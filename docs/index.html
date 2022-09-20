@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Introduction to Linux for the HPC</title>
+  <meta name="description" content="A book for the Introduction to Linux for the HPC workshop." />
+  <meta name="generator" content="bookdown 0.29 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Introduction to Linux for the HPC" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:description" content="A book for the Introduction to Linux for the HPC workshop." />
+  <meta name="github-repo" content="vari-bbc/Intro_to_Linux_for_HPC" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Introduction to Linux for the HPC" />
+  
+  <meta name="twitter:description" content="A book for the Introduction to Linux for the HPC workshop." />
+  
+
+<meta name="author" content="BBC" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+
+<link rel="next" href="basics-of-using-the-hpc-and-the-linux-commandline.html"/>
+<script src="assets/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="assets/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="assets/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="assets/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="assets/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="assets/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="assets/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="assets/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<script src="assets/accessible-code-block-0.0.1/empty-anchor.js"></script>
+<link href="assets/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="assets/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="assets/anchor-sections-1.1.0/anchor-sections.js"></script>
+
+
+<style type="text/css">
+code.sourceCode > span { display: inline-block; line-height: 1.25; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Preface</a><ul>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#workshop-organizers"><i class="fa fa-check"></i><b>1.1</b> Workshop organizers</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="basics-of-using-the-hpc-and-the-linux-commandline.html"><a href="basics-of-using-the-hpc-and-the-linux-commandline.html"><i class="fa fa-check"></i><b>2</b> Basics of using the HPC and the Linux commandline</a><ul>
+<li class="chapter" data-level="2.1" data-path="basics-of-using-the-hpc-and-the-linux-commandline.html"><a href="basics-of-using-the-hpc-and-the-linux-commandline.html#ex-1-log-into-the-hpc"><i class="fa fa-check"></i><b>2.1</b> Ex 1 Log into the HPC</a></li>
+<li class="chapter" data-level="2.2" data-path="basics-of-using-the-hpc-and-the-linux-commandline.html"><a href="basics-of-using-the-hpc-and-the-linux-commandline.html#commands-you-need-to-learn-for-ex2"><i class="fa fa-check"></i><b>2.2</b> Commands you need to learn for Ex2:</a></li>
+<li class="chapter" data-level="2.3" data-path="basics-of-using-the-hpc-and-the-linux-commandline.html"><a href="basics-of-using-the-hpc-and-the-linux-commandline.html#ex2-file-navigation"><i class="fa fa-check"></i><b>2.3</b> Ex2: file navigation</a></li>
+<li class="chapter" data-level="2.4" data-path="basics-of-using-the-hpc-and-the-linux-commandline.html"><a href="basics-of-using-the-hpc-and-the-linux-commandline.html#commands-you-need-to-learn-for-ex-3"><i class="fa fa-check"></i><b>2.4</b> Commands you need to learn for Ex 3</a><ul>
+<li class="chapter" data-level="2.4.1" data-path="basics-of-using-the-hpc-and-the-linux-commandline.html"><a href="basics-of-using-the-hpc-and-the-linux-commandline.html#so-what-is-pipe"><i class="fa fa-check"></i><b>2.4.1</b> So, what is pipe?</a></li>
+</ul></li>
+<li class="chapter" data-level="2.5" data-path="basics-of-using-the-hpc-and-the-linux-commandline.html"><a href="basics-of-using-the-hpc-and-the-linux-commandline.html#exercise-3-file-viewing-and-manipulation"><i class="fa fa-check"></i><b>2.5</b> Exercise 3: File viewing and manipulation</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="a-toy-bioinformatics-project.html"><a href="a-toy-bioinformatics-project.html"><i class="fa fa-check"></i><b>3</b> A toy bioinformatics project</a><ul>
+<li class="chapter" data-level="3.1" data-path="a-toy-bioinformatics-project.html"><a href="a-toy-bioinformatics-project.html#navigate-to-your-research-groups-folder-and-see-whats-there"><i class="fa fa-check"></i><b>3.1</b> Navigate to your research group’s folder and see what’s there</a></li>
+<li class="chapter" data-level="3.2" data-path="a-toy-bioinformatics-project.html"><a href="a-toy-bioinformatics-project.html#create-project-directory-and-navgiate-into-it"><i class="fa fa-check"></i><b>3.2</b> Create project directory and navgiate into it</a></li>
+<li class="chapter" data-level="3.3" data-path="a-toy-bioinformatics-project.html"><a href="a-toy-bioinformatics-project.html#copy-fastqs-to-working-directory"><i class="fa fa-check"></i><b>3.3</b> Copy fastqs to working directory</a></li>
+<li class="chapter" data-level="3.4" data-path="a-toy-bioinformatics-project.html"><a href="a-toy-bioinformatics-project.html#check-that-the-files-transferred-properly"><i class="fa fa-check"></i><b>3.4</b> Check that the files transferred properly</a></li>
+<li class="chapter" data-level="3.5" data-path="a-toy-bioinformatics-project.html"><a href="a-toy-bioinformatics-project.html#use-zcat-to-take-a-look-into-fastq.gz-files-usually-we-do-not-do-this"><i class="fa fa-check"></i><b>3.5</b> Use zcat to take a look into fastq.gz files (usually we do not do this)</a></li>
+<li class="chapter" data-level="3.6" data-path="a-toy-bioinformatics-project.html"><a href="a-toy-bioinformatics-project.html#run-fastqc-or-zcat-wc--l-to-count-how-many-reads"><i class="fa fa-check"></i><b>3.6</b> Run fastqc or zcat {} | wc -l to count how many reads</a></li>
+<li class="chapter" data-level="3.7" data-path="a-toy-bioinformatics-project.html"><a href="a-toy-bioinformatics-project.html#how-to-see-what-packages-are-installed-on-hpc.-use-grep."><i class="fa fa-check"></i><b>3.7</b> How to see what packages are installed on HPC. Use grep.</a></li>
+<li class="chapter" data-level="3.8" data-path="a-toy-bioinformatics-project.html"><a href="a-toy-bioinformatics-project.html#set-up-a-job-to-run-salmon"><i class="fa fa-check"></i><b>3.8</b> Set up a job to run Salmon</a></li>
+<li class="chapter" data-level="3.9" data-path="a-toy-bioinformatics-project.html"><a href="a-toy-bioinformatics-project.html#use-qstat-to-check-on-the-job"><i class="fa fa-check"></i><b>3.9</b> Use qstat to check on the job</a></li>
+<li class="chapter" data-level="3.10" data-path="a-toy-bioinformatics-project.html"><a href="a-toy-bioinformatics-project.html#check-the-job-logs-to-see-if-job-finished-running"><i class="fa fa-check"></i><b>3.10</b> Check the job logs to see if job finished running</a></li>
+<li class="chapter" data-level="3.11" data-path="a-toy-bioinformatics-project.html"><a href="a-toy-bioinformatics-project.html#use-grep-to-find-the-tpms-for-specific-genes"><i class="fa fa-check"></i><b>3.11</b> Use grep to find the TPMs for specific genes</a></li>
+<li class="chapter" data-level="3.12" data-path="a-toy-bioinformatics-project.html"><a href="a-toy-bioinformatics-project.html#transfer-read-counts-table-to-laptopdesktop-to-view-in-excel"><i class="fa fa-check"></i><b>3.12</b> Transfer read counts table to laptop/desktop to view in Excel</a></li>
+</ul></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Introduction to Linux for the HPC</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="header">
+<h1 class="title">Introduction to Linux for the HPC</h1>
+<p class="author"><em>BBC</em></p>
+<p class="date"><em>Sept 21, 2022</em></p>
+</div>
+<div id="preface" class="section level1 hasAnchor">
+<h1><span class="header-section-number">Part 1</span> Preface<a href="index.html#preface" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>This is a book containing material for the Introduction to Linux for the HPC workshop.</p>
+<div id="workshop-organizers" class="section level2 hasAnchor">
+<h2><span class="header-section-number">1.1</span> Workshop organizers<a href="index.html#workshop-organizers" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<ol style="list-style-type: decimal">
+<li>Daisy Fu</li>
+<li>Zack Ramjan</li>
+<li>Kin Lau</li>
+</ol>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+
+<a href="basics-of-using-the-hpc-and-the-linux-commandline.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="assets/gitbook-2.6.7/js/app.min.js"></script>
+<script src="assets/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="assets/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="assets/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="assets/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="assets/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="assets/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="assets/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+},
+"toolbar": {
+"position": "static"
+}
+});
+});
+</script>
+
+</body>
+
+</html>

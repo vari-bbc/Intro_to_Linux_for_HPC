@@ -1,0 +1,114 @@
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# A toy bioinformatics project
+
+## Navigate to your research group's folder and see what's there
+
+```{bash, eval=FALSE, engine="sh"}
+cd /varidata/research/projects/labname
+
+ls
+```
+
+## Create project directory and navgiate into it
+
+Also make a directory to store your fastq files.
+
+```{bash, eval=FALSE, engine="sh"}
+mkdir hpc_workshop_202209 
+
+cd hpc_workshop_202209
+
+mkdir fastqs
+```
+
+## Copy fastqs to working directory
+
+```{bash, eval=FALSE, engine="sh"}
+cp /varidata/researchtemp/hpctmp/BBC/hpc_workshop_fqs/md5sum.txt ./fastqs/
+cp /varidata/researchtemp/hpctmp/BBC/hpc_workshop_fqs/*fastq.gz ./fastqs/
+
+```
+
+## Check that the files transferred properly
+
+```{bash, eval=TRUE, engine="sh"}
+ls fastqs
+
+cd fastqs
+
+md5sum -c md5sum.txt
+```
+
+```{bash, eval=TRUE, engine="sh"}
+cd ..
+```
+
+## Use zcat to take a look into fastq.gz files (usually we do not do this)
+
+Note the matching fastq IDs in the R1 and R2 files.
+
+```{bash, eval=TRUE, engine="sh"}
+ls
+ls fastqs
+zcat fastqs/SRR1039520_1.5Msample.fastq.gz | head
+zcat fastqs/SRR1039520_2.5Msample.fastq.gz | head
+```
+
+## Run fastqc or zcat {} | wc -l to count how many reads
+
+```{bash, eval=FALSE, engine="sh"}
+
+
+```
+
+
+## How to see what packages are installed on HPC. Use grep.
+
+```{bash, eval=TRUE, engine="sh"}
+module av
+module av bbc | head -n50
+
+```
+
+## Set up a job to run Salmon
+
+The job script code is below. Don't worry about the specifics of this code for now. Simply, copy the code and paste into your text editor to make your job script. You will need to edit certain fields.
+
+```{bash, eval=FALSE, engine="sh"}
+
+
+```
+
+## Use qstat to check on the job
+
+```{bash, eval=FALSE, engine="sh"}
+qstat
+qstat | grep 'firstname.lastname'
+
+```
+
+## Check the job logs to see if job finished running
+
+```{bash, eval=FALSE, engine="sh"}
+cat job.log
+
+```
+
+## Use grep to find the TPMs for specific genes
+
+```{bash, eval=FALSE, engine="sh"}
+
+grep 'SNC' salmon.results.txt
+```
+
+## Transfer read counts table to laptop/desktop to view in Excel
+
+```{bash, eval=FALSE, engine="sh"}
+
+
+```
+
+

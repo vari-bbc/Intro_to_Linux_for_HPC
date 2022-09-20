@@ -1,0 +1,31 @@
+---
+title: "Introduction to Linux for the HPC"
+author: "BBC"
+date: "Sept 21, 2022"
+site: bookdown::bookdown_site
+output: bookdown::gitbook
+documentclass: book
+bibliography: [packages.bib]
+biblio-style: apalike
+link-citations: yes
+github-repo: vari-bbc/Intro_to_Linux_for_HPC
+theme: "yeti"
+description: "A book for the Introduction to Linux for the HPC workshop."
+---
+
+# Preface
+
+This is a book containing material for the Introduction to Linux for the HPC workshop.
+
+## Workshop organizers
+
+1. Daisy Fu
+2. Zack Ramjan
+3. Kin Lau
+
+```{r include=FALSE}
+# automatically create a bib database for R packages
+knitr::write_bib(c(
+  .packages(), 'bookdown', 'knitr', 'rmarkdown'
+), 'packages.bib')
+```
