@@ -7,6 +7,7 @@ ex2-file-navigation
 commands-you-need-to-learn-for-ex-3
 so-what-is-pipe
 exercise-3-file-viewing-and-manipulation
+hpc-basics-and-the-job-scheduler
 a-toy-bioinformatics-project
 navigate-to-your-research-groups-folder-and-see-whats-there
 create-project-directory-and-navgiate-into-it

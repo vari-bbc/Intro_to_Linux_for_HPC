@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Part 3 A toy bioinformatics project | Introduction to Linux for the HPC</title>
+  <title>Part 4 A toy bioinformatics project | Introduction to Linux for the HPC</title>
   <meta name="description" content="A book for the Introduction to Linux for the HPC workshop." />
   <meta name="generator" content="bookdown 0.29 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Part 3 A toy bioinformatics project | Introduction to Linux for the HPC" />
+  <meta property="og:title" content="Part 4 A toy bioinformatics project | Introduction to Linux for the HPC" />
   <meta property="og:type" content="book" />
   
   <meta property="og:description" content="A book for the Introduction to Linux for the HPC workshop." />
   <meta name="github-repo" content="vari-bbc/Intro_to_Linux_for_HPC" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Part 3 A toy bioinformatics project | Introduction to Linux for the HPC" />
+  <meta name="twitter:title" content="Part 4 A toy bioinformatics project | Introduction to Linux for the HPC" />
   
   <meta name="twitter:description" content="A book for the Introduction to Linux for the HPC workshop." />
   
@@ -29,7 +29,7 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="basics-of-using-the-hpc-and-the-linux-commandline.html"/>
+<link rel="prev" href="hpc-basics-and-the-job-scheduler.html"/>
 
 <script src="assets/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
@@ -144,19 +144,20 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="2.5" data-path="basics-of-using-the-hpc-and-the-linux-commandline.html"><a href="basics-of-using-the-hpc-and-the-linux-commandline.html#exercise-3-file-viewing-and-manipulation"><i class="fa fa-check"></i><b>2.5</b> Exercise 3: File viewing and manipulation</a></li>
 </ul></li>
-<li class="chapter" data-level="3" data-path="a-toy-bioinformatics-project.html"><a href="a-toy-bioinformatics-project.html"><i class="fa fa-check"></i><b>3</b> A toy bioinformatics project</a><ul>
-<li class="chapter" data-level="3.1" data-path="a-toy-bioinformatics-project.html"><a href="a-toy-bioinformatics-project.html#navigate-to-your-research-groups-folder-and-see-whats-there"><i class="fa fa-check"></i><b>3.1</b> Navigate to your research group’s folder and see what’s there</a></li>
-<li class="chapter" data-level="3.2" data-path="a-toy-bioinformatics-project.html"><a href="a-toy-bioinformatics-project.html#create-project-directory-and-navgiate-into-it"><i class="fa fa-check"></i><b>3.2</b> Create project directory and navgiate into it</a></li>
-<li class="chapter" data-level="3.3" data-path="a-toy-bioinformatics-project.html"><a href="a-toy-bioinformatics-project.html#copy-fastqs-to-working-directory"><i class="fa fa-check"></i><b>3.3</b> Copy fastqs to working directory</a></li>
-<li class="chapter" data-level="3.4" data-path="a-toy-bioinformatics-project.html"><a href="a-toy-bioinformatics-project.html#check-that-the-files-transferred-properly"><i class="fa fa-check"></i><b>3.4</b> Check that the files transferred properly</a></li>
-<li class="chapter" data-level="3.5" data-path="a-toy-bioinformatics-project.html"><a href="a-toy-bioinformatics-project.html#use-zcat-to-take-a-look-into-fastq.gz-files-usually-we-do-not-do-this"><i class="fa fa-check"></i><b>3.5</b> Use zcat to take a look into fastq.gz files (usually we do not do this)</a></li>
-<li class="chapter" data-level="3.6" data-path="a-toy-bioinformatics-project.html"><a href="a-toy-bioinformatics-project.html#run-fastqc-or-zcat-wc--l-to-count-how-many-reads"><i class="fa fa-check"></i><b>3.6</b> Run fastqc or zcat {} | wc -l to count how many reads</a></li>
-<li class="chapter" data-level="3.7" data-path="a-toy-bioinformatics-project.html"><a href="a-toy-bioinformatics-project.html#how-to-see-what-packages-are-installed-on-hpc.-use-grep."><i class="fa fa-check"></i><b>3.7</b> How to see what packages are installed on HPC. Use grep.</a></li>
-<li class="chapter" data-level="3.8" data-path="a-toy-bioinformatics-project.html"><a href="a-toy-bioinformatics-project.html#set-up-a-job-to-run-salmon"><i class="fa fa-check"></i><b>3.8</b> Set up a job to run Salmon</a></li>
-<li class="chapter" data-level="3.9" data-path="a-toy-bioinformatics-project.html"><a href="a-toy-bioinformatics-project.html#use-qstat-to-check-on-the-job"><i class="fa fa-check"></i><b>3.9</b> Use qstat to check on the job</a></li>
-<li class="chapter" data-level="3.10" data-path="a-toy-bioinformatics-project.html"><a href="a-toy-bioinformatics-project.html#check-the-job-logs-to-see-if-job-finished-running"><i class="fa fa-check"></i><b>3.10</b> Check the job logs to see if job finished running</a></li>
-<li class="chapter" data-level="3.11" data-path="a-toy-bioinformatics-project.html"><a href="a-toy-bioinformatics-project.html#use-grep-to-find-the-tpms-for-specific-genes"><i class="fa fa-check"></i><b>3.11</b> Use grep to find the TPMs for specific genes</a></li>
-<li class="chapter" data-level="3.12" data-path="a-toy-bioinformatics-project.html"><a href="a-toy-bioinformatics-project.html#transfer-read-counts-table-to-laptopdesktop-to-view-in-excel"><i class="fa fa-check"></i><b>3.12</b> Transfer read counts table to laptop/desktop to view in Excel</a></li>
+<li class="chapter" data-level="3" data-path="hpc-basics-and-the-job-scheduler.html"><a href="hpc-basics-and-the-job-scheduler.html"><i class="fa fa-check"></i><b>3</b> HPC basics and the job scheduler</a></li>
+<li class="chapter" data-level="4" data-path="a-toy-bioinformatics-project.html"><a href="a-toy-bioinformatics-project.html"><i class="fa fa-check"></i><b>4</b> A toy bioinformatics project</a><ul>
+<li class="chapter" data-level="4.1" data-path="a-toy-bioinformatics-project.html"><a href="a-toy-bioinformatics-project.html#navigate-to-your-research-groups-folder-and-see-whats-there"><i class="fa fa-check"></i><b>4.1</b> Navigate to your research group’s folder and see what’s there</a></li>
+<li class="chapter" data-level="4.2" data-path="a-toy-bioinformatics-project.html"><a href="a-toy-bioinformatics-project.html#create-project-directory-and-navgiate-into-it"><i class="fa fa-check"></i><b>4.2</b> Create project directory and navgiate into it</a></li>
+<li class="chapter" data-level="4.3" data-path="a-toy-bioinformatics-project.html"><a href="a-toy-bioinformatics-project.html#copy-fastqs-to-working-directory"><i class="fa fa-check"></i><b>4.3</b> Copy fastqs to working directory</a></li>
+<li class="chapter" data-level="4.4" data-path="a-toy-bioinformatics-project.html"><a href="a-toy-bioinformatics-project.html#check-that-the-files-transferred-properly"><i class="fa fa-check"></i><b>4.4</b> Check that the files transferred properly</a></li>
+<li class="chapter" data-level="4.5" data-path="a-toy-bioinformatics-project.html"><a href="a-toy-bioinformatics-project.html#use-zcat-to-take-a-look-into-fastq.gz-files-usually-we-do-not-do-this"><i class="fa fa-check"></i><b>4.5</b> Use zcat to take a look into fastq.gz files (usually we do not do this)</a></li>
+<li class="chapter" data-level="4.6" data-path="a-toy-bioinformatics-project.html"><a href="a-toy-bioinformatics-project.html#run-fastqc-or-zcat-wc--l-to-count-how-many-reads"><i class="fa fa-check"></i><b>4.6</b> Run fastqc or zcat {} | wc -l to count how many reads</a></li>
+<li class="chapter" data-level="4.7" data-path="a-toy-bioinformatics-project.html"><a href="a-toy-bioinformatics-project.html#how-to-see-what-packages-are-installed-on-hpc.-use-grep."><i class="fa fa-check"></i><b>4.7</b> How to see what packages are installed on HPC. Use grep.</a></li>
+<li class="chapter" data-level="4.8" data-path="a-toy-bioinformatics-project.html"><a href="a-toy-bioinformatics-project.html#set-up-a-job-to-run-salmon"><i class="fa fa-check"></i><b>4.8</b> Set up a job to run Salmon</a></li>
+<li class="chapter" data-level="4.9" data-path="a-toy-bioinformatics-project.html"><a href="a-toy-bioinformatics-project.html#use-qstat-to-check-on-the-job"><i class="fa fa-check"></i><b>4.9</b> Use qstat to check on the job</a></li>
+<li class="chapter" data-level="4.10" data-path="a-toy-bioinformatics-project.html"><a href="a-toy-bioinformatics-project.html#check-the-job-logs-to-see-if-job-finished-running"><i class="fa fa-check"></i><b>4.10</b> Check the job logs to see if job finished running</a></li>
+<li class="chapter" data-level="4.11" data-path="a-toy-bioinformatics-project.html"><a href="a-toy-bioinformatics-project.html#use-grep-to-find-the-tpms-for-specific-genes"><i class="fa fa-check"></i><b>4.11</b> Use grep to find the TPMs for specific genes</a></li>
+<li class="chapter" data-level="4.12" data-path="a-toy-bioinformatics-project.html"><a href="a-toy-bioinformatics-project.html#transfer-read-counts-table-to-laptopdesktop-to-view-in-excel"><i class="fa fa-check"></i><b>4.12</b> Transfer read counts table to laptop/desktop to view in Excel</a></li>
 </ul></li>
 </ul>
 
@@ -176,15 +177,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
             <section class="normal" id="section-">
 <div id="a-toy-bioinformatics-project" class="section level1 hasAnchor">
-<h1><span class="header-section-number">Part 3</span> A toy bioinformatics project<a href="a-toy-bioinformatics-project.html#a-toy-bioinformatics-project" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<h1><span class="header-section-number">Part 4</span> A toy bioinformatics project<a href="a-toy-bioinformatics-project.html#a-toy-bioinformatics-project" class="anchor-section" aria-label="Anchor link to header"></a></h1>
 <div id="navigate-to-your-research-groups-folder-and-see-whats-there" class="section level2 hasAnchor">
-<h2><span class="header-section-number">3.1</span> Navigate to your research group’s folder and see what’s there<a href="a-toy-bioinformatics-project.html#navigate-to-your-research-groups-folder-and-see-whats-there" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<h2><span class="header-section-number">4.1</span> Navigate to your research group’s folder and see what’s there<a href="a-toy-bioinformatics-project.html#navigate-to-your-research-groups-folder-and-see-whats-there" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="a-toy-bioinformatics-project.html#cb1-1"></a><span class="bu">cd</span> /varidata/research/projects/labname</span>
 <span id="cb1-2"><a href="a-toy-bioinformatics-project.html#cb1-2"></a></span>
 <span id="cb1-3"><a href="a-toy-bioinformatics-project.html#cb1-3"></a><span class="fu">ls</span></span></code></pre></div>
 </div>
 <div id="create-project-directory-and-navgiate-into-it" class="section level2 hasAnchor">
-<h2><span class="header-section-number">3.2</span> Create project directory and navgiate into it<a href="a-toy-bioinformatics-project.html#create-project-directory-and-navgiate-into-it" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<h2><span class="header-section-number">4.2</span> Create project directory and navgiate into it<a href="a-toy-bioinformatics-project.html#create-project-directory-and-navgiate-into-it" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Also make a directory to store your fastq files.</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb2-1"><a href="a-toy-bioinformatics-project.html#cb2-1"></a><span class="fu">mkdir</span> hpc_workshop_202209 </span>
 <span id="cb2-2"><a href="a-toy-bioinformatics-project.html#cb2-2"></a></span>
@@ -193,12 +194,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb2-5"><a href="a-toy-bioinformatics-project.html#cb2-5"></a><span class="fu">mkdir</span> fastqs</span></code></pre></div>
 </div>
 <div id="copy-fastqs-to-working-directory" class="section level2 hasAnchor">
-<h2><span class="header-section-number">3.3</span> Copy fastqs to working directory<a href="a-toy-bioinformatics-project.html#copy-fastqs-to-working-directory" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<h2><span class="header-section-number">4.3</span> Copy fastqs to working directory<a href="a-toy-bioinformatics-project.html#copy-fastqs-to-working-directory" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <div class="sourceCode" id="cb3"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb3-1"><a href="a-toy-bioinformatics-project.html#cb3-1"></a><span class="fu">cp</span> /varidata/researchtemp/hpctmp/BBC/hpc_workshop_fqs/md5sum.txt ./fastqs/</span>
 <span id="cb3-2"><a href="a-toy-bioinformatics-project.html#cb3-2"></a><span class="fu">cp</span> /varidata/researchtemp/hpctmp/BBC/hpc_workshop_fqs/*fastq.gz ./fastqs/</span></code></pre></div>
 </div>
 <div id="check-that-the-files-transferred-properly" class="section level2 hasAnchor">
-<h2><span class="header-section-number">3.4</span> Check that the files transferred properly<a href="a-toy-bioinformatics-project.html#check-that-the-files-transferred-properly" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<h2><span class="header-section-number">4.4</span> Check that the files transferred properly<a href="a-toy-bioinformatics-project.html#check-that-the-files-transferred-properly" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <div class="sourceCode" id="cb4"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb4-1"><a href="a-toy-bioinformatics-project.html#cb4-1"></a><span class="fu">ls</span> fastqs</span>
 <span id="cb4-2"><a href="a-toy-bioinformatics-project.html#cb4-2"></a></span>
 <span id="cb4-3"><a href="a-toy-bioinformatics-project.html#cb4-3"></a><span class="bu">cd</span> fastqs</span>
@@ -216,7 +217,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="sourceCode" id="cb6"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb6-1"><a href="a-toy-bioinformatics-project.html#cb6-1"></a><span class="bu">cd</span> ..</span></code></pre></div>
 </div>
 <div id="use-zcat-to-take-a-look-into-fastq.gz-files-usually-we-do-not-do-this" class="section level2 hasAnchor">
-<h2><span class="header-section-number">3.5</span> Use zcat to take a look into fastq.gz files (usually we do not do this)<a href="a-toy-bioinformatics-project.html#use-zcat-to-take-a-look-into-fastq.gz-files-usually-we-do-not-do-this" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<h2><span class="header-section-number">4.5</span> Use zcat to take a look into fastq.gz files (usually we do not do this)<a href="a-toy-bioinformatics-project.html#use-zcat-to-take-a-look-into-fastq.gz-files-usually-we-do-not-do-this" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Note the matching fastq IDs in the R1 and R2 files.</p>
 <div class="sourceCode" id="cb7"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb7-1"><a href="a-toy-bioinformatics-project.html#cb7-1"></a><span class="fu">ls</span></span>
 <span id="cb7-2"><a href="a-toy-bioinformatics-project.html#cb7-2"></a><span class="fu">ls</span> fastqs</span>
@@ -224,7 +225,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb7-4"><a href="a-toy-bioinformatics-project.html#cb7-4"></a><span class="fu">zcat</span> fastqs/SRR1039520_2.5Msample.fastq.gz <span class="kw">|</span> <span class="fu">head</span></span></code></pre></div>
 <pre><code>## 01_linux_basics.md
 ## 01_linux_basics.Rmd
-## 02_bioinfx_example.Rmd
+## 02_hpc_intro.md
+## 02_hpc_intro.Rmd
+## 03_bioinfx_example.Rmd
 ## bbc_workshop_202209.rds
 ## _bookdown.yml
 ## docs
@@ -234,7 +237,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## index.Rmd
 ## _output.yml
 ## packages.bib
-## render3e1b44ffc05e9.rds
+## render3f7d925f9a22f.rds
 ## toc.css
 ## md5sum.txt
 ## SRR1039520_1.5Msample.fastq.gz
@@ -247,11 +250,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## gzip: fastqs/SRR1039520_2.5Msample.fastq.gz: not in gzip format</code></pre>
 </div>
 <div id="run-fastqc-or-zcat-wc--l-to-count-how-many-reads" class="section level2 hasAnchor">
-<h2><span class="header-section-number">3.6</span> Run fastqc or zcat {} | wc -l to count how many reads<a href="a-toy-bioinformatics-project.html#run-fastqc-or-zcat-wc--l-to-count-how-many-reads" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<h2><span class="header-section-number">4.6</span> Run fastqc or zcat {} | wc -l to count how many reads<a href="a-toy-bioinformatics-project.html#run-fastqc-or-zcat-wc--l-to-count-how-many-reads" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <div class="sourceCode" id="cb9"><pre class="sourceCode bash"><code class="sourceCode bash"></code></pre></div>
 </div>
 <div id="how-to-see-what-packages-are-installed-on-hpc.-use-grep." class="section level2 hasAnchor">
-<h2><span class="header-section-number">3.7</span> How to see what packages are installed on HPC. Use grep.<a href="a-toy-bioinformatics-project.html#how-to-see-what-packages-are-installed-on-hpc.-use-grep." class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<h2><span class="header-section-number">4.7</span> How to see what packages are installed on HPC. Use grep.<a href="a-toy-bioinformatics-project.html#how-to-see-what-packages-are-installed-on-hpc.-use-grep." class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <div class="sourceCode" id="cb10"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb10-1"><a href="a-toy-bioinformatics-project.html#cb10-1"></a><span class="ex">module</span> av</span>
 <span id="cb10-2"><a href="a-toy-bioinformatics-project.html#cb10-2"></a><span class="ex">module</span> av bbc <span class="kw">|</span> <span class="fu">head</span> -n50</span></code></pre></div>
 <pre><code>## 
@@ -864,26 +867,26 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## bbc/Zzz_deprecated/zlib/zlib-1.2.11</code></pre>
 </div>
 <div id="set-up-a-job-to-run-salmon" class="section level2 hasAnchor">
-<h2><span class="header-section-number">3.8</span> Set up a job to run Salmon<a href="a-toy-bioinformatics-project.html#set-up-a-job-to-run-salmon" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<h2><span class="header-section-number">4.8</span> Set up a job to run Salmon<a href="a-toy-bioinformatics-project.html#set-up-a-job-to-run-salmon" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>The job script code is below. Don’t worry about the specifics of this code for now. Simply, copy the code and paste into your text editor to make your job script. You will need to edit certain fields.</p>
 <div class="sourceCode" id="cb12"><pre class="sourceCode bash"><code class="sourceCode bash"></code></pre></div>
 </div>
 <div id="use-qstat-to-check-on-the-job" class="section level2 hasAnchor">
-<h2><span class="header-section-number">3.9</span> Use qstat to check on the job<a href="a-toy-bioinformatics-project.html#use-qstat-to-check-on-the-job" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<h2><span class="header-section-number">4.9</span> Use qstat to check on the job<a href="a-toy-bioinformatics-project.html#use-qstat-to-check-on-the-job" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <div class="sourceCode" id="cb13"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb13-1"><a href="a-toy-bioinformatics-project.html#cb13-1"></a><span class="ex">qstat</span></span>
 <span id="cb13-2"><a href="a-toy-bioinformatics-project.html#cb13-2"></a><span class="ex">qstat</span> <span class="kw">|</span> <span class="fu">grep</span> <span class="st">&#39;firstname.lastname&#39;</span></span></code></pre></div>
 </div>
 <div id="check-the-job-logs-to-see-if-job-finished-running" class="section level2 hasAnchor">
-<h2><span class="header-section-number">3.10</span> Check the job logs to see if job finished running<a href="a-toy-bioinformatics-project.html#check-the-job-logs-to-see-if-job-finished-running" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<h2><span class="header-section-number">4.10</span> Check the job logs to see if job finished running<a href="a-toy-bioinformatics-project.html#check-the-job-logs-to-see-if-job-finished-running" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <div class="sourceCode" id="cb14"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb14-1"><a href="a-toy-bioinformatics-project.html#cb14-1"></a><span class="fu">cat</span> job.log</span></code></pre></div>
 </div>
 <div id="use-grep-to-find-the-tpms-for-specific-genes" class="section level2 hasAnchor">
-<h2><span class="header-section-number">3.11</span> Use grep to find the TPMs for specific genes<a href="a-toy-bioinformatics-project.html#use-grep-to-find-the-tpms-for-specific-genes" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<h2><span class="header-section-number">4.11</span> Use grep to find the TPMs for specific genes<a href="a-toy-bioinformatics-project.html#use-grep-to-find-the-tpms-for-specific-genes" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <div class="sourceCode" id="cb15"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb15-1"><a href="a-toy-bioinformatics-project.html#cb15-1"></a></span>
 <span id="cb15-2"><a href="a-toy-bioinformatics-project.html#cb15-2"></a><span class="fu">grep</span> <span class="st">&#39;SNC&#39;</span> salmon.results.txt</span></code></pre></div>
 </div>
 <div id="transfer-read-counts-table-to-laptopdesktop-to-view-in-excel" class="section level2 hasAnchor">
-<h2><span class="header-section-number">3.12</span> Transfer read counts table to laptop/desktop to view in Excel<a href="a-toy-bioinformatics-project.html#transfer-read-counts-table-to-laptopdesktop-to-view-in-excel" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<h2><span class="header-section-number">4.12</span> Transfer read counts table to laptop/desktop to view in Excel<a href="a-toy-bioinformatics-project.html#transfer-read-counts-table-to-laptopdesktop-to-view-in-excel" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <div class="sourceCode" id="cb16"><pre class="sourceCode bash"><code class="sourceCode bash"></code></pre></div>
 
 </div>
@@ -893,7 +896,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           </div>
         </div>
       </div>
-<a href="basics-of-using-the-hpc-and-the-linux-commandline.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="hpc-basics-and-the-job-scheduler.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
 
     </div>
   </div>
