@@ -1,7 +1,0 @@
-Module	Section	Sample Name	Source
-Salmon	all_sections	SRR1039521	/varidata/research/projects/bbc/research/hpc_workshop_202209/salmon/SRR1039521/libParams/flenDist.txt
-Salmon	all_sections	SRR1039520	/varidata/research/projects/bbc/research/hpc_workshop_202209/salmon/SRR1039520/libParams/flenDist.txt
-FastQC	all_sections	SRR1039521_2	/varidata/research/projects/bbc/research/hpc_workshop_202209/fastqc/SRR1039521_2_fastqc.zip
-FastQC	all_sections	SRR1039520_2	/varidata/research/projects/bbc/research/hpc_workshop_202209/fastqc/SRR1039520_2_fastqc.zip
-FastQC	all_sections	SRR1039520_1	/varidata/research/projects/bbc/research/hpc_workshop_202209/fastqc/SRR1039520_1_fastqc.zip
-FastQC	all_sections	SRR1039521_1	/varidata/research/projects/bbc/research/hpc_workshop_202209/fastqc/SRR1039521_1_fastqc.zip

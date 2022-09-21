@@ -1,7 +1,0 @@
-Sample	Salmon_mqc-generalstats-salmon-percent_mapped	Salmon_mqc-generalstats-salmon-num_mapped	FastQC_mqc-generalstats-fastqc-percent_duplicates	FastQC_mqc-generalstats-fastqc-percent_gc	FastQC_mqc-generalstats-fastqc-avg_sequence_length	FastQC_mqc-generalstats-fastqc-percent_fails	FastQC_mqc-generalstats-fastqc-total_sequences
-SRR1039520	93.0532	465266					
-SRR1039520_1			11.81356578843041	49.0	63.0	0.0	500000.0
-SRR1039520_2			11.872030737080621	49.0	63.0	0.0	500000.0
-SRR1039521	93.5656	467828					
-SRR1039521_1			11.212926904791757	49.0	63.0	0.0	500000.0
-SRR1039521_2			11.075068636479486	49.0	63.0	0.0	500000.0
