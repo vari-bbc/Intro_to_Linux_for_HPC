@@ -4,22 +4,34 @@ knitr::opts_chunk$set(echo = TRUE)
 
 # A toy bioinformatics project
 
-## Navigate to your research group's folder and see what's there
+Here, we will put together some of the new skills that we have discussed today to perform a toy bioinformatic analysis. Four RNA-seq fastq files representing paired-end reads from two human samples have already been downloaded from [GSE52778](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE52778). To save time for the workshop, each file has been randomly subsetted to just a small fraction of the total reads. Here we will:
+
+1. Copy these fastq files to a private project directory for each user.
+2. Use basic Linux commands to learn some characteristics of these files, and compare the results to results from FastQC, which we will also run.
+3. Use Salmon to align (pseudo-align) these reads to the hg38 reference transcriptome and get transcripts-per-million (TPMs) for each annotated gene.
+
+## Start up an interactive job
+
+Remember we try to avoid running computationally-intensive operations on the submit node directly. Where a formal script is not needed, we can start up an 'interactive job'. Once an interactive job is started, we can use the commandline as before but now we are using pre-allocated computational resources.
 
 ```{bash, eval=FALSE, engine="sh"}
-cd /varidata/research/projects/labname
+qsub -I -l nodes=1:ppn=1 -l mem=32gb -l walltime=2:00:00
 
-ls
+# one way to verify that we have started an interactive successfully is to run qstat
+# to show only jobs submitted by ourselves, we use the `-u` option followed by our username.
+qstat -u kin.lau
 ```
 
-## Create project directory and navgiate into it
+## Create a project directory for yourself and a subdirectory for storing the raw fastq files
 
-Also make a directory to store your fastq files.
+It is good practice to try to make a separate directory for each project to minimize the risk of accidentally editing other files. It is also good to store raw data in its own location and not make any modifications to them.
 
 ```{bash, eval=FALSE, engine="sh"}
-mkdir hpc_workshop_202209 
+cd /varidata/researchtemp/hpctmp/HPC_mini_workshop/Part3
 
-cd hpc_workshop_202209
+mkdir firstname.lastname
+
+cd firstname.lastname
 
 mkdir fastqs
 ```
@@ -27,88 +39,234 @@ mkdir fastqs
 ## Copy fastqs to working directory
 
 ```{bash, eval=FALSE, engine="sh"}
+# copy the md5sum file which will be used to verify successful file transfers.
 cp /varidata/researchtemp/hpctmp/BBC/hpc_workshop_fqs/md5sum.txt ./fastqs/
+
+# copy the fastqs
 cp /varidata/researchtemp/hpctmp/BBC/hpc_workshop_fqs/*fastq.gz ./fastqs/
 
 ```
 
 ## Check that the files transferred properly
 
-```{bash, eval=TRUE, engine="sh"}
-ls fastqs
+Run the following command. The tool will compare the md5sums in the `md5sum.txt` file to the md5sums calculated for the files in your directory currently. If each line says 'OK', then the transfer was successful.
 
+```{bash, eval=TRUE, engine="sh"}
 cd fastqs
 
 md5sum -c md5sum.txt
 ```
 
-```{bash, eval=TRUE, engine="sh"}
+For the next steps, go back to the project directory.
+
+```{bash, eval=FALSE, engine="sh"}
 cd ..
 ```
 
-## Use zcat to take a look into fastq.gz files (usually we do not do this)
+## Use zcat to take a look into fastq.gz files
 
-Note the matching fastq IDs in the R1 and R2 files.
+Note that a `.gz` file suffix means that the file is compressed and running the usual `cat` on it will not return human-readable results. The `zcat` command first decompresses the file then prints the results.
 
-```{bash, eval=TRUE, engine="sh"}
-ls
-ls fastqs
-zcat fastqs/SRR1039520_1.5Msample.fastq.gz | head
-zcat fastqs/SRR1039520_2.5Msample.fastq.gz | head
-```
-
-## Run fastqc or zcat {} | wc -l to count how many reads
-
-```{bash, eval=FALSE, engine="sh"}
-
-
-```
-
-
-## How to see what packages are installed on HPC. Use grep.
+Note the matching fastq IDs in the R1 and R2 files. Valid paired fastq files always have matching read IDs throughout the entire file.
 
 ```{bash, eval=TRUE, engine="sh"}
-module av
-module av bbc | head -n50
+zcat fastqs/SRR1039520_1.fastq.gz | head
+```
+
+Now look at the R2 file.
+
+```{bash, eval=TRUE, engine="sh"}
+zcat fastqs/SRR1039520_2.fastq.gz | head
+```
+
+## Use `wc` to see how many reads are in a fastq file and how long they are.
+
+Remember that we can use `man wc` to see what the different options such as `-l` and `-m` do.
+
+This command counts the new line characters at the end of each line. Typically, this corresponds to the number of lines in a file. Recall that each read is represented by 4 lines in a fastq file, so we need to divide the results of `wc -l` by 4 to get the number of reads.
+
+```{bash, eval=TRUE, engine="sh"}
+zcat fastqs/SRR1039520_1.fastq.gz | wc -l
+```
+
+This command counts the number of characters in the sequence line in the first read in the file. you may notice that the results of `wc -m` will be 1 higher than the actual read length. This is because the tool counts the newline character also.
+
+```{bash, eval=TRUE, engine="sh"}
+zcat fastqs/SRR1039520_1.fastq.gz | wc -m
+
+```
+
+Record these numbers so that you can compare these to the output from FastQC (a commonly used tool for checking the quality of fastq files) which we will run below.
+
+## How to see what packages are installed on HPC.
+
+If you simply type `module av`, you will see all the modules available. There are a lot of modules installed. To parse through these more easily, we can **pipe** the results of `module av` into tools such as `head` to print just the first 'n' lines and `grep` to search for modules with specific keywords. There is a trick, though. The results of `module av` go to stderr, so we need to redirect stderr to stdout using `2>&1` before the pipe.
+
+Print the first 50 lines.
+
+```{bash, eval=TRUE, engine="sh"}
+module av 2>&1 | head -n50
+```
+
+Print the first 50 lines after subsetting to just the BBC-installed modules.
+
+```{bash, eval=TRUE, engine="sh"}
+module av bbc 2>&1 | head -n50
+```
+
+Print the modules with the keyword, 'fastqc', in their names.
+
+```{bash, eval=TRUE, engine="sh"}
+module av 2>&1 | grep 'fastqc'
+```
+
+## Run FastQC on the fastq files
+
+We run fastqc on our raw fastq files for essentially all of the projects that we work on.
+
+The output of fastqc includes an html file for each fastq file. You can open up these in a regular browser to look at basic QC metrics for these fastq files. In the interest of time, we will simply run FastQC without viewing the results because we will aggregate all of our results into one html file at the end of this exercise.
+
+```{bash, eval=TRUE, engine="sh"}
+module load bbc/fastqc/fastqc-0.11.9
+
+# make a directory for the output
+mkdir fastqc
+
+# run FastQC. Remember you can check out what the options do by typing `fastqc -h`.
+fastqc -o fastqc fastqs/*fastq.gz
+```
+
+Look at the output from FastQC.
+
+```{bash, eval=TRUE, engine="sh"}
+ls fastqc
 
 ```
 
 ## Set up a job to run Salmon
 
-The job script code is below. Don't worry about the specifics of this code for now. Simply, copy the code and paste into your text editor to make your job script. You will need to edit certain fields.
+First, we `exit` from our interactive job because we want to get back on to the submit node to submit a non-interactive job to run Salmon.
 
 ```{bash, eval=FALSE, engine="sh"}
+# exit the interactive job
+exit
 
+# verify that the interactive job has ended
+qstat -u username
 
 ```
 
-## Use qstat to check on the job
+Next, we can set up our job script to run Salmon. The job script code is below. Don't worry about the specifics of this code for now. Simply, copy the code and paste into your text editor to make your job script. Save the script as `run_salmon.sh` and ensure that it is in our project directory containing the `fastqs/` subfolder.
 
 ```{bash, eval=FALSE, engine="sh"}
-qstat
-qstat | grep 'firstname.lastname'
+#PBS -l nodes=1:ppn=3
+#PBS -l mem=36gb
+#PBS -l walltime=1:00:00
+#PBS -N salmon
+#PBS -o salmon.o
+#PBS -e salmon.e
+
+set -euo pipefail # see explanation at https://gist.github.com/mohanpedala/1e2ff5661761d3abd0385e8223e16425?permalink_comment_id=3945021
+
+start_time=$(date +"%T")
+
+# You need to navigate to your project directory. Conveniently, the $PBS_O_WORKDIR variable stores the path for where the job was submitted.
+cd ${PBS_O_WORKDIR}
+
+module load bbc/salmon/salmon-1.5.2
+
+# Typically, you would have to first build an index before doing the aligning, but we have done this for you already. Here, we store the path to the index file in a variable called 'salmon_idx'.
+salmon_idx="/varidata/research/projects/bbc/versioned_references/2022-03-08_14.47.50_v9/data/hg38_gencode/indexes/salmon/hg38_gencode/"
+
+# make output directory for salmon
+mkdir -p salmon
+
+# this is called a for loop. We use this to run salmon quant on all the samples, one at a time. It is more efficient to run salmon on each sample "in parallel" but we will not do not today.
+for samp_id in SRR1039520 SRR1039521
+do
+    salmon quant -p ${PBS_NUM_PPN} -l A -i $salmon_idx -1 fastqs/${samp_id}_1.fastq.gz -2 fastqs/${samp_id}_2.fastq.gz -o salmon/${samp_id} --validateMappings
+
+done
+
+end_time=$(date +"%T")
+echo "Start time: $start_time"
+echo "End time: $end_time"
+```
+
+## Submit the job
+
+```{bash, eval=FALSE, engine="sh"}
+qsub run_salmon.sh
+
+# check on the status of your job
+qstat -u firstname.lastname
 
 ```
 
 ## Check the job logs to see if job finished running
 
-```{bash, eval=FALSE, engine="sh"}
-cat job.log
+It is good practice to check the job logs after your job is done to ensure that the job completed successfully. If there is an error, the output files may not be reliable or could be incomplete.
+
+Look at the stderr from the script.
+
+```{bash, eval=TRUE, engine="sh"}
+tail salmon.e
+```
+
+Look at the stdout from the script.
+
+```{bash, eval=TRUE, engine="sh"}
+tail salmon.o
 
 ```
 
 ## Use grep to find the TPMs for specific genes
 
-```{bash, eval=FALSE, engine="sh"}
+As an example, let's try to extract out the TPMs for MUC1. These values can be found in the `quant.sf` file in each sample's folder. Let's take a look at one of these files to figure out the format of these files.
 
-grep 'SNC' salmon.results.txt
-```
-
-## Transfer read counts table to laptop/desktop to view in Excel
-
-```{bash, eval=FALSE, engine="sh"}
-
+```{bash, eval=TRUE, engine="sh"}
+head salmon/SRR1039520/quant.sf 
 
 ```
 
+We can see that the TPMs are in the 4th column of this file. We can also see that the transcript IDs are in ENSEMBL format. If we look up MUC1 on [Ensembl](http://useast.ensembl.org/Homo_sapiens/Gene/Summary?db=core;g=ENSG00000185499;r=1:155185824-155192916), we will find that the canonical transcript is `ENST00000620103`, so let's `grep` for this transcript ID. 
 
+Look for this transript for one specific sample.
+
+```{bash, eval=TRUE, engine="sh"}
+grep 'ENST00000620103' salmon/SRR1039520/quant.sf
+```
+
+Look across all the samples at the same time. We can see that 'SRR1039521' has a TPM of 13.1 for MUC1 compared to 0 for 'SRR1039520'. Recall that the fastq files for this exercise were subsetted to a very small number of reads so don't interpret these results seriously.
+
+```{bash, eval=TRUE, engine="sh"}
+grep 'ENST00000620103' salmon/*/quant.sf
+```
+
+## Use an interactive job to run multiQC on the Salmon and FastQC output
+
+As our final exercise, let's run a tool called multiQC to summarize the results from FastQC and Salmon. Using the output from multiQC, we will be able to assess both the quality of the fastq sequences themselves and how well they match up with the reference transcriptome (mapping rate), and other useful information. We will start up another interactive job to do this.
+
+```{bash, eval=FALSE, engine="sh"}
+qsub -I -l nodes=1:ppn=1 -l mem=32gb -l walltime=1:00:00
+
+# go back to your project directory
+cd /varidata/researchtemp/hpctmp/HPC_mini_workshop/Part3/firstname.lastname/
+```
+
+Now actually run multiQC.
+
+```{bash, eval=TRUE, engine="sh"}
+module load bbc/multiqc/multiqc-1.12
+
+# multiqc creates the output directory automatically. You don't have to run mkdir manually.
+multiqc --outdir multiqc .
+```
+
+Look at the output from multiQC.
+
+```{bash, eval=TRUE, engine="sh"}
+ls multiqc
+```
+
+Note the newly created `multiqc_report.html` file. Your final task today is to view this file in your browser. If you have mounted the HPC file system to your computer, you can try to open up this file directly. Alternatively, you can copy this file to your computer's local storage first and then open it. As a last resort, you can view a pre-made one [here](https://htmlpreview.github.io/?https://github.com/vari-bbc/Intro_to_Linux_for_HPC/tree/main/multiqc/multiqc_report.html).
