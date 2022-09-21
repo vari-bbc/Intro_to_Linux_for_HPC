@@ -89,10 +89,10 @@ This command counts the new line characters at the end of each line. Typically, 
 zcat fastqs/SRR1039520_1.fastq.gz | wc -l
 ```
 
-This command counts the number of characters in the sequence line in the first read in the file. you may notice that the results of `wc -m` will be 1 higher than the actual read length. This is because the tool counts the newline character also.
+This command counts the number of characters in the sequence line (second line) in the first read in the file. you may notice that the results of `wc -m` will be 1 higher than the actual read length. This is because the tool counts the newline character also.
 
 ```{bash, eval=TRUE, engine="sh"}
-zcat fastqs/SRR1039520_1.fastq.gz | wc -m
+zcat fastqs/SRR1039520_1.fastq.gz | head -n2 | tail -n1 | wc -m
 
 ```
 

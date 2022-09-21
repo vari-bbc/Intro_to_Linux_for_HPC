@@ -132,16 +132,16 @@ zcat fastqs/SRR1039520_1.fastq.gz | wc -l
 ## 2000000
 ```
 
-This command counts the number of characters in the sequence line in the first read in the file. you may notice that the results of `wc -m` will be 1 higher than the actual read length. This is because the tool counts the newline character also.
+This command counts the number of characters in the sequence line (second line) in the first read in the file. you may notice that the results of `wc -m` will be 1 higher than the actual read length. This is because the tool counts the newline character also.
 
 
 ```bash
-zcat fastqs/SRR1039520_1.fastq.gz | wc -m
+zcat fastqs/SRR1039520_1.fastq.gz | head -n2 | tail -n1 | wc -m
 
 ```
 
 ```
-## 84478500
+## 64
 ```
 
 Record these numbers so that you can compare these to the output from FastQC (a commonly used tool for checking the quality of fastq files) which we will run below.
@@ -593,7 +593,7 @@ multiqc --outdir multiqc .
 ##   /// MultiQC 🔍 | v1.12
 ## 
 ## |           multiqc | Search path : /varidata/research/projects/bbc/research/hpc_workshop_202209
-## |         searching | ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 100% 233/233  
+## |         searching | ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 100% 240/240  
 ## |            salmon | Found 2 meta reports
 ## |            salmon | Found 2 fragment length distributions
 ## |            fastqc | Found 4 reports
