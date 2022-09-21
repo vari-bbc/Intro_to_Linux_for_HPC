@@ -588,7 +588,7 @@ multiqc --outdir multiqc .
 ##   /// MultiQC 🔍 | v1.12
 ## 
 ## |           multiqc | Search path : /varidata/research/projects/bbc/research/hpc_workshop_202209
-## |         searching | ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 100% 200/200  
+## |         searching | ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 100% 227/227  
 ## |            salmon | Found 2 meta reports
 ## |            salmon | Found 2 fragment length distributions
 ## |            fastqc | Found 4 reports
@@ -610,4 +610,4 @@ ls multiqc
 ## multiqc_report.html
 ```
 
-Note the newly created `multiqc_report.html` file. Your final task today is to view this file in your browser. If you have mounted the HPC file system to your computer, you can try to open up this file directly. Alternatively, you can copy this file to your computer's local storage first and then open it. As a last resort, you can view a pre-made one [here](https://htmlpreview.github.io/?https://github.com/vari-bbc/Intro_to_Linux_for_HPC/tree/main/multiqc/multiqc_report.html).
+Note the newly created `multiqc_report.html` file. Your final task today is to view this file in your browser. If you have mounted the HPC file system to your computer, you can try to open up this file directly. Alternatively, you can copy this file to your computer's local storage first and then open it.
