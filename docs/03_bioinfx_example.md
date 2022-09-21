@@ -18,7 +18,7 @@ qsub -I -l nodes=1:ppn=1 -l mem=32gb -l walltime=2:00:00
 
 # one way to verify that we have started an interactive successfully is to run qstat
 # to show only jobs submitted by ourselves, we use the `-u` option followed by our username.
-qstat -u kin.lau
+qstat -u username
 ```
 
 ## Create a project directory for yourself and a subdirectory for storing the raw fastq files
@@ -421,6 +421,9 @@ exit
 # verify that the interactive job has ended
 qstat -u username
 
+# go back to the project directory
+cd /varidata/researchtemp/hpctmp/HPC_mini_workshop/Part3/firstname.lastname
+
 ```
 
 Next, we can set up our job script to run Salmon. The job script code is below. Don't worry about the specifics of this code for now. Simply, copy the code and paste into your text editor to make your job script. Save the script as `run_salmon.sh` and ensure that it is in our project directory containing the `fastqs/` subfolder.
@@ -462,6 +465,8 @@ echo "End time: $end_time"
 ```
 
 ## Submit the job
+
+Submit the job and keep monitoring the job using `qstat` as shown below. The job should complete in about 2 minutes.
 
 
 ```bash
@@ -588,7 +593,7 @@ multiqc --outdir multiqc .
 ##   /// MultiQC 🔍 | v1.12
 ## 
 ## |           multiqc | Search path : /varidata/research/projects/bbc/research/hpc_workshop_202209
-## |         searching | ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 100% 227/227  
+## |         searching | ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 100% 233/233  
 ## |            salmon | Found 2 meta reports
 ## |            salmon | Found 2 fragment length distributions
 ## |            fastqc | Found 4 reports

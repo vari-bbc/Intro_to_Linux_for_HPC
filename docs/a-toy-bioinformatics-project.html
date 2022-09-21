@@ -192,7 +192,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb1-2"><a href="a-toy-bioinformatics-project.html#cb1-2"></a></span>
 <span id="cb1-3"><a href="a-toy-bioinformatics-project.html#cb1-3"></a><span class="co"># one way to verify that we have started an interactive successfully is to run qstat</span></span>
 <span id="cb1-4"><a href="a-toy-bioinformatics-project.html#cb1-4"></a><span class="co"># to show only jobs submitted by ourselves, we use the `-u` option followed by our username.</span></span>
-<span id="cb1-5"><a href="a-toy-bioinformatics-project.html#cb1-5"></a><span class="ex">qstat</span> -u kin.lau</span></code></pre></div>
+<span id="cb1-5"><a href="a-toy-bioinformatics-project.html#cb1-5"></a><span class="ex">qstat</span> -u username</span></code></pre></div>
 </div>
 <div id="create-a-project-directory-for-yourself-and-a-subdirectory-for-storing-the-raw-fastq-files" class="section level2 hasAnchor">
 <h2><span class="header-section-number">4.2</span> Create a project directory for yourself and a subdirectory for storing the raw fastq files<a href="a-toy-bioinformatics-project.html#create-a-project-directory-for-yourself-and-a-subdirectory-for-storing-the-raw-fastq-files" class="anchor-section" aria-label="Anchor link to header"></a></h2>
@@ -494,7 +494,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb25-2"><a href="a-toy-bioinformatics-project.html#cb25-2"></a><span class="bu">exit</span></span>
 <span id="cb25-3"><a href="a-toy-bioinformatics-project.html#cb25-3"></a></span>
 <span id="cb25-4"><a href="a-toy-bioinformatics-project.html#cb25-4"></a><span class="co"># verify that the interactive job has ended</span></span>
-<span id="cb25-5"><a href="a-toy-bioinformatics-project.html#cb25-5"></a><span class="ex">qstat</span> -u username</span></code></pre></div>
+<span id="cb25-5"><a href="a-toy-bioinformatics-project.html#cb25-5"></a><span class="ex">qstat</span> -u username</span>
+<span id="cb25-6"><a href="a-toy-bioinformatics-project.html#cb25-6"></a></span>
+<span id="cb25-7"><a href="a-toy-bioinformatics-project.html#cb25-7"></a><span class="co"># go back to the project directory</span></span>
+<span id="cb25-8"><a href="a-toy-bioinformatics-project.html#cb25-8"></a><span class="bu">cd</span> /varidata/researchtemp/hpctmp/HPC_mini_workshop/Part3/firstname.lastname</span></code></pre></div>
 <p>Next, we can set up our job script to run Salmon. The job script code is below. Don’t worry about the specifics of this code for now. Simply, copy the code and paste into your text editor to make your job script. Save the script as <code>run_salmon.sh</code> and ensure that it is in our project directory containing the <code>fastqs/</code> subfolder.</p>
 <div class="sourceCode" id="cb26"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb26-1"><a href="a-toy-bioinformatics-project.html#cb26-1"></a><span class="co">#PBS -l nodes=1:ppn=3</span></span>
 <span id="cb26-2"><a href="a-toy-bioinformatics-project.html#cb26-2"></a><span class="co">#PBS -l mem=36gb</span></span>
@@ -531,6 +534,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div id="submit-the-job" class="section level2 hasAnchor">
 <h2><span class="header-section-number">4.10</span> Submit the job<a href="a-toy-bioinformatics-project.html#submit-the-job" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Submit the job and keep monitoring the job using <code>qstat</code> as shown below. The job should complete in about 2 minutes.</p>
 <div class="sourceCode" id="cb27"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb27-1"><a href="a-toy-bioinformatics-project.html#cb27-1"></a><span class="ex">qsub</span> run_salmon.sh</span>
 <span id="cb27-2"><a href="a-toy-bioinformatics-project.html#cb27-2"></a></span>
 <span id="cb27-3"><a href="a-toy-bioinformatics-project.html#cb27-3"></a><span class="co"># check on the status of your job</span></span>
@@ -599,7 +603,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ##   /// MultiQC 🔍 | v1.12
 ## 
 ## |           multiqc | Search path : /varidata/research/projects/bbc/research/hpc_workshop_202209
-## |         searching | ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 100% 227/227  
+## |         searching | ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 100% 233/233  
 ## |            salmon | Found 2 meta reports
 ## |            salmon | Found 2 fragment length distributions
 ## |            fastqc | Found 4 reports
