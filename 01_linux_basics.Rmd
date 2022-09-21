@@ -36,7 +36,7 @@ Let’s say you’re in `/home/username/documents` and you want to go to `projec
 
 Another scenario is if you want to switch to a completely new directory, for example, `/home/username/research`, you need to type `cd` followed by the directory’s absolute path: `cd /home/username/research`
 
-_Tip_, `./` means current working directory. `../` means the parent directory. `/` is the root directory, "~" is home directory. Pay attention to these differences. 
+_Tip_, `./` means current working directory. `../` means the parent directory. `/` is the root directory, `~` is home directory. Pay attention to these differences. 
 
 **Cmd4.** `mv` -- move and rename file
 
@@ -67,7 +67,7 @@ Syntax: `cp old_file new_file` for file copy.
 
 Typical usage: `find /home/username -name notes.txt` will search for a file called `notes.txt` within your home directory and its subdirectories.
 
-_Tip_, if you want to find all pdf files under the current directory, do find . -name “*.pdf”. Here, "*" is called wildcard, it will match any name. 
+_Tip_, if you want to find all pdf files under the current directory, do `find . -name “*.pdf”`. Here, `*` is called wildcard, it will match any name. 
 
 
 ## Ex2: file navigation
