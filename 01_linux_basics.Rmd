@@ -11,7 +11,7 @@ Here we will learn the basics of using the Linux commandline on the HPC.
 **Step 1.** Make sure you are on the VAI network, not VAI guest. 
 
 **Step 2.** 
-- For Mac user: open terminal, type `ssh you_vai_user_name@submit.hpc.vai`, and type your password. 
+- For Mac user: open terminal, type `ssh you_vai_user_name@submit.hpc.vai.org`, and type your password. 
 - For Windows user, open MobarXterm, click new session under “Session”.
 Click on “SSH”, type “submit.hpc.vai.org” as Remote host name, your user name for  VAI as username, click “OK”. You need to type your VAI password. 
 
