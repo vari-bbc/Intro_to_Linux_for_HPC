@@ -592,8 +592,8 @@ multiqc --outdir multiqc .
 ## 
 ##   /// MultiQC 🔍 | v1.12
 ## 
-## |           multiqc | Search path : /varidata/research/projects/bbc/research/hpc_workshop_202209
-## |         searching | ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 100% 240/240  
+## |           multiqc | Search path : /varidata/research/home/daisy.fu/Intro_to_Linux_for_HPC
+## |         searching | ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 100% 106/106  
 ## |            salmon | Found 2 meta reports
 ## |            salmon | Found 2 fragment length distributions
 ## |            fastqc | Found 4 reports
