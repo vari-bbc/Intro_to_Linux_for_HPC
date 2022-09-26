@@ -22,19 +22,15 @@ It is useful when directory changes are made frequently.
 
 **Cmd2.** `ls` - list content 
 
-This command lists directory contents. Without anything specified after ls, it will list the current directory. It can also list content of another directory.
+This command lists directory contents. Without anything specified after ls, it will list the current directory. It can also list content of another directory. You might not have any file in your home directory at this point, you can type `touch file.txt` to create your first file.
 
 `ls /varidata/`
 
 `ls -lht`  -- show more details of the files. 
 
-**Cmd3.** `cd` -- change directory 
+**Cmd3.**  `mkdir` -- create a new directory
 
-Let’s say you’re in `/home/username/documents` and you want to go to `projects`, a subdirectory of documents, type: `cd projects`
-
-Another scenario is if you want to switch to a completely new directory, for example, `/home/username/research`, you need to type `cd` followed by the directory’s absolute path: `cd /home/username/research`
-
-_Tip_, `./` means current working directory. `../` means the parent directory. `/` is the root directory, `~` is home directory. Pay attention to these differences. 
+Syntax is mkdir new_directory name. You can create a new directory in the current directory or another directory. For example, `mkdir projects` will create a new directory called "projects" in your home directory.
 
 **Cmd4.** `mv` -- move and rename file
 
@@ -42,11 +38,15 @@ The arguments in `mv` are similar to the `cp` command.
 
 To move a file, syntax is mv file_name destination’s directory. For example: `mv file.txt /home/username/projects`, will move `file.txt` from current directory to `/home/username/projects`
 
-To rename a file, the syntax is `mv old_file_name.ext new_file_name`
+To rename a file, the syntax is `mv old_file_name.txt new_file_name.txt`
 
-**Cmd5.** `mkdir` -- create a new directory
+**Cmd5.** `cd` -- change directory
 
-Syntax is mkdir new_directory name. You can create a new directory in the current directory or another directory. 
+Let’s say you’re in `/home/username/` and you want to go to `projects`, a subdirectory of documents, type: `cd projects`
+
+Another scenario is if you want to switch to a completely new directory, for example, `/home/username/research`, you need to type `cd` followed by the directory’s absolute path: `cd /home/username/research`
+
+_Tip_, `./` means current working directory. `../` means the parent directory. `/` is the root directory, `~` is home directory. Pay attention to these differences.  
 
 **Cmd6.** `rm` -- remove a file 
 

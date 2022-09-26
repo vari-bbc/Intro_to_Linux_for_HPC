@@ -300,6 +300,7 @@ fastqc -o fastqc fastqs/*fastq.gz
 ```
 
 ```
+## mkdir: cannot create directory ‘fastqc’: File exists
 ## Started analysis of SRR1039520_1.fastq.gz
 ## Approx 5% complete for SRR1039520_1.fastq.gz
 ## Approx 10% complete for SRR1039520_1.fastq.gz
@@ -593,13 +594,17 @@ multiqc --outdir multiqc .
 ##   /// MultiQC 🔍 | v1.12
 ## 
 ## |           multiqc | Search path : /varidata/research/home/daisy.fu/Intro_to_Linux_for_HPC
-## |         searching | ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 100% 106/106  
+## |         searching | ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 100% 141/141  
+## |            snippy | Found 1 reports
+## |          bargraph | Tried to make bar plot, but had no data: snippy_variants
 ## |            salmon | Found 2 meta reports
 ## |            salmon | Found 2 fragment length distributions
 ## |            fastqc | Found 4 reports
 ## |           multiqc | Compressing plot data
-## |           multiqc | Report      : multiqc/multiqc_report.html
-## |           multiqc | Data        : multiqc/multiqc_data
+## |           multiqc | Previous MultiQC output found! Adjusting filenames..
+## |           multiqc | Use -f or --force to overwrite existing reports instead
+## |           multiqc | Report      : multiqc/multiqc_report_2.html
+## |           multiqc | Data        : multiqc/multiqc_data_2
 ## |           multiqc | MultiQC complete
 ```
 
@@ -612,6 +617,10 @@ ls multiqc
 
 ```
 ## multiqc_data
+## multiqc_data_1
+## multiqc_data_2
+## multiqc_report_1.html
+## multiqc_report_2.html
 ## multiqc_report.html
 ```
 
