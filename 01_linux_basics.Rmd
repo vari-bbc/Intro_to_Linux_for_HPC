@@ -1,152 +1,205 @@
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
+# **Set up HPC**
 
-# Basics of using the HPC and the Linux commandline
 
-Here we will learn the basics of using the Linux commandline on the HPC.
+## **Access Network**
 
-## Ex 1 Log into the HPC
+Ensure the device’s connection is on the VAI network, and the user enters the VAI username and password if needed, the VAI_guest network will not give users access to the VAI server.
 
-**Step 1.** Make sure you are on the VAI network, not VAI guest. 
 
-**Step 2.** 
-- For Mac user: open terminal, type `ssh you_vai_user_name@submit.hpc.vai.org`, and type your password. 
-- For Windows user, open MobarXterm, click new session under “Session”.
-Click on “SSH”, type “submit.hpc.vai.org” as Remote host name, your user name for  VAI as username, click “OK”. You need to type your VAI password. 
+## **MAC User**
 
+Log into the terminal with **ssh vai_username@access.hpc.vai.org**, and enter the VAI password.
 
-## Commands you need to learn for Ex2:
 
-**Cmd1.** `pwd` - displays the current working directory
+## **Window User**
 
-It is useful when directory changes are made frequently.
+If MobaXterm is not installed, please download the [free MobaXterm version](https://mobaxterm.mobatek.net/download.html), then set up, and agree with license agreements to process installation.
 
-**Cmd2.** `ls` - list content 
 
-This command lists directory contents. Without anything specified after ls, it will list the current directory. It can also list content of another directory. You might not have any file in your home directory at this point, you can type `touch file.txt` to create your first file.
+- Open MobaXterm
+- Click on `Session` in the top left corner
+- Click on `SSH`(Secure Shell)
+- Enter `access.hpc.vai.org` in Remote host*
+- Click the little box on the left of Specify username, then type VAI `username` and enter VAI `password`
+- Next, click `OK`
 
-`ls /varidata/`
+Once the user successfully login, the user’s command prompt should look similar to `[username@submit001 ~]$` or `[username@submit002 ~]$`
+<br><br>
 
-`ls -lht`  -- show more details of the files. 
+# **File Navigation Exercise 1**
 
-**Cmd3.**  `mkdir` -- create a new directory
+Practice directory: `/varidata/researchtemp/hpctmp/HPC_mini_workshop/Ex2`. This directory allows users to practice, and familiarize some basic Linux command lines.  Follow each command and review the solution below.
 
-Syntax is mkdir new_directory name. You can create a new directory in the current directory or another directory. For example, `mkdir projects` will create a new directory called "projects" in your home directory.
+## **Navigate to the `EX2` Directory**
+`Ex2` directory is inside of the `HPC_mini_workshop` directory, evidently, it requires to access `varidata` directory and a few directories before reaching the `Ex2` directory.
 
-**Cmd4.** `mv` -- move and rename file
+```{bash, eval = FALSE, engine= "sh"}
+cd /varidata/researchtemp/hpctmp/HPC_mini_workshop/Ex2
+```
 
-The arguments in `mv` are similar to the `cp` command. 
+## **Location the Current Directory**
 
-To move a file, syntax is mv file_name destination’s directory. For example: `mv file.txt /home/username/projects`, will move `file.txt` from current directory to `/home/username/projects`
+```{bash, eval= TRUE, engine= "sh"}
+pwd
+```
+## **View Inside of the `Ex2` Directory**
 
-To rename a file, the syntax is `mv old_file_name.txt new_file_name.txt`
+```{bash, eval= FALSE, engine= "sh"}
+ls
+```
 
-**Cmd5.** `cd` -- change directory
+## **Navigate to Home Directory**
 
-Let’s say you’re in `/home/username/` and you want to go to `projects`, a subdirectory of documents, type: `cd projects`
+```{bash, eval = FALSE, engine= "sh"}
+cd
+```
 
-Another scenario is if you want to switch to a completely new directory, for example, `/home/username/research`, you need to type `cd` followed by the directory’s absolute path: `cd /home/username/research`
+## **Create a Directory**
+`hpc_mini_workshop` will be the directory name
 
-_Tip_, `./` means current working directory. `../` means the parent directory. `/` is the root directory, `~` is home directory. Pay attention to these differences.  
+```{bash, eval = FALSE, engine= "sh"}
+mkdir hpc_mini_workshop
+```
 
-**Cmd6.** `rm` -- remove a file 
+## **Copy a File**
+Access multiple directories to reach `test_54_R1.fq` file and copy it to the `hpc_mini_workshop` directory.
 
-`rm file_name` will delete the file. 
+```{bash, eval = FALSE, engine= "sh"}
+cp /varidata/researchtemp/hpctmp/HPC_mini_workshop/Ex2/test_54_R1.fq hpc_mini_workshop
+```
 
-`rm -r dir` will delete the whole directory. 
+## **Check the Existing File**
 
-Note, `rm` is permanent. Unlike Window and Mac where deleted files can be recovered from the Trash. Think carefully before you type `rm`. 
+```{bash, eval= FALSE, engine= "sh"}
+cd hpc_mini_workshop
 
-**Cmd7.** `cp` -- copy a file or a dir 
+ls
+```
 
-Syntax: `cp old_file new_file` for file copy. 
-`cp -r old_dir new_dir` for directory copy. 
+## **Search a Pattern**
 
-**Cmd8.** `find` -- look for a file based on its name 
+```{bash, eval= TRUE, engine= "sh"}
+grep "AATTGG" test_54_R1.fq
+```
 
-Typical usage: `find /home/username -name notes.txt` will search for a file called `notes.txt` within your home directory and its subdirectories.
+## **Display Contents**
 
-_Tip_, if you want to find all pdf files under the current directory, do `find . -name “*.pdf”`. Here, `*` is called wildcard, it will match any name. 
+```{bash, eval= TRUE, engine= "sh"}
+head test_54_R1.fq
+```
 
+## **Display the Number of words, Lines, and Characters**
 
-## Ex2: file navigation
+```{bash, eval= TRUE, engine= "sh"}
+wc test_54_R1.fq
+```
 
-1. Use the commands you just learned, go to
+## **Create a File**
 
-/varidata/researchtemp/hpctmp/HPC_mini_workshop/Ex2
+```{bash, eval= TRUE, engine= "sh"}
+touch exampleFile.txt
+```
 
+# **Pipe Command Line**
 
-2. List files in this the directory, how many files and directories did you see? Which file was created the earliest?
+Pipe is a neat structure to process individual commands with a vertical pipe character between each command such as `command 1| command 2 | command 3`. According to Rahul Awati, “The pipe provides the connection that transforms an input into an output stream, while the filter reads from the standard input, does some processing on what it reads and writes to standard output.”
 
+```{r, echo= FALSE}
+library(knitr)
+library(kableExtra)
 
-3. Make a new directory in your home directory called “hpc_mini_workshop”
+# Create a data frame
+df <- data.frame(
+  Example = c("1", "2", "3"),
+  Command = c("`cat file.txt | head -n7`", "`cat file.txt | head -n7 | tail -n5`", "`cat file.txt | head -n7 | tail -n5 | grep 'CGAG'`"),
+  Description = c(
+    "Display the contents of `file.txt` by selecting the first 7 lines. ",
+    "Display the contents of `file.txt` by selecting the last 5 lines from the first 7 lines",
+    "Display contents of `file.txt` by selecting the first 7 lines, then the last 5 lines, and finally filter those lines and display only lines with the pattern `CGAG`."
+  )
+)
 
+# Render the data frame as a table in RMarkdown
+kable(df, format = "html") %>%
+  kable_styling() %>%
+  column_spec(3, width = "40%") %>%
+  row_spec(2, background = "#e9f5f8")
 
-4. Try to copy (not to move) one of the fastsq files to hpc_mini_workshop you just created in your home directory. 
+```
 
+## **File Navigation Exercise 2**
 
-5. Use “find” command to list all the fastq files (file ends with fq) in /varidata/researchtemp/hpctmp/HPC_mini_workshop/Ex2
+In this exercise, we will continue to practice and advance the skill to access `/varidata/researchtemp/hpctmp/HPC_mini_workshop/Ex2` directory with character pipe `|`.
 
+## **Navigate to the Home Directory**
 
-## Commands you need to learn for Ex 3
+```{bash, eval = FALSE, engine= "sh"}
+cd
+```
 
-**Cmd9.**  `head` & `tail` -- view the first and last a few rows/lines of a file
+## **Display the Ex2 Directory Contents**
 
-_Usage_: `head -n 5 file_name` will display as standard output (stdout) the first 5 lines/rows of the a file. Without -n, it will default display 10 lines. 
+```{bash, eval = TRUE, engine= "sh"}
+ls /varidata/researchtemp/hpctmp/HPC_mini_workshop/Ex2/
+```
 
-**Cmd10.** `less` & `more` -- view content of a file one page at a time. 
+## **Copy Files**
 
-_Tip_, you can use `q` key to quit the viewing. 
+Previous step, we can spot `protein_seq.fa` file and `test_54_R2.fq` file inside the `Ex2` directory. Copy the following code to the personal `hpc_mini_workshop` directory below.
 
-**Cmd11.** `cat` -- list the contents of a file as stdout
+```{bash, eval = FALSE, engine= "sh"}
+cp /varidata/researchtemp/hpctmp/HPC_mini_workshop/Ex2/test_54_R2.fq hpc_mini_workshop
 
-`cat` (short for concatenate) is one of the most frequently used commands. 
+cp /varidata/researchtemp/hpctmp/HPC_mini_workshop/Ex2/protein_seq.fq hpc_mini_workshop
+```
 
-To run this command, type `cat` followed by the file’s name: `cat file.txt`
+## **Verify Files are in the Directory**
 
-Combine two files: `cat file1 file2`
+```{bash, eval =TRUE, engine= "sh"}
+cd hpc_mini_workshop
 
-It is useful to **pipe** the content of the file into another command. 
+ls
+```
 
+## **Practice Concatenate**
 
-### So, what is pipe?
+Display the number of words, lines, and characters in the `protein_seq.fa` file.
+```{bash, eval= TRUE, engine= "sh"}
+cat protein_seq.fa | wc
+```
 
-A pipe is a form of redirection (transfer of sdout to other destinations). You can send output from one command/program/process to another command/program/process for further processing. You can do so by using the pipe character `|`.
+Display the number of words in the `protein_seq.fa` file.
+```{bash, eval= TRUE, engine= "sh"}
+cat protein_seq.fa | wc -l
+```
 
-Lastly, you can direct the stdout of any command to a new file use `>`. 
+## **Find patterns**
 
-For example:
+Only display the beginning of 20 lines from `test_54_R2.fq` file with pattern **"AGCA"**
+```{bash, eval= TRUE, engine= "sh"}
+cat test_54_R2.fq | head -n20 | grep "AGCA"
+```
 
-`bwa mem genome.fa reads.fastq | samtools sort -o output.bam`
+## **Combine Files**
 
-`cat protein.fa | head -5 > first_5_protein.fa`
+This step requires output redirection `>`. Output redirection allows users to perform specific commands and direct to preferred files. For example `cat protein.fq | head -n5 > first_5_protein.fq`, the command is displaying `protein.fq` file contents with 5 lines from the beginning of the file, then those 5 lines are redirected to a new file named `first_5_protein.fq`. Follow the command and combine two files into a single file below.
 
+The `protein_seq.fa` file and the `test_54_R2.fq` file are combined into a single file called `combinedFile.fq`.
+```{bash, eval=  TRUE, engine= "sh"}
+cat protein_seq.fa | cat test_54_R2.fq > combinedFile.fq
+```
 
-**Cmd 12.** `grep` -- search a pattern by line 
+## **Ensure Files Are In The Directory**
 
-`grep “GCGGA” sequence_file.fastq` will output lines with GCGGA in it. 
+```{bash, eval= FALSE, engine= "sh"}
+ls
+```
 
-**Cmd 13.** `wc` - counting words, lines, and bytes in files
+## **Display the Contents From the End of the File**
 
-Without any specification, wc will output three numbers. 
-
-The most useful is wc -l, it only outputs the line number. 
-
-## Exercise 3:  File viewing and manipulation
-
-6. Count how many lines in the fastq file you just copied to your home directory. 
-
-
-7. Create a file that only has protein sequence name from file:
-
-`/varidata/researchtemp/hpctmp/HPC_mini_workshop/Ex2/protein_seq.fa`
-
-(please copy this file to your home directory first). 
-
-_Hint_, use `grep` to look for pattern that is shared among all protein names; then use redirection to create a new file. 
-
-
-8. Copy a different fastq file from `/varidata/researchtemp/hpctmp/HPC_mini_workshop/Ex2/` to your home directory, and combine two fq files into a new file called `combined.fq`.
-
-
+```{bash, eval= TRUE, engine= "sh"}
+cat combinedFile.fq | tail -n20
+```
