@@ -1,7 +1,7 @@
 ---
-title: "Introduction to Linux for the HPC"
-author: "BBC"
-date: "Sept 21, 2022"
+title: "Use Linux to navigate in High Performance Computing (HPC)"
+author: "Presented by The Bioinformatics and Biostatistics Core (BBC)"
+date: "DATE: 06/08/2023"
 site: bookdown::bookdown_site
 output: bookdown::gitbook
 documentclass: book
@@ -10,18 +10,12 @@ biblio-style: apalike
 link-citations: yes
 github-repo: vari-bbc/Intro_to_Linux_for_HPC
 theme: "yeti"
-description: "A book for the Introduction to Linux for the HPC workshop."
+description: "Linux tutorials with hands-on exercises, clear explanation, and useful examples for using HPC."
 ---
 
-# Preface
+# **Introduction**
 
-This is a book containing material for the Introduction to Linux for the HPC workshop.
-
-## Workshop organizers
-
-1. Daisy Fu
-2. Zack Ramjan
-3. Kin Lau
+Welcome to the introduction to Linux tutorials. This tutorial will walk users through some of the standard line commands to use on High-Performance Computing System (HPC), and navigate users how to direct, inspect and understand the file system. Throughout the exercise, the user will be provided with clear explanations, practical examples, and hands-on exercises to ensure the user’s learning journey is enjoyable and valuable.
 
 ```{r include=FALSE}
 # automatically create a bib database for R packages
