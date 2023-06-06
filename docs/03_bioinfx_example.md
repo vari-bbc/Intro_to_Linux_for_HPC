@@ -595,8 +595,8 @@ multiqc --outdir multiqc .
 ##   /// MultiQC 🔍 | v1.12
 ## 
 ## |           multiqc | Search path : /varidata/research/projects/bbc/research/hpc_workshop_202209
-## |         searching | ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 100% 333/333  
-## |            snippy | Found 2 reports
+## |         searching | ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 100% 356/356  
+## |            snippy | Found 4 reports
 ## |          bargraph | Tried to make bar plot, but had no data: snippy_variants
 ## |            salmon | Found 2 meta reports
 ## |            salmon | Found 2 fragment length distributions
@@ -604,8 +604,8 @@ multiqc --outdir multiqc .
 ## |           multiqc | Compressing plot data
 ## |           multiqc | Previous MultiQC output found! Adjusting filenames..
 ## |           multiqc | Use -f or --force to overwrite existing reports instead
-## |           multiqc | Report      : multiqc/multiqc_report_2.html
-## |           multiqc | Data        : multiqc/multiqc_data_2
+## |           multiqc | Report      : multiqc/multiqc_report_3.html
+## |           multiqc | Data        : multiqc/multiqc_data_3
 ## |           multiqc | MultiQC complete
 ```
 
@@ -620,9 +620,11 @@ ls multiqc
 ## multiqc_data
 ## multiqc_data_1
 ## multiqc_data_2
+## multiqc_data_3
 ## multiqc_report.html
 ## multiqc_report_1.html
 ## multiqc_report_2.html
+## multiqc_report_3.html
 ```
 
 Note the newly created `multiqc_report.html` file. Your final task today is to view this file in your browser. If you have mounted the HPC file system to your computer, you can try to open up this file directly. Alternatively, you can copy this file to your computer's local storage first and then open it.

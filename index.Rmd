@@ -15,6 +15,7 @@ description: "Bioinformatics tutorials with hands-on exercises and examples."
 # **Introduction**
 
 This book is divided into three sections:
+
 1. Basic command-line commands on the High-Performance Computing System (HPC).
 2. Performing a simple RNA-Seq analysis from read alignment to the identification of differentially expressed genes (DEGs).
 3. TBD
