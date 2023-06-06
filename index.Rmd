@@ -1,7 +1,6 @@
 ---
-title: "Use Linux to navigate in High Performance Computing (HPC)"
-author: "Presented by The Bioinformatics and Biostatistics Core (BBC)"
-date: "DATE: 06/08/2023"
+title: "Introductory Bioinformatics for VAI Users"
+author: "The Bioinformatics and Biostatistics Core (BBC)"
 site: bookdown::bookdown_site
 output: bookdown::gitbook
 documentclass: book
@@ -10,12 +9,15 @@ biblio-style: apalike
 link-citations: yes
 github-repo: vari-bbc/Intro_to_Linux_for_HPC
 theme: "yeti"
-description: "Linux tutorials with hands-on exercises, clear explanation, and useful examples for using HPC."
+description: "Bioinformatics tutorials with hands-on exercises and examples."
 ---
 
 # **Introduction**
 
-Welcome to the introduction to Linux tutorials. This tutorial will walk users through some of the standard line commands to use on High-Performance Computing System (HPC), and navigate users how to direct, inspect and understand the file system. Throughout the exercise, the user will be provided with clear explanations, practical examples, and hands-on exercises to ensure the user’s learning journey is enjoyable and valuable.
+This book is divided into three sections:
+1. Basic command-line commands on the High-Performance Computing System (HPC).
+2. Performing a simple RNA-Seq analysis from read alignment to the identification of differentially expressed genes (DEGs).
+3. TBD
 
 ```{r include=FALSE}
 # automatically create a bib database for R packages
