@@ -1,7 +1,6 @@
 ---
-title: "Introduction to Linux for the HPC"
-author: "BBC"
-date: "Sept 21, 2022"
+title: "Introductory Bioinformatics for VAI Users"
+author: "The Bioinformatics and Biostatistics Core (BBC)"
 site: bookdown::bookdown_site
 output: bookdown::gitbook
 documentclass: book
@@ -10,17 +9,14 @@ biblio-style: apalike
 link-citations: yes
 github-repo: vari-bbc/Intro_to_Linux_for_HPC
 theme: "yeti"
-description: "A book for the Introduction to Linux for the HPC workshop."
+description: "Bioinformatics tutorials with hands-on exercises and examples."
 ---
 
-# Preface
+# **Introduction**
 
-This is a book containing material for the Introduction to Linux for the HPC workshop.
-
-## Workshop organizers
-
-1. Daisy Fu
-2. Zack Ramjan
-3. Kin Lau
+This book is divided into three sections:
+1. Basic command-line commands on the High-Performance Computing System (HPC).
+2. Performing a simple RNA-Seq analysis from read alignment to the identification of differentially expressed genes (DEGs).
+3. TBD
 
 

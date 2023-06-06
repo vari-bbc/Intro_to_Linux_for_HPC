@@ -1,5 +1,4 @@
-preface
-workshop-organizers
+introduction
 basics-of-using-the-hpc-and-the-linux-commandline
 ex-1-log-into-the-hpc
 commands-you-need-to-learn-for-ex2

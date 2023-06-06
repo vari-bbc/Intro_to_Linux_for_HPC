@@ -158,56 +158,56 @@ module av 2>&1 | head -n50
 ```
 
 ```
+## --------------------------------------------------------------------------------- /cm/local/modulefiles ---------------------------------------------------------------------------------
+## boost/1.77.0            cluster-tools/9.2  cmd    cuda-dcgm/2.4.6.1  freeipmi/1.6.8  ipmitool/1.8.18  luajit        module-git   null      python3   shared  
+## cluster-tools-dell/9.2  cm-bios-tools      cmjob  dot                gcc/11.2.0      lua/5.4.4        mariadb-libs  module-info  openldap  python39  
 ## 
-## ---------------------------- /cm/local/modulefiles -----------------------------
-## cluster-tools/7.3 freeipmi/1.5.2    module-git        openldap
-## cmd               gcc/6.1.0         module-info       shared
-## dot               ipmitool/1.8.17   null              singularity/2.4.2
-## 
-## ---------------------------- /cm/shared/modulefiles ----------------------------
-## acml/gcc/64/5.3.1
-## acml/gcc/fma4/5.3.1
-## acml/gcc/mp/64/5.3.1
-## acml/gcc/mp/fma4/5.3.1
-## acml/gcc-int64/64/5.3.1
-## acml/gcc-int64/fma4/5.3.1
-## acml/gcc-int64/mp/64/5.3.1
-## acml/gcc-int64/mp/fma4/5.3.1
-## acml/open64/64/5.3.1
-## acml/open64/fma4/5.3.1
-## acml/open64/mp/64/5.3.1
-## acml/open64/mp/fma4/5.3.1
-## acml/open64-int64/64/5.3.1
-## acml/open64-int64/fma4/5.3.1
-## acml/open64-int64/mp/64/5.3.1
-## acml/open64-int64/mp/fma4/5.3.1
-## aspera/AsperaConnect
-## bbc/10x_bamtofastq/bamtofastq-1.2.0
-## bbc/10x_bamtofastq/bamtofastq-1.3.2
-## bbc/10x_subset-bam/10x_subset-bam-1.0
-## bbc/7zip/7zip-16.02
-## bbc/abyss/abyss-2.2.3
-## bbc/AWS/aws-cli
-## bbc/bamtools/bamtools-2.5.1
-## bbc/bbc_projects/bbc_projects
-## bbc/bcftools/bcftools-1.10.2
-## bbc/bcftools/bcftools-1.12
-## bbc/bcl2fastq/fastq-multx
-## bbc/bcl2fastq2/bcl2fastq2-2.20.0
-## bbc/bedops/bedops-2.4.37
-## bbc/bedtools/bedtools-2.29.2
-## bbc/bedtools/bedtools-2.30.0
-## bbc/bioawk/bioawk-git
-## bbc/biscuit/biscuit_0_3_14
-## bbc/biscuit/biscuit_0_3_16
-## bbc/biscuit/biscuit_1_0_0
-## bbc/biscuit/biscuit_1_0_1
-## bbc/biscuit/biscuit_dev
-## bbc/bismark/bismark-0.22.3
-## bbc/bismark/bismark-0.23.0
-## bbc/blast+/blast+-2.10.0
-## bbc/bonito/bonito-0.0.5
-## bbc/bowtie/bowtie-1.2.3
+## -------------------------------------------------------------------------------- /cm/shared/modulefiles ---------------------------------------------------------------------------------
+## bbc/7zip/7zip-16.02                        bbc/gmp/gmp-6.2.1                        bbc/R/R-4.0.0-pcre2-setR_LIBS_USER            bbc2/biscuit/biscuit_1_0_1                
+## bbc/10x_bamtofastq/bamtofastq-1.2.0        bbc/gnuplot/gnuplot-5.2.8                bbc/R/R-4.0.0-USE_PCRE2                       bbc2/biscuit/biscuit_1_0_2                
+## bbc/10x_bamtofastq/bamtofastq-1.3.2        bbc/gnuplot/gnuplot-5.4.5                bbc/R/R-4.0.2                                 bbc2/biscuit/biscuit_1_2_0                
+## bbc/10x_subset-bam/10x_subset-bam-1.0      bbc/gridss/gridss-2.7.3                  bbc/R/R-4.0.2-setR_LIBS_USER                  bbc2/bismark/bismark-0.24.0               
+## bbc/abyss/abyss-2.2.3                      bbc/gsl/gsl-2.5                          bbc/R/R-4.1.0                                 bbc2/blast+/blast-2.14.0                  
+## bbc/AWS/aws-cli                            bbc/gsutil/gsutil-4.52                   bbc/R/R-4.1.0-setR_LIBS_USER                  bbc2/bowtie2/bowtie2-2.5.1                
+## bbc/bamtools/bamtools-2.5.1                bbc/guppy/guppy-3.4.5                    bbc/R/R-4.2.1                                 bbc2/bwa/bwa-0.7.17                       
+## bbc/bbc2/perl-5.36.1                       bbc/hisat2/hisat2-2.1.0                  bbc/R/R-4.2.1-C++17                           bbc2/cellranger/cellranger-7.1.0          
+## bbc/bbc_projects/bbc_projects              bbc/hisat2/hisat2-2.2.1                  bbc/R/R-4.2.1-C++20                           bbc2/circexplorer/circexplorer-2.3.8      
+## bbc/bcftools/bcftools-1.10.2               bbc/HMMRATAC/HMMRATAC-1.2.9              bbc/racon/racon-1.4.3                         bbc2/CogentAP/CogentAP-2.0                
+## bbc/bcftools/bcftools-1.12                 bbc/HMMRATAC/HMMRATAC-1.2.10             bbc/readline/readline-8.0                     bbc2/cutadapt/cutadapt-4.3                
+## bbc/bcl2fastq/fastq-multx                  bbc/homer/homer-4.11                     bbc/rmats_turbo/rmats_turbo-4.1.1             bbc2/deeptools/deeptools-3.5.2            
+## bbc/bcl2fastq2/bcl2fastq2-2.20.0           bbc/HOMER/HOMER-4.11.1                   bbc/rsat/rsat-2020.02.07                      bbc2/fastq_screen/fastq_screen-0.14.0     
+## bbc/bedops/bedops-2.4.37                   bbc/htop/htop-2.2.0                      bbc/RSeQC/RSeQC-4.0.0                         bbc2/fastqc/fastqc-0.12.1                 
+## bbc/bedtools/bedtools-2.29.2               bbc/htseq/htseq-0.13.5                   bbc/rust/rust-1.52.1                          bbc2/gatk/gatk-4.1.8.1                    
+## bbc/bedtools/bedtools-2.30.0               bbc/htslib/htslib-1.10.2                 bbc/salmon/salmon-1.2.0                       bbc2/gatk/gatk-4.3.0.0                    
+## bbc/bioawk/bioawk-git                      bbc/htslib/htslib-1.12                   bbc/salmon/salmon-1.3.0                       bbc2/gatk/gatk-4.4.0.0                    
+## bbc/biscuit/biscuit_0_3_14                 bbc/htslib/htslib-1.14                   bbc/salmon/salmon-1.4.0                       bbc2/gsl/gsl-2.7                          
+## bbc/biscuit/biscuit_0_3_16                 bbc/iaap-cli/iaap-cli                    bbc/salmon/salmon-1.5.2                       bbc2/hisat2/hisat2-2.2.1                  
+## bbc/biscuit/biscuit_1_0_0                  bbc/idr/idr-2.0.4.2                      bbc/sambamba/sambamba-0.7.1                   bbc2/HMMRATAC/HMMRATAC-1.2.10             
+## bbc/biscuit/biscuit_1_0_1                  bbc/igblast/igblast-1.17.1               bbc/samblaster/samblaster-0.1.24              bbc2/HOMER/HOMER-4.11.1                   
+## bbc/biscuit/biscuit_dev                    bbc/isl/isl-0.24                         bbc/samblaster/samblaster-0.1.26              bbc2/htslib/htslib-1.17                   
+## bbc/bismark/bismark-0.22.3                 bbc/jcvi/jcvi-1.1.18                     bbc/samclip/samclip-v0.4.0                    bbc2/jdk/jdk-17.0.7                       
+## bbc/bismark/bismark-0.23.0                 bbc/jellyfish/jellyfish-2.3.0            bbc/samtools/samtools-1.9                     bbc2/juicer/juicer-1.6                    
+## bbc/blast+/blast+-2.10.0                   bbc/jemalloc/jemalloc-5.3.0              bbc/samtools/samtools-1.12                    bbc2/kent-core/kent-core-v448             
+## bbc/bonito/bonito-0.0.5                    bbc/kallisto/kallisto-0.46.1             bbc/samtools/samtools-1.14                    bbc2/libBigWig/libBigWig-0.4.7            
+## bbc/Boost/boost-1.57.0                     bbc/kb-python/kb-python-0.24.4           bbc/seqkit/seqkit-v2.1.0                      bbc2/macs2/macs2-2.2.7.1                  
+## bbc/bowtie/bowtie-1.2.3                    bbc/kb-python/kb-python-0.27.3           bbc/seqtk/seqtk-1.3-r115-dirty                bbc2/multiqc/multiqc-1.14                 
+## bbc/bowtie2/bowtie2-2.3.5.1                bbc/Kraken2/kraken2-git                  bbc/shasta/shasta-0.4.0                       bbc2/nextflow/nextflow-23.04.1.5866       
+## bbc/bowtie2/bowtie2-2.4.1                  bbc/last/last-1256                       bbc/skewer/skewer                             bbc2/openjdk/17.0.2                       
+## bbc/Bracken/bracken-2.8                    bbc/libBigWig/libBigWig-0.4.6            bbc/snakemake/snakemake-5.10.0                bbc2/pandoc/pandoc-3.1.2 <aL>             
+## bbc/brename/brename-v2.11.1                bbc/libgd/libgd-2.2.5                    bbc/snakemake/snakemake-5.14.0                bbc2/perl/perl-5.36.1                     
+## bbc/bustools/bustools-0.39.3               bbc/libpng/png16                         bbc/snakemake/snakemake-5.15.0                bbc2/picard/picard-2.27.5                 
+## bbc/bustools/bustools-0.40.0               bbc/lisa/lisa-1.0                        bbc/snakemake/snakemake-5.17.0                bbc2/picard/picard-3.0.0                  
+## bbc/bwa-mem2/bwa-mem2-v2.2.1               bbc/llvm/llvm-11.1.0                     bbc/snakemake/snakemake-5.19.0                bbc2/pigz/pigz-2.7                        
+## bbc/bwa/bwa-0.7.17                         bbc/lz4/lz4-1.9.4                        bbc/snakemake/snakemake-5.20.1                bbc2/pkg-config-libs/BBC-pkg-config-libs  
+## bbc/byacc/byacc-1.9                        bbc/macs2/macs2-2.2.6                    bbc/snakemake/snakemake-5.23.0                bbc2/preseq/preseq-3.2.0                  
+## bbc/bzip2/bzip2-1.0.6                      bbc/macs2/macs2-2.2.7.1                  bbc/snakemake/snakemake-5.28.0                bbc2/python3/python-3.10.10               
+## bbc/canu/canu-1.9                          bbc/make/make-4.4                        bbc/snakemake/snakemake-5.32.2                bbc2/python3/python-3.11.3                
+## bbc/CaVEMan/CaVEMan-1.15.1                 bbc/manta/manta-1.6.0                    bbc/snakemake/snakemake-6.1.0                 bbc2/qualimap/qualimap_v.2.2.2            
+## bbc/cellranger-atac/cellranger-atac-1.1.0  bbc/MaSuRCA/MaSuRCA-4.1.0                bbc/snakemake/snakemake-6.13.1_test           bbc2/R/alt/R-4.2.1-setR_LIBS_USER <L>     
+## bbc/cellranger/cellranger-3.0.2            bbc/meme/meme-5.1.1                      bbc/snakemake/snakemake-6.15.0                bbc2/R/alt/R-4.2.3-setR_LIBS_USER         
+## bbc/cellranger/cellranger-3.1.0            bbc/meme/meme-5.3.3                      bbc/snakemake/snakemake-7.8.5                 bbc2/R/R-4.2.1 <aL>                       
+## bbc/cellranger/cellranger-4.0.0            bbc/Meraculous-2D/meraculous-2.2.6       bbc/snakePipes/snakePipes-2.1.2               bbc2/R/R-4.2.3                            
+## bbc/cellranger/cellranger-6.0.2            bbc/metilene/metilene-0.2-8              bbc/sniffles/sniffles-1.0.11                  bbc2/R/R-4.3.0
 ```
 
 Print the first 50 lines after subsetting to just the BBC-installed modules.
@@ -218,56 +218,56 @@ module av bbc 2>&1 | head -n50
 ```
 
 ```
-## 
-## ---------------------------- /cm/shared/modulefiles ----------------------------
-## bbc/10x_bamtofastq/bamtofastq-1.2.0
-## bbc/10x_bamtofastq/bamtofastq-1.3.2
-## bbc/10x_subset-bam/10x_subset-bam-1.0
-## bbc/7zip/7zip-16.02
-## bbc/abyss/abyss-2.2.3
-## bbc/AWS/aws-cli
-## bbc/bamtools/bamtools-2.5.1
-## bbc/bbc_projects/bbc_projects
-## bbc/bcftools/bcftools-1.10.2
-## bbc/bcftools/bcftools-1.12
-## bbc/bcl2fastq/fastq-multx
-## bbc/bcl2fastq2/bcl2fastq2-2.20.0
-## bbc/bedops/bedops-2.4.37
-## bbc/bedtools/bedtools-2.29.2
-## bbc/bedtools/bedtools-2.30.0
-## bbc/bioawk/bioawk-git
-## bbc/biscuit/biscuit_0_3_14
-## bbc/biscuit/biscuit_0_3_16
-## bbc/biscuit/biscuit_1_0_0
-## bbc/biscuit/biscuit_1_0_1
-## bbc/biscuit/biscuit_dev
-## bbc/bismark/bismark-0.22.3
-## bbc/bismark/bismark-0.23.0
-## bbc/blast+/blast+-2.10.0
-## bbc/bonito/bonito-0.0.5
-## bbc/bowtie/bowtie-1.2.3
-## bbc/bowtie2/bowtie2-2.3.5.1
-## bbc/bowtie2/bowtie2-2.4.1
-## bbc/brename/brename-v2.11.1
-## bbc/bustools/bustools-0.39.3
-## bbc/bustools/bustools-0.40.0
-## bbc/bwa/bwa-0.7.17
-## bbc/bwa-mem2/bwa-mem2-v2.2.1
-## bbc/byacc/byacc-1.9
-## bbc/canu/canu-1.9
-## bbc/CaVEMan/CaVEMan-1.15.1
-## bbc/cellranger/cellranger-3.0.2
-## bbc/cellranger/cellranger-3.1.0
-## bbc/cellranger/cellranger-4.0.0
-## bbc/cellranger/cellranger-6.0.2
-## bbc/cellranger/cellranger-6.1.2
-## bbc/cellranger-atac/cellranger-atac-1.1.0
-## bbc/changeo/changeo-1.1.0
-## bbc/choose/choose-1.3.3
-## bbc/chromap/chromap
-## bbc/ChromHMM/chromHMM-1.22
-## bbc/ChromHMM/chromHMM-1.23
-## bbc/cmake/cmake-3.19.4
+## -------------------------------------------------------------------------------- /cm/shared/modulefiles ---------------------------------------------------------------------------------
+## bbc/7zip/7zip-16.02                        bbc/gcc/gcc-10.4.0                       bbc/preseq/preseq-2.0.3                bbc/tophat/tophat-2.1.0                       
+## bbc/10x_bamtofastq/bamtofastq-1.2.0        bbc/gcc/gcc-11.3.0                       bbc/preseq/preseq-3.1.2                bbc/tophat/tophat-2.1.1                       
+## bbc/10x_bamtofastq/bamtofastq-1.3.2        bbc/gcc/gcc-12.2.0                       bbc/preseq/preseq-3.1.2-vari           bbc/transdecoder/transdecoder-5.5.0           
+## bbc/10x_subset-bam/10x_subset-bam-1.0      bbc/gcc/gcc-12.2.0-lto                   bbc/pyGenomeTracks/pyGenomeTracks-3.2  bbc/tree/tree-1.8.0                           
+## bbc/abyss/abyss-2.2.3                      bbc/gdc/gdc-1.6.0                        bbc/python2/python-2.7.18              bbc/trim_galore/trim_galore-0.6.0             
+## bbc/AWS/aws-cli                            bbc/genometools/genometools-1.6.2        bbc/python2/python2.7.0                bbc/Trimmomatic/trimmomatic-0.39              
+## bbc/bamtools/bamtools-2.5.1                bbc/gff3sort/gff3sort_dd881e1            bbc/python3/python-3.6.10              bbc/Trinity/Trinity-2.13.0                    
+## bbc/bbc2/perl-5.36.1                       bbc/gffcompare/gffcompare-0.12.6         bbc/python3/python-3.7.3               bbc/TRUST4/trust4-1.0.2b                      
+## bbc/bbc_projects/bbc_projects              bbc/gffread/gffread-0.12.7               bbc/python3/python-3.7.4               bbc/ucsc/ucsc-2020.06.11                      
+## bbc/bcftools/bcftools-1.10.2               bbc/gmp/gmp-6.2.1                        bbc/python3/python-3.8.1               bbc/UMI-Tools/UMI-Tools-1.1.1                 
+## bbc/bcftools/bcftools-1.12                 bbc/gnuplot/gnuplot-5.2.8                bbc/python3/python-3.8.1-bz            bbc/vcflib/vcflib-1.0.1                       
+## bbc/bcl2fastq/fastq-multx                  bbc/gnuplot/gnuplot-5.4.5                bbc/python3/python-3.8.1-bz-sqlite3    bbc/vcftools/vcftools-0.1.16                  
+## bbc/bcl2fastq2/bcl2fastq2-2.20.0           bbc/gridss/gridss-2.7.3                  bbc/qualimap/qualimap_v.2.2.2          bbc/vsearch/vsearch-2.21.1                    
+## bbc/bedops/bedops-2.4.37                   bbc/gsl/gsl-2.5                          bbc/quast/quast-5.2.0                  bbc/vt/vt-0.1.16                              
+## bbc/bedtools/bedtools-2.29.2               bbc/gsutil/gsutil-4.52                   bbc/R/alt/R-4.2.1-setR_LIBS_USER       bbc/WiggleTools/WiggleTools-1.2.11            
+## bbc/bedtools/bedtools-2.30.0               bbc/guppy/guppy-3.4.5                    bbc/R/alt2/R-4.2.1-setR_LIBS_USER_kin  bbc/xlsx2csv/xlsx2csv-0.7.8                   
+## bbc/bioawk/bioawk-git                      bbc/hisat2/hisat2-2.1.0                  bbc/R/R-3.6.0                          bbc/zstd/zstd-1.5.4                           
+## bbc/biscuit/biscuit_0_3_14                 bbc/hisat2/hisat2-2.2.1                  bbc/R/R-4.0.0-pcre2                    bbc/Zzz_deprecated/cairo-1.15.12              
+## bbc/biscuit/biscuit_0_3_16                 bbc/HMMRATAC/HMMRATAC-1.2.9              bbc/R/R-4.0.0-pcre2-setR_LIBS_USER     bbc/Zzz_deprecated/cairo-1.16.0               
+## bbc/biscuit/biscuit_1_0_0                  bbc/HMMRATAC/HMMRATAC-1.2.10             bbc/R/R-4.0.0-USE_PCRE2                bbc/Zzz_deprecated/multiqc-1.8                
+## bbc/biscuit/biscuit_1_0_1                  bbc/homer/homer-4.11                     bbc/R/R-4.0.2                          bbc/Zzz_deprecated/snakemake/snakemake-5.8.2  
+## bbc/biscuit/biscuit_dev                    bbc/HOMER/HOMER-4.11.1                   bbc/R/R-4.0.2-setR_LIBS_USER           bbc/Zzz_deprecated/zlib/zlib-1.2.11           
+## bbc/bismark/bismark-0.22.3                 bbc/htop/htop-2.2.0                      bbc/R/R-4.1.0                          bbc2/bamtools/bamtools-2.5.2                  
+## bbc/bismark/bismark-0.23.0                 bbc/htseq/htseq-0.13.5                   bbc/R/R-4.1.0-setR_LIBS_USER           bbc2/bcftools/bcftools-1.17                   
+## bbc/blast+/blast+-2.10.0                   bbc/htslib/htslib-1.10.2                 bbc/R/R-4.2.1                          bbc2/bcl2fastq2/bcl2fastq2-2.20.0             
+## bbc/bonito/bonito-0.0.5                    bbc/htslib/htslib-1.12                   bbc/R/R-4.2.1-C++17                    bbc2/bedops/bedops-2.4.41                     
+## bbc/Boost/boost-1.57.0                     bbc/htslib/htslib-1.14                   bbc/R/R-4.2.1-C++20                    bbc2/bedtools/bedtools-2.30.0                 
+## bbc/bowtie/bowtie-1.2.3                    bbc/iaap-cli/iaap-cli                    bbc/racon/racon-1.4.3                  bbc2/biscuit/biscuit_1_0_1                    
+## bbc/bowtie2/bowtie2-2.3.5.1                bbc/idr/idr-2.0.4.2                      bbc/readline/readline-8.0              bbc2/biscuit/biscuit_1_0_2                    
+## bbc/bowtie2/bowtie2-2.4.1                  bbc/igblast/igblast-1.17.1               bbc/rmats_turbo/rmats_turbo-4.1.1      bbc2/biscuit/biscuit_1_2_0                    
+## bbc/Bracken/bracken-2.8                    bbc/isl/isl-0.24                         bbc/rsat/rsat-2020.02.07               bbc2/bismark/bismark-0.24.0                   
+## bbc/brename/brename-v2.11.1                bbc/jcvi/jcvi-1.1.18                     bbc/RSeQC/RSeQC-4.0.0                  bbc2/blast+/blast-2.14.0                      
+## bbc/bustools/bustools-0.39.3               bbc/jellyfish/jellyfish-2.3.0            bbc/rust/rust-1.52.1                   bbc2/bowtie2/bowtie2-2.5.1                    
+## bbc/bustools/bustools-0.40.0               bbc/jemalloc/jemalloc-5.3.0              bbc/salmon/salmon-1.2.0                bbc2/bwa/bwa-0.7.17                           
+## bbc/bwa-mem2/bwa-mem2-v2.2.1               bbc/kallisto/kallisto-0.46.1             bbc/salmon/salmon-1.3.0                bbc2/cellranger/cellranger-7.1.0              
+## bbc/bwa/bwa-0.7.17                         bbc/kb-python/kb-python-0.24.4           bbc/salmon/salmon-1.4.0                bbc2/circexplorer/circexplorer-2.3.8          
+## bbc/byacc/byacc-1.9                        bbc/kb-python/kb-python-0.27.3           bbc/salmon/salmon-1.5.2                bbc2/CogentAP/CogentAP-2.0                    
+## bbc/bzip2/bzip2-1.0.6                      bbc/Kraken2/kraken2-git                  bbc/sambamba/sambamba-0.7.1            bbc2/cutadapt/cutadapt-4.3                    
+## bbc/canu/canu-1.9                          bbc/last/last-1256                       bbc/samblaster/samblaster-0.1.24       bbc2/deeptools/deeptools-3.5.2                
+## bbc/CaVEMan/CaVEMan-1.15.1                 bbc/libBigWig/libBigWig-0.4.6            bbc/samblaster/samblaster-0.1.26       bbc2/fastq_screen/fastq_screen-0.14.0         
+## bbc/cellranger-atac/cellranger-atac-1.1.0  bbc/libgd/libgd-2.2.5                    bbc/samclip/samclip-v0.4.0             bbc2/fastqc/fastqc-0.12.1                     
+## bbc/cellranger/cellranger-3.0.2            bbc/libpng/png16                         bbc/samtools/samtools-1.9              bbc2/gatk/gatk-4.1.8.1                        
+## bbc/cellranger/cellranger-3.1.0            bbc/lisa/lisa-1.0                        bbc/samtools/samtools-1.12             bbc2/gatk/gatk-4.3.0.0                        
+## bbc/cellranger/cellranger-4.0.0            bbc/llvm/llvm-11.1.0                     bbc/samtools/samtools-1.14             bbc2/gatk/gatk-4.4.0.0                        
+## bbc/cellranger/cellranger-6.0.2            bbc/lz4/lz4-1.9.4                        bbc/seqkit/seqkit-v2.1.0               bbc2/gsl/gsl-2.7                              
+## bbc/cellranger/cellranger-6.1.2            bbc/macs2/macs2-2.2.6                    bbc/seqtk/seqtk-1.3-r115-dirty         bbc2/hisat2/hisat2-2.2.1                      
+## bbc/changeo/changeo-1.1.0                  bbc/macs2/macs2-2.2.7.1                  bbc/shasta/shasta-0.4.0                bbc2/HMMRATAC/HMMRATAC-1.2.10                 
+## bbc/choose/choose-1.3.3                    bbc/make/make-4.4                        bbc/skewer/skewer                      bbc2/HOMER/HOMER-4.11.1                       
+## bbc/chromap/chromap                        bbc/manta/manta-1.6.0                    bbc/snakemake/snakemake-5.10.0         bbc2/htslib/htslib-1.17
 ```
 
 Print the modules with the keyword, 'fastqc', in their names.
@@ -278,8 +278,9 @@ module av 2>&1 | grep 'fastqc'
 ```
 
 ```
-## bbc/fastqc/fastqc-0.11.8
-## bbc/fastqc/fastqc-0.11.9
+## bbc/bedops/bedops-2.4.37                   bbc/htop/htop-2.2.0                      bbc/RSeQC/RSeQC-4.0.0                         bbc2/fastqc/fastqc-0.12.1                 
+## bbc/fastqc/fastqc-0.11.8                   bbc/pkg-config-libs/BBC-pkg-config-libs  bbc/TRUST4/trust4-1.0.2b                      intel-cluster-runtime/intel64/2019.6      
+## bbc/fastqc/fastqc-0.11.9                   bbc/plink/plink-v1.90b6.18               bbc/ucsc/ucsc-2020.06.11                      intel-tbb-oss/ia32/2021.4.0
 ```
 
 ## Run FastQC on the fastq files
@@ -593,9 +594,9 @@ multiqc --outdir multiqc .
 ## 
 ##   /// MultiQC 🔍 | v1.12
 ## 
-## |           multiqc | Search path : /varidata/research/home/daisy.fu/Intro_to_Linux_for_HPC
-## |         searching | ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 100% 141/141  
-## |            snippy | Found 1 reports
+## |           multiqc | Search path : /varidata/research/projects/bbc/research/hpc_workshop_202209
+## |         searching | ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 100% 333/333  
+## |            snippy | Found 2 reports
 ## |          bargraph | Tried to make bar plot, but had no data: snippy_variants
 ## |            salmon | Found 2 meta reports
 ## |            salmon | Found 2 fragment length distributions
@@ -619,9 +620,9 @@ ls multiqc
 ## multiqc_data
 ## multiqc_data_1
 ## multiqc_data_2
+## multiqc_report.html
 ## multiqc_report_1.html
 ## multiqc_report_2.html
-## multiqc_report.html
 ```
 
 Note the newly created `multiqc_report.html` file. Your final task today is to view this file in your browser. If you have mounted the HPC file system to your computer, you can try to open up this file directly. Alternatively, you can copy this file to your computer's local storage first and then open it.
