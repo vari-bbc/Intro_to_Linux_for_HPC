@@ -29,26 +29,26 @@ Create a project directory with a **personal username** and a sub-directory for 
 
 * Navigate to the `Part3` directory
 ```{bash, eval=FALSE, engine= "sh"}
-        cd /varidata/researchtemp/hpctmp/HPC_mini_workshop/Part3
+cd /varidata/researchtemp/hpctmp/HPC_mini_workshop/Part3
 ```
 * Create username directory
 ```
-        mkdir first.lastName
+mkdir first.lastName
 ```
 * Create a `fastqs` directory inside of the username directory
 
 * Navigate to the username directory
 ```{bash, eval=FALSE, engine= "sh"}
-        cd first.lastName
+cd first.lastName
 ```
 
 * Create a `fastqs` directory
 ```{bash, eval= FALSE, engine= "sh"}
-        mkdir fastqs
+mkdir fastqs
 ```
 * Ensure a directory is Exist
 ```{bash, eval=FALSE, engine= "sh"}
-        ls
+ls
 ```
 
 ## **Copy Files**
@@ -206,18 +206,6 @@ echo "Start time: $start_time"
 echo "End time: $end_time"
 ```
 
-## **Access the Salmon Script**
-
-Daisy Fu from the Bioinformatics and Biostatistics Core department provided a job script in her directory. To access the job script, users are required to **Copy** (please do not remove) it from Daisy’s directory. Here is the following code below and change `username` to your personal username.
-
-```{bash, eval=FALSE, engine="sh"}
-cp /varidata/researchtemp/hpctmp/HPC_mini_workshop/Part3/daisy.fu/run_salmon.sh /varidata/researchtemp/hpctmp/HPC_mini_workshop/Part3/username
-```
-
-Type `ls` to ensure `run_salmon.sh` file exist in the username directory.
-```{bash, eval=FALSE, engine="sh"}
-ls
-```
 
 ## **Submit a Job**
 
@@ -306,7 +294,7 @@ Now, the `multiqc_report.html` file is available to view or make a copy to a loc
 
 # **Glossary**
 
-```{r data_structure,results='asis', echo=FALSE}
+```{r bash_cheatsheet, results='asis', echo=FALSE}
 library(kableExtra)
 library(knitr)
 
