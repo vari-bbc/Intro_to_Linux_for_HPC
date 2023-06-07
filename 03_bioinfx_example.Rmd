@@ -1,69 +1,83 @@
-
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
 # **Mini Project**
 
-## **Starting an Interactive Job**
 
-Now we have a better understanding of what Linux command lines are and how to inspect and understand the file system. In this mini project, we will make a transition from computationally intensive operations on the submit node to preallocated computational resources.
+Here, we will combine some of the commands we have learned today to perform a toy bioinformatic analysis. Two human paired-end samples (four total fastq files) have already been downloaded from [GSE52778](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE52778). To save time for the workshop, each file has been randomly subsetted to just a small fraction of the total reads. Here each user will:
 
-It is important to use preallocated computational resources to activate a job, the command prompt will switch from a submission prompt to a running prompt. For example,`[username@submit001 ~] $` to `[username@compute001 ~] $`.
+1. Copy these fastq files their own private project directory.
+2. Use basic Linux commands to learn some characteristics of these files.
+3. Use Salmon to align (pseudo-align) these reads to the hg38 reference transcriptome and get transcripts-per-million (TPMs) for each annotated gene.
 
 
-Let’s begin by activating a job, it requires a number of nodes and time based on the user’s preference.
+## **Start an Interactive Job**
+
+While simple file manipulations can be done on the submit node, computationally intensive operations should be performed using preallocated computational resources. An **interactive job** allows us to preallocate resources while still being able to run commands line by line.
+
+We will start an interactive job, requesting one CPU core and 6 hours of walltime.
+
 ```{bash, eval= FALSE, engine= "sh"}
-srun --nodes=1 --ntasks-per-node=1 --time=01:00:00 --pty bash -i
+srun --nodes=1 --ntasks-per-node=1 --time=06:00:00 --pty bash
 ```
 
+After a job has been submitted, users can check on the status (e.g. how long it has been running) of it using the following.
 
-After a job has been submitted, users can verify how much time has been passed by coding.
 ```{bash, eval= FALSE, engine= "sh"}
 squeue -u username
 ```
 
 ## **Create Directory**
 
-Create a project directory with a **personal username** and a sub-directory for storing raw sequence data file name **fastqs** in `cd v/varidata/researchtemp/hpctmp/HPC_mini_workshop/Part3 directory`.
+Create a project directory with a **username** and a sub-directory for storing raw sequence data file name **fastqs** in `cd /varidata/researchtemp/hpctmp/HPC_mini_workshop/Part3 directory`.
 
-* Navigate to the `Part3` directory
+* Typically, one would work in their specific lab's folder on the HPC. For this workshop, we will work in a common directory so that the instructors and chck on your progress.
+
 ```{bash, eval=FALSE, engine= "sh"}
-cd /varidata/researchtemp/hpctmp/HPC_mini_workshop/Part3
+cd /varidata/researchtemp/hpctmp/BBC_workshop_June2023
 ```
-* Create username directory
+
+* Create a directory based on your username to separate your work from other users'.
+
+```{bash, eval=FALSE, engine= "sh"}
+mkdir <username>
 ```
-mkdir first.lastName
-```
-* Create a `fastqs` directory inside of the username directory
 
 * Navigate to the username directory
 ```{bash, eval=FALSE, engine= "sh"}
 cd first.lastName
 ```
 
-* Create a `fastqs` directory
+* Create a `fastqs` directory inside the username directory. It is good practice to keep your raw data separate from your analyses and never make changes to them directly.
+
 ```{bash, eval= FALSE, engine= "sh"}
 mkdir fastqs
 ```
-* Ensure a directory is Exist
+
+* Use `ls` to confirm the `fastqs` directory was created.
+
 ```{bash, eval=FALSE, engine= "sh"}
 ls
 ```
 
-## **Copy Files**
+## **Copy Fastq Files To `fastqs` subdirectory**
 
-Verify the current directory is in the username directory, and copy an individual code below to receive the `md5sum.txt` file and a few `*fastq.gz` files.
+* Verify the current directory is in the username directory.
 
-```{bash, eval=FALSE, engine= "sh"}
-cp /varidata/researchtemp/hpctmp/BBC/hpc_workshop_fqs/md5sum.txt ./fastqs/
-
-cp /varidata/researchtemp/hpctmp/BBC/hpc_workshop_fqs/*fastq.gz ./fastqs/
+```{bash, eval=FALSE, engine="sh"}
+pwd
 ```
 
-## **Verify File**
+* Copy the 4 fastq.gz files and `md5sum.txt`, which you will use to check the validty of the files.
 
-Verify that `md5sum.txt` is transferred successfully by comparing it with `md5sums`. Copy the following code and it should return with **OK** for each file.
+```{bash, eval=FALSE, engine="sh"}
+cp /varidata/researchtemp/hpctmp/BBC/hpc_workshop_fqs/*fastq.gz ./fastqs/
+
+cp /varidata/researchtemp/hpctmp/BBC/hpc_workshop_fqs/md5sum.txt ./fastqs/
+```
+
+* Verify that the copied files are valid. The following code should return with an **OK** for each file.
 
 ```{bash, eval=TRUE, engine="sh"}
 cd fastqs
@@ -71,19 +85,16 @@ cd fastqs
 md5sum -c md5sum.txt
 ```
 
-## **Back to the Username Directory**
+* Go back to the username directory.
 
-Direct back to the username directory by entering the following.
 ```{bash, eval=FALSE, engine="sh"}
 cd ..
 ```
 
-## **Discover Compressed Zip File**
+## **Use basic Linux commands to explore the fastq files**
 
-Notice all of the sequence data files ended with a `.gz` extension. A file with `.gz`(gzip) means that the file is compressed. If someone is interested to view the contents by using `cat`, the person will not be able to read it since it is not in a human-readable format. To view a `file.gz`, users require to use `zcat`.
+Notice all of the sequence data files end with a `.gz` extension, indicating they are gzip compressed. To view such files, one must use `zcat` instead of `cat` so that the files are decompressed into human-readable format.
 
-
-Let’s jump into two sequence data files such as `SRR1039520_1.fastq.gz` and `SRR1039520_2.fastq.gz` which are in the `fastqs` directory.
 ```{bash, eval=TRUE, engine="sh"}
 zcat fastqs/SRR1039520_1.fastq.gz | head
 ```
@@ -91,99 +102,89 @@ zcat fastqs/SRR1039520_1.fastq.gz | head
 ```{bash, eval=TRUE, engine="sh"}
 zcat fastqs/SRR1039520_2.fastq.gz | head
 ```
-Notice both `SRR1039520_1.fastq.gz` and `SRR1039520_2.fastq.gz` files have the exact read IDs.
 
-## **Use `wc` Command Line to Count Lines and Characters**
+Notice that `SRR1039520_1.fastq.gz` and `SRR1039520_2.fastq.gz` files have the same read IDs. Valid paired fastq files always have matching read IDs throughout the entire file.
 
-Sequence data files tend to be large, however, it can be verified on how many lines of sequence it contains with `-l` and how many characters it contains with `-m`. Copy the code and view the result below.
+Next, we can figure out how many reads are in a fastq file using `wc -l`. Recall that each read is represented by 4 lines in a fastq file, so we need to divide the results of `wc -l` by 4 to get the number of reads.
 
 ```{bash, eval=TRUE, engine="sh"}
 zcat fastqs/SRR1039520_1.fastq.gz | wc -l
 ```
 
-The command below is retrieving data from `SRR1039520_1.fastq.gz` which is in `fastqs` directory, then receiving two lines from the beginning of the file and only taking the last line from the two lines that has been received. Finally, it counts the total number of characters in the last line.
+Finally, we can use `wc -m` to figure out the read length in a fastq file. Below, we use a combination of `head -n2` and `tail -n1` to get the second line of the first read. You may notice that the results of `wc -m` will be 1 higher than the actual read length. This is because the tool counts the newline character also.
 
 ```{bash, eval=TRUE, engine="sh"}
 zcat fastqs/SRR1039520_1.fastq.gz | head -n2 | tail -n1 | wc -m
 
 ```
 
-## **Working With Module**
+## **Working With Environment Modules**
 
-There are many modules installed and available in `module av`, type `module av` to discover all the options. A smooth way to view and locate a portion of `modulefiles` is to construct pipe `|` after `module av 2>&1`.  `2>&1` is a redirection operator that redirects the error output of `module av`,  adding `head`, `grep` or other basic commands will help users view the `module` easier.
+Type `module av bbc2` (modules beginning with just `bbc` are from the old HPC) to see all the software installed by the BBC. There are a lot of modules installed; to parse through these more easily, we can **pipe** the results of `module av` into `grep` to search for modules with specific keywords. There is a trick, though. The results of `module av` go to standard error, so we need to redirect standard error to standard out using `2>&1` before the pipe.
 
-This command will output 50 lines of `modulefiles`
-```{bash, eval=TRUE, engine="sh"}
-module av 2>&1 | head -n50
-```
+This command will output any modules containing the `fastqc` keyword.
 
-
-This command will only output `bbc2` installed modules
-```{bash, eval=TRUE, engine="sh"}
-module av bbc2 2>&1 | head -n50
-```
-
-
-This command will output any modules containing the `fastqc` pattern
 ```{bash, eval=TRUE, engine="sh"}
 module av bbc2 2>&1 | grep 'fastqc'
 ```
 
-## **Create a Sequence Data File**
+## **Run FastQC**
 
-Create a `fastqc` directory inside of the username directory, this directory will process the rest of the sequence data files.  Each sequence data file will contain an HTML file once `fastqc` is output, users are free to view and have a better understanding of basic QC metrics which will be available on a regular browser.  Follow each command below and process
+* Create a `fastqc` directory inside of your username directory and run FastQC.
 
 ```{bash, eval=TRUE, engine="sh"}
 module load bbc2/fastqc/fastqc-0.12.1
 
 mkdir fastqc
 
-# NOTE: Type 'fastqc -h' for more option to view the file
+# Run FastQC. You can also run `fastqc -h` to see what different options do.
 fastqc -o fastqc fastqs/*fastq.gz
 ```
 
-Review Files
+* See what was produced by FastQC.
+
 ```{bash, eval=TRUE, engine="sh"}
-ls fastqc
+ls fastqc/
 
 ```
 
-## **Set up a Job Script**
+## **Set up a job to run Salmon to align the reads**
 
-Now users have a better understanding of how to start an interactive job. If the interactive job time frame has not expired, please type `exit` to escape.  The next task will focus on submitting a non-interactive job since this is a practice, however, users can submit an interactive job.  Once users exit the interactive job, the command prompt will switch to the submission prompt as `[username@submit001 ~]$`.
-
-Below provided a job script, please follow the commands below and set up a job script. Although the job script looks confusing, in the meantime, do not worry about how the code works.
+First, we `exit` from our interactive job because we want to get back on to the submit node to submit a non-interactive job to run Salmon.
 
 ```{bash, eval=FALSE, engine="sh"}
-# Type ‘exit’ if an interactive job is active
+# You should see one job when you run this command, corresponding to your interactive job.
+squeue -u username
+
+# Exit the interactive job
 exit
 
-# Verify if an interactive job is active or expired
+# Now you should see no jobs when you run this command because the interactive job has ended.
 squeue -u username
 
 # Go back to the project directory
-cd /varidata/researchtemp/hpctmp/HPC_mini_workshop/Part3/firstname.lastname
+cd /varidata/researchtemp/hpctmp/BBC_workshop_June2023/firstname.lastname
 
 ```
-## **Salmon Script**
 
-This is what a Salmon Script looks like below, currently, do not worry about how the script works.
+## **Make a job script to run Salmon**
+
+Below is a SLURM job script to run Salmon. For now, do not worry about how the code works. Copy the code and paste it into a new file. Save it as `run_salmon.sh` in your username directory.
+
 ```{bash, eval=FALSE, engine="sh"}
 #!/bin/bash
 
-#SBATCH --nodes=1
-#SBATCH --ntasks-per-node=1
-#SBATCH --cpus-per-task=4
-#SBATCH --time=00:02:00
-#SBATCH --job-name=salmon
-#SBATCH -e slurm-%j.err
-#SBATCH -o slurm-%j.out
-
-set -euo pipefail # see explanation at https://gist.github.com/mohanpedala/1e2ff5661761d3abd0385e8223e16425?permalink_comment_id=3945021
+#SBATCH --export=NONE
+#SBATCH -J run_salmon
+#SBATCH -o run_salmon.o
+#SBATCH -e run_salmon.e
+#SBATCH --ntasks 4
+#SBATCH --time 1:00:00
+#SBATCH --mem=36G
 
 start_time=$(date +"%T")
 
-# You need to navigate to your project directory. Conveniently, the $PBS_O_WORKDIR variable stores the path for where the job was submitted.
+# You need to navigate to your project directory. Conveniently, the $SLURM_SUBMIT_DIR variable stores the path for where the job was submitted.
 cd ${SLURM_SUBMIT_DIR}
 
 module load bbc2/salmon/salmon-1.10.0
@@ -194,7 +195,7 @@ salmon_idx="/varidata/research/projects/bbc/versioned_references/2022-03-08_14.4
 # make output directory for salmon
 mkdir -p salmon
 
-# this is called a for loop. We use this to run salmon quant on all the samples, one at a time. It is more efficient to run salmon on each sample "in parallel" but we will not do not today.
+# This is called a for loop. We use this to run salmon quant on all the samples, one at a time. It is more efficient to run salmon on each sample "in parallel" but we will not do that today.
 for samp_id in SRR1039520 SRR1039521
 do
     salmon quant -p ${SLURM_NTASKS} -l A -i $salmon_idx -1 fastqs/${samp_id}_1.fastq.gz -2 fastqs/${samp_id}_2.fastq.gz -o salmon/${samp_id} --validateMappings
@@ -206,230 +207,98 @@ echo "Start time: $start_time"
 echo "End time: $end_time"
 ```
 
-
 ## **Submit a Job**
 
-Once `run_salmon.sh` appears in the directory, the job script is ready to submit. To submit a job, require the `sbatch` command to submit the job. After the job is submitted, it will return a result similar to the one below with an ID.
+* Type `ls` to ensure `run_salmon.sh` file exist in the username directory.
+
+```{bash, eval=FALSE, engine="sh"}
+ls
+```
+
+* Use the `sbatch` command to submit the job.
 
 ```{bash, eval=FALSE, engine="sh"}
 sbatch run_salmon.sh
 
 ```
-Users can check if there is any task running in the background with the following command.  The job should take about two minutes to complete.
+
+* Users can check if the job is running with the following command. The job should take about two minutes to complete.
+
 ```{bash, eval=FALSE, engine="sh"}
 squeue -u username
 
 ```
 
-## **Process Standard Output(stdout) and Standard Error(stderr)**
+## **Examine the Standard Output (stdout) and Standard Error (stderr) log files**
 
-After completing a job, the directory sorts out any standard error(stderr) and standard output(stdout) messages.  A file with **.err** is stderr and a file with **.out** is stdout.  Use `-ls` to check if there is any stderr and stdout in the directory.
+It is good practice to check the job logs after your job is done to ensure that the job completed successfully. If there is an error, the output files may not be reliable or could be incomplete.
 
-```{bash, eval=FALSE, engine="sh"}
-ls
-
-```
-
-View and process stderr and stdout results with the `tail` command.  As you notice, your stderr and stdout might look different from here.
 ```{bash, eval=TRUE, engine="sh"}
-tail slurm-32564.err
+tail salmon.e
 ```
 
-Check process time.
 ```{bash, eval=TRUE, engine="sh"}
-tail slurm-32564.out
-
+tail salmon.o
 ```
 
-## **View Transcript ID**
+## **Use grep to find the TPMs for a specific gene**
 
-In this process, users will discover a specific gene called MUC1(protein) in the quant.sf file, and better understand how TPM(Transcripts per Million) values are stored in one of the files.
+As an example, let's try to extract out the TPMs (Transcripts per Million) for MUC1. These values can be found in the `quant.sf` file in each sample's folder. 
+
+* First, let's take a look at one of these files to figure out the format of these files.
 
 ```{bash, eval=TRUE, engine="sh"}
 head salmon/SRR1039520/quant.sf
 
 ```
 
-The image shows that TPM is in the 4th column above, and transcript IDs are in Ensembl format. Next, use the grep command to locate ENST00000620103 canonical transcript in MUC1, see [Ensembl](http://useast.ensembl.org/Homo_sapiens/Gene/Summary?db=core;g=ENSG00000185499;r=1:155185824-155192916) for more detail.
+From the output above, we can see that the TPMs are in the 4th column of this file. The canonical transcript for [MUC1](http://useast.ensembl.org/Homo_sapiens/Gene/Summary?db=core;g=ENSG00000185499;r=1:155185824-155192916) is ENST00000620103, so we will search for that using `grep`.
 
-Search `'ENST00000620103'` pattern in `salmon/SRR1039520/quant.sf` file
 ```{bash, eval=TRUE, engine="sh"}
 grep 'ENST00000620103' salmon/SRR1039520/quant.sf
 
 ```
 
-## **Use an interactive job to run multiQC on the Salmon and FastQC output**
+Look for MUC1 across all the samples at the same time. We can see that 'SRR1039521' has a TPM of 13.1 for MUC1 compared to 0 for 'SRR1039520'. Recall that the fastq files for this exercise were subsetted to a very small number of reads so don't interpret these results seriously.
+
+```{bash, eval=TRUE, engine="sh"}
+grep 'ENST00000620103' salmon/*/quant.sf
+```
+
+## **BONUS: Use an interactive job to run multiQC on the Salmon and FastQC output**
 
 In this final step, users will start an interactive job to perform multiQC to collect and summarize the outcomes from FastQC and Salmon, then evaluate the quality of the fastq sequences with the reference transcriptome(mapping rate).
 
-Start an interactive job
+* Start an interactive job.
 
 ```{bash, eval=FALSE, engine="sh"}
-srun --nodes=1 --ntasks-per-node=1 --time=00:30:00 --pty bash -i
+srun --nodes=1 --ntasks-per-node=1 --time=00:30:00 --pty bash
 
 ```
 
-Negative to the project directory
+* Navigate to the project directory.
 ```{bash, eval=FALSE, engine="sh"}
 cd /varidata/researchtemp/hpctmp/HPC_mini_workshop/Part3/firstname.lastname/
 ```
 
-Load BBC module
+* Load the environment module for multiQC.
+
 ```{bash, eval=TRUE, engine="sh"}
 module load bbc2/multiqc/multiqc-1.14
 ```
 
-Multiqc creates a multiqc directory automatically, ensuring the period is after a space.
+* Run multiQC, which will summarize the results from FastQC and Salmon and output the results into a new directory called `multiqc/`.
+
 ```{bash, eval=FALSE, engine="sh"}
 multiqc --outdir multiqc .
 
 ```
 
-View inside of the multiqc directory.
+* List the contents of the `multiqc` directory.
+
 ```{bash, eval=TRUE, engine="sh"}
 ls multiqc
 ```
 
-Now, the `multiqc_report.html` file is available to view or make a copy to a local directory.
+Note the newly created `multiqc_report.html` file. Try to view this file in your preferred internet browser. If you have mounted the HPC file system to your computer, you can simply double-click on this file. Alternatively, you can copy this file to your computer's local storage first and then open it.
 
-# **Glossary**
-
-```{r bash_cheatsheet, results='asis', echo=FALSE}
-library(kableExtra)
-library(knitr)
-
-commands <- data.frame(
-  Name = c(
-    "Print Working Directory",
-    "List",
-    "List More Detail",
-    "Make Directory",
-    "Move",
-    "Change Directory",
-    "Remove",
-    "Copy",
-    "Search for File",
-    "Head",
-    "Tail",
-    "Less",
-    "More",
-    "Quit",
-    "Concatenate",
-    "Search for Text",
-    "Word, Line, and Character Count",
-    "Touch"),
-
-  Command_Line = c(
-    "`pwd`",
-    "`ls`",
-    "`ls -lht`",
-    "`mkdir`",
-    "`mv`",
-    "`cd`",
-    "`rm`",
-    "`cp`",
-    "`find`",
-    "`head`",
-    "`tail`",
-    "`less`",
-    "`more`",
-    "`q`",
-    "`cat`",
-    "`grep`",
-    "`wc`",
-    "`touch`"),
-
-  Description = c(
-    "Displays the current working directory",
-    "Lists the files and directories in the current directory",
-    "Display more details about the file",
-    "Creates a new directory",
-    "Moves or renames files or directories",
-    "Change to an existing directory",
-    "Deletes files and directories",
-    "Copies files or directories",
-    "Search for files and directories based on various criteria like name, size, and modification time",
-    "Display at the beginning of a file",
-    "Display at the end of a file",
-    "Load the necessary portion of a file",
-    "Load the entire file",
-    "Stop viewing the current file",
-    "Display the contents of a file",
-    "Search for a specific pattern of text within files",
-    "Display the number of words, lines, and characters in a file",
-    "Create a new empty file"),
-
- Example = c(
-  # explanation_1
-  "**`[username\\@submit002 ~]$ pwd`**\n\nResult:/home/username",
-
-
-  # explanation_2
-
-  "**`[username\\@submit002 ~]$ ls`**\n\nResult: It returns empty after the $
-  symbol since nothing has been created.",
-
- " **`[username\\@submit002 ~]$ ls -lht`**\n\nResult: Display file detail in the current director",
-
-  # explanation_3
-  "**`[username\\@submit002 ~]$ mkdir hpc_mini_workshop`**\n\nResult: A hpc_mini_workshop folder is created.",
-
-  # explanation_4
-  "**`[username\\@submit002 ~]$ mv hpc_mini_workshop workshopTraining`**\n\nResult: Now the hpc_mini_workshop directory is called workshopTraining",
-
-  # explanation_5
-  "**`[username\\@submit002 ~]$ cd workshopTraining`**\n\nResult: [username\\@submit002 workshopTraining]$ Notice ~ was in the home directory, now in the workshopTraining directory.",
-
-  # explanation_6
-  "**`[username\\@submit002 ~]$ rm -r TaskProject`**\n\n*Note: -r means directory\n\nResult: TaskProject is deleted",
-
-  # explanation_7
-  "**`[username\\@submit002 ~]$ cp -r Task1 Project`**\n\nResult: Task1 directory has moved to the Project directory.",
-
-  # explanation_8
-  "**`[username\\@submit002 ~]$ find Project`**\n\nResult: Task1 will appear within the Project directory\n\nProject\nProject/Task1",
-
-  # explanation_9
-  "**`[username\\@submit002 ~]$ head -n5 file_name`**\n\nResult: It will display the first 5 lines from the beginning of the file_name.",
-
-  # explanation_10
-  "**`[username\\@submit002 ~]$ tail -n5 file_name`**\n\nResult: It will display the last 5 lines from the end of the file_name",
-
-  # explanation_11
-  "**`[username\\@submit002 ~]$ less file.txt`**\n\nResult: The user is able to view a portion of the file.txt.",
-
-  # explanation_12
-  "**`[username\\@submit002 ~]$ more file.txt`**\n\nResult: The user is able to view the entire file.txt.",
-
-  # explanation_13
-  "quit viewing the current file",
-
-  # explanation_14
-  "**`[username\\@submit002 ~]$ cat file.txt`**\n\nResult: Display the contents of file.txt",
-
-  # explanation_15
-  "**`[username\\@submit002 ~]$ grep “GCGGA” sequence_file.fastq`**\n\nResult: Display any GCGGA pattern in sequence_file.fastq",
-
-  # explanation_16
-  "**`[username\\@submit002 ~]$ wc file.txt`**\n\nResult: Display the number of words, lines, and characters in the file.txt.",
-
-  # explanation_17
-  "**`[username\\@submit002 ~]$ touch exampleFile.txt`**\n\nResult: The command line will display file details in
-  the current directory"
-  ))
-
-# Apply formatting to the Command_Line column
-#commands$Command_Line <- cell_spec(commands$Command_Line, "html", font = "Courier", color = "black", background = "lightgray", escape = FALSE)
-
-knitr::kable(
-  commands,
-  format = "html",
-  col.names = c("Name", "Command Line", "Description", "Example"),
-  align = c("l", "l", "l", "l"),
-  escape = FALSE
-) %>%
-  kable_styling() %>%
-  # Set background color for alternating rows
-  row_spec(seq(2, nrow(commands), 2), background = "#e9f5f8")
-
-```

@@ -1,0 +1,147 @@
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+``
+
+# **Glossary**
+
+## Bash cheatsheet
+
+```{r bash_cheatsheet, results='asis', echo=FALSE}
+library(kableExtra)
+library(knitr)
+
+commands <- data.frame(
+  Name = c(
+    "Print Working Directory",
+    "List",
+    "List More Detail",
+    "Make Directory",
+    "Move",
+    "Change Directory",
+    "Remove",
+    "Copy",
+    "Search for File",
+    "Head",
+    "Tail",
+    "Less",
+    "More",
+    "Quit",
+    "Concatenate",
+    "Search for Text",
+    "Word, Line, and Character Count",
+    "Touch"),
+
+  Command_Line = c(
+    "`pwd`",
+    "`ls`",
+    "`ls -lht`",
+    "`mkdir`",
+    "`mv`",
+    "`cd`",
+    "`rm`",
+    "`cp`",
+    "`find`",
+    "`head`",
+    "`tail`",
+    "`less`",
+    "`more`",
+    "`q`",
+    "`cat`",
+    "`grep`",
+    "`wc`",
+    "`touch`"),
+
+  Description = c(
+    "Displays the current working directory",
+    "Lists the files and directories in the current directory",
+    "Display more details about the file",
+    "Creates a new directory",
+    "Moves or renames files or directories",
+    "Change to an existing directory",
+    "Deletes files and directories",
+    "Copies files or directories",
+    "Search for files and directories based on various criteria like name, size, and modification time",
+    "Display at the beginning of a file",
+    "Display at the end of a file",
+    "Load the necessary portion of a file",
+    "Load the entire file",
+    "Stop viewing the current file",
+    "Display the contents of a file",
+    "Search for a specific pattern of text within files",
+    "Display the number of words, lines, and characters in a file",
+    "Create a new empty file"),
+
+ Example = c(
+  # explanation_1
+  "**`[username\\@submit002 ~]$ pwd`**\n\nResult:/home/username",
+
+
+  # explanation_2
+
+  "**`[username\\@submit002 ~]$ ls`**\n\nResult: It returns empty after the $
+  symbol since nothing has been created.",
+
+ " **`[username\\@submit002 ~]$ ls -lht`**\n\nResult: Display file detail in the current director",
+
+  # explanation_3
+  "**`[username\\@submit002 ~]$ mkdir hpc_mini_workshop`**\n\nResult: A hpc_mini_workshop folder is created.",
+
+  # explanation_4
+  "**`[username\\@submit002 ~]$ mv hpc_mini_workshop workshopTraining`**\n\nResult: Now the hpc_mini_workshop directory is called workshopTraining",
+
+  # explanation_5
+  "**`[username\\@submit002 ~]$ cd workshopTraining`**\n\nResult: [username\\@submit002 workshopTraining]$ Notice ~ was in the home directory, now in the workshopTraining directory.",
+
+  # explanation_6
+  "**`[username\\@submit002 ~]$ rm -r TaskProject`**\n\n*Note: -r means directory\n\nResult: TaskProject is deleted",
+
+  # explanation_7
+  "**`[username\\@submit002 ~]$ cp -r Task1 Project`**\n\nResult: Task1 directory has moved to the Project directory.",
+
+  # explanation_8
+  "**`[username\\@submit002 ~]$ find Project`**\n\nResult: Task1 will appear within the Project directory\n\nProject\nProject/Task1",
+
+  # explanation_9
+  "**`[username\\@submit002 ~]$ head -n5 file_name`**\n\nResult: It will display the first 5 lines from the beginning of the file_name.",
+
+  # explanation_10
+  "**`[username\\@submit002 ~]$ tail -n5 file_name`**\n\nResult: It will display the last 5 lines from the end of the file_name",
+
+  # explanation_11
+  "**`[username\\@submit002 ~]$ less file.txt`**\n\nResult: The user is able to view a portion of the file.txt.",
+
+  # explanation_12
+  "**`[username\\@submit002 ~]$ more file.txt`**\n\nResult: The user is able to view the entire file.txt.",
+
+  # explanation_13
+  "quit viewing the current file",
+
+  # explanation_14
+  "**`[username\\@submit002 ~]$ cat file.txt`**\n\nResult: Display the contents of file.txt",
+
+  # explanation_15
+  "**`[username\\@submit002 ~]$ grep “GCGGA” sequence_file.fastq`**\n\nResult: Display any GCGGA pattern in sequence_file.fastq",
+
+  # explanation_16
+  "**`[username\\@submit002 ~]$ wc file.txt`**\n\nResult: Display the number of words, lines, and characters in the file.txt.",
+
+  # explanation_17
+  "**`[username\\@submit002 ~]$ touch exampleFile.txt`**\n\nResult: The command line will display file details in
+  the current directory"
+  ))
+
+# Apply formatting to the Command_Line column
+#commands$Command_Line <- cell_spec(commands$Command_Line, "html", font = "Courier", color = "black", background = "lightgray", escape = FALSE)
+
+knitr::kable(
+  commands,
+  format = "html",
+  col.names = c("Name", "Command Line", "Description", "Example"),
+  align = c("l", "l", "l", "l"),
+  escape = FALSE
+) %>%
+  kable_styling() %>%
+  # Set background color for alternating rows
+  row_spec(seq(2, nrow(commands), 2), background = "#e9f5f8")
+
+```
