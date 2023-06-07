@@ -4,7 +4,7 @@ knitr::opts_chunk$set(echo = TRUE)
 
 # **Glossary**
 
-## Bash cheatsheet
+## **Bash cheatsheet**
 
 ```{r bash_cheatsheet, results='asis', echo=FALSE}
 library(kableExtra)

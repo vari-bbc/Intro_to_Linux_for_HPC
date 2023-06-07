@@ -2,7 +2,7 @@
 
 # **Glossary**
 
-## Bash cheatsheet
+## **Bash cheatsheet**
 
 <table class="table" style="margin-left: auto; margin-right: auto;">
  <thead>
