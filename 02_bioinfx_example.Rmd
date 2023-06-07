@@ -25,12 +25,10 @@ srun --nodes=1 --ntasks-per-node=1 --time=06:00:00 --pty bash
 After a job has been submitted, users can check on the status (e.g. how long it has been running) of it using the following.
 
 ```{bash, eval= FALSE, engine= "sh"}
-squeue -u username
+squeue -u <username>
 ```
 
 ## **Create Directory**
-
-Create a project directory with a **username** and a sub-directory for storing raw sequence data file name **fastqs** in `cd /varidata/researchtemp/hpctmp/HPC_mini_workshop/Part3 directory`.
 
 Typically, one would work in their specific lab's folder on the HPC. For this workshop, we will work in a common directory so that the instructors and chck on your progress.
 
@@ -46,7 +44,7 @@ mkdir <username>
 
 Navigate to the username directory
 ```{bash, eval=FALSE, engine= "sh"}
-cd first.lastName
+cd <username>
 ```
 
 Create a `fastqs` directory inside the username directory. It is good practice to keep your raw data separate from your analyses and never make changes to them directly.
@@ -163,7 +161,7 @@ exit
 squeue -u username
 
 # Go back to the project directory
-cd /varidata/researchtemp/hpctmp/BBC_workshop_June2023/firstname.lastname
+cd /varidata/researchtemp/hpctmp/BBC_workshop_June2023/<username>
 
 ```
 
@@ -278,7 +276,7 @@ srun --nodes=1 --ntasks-per-node=1 --time=00:30:00 --pty bash
 
 Navigate to the project directory.
 ```{bash, eval=FALSE, engine="sh"}
-cd /varidata/researchtemp/hpctmp/HPC_mini_workshop/Part3/firstname.lastname/
+cd /varidata/researchtemp/hpctmp/BBC_workshop_June2023/<username>
 ```
 
 Load the environment module for multiQC.
