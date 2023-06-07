@@ -1,56 +1,90 @@
 
 
-# A toy bioinformatics project
+# **Mini Project**
 
-Here, we will put together some of the new skills that we have discussed today to perform a toy bioinformatic analysis. Four RNA-seq fastq files representing paired-end reads from two human samples have already been downloaded from [GSE52778](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE52778). To save time for the workshop, each file has been randomly subsetted to just a small fraction of the total reads. Here we will:
 
-1. Copy these fastq files to a private project directory for each user.
-2. Use basic Linux commands to learn some characteristics of these files, and compare the results to results from FastQC, which we will also run.
+Here, we will combine some of the commands we have learned today to perform a toy bioinformatic analysis. Two human paired-end samples (four total fastq files) have already been downloaded from [GSE52778](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE52778). To save time for the workshop, each file has been randomly subsetted to just a small fraction of the total reads. Here each user will:
+
+1. Copy these fastq files their own private project directory.
+2. Use basic Linux commands to learn some characteristics of these files.
 3. Use Salmon to align (pseudo-align) these reads to the hg38 reference transcriptome and get transcripts-per-million (TPMs) for each annotated gene.
 
-## Start up an interactive job
 
-Remember we try to avoid running computationally-intensive operations on the submit node directly. Where a formal script is not needed, we can start up an 'interactive job'. Once an interactive job is started, we can use the commandline as before but now we are using pre-allocated computational resources.
+## **Start an Interactive Job**
+
+While simple file manipulations can be done on the submit node, computationally intensive operations should be performed using preallocated computational resources. An **interactive job** allows us to preallocate resources while still being able to run commands line by line.
+
+We will start an interactive job, requesting one CPU core and 6 hours of walltime.
 
 
 ```bash
-qsub -I -l nodes=1:ppn=1 -l mem=32gb -l walltime=2:00:00
-
-# one way to verify that we have started an interactive successfully is to run qstat
-# to show only jobs submitted by ourselves, we use the `-u` option followed by our username.
-qstat -u username
+srun --nodes=1 --ntasks-per-node=1 --time=06:00:00 --pty bash
 ```
 
-## Create a project directory for yourself and a subdirectory for storing the raw fastq files
-
-It is good practice to try to make a separate directory for each project to minimize the risk of accidentally editing other files. It is also good to store raw data in its own location and not make any modifications to them.
+After a job has been submitted, users can check on the status (e.g. how long it has been running) of it using the following.
 
 
 ```bash
-cd /varidata/researchtemp/hpctmp/HPC_mini_workshop/Part3
+squeue -u username
+```
 
-mkdir firstname.lastname
+## **Create Directory**
 
-cd firstname.lastname
+Create a project directory with a **username** and a sub-directory for storing raw sequence data file name **fastqs** in `cd /varidata/researchtemp/hpctmp/HPC_mini_workshop/Part3 directory`.
 
+* Typically, one would work in their specific lab's folder on the HPC. For this workshop, we will work in a common directory so that the instructors and chck on your progress.
+
+
+```bash
+cd /varidata/researchtemp/hpctmp/BBC_workshop_June2023
+```
+
+* Create a directory based on your username to separate your work from other users'.
+
+
+```bash
+mkdir <username>
+```
+
+* Navigate to the username directory
+
+```bash
+cd first.lastName
+```
+
+* Create a `fastqs` directory inside the username directory. It is good practice to keep your raw data separate from your analyses and never make changes to them directly.
+
+
+```bash
 mkdir fastqs
 ```
 
-## Copy fastqs to working directory
+* Use `ls` to confirm the `fastqs` directory was created.
 
 
 ```bash
-# copy the md5sum file which will be used to verify successful file transfers.
-cp /varidata/researchtemp/hpctmp/BBC/hpc_workshop_fqs/md5sum.txt ./fastqs/
-
-# copy the fastqs
-cp /varidata/researchtemp/hpctmp/BBC/hpc_workshop_fqs/*fastq.gz ./fastqs/
-
+ls
 ```
 
-## Check that the files transferred properly
+## **Copy Fastq Files To `fastqs` subdirectory**
 
-Run the following command. The tool will compare the md5sums in the `md5sum.txt` file to the md5sums calculated for the files in your directory currently. If each line says 'OK', then the transfer was successful.
+* Verify the current directory is in the username directory.
+
+
+```bash
+pwd
+```
+
+* Copy the 4 fastq.gz files and `md5sum.txt`, which you will use to check the validty of the files.
+
+
+```bash
+cp /varidata/researchtemp/hpctmp/BBC/hpc_workshop_fqs/*fastq.gz ./fastqs/
+
+cp /varidata/researchtemp/hpctmp/BBC/hpc_workshop_fqs/md5sum.txt ./fastqs/
+```
+
+* Verify that the copied files are valid. The following code should return with an **OK** for each file.
 
 
 ```bash
@@ -66,18 +100,16 @@ md5sum -c md5sum.txt
 ## SRR1039521_2.fastq.gz: OK
 ```
 
-For the next steps, go back to the project directory.
+* Go back to the username directory.
 
 
 ```bash
 cd ..
 ```
 
-## Use zcat to take a look into fastq.gz files
+## **Use basic Linux commands to explore the fastq files**
 
-Note that a `.gz` file suffix means that the file is compressed and running the usual `cat` on it will not return human-readable results. The `zcat` command first decompresses the file then prints the results.
-
-Note the matching fastq IDs in the R1 and R2 files. Valid paired fastq files always have matching read IDs throughout the entire file.
+Notice all of the sequence data files end with a `.gz` extension, indicating they are gzip compressed. To view such files, one must use `zcat` instead of `cat` so that the files are decompressed into human-readable format.
 
 
 ```bash
@@ -97,8 +129,6 @@ zcat fastqs/SRR1039520_1.fastq.gz | head
 ## CAGGAGACCAAAGACACTGCAATTTGTGTGTTTTCTACAGGGTGCTTTAGATGACGTCTCATT
 ```
 
-Now look at the R2 file.
-
 
 ```bash
 zcat fastqs/SRR1039520_2.fastq.gz | head
@@ -117,11 +147,9 @@ zcat fastqs/SRR1039520_2.fastq.gz | head
 ## TACAGTTTGCAAAAGATGTCCAGATGGGTTCTTCTCAAATGAGACGTCATCTAAAGCACCCTG
 ```
 
-## Use `wc` to see how many reads are in a fastq file and how long they are.
+Notice that `SRR1039520_1.fastq.gz` and `SRR1039520_2.fastq.gz` files have the same read IDs. Valid paired fastq files always have matching read IDs throughout the entire file.
 
-Remember that we can use `man wc` to see what the different options such as `-l` and `-m` do.
-
-This command counts the new line characters at the end of each line. Typically, this corresponds to the number of lines in a file. Recall that each read is represented by 4 lines in a fastq file, so we need to divide the results of `wc -l` by 4 to get the number of reads.
+Next, we can figure out how many reads are in a fastq file using `wc -l`. Recall that each read is represented by 4 lines in a fastq file, so we need to divide the results of `wc -l` by 4 to get the number of reads.
 
 
 ```bash
@@ -132,7 +160,7 @@ zcat fastqs/SRR1039520_1.fastq.gz | wc -l
 ## 2000000
 ```
 
-This command counts the number of characters in the sequence line (second line) in the first read in the file. you may notice that the results of `wc -m` will be 1 higher than the actual read length. This is because the tool counts the newline character also.
+Finally, we can use `wc -m` to figure out the read length in a fastq file. Below, we use a combination of `head -n2` and `tail -n1` to get the second line of the first read. You may notice that the results of `wc -m` will be 1 higher than the actual read length. This is because the tool counts the newline character also.
 
 
 ```bash
@@ -144,165 +172,42 @@ zcat fastqs/SRR1039520_1.fastq.gz | head -n2 | tail -n1 | wc -m
 ## 64
 ```
 
-Record these numbers so that you can compare these to the output from FastQC (a commonly used tool for checking the quality of fastq files) which we will run below.
+## **Working With Environment Modules**
 
-## How to see what packages are installed on HPC.
+Type `module av bbc2` (modules beginning with just `bbc` are from the old HPC) to see all the software installed by the BBC. There are a lot of modules installed; to parse through these more easily, we can **pipe** the results of `module av` into `grep` to search for modules with specific keywords. There is a trick, though. The results of `module av` go to standard error, so we need to redirect standard error to standard out using `2>&1` before the pipe.
 
-If you simply type `module av`, you will see all the modules available. There are a lot of modules installed. To parse through these more easily, we can **pipe** the results of `module av` into tools such as `head` to print just the first 'n' lines and `grep` to search for modules with specific keywords. There is a trick, though. The results of `module av` go to stderr, so we need to redirect stderr to stdout using `2>&1` before the pipe.
-
-Print the first 50 lines.
+This command will output any modules containing the `fastqc` keyword.
 
 
 ```bash
-module av 2>&1 | head -n50
+module av bbc2 2>&1 | grep 'fastqc'
 ```
 
 ```
-## --------------------------------------------------------------------------------- /cm/local/modulefiles ---------------------------------------------------------------------------------
-## boost/1.77.0            cluster-tools/9.2  cmd    cuda-dcgm/2.4.6.1  freeipmi/1.6.8  ipmitool/1.8.18  luajit        module-git   null      python3   shared  
-## cluster-tools-dell/9.2  cm-bios-tools      cmjob  dot                gcc/11.2.0      lua/5.4.4        mariadb-libs  module-info  openldap  python39  
-## 
-## -------------------------------------------------------------------------------- /cm/shared/modulefiles ---------------------------------------------------------------------------------
-## bbc/7zip/7zip-16.02                        bbc/gmp/gmp-6.2.1                        bbc/R/R-4.0.0-pcre2-setR_LIBS_USER            bbc2/biscuit/biscuit_1_0_1                
-## bbc/10x_bamtofastq/bamtofastq-1.2.0        bbc/gnuplot/gnuplot-5.2.8                bbc/R/R-4.0.0-USE_PCRE2                       bbc2/biscuit/biscuit_1_0_2                
-## bbc/10x_bamtofastq/bamtofastq-1.3.2        bbc/gnuplot/gnuplot-5.4.5                bbc/R/R-4.0.2                                 bbc2/biscuit/biscuit_1_2_0                
-## bbc/10x_subset-bam/10x_subset-bam-1.0      bbc/gridss/gridss-2.7.3                  bbc/R/R-4.0.2-setR_LIBS_USER                  bbc2/bismark/bismark-0.24.0               
-## bbc/abyss/abyss-2.2.3                      bbc/gsl/gsl-2.5                          bbc/R/R-4.1.0                                 bbc2/blast+/blast-2.14.0                  
-## bbc/AWS/aws-cli                            bbc/gsutil/gsutil-4.52                   bbc/R/R-4.1.0-setR_LIBS_USER                  bbc2/bowtie2/bowtie2-2.5.1                
-## bbc/bamtools/bamtools-2.5.1                bbc/guppy/guppy-3.4.5                    bbc/R/R-4.2.1                                 bbc2/bwa/bwa-0.7.17                       
-## bbc/bbc2/perl-5.36.1                       bbc/hisat2/hisat2-2.1.0                  bbc/R/R-4.2.1-C++17                           bbc2/cellranger/cellranger-7.1.0          
-## bbc/bbc_projects/bbc_projects              bbc/hisat2/hisat2-2.2.1                  bbc/R/R-4.2.1-C++20                           bbc2/circexplorer/circexplorer-2.3.8      
-## bbc/bcftools/bcftools-1.10.2               bbc/HMMRATAC/HMMRATAC-1.2.9              bbc/racon/racon-1.4.3                         bbc2/CogentAP/CogentAP-2.0                
-## bbc/bcftools/bcftools-1.12                 bbc/HMMRATAC/HMMRATAC-1.2.10             bbc/readline/readline-8.0                     bbc2/cutadapt/cutadapt-4.3                
-## bbc/bcl2fastq/fastq-multx                  bbc/homer/homer-4.11                     bbc/rmats_turbo/rmats_turbo-4.1.1             bbc2/deeptools/deeptools-3.5.2            
-## bbc/bcl2fastq2/bcl2fastq2-2.20.0           bbc/HOMER/HOMER-4.11.1                   bbc/rsat/rsat-2020.02.07                      bbc2/fastq_screen/fastq_screen-0.14.0     
-## bbc/bedops/bedops-2.4.37                   bbc/htop/htop-2.2.0                      bbc/RSeQC/RSeQC-4.0.0                         bbc2/fastqc/fastqc-0.12.1                 
-## bbc/bedtools/bedtools-2.29.2               bbc/htseq/htseq-0.13.5                   bbc/rust/rust-1.52.1                          bbc2/gatk/gatk-4.1.8.1                    
-## bbc/bedtools/bedtools-2.30.0               bbc/htslib/htslib-1.10.2                 bbc/salmon/salmon-1.2.0                       bbc2/gatk/gatk-4.3.0.0                    
-## bbc/bioawk/bioawk-git                      bbc/htslib/htslib-1.12                   bbc/salmon/salmon-1.3.0                       bbc2/gatk/gatk-4.4.0.0                    
-## bbc/biscuit/biscuit_0_3_14                 bbc/htslib/htslib-1.14                   bbc/salmon/salmon-1.4.0                       bbc2/gsl/gsl-2.7                          
-## bbc/biscuit/biscuit_0_3_16                 bbc/iaap-cli/iaap-cli                    bbc/salmon/salmon-1.5.2                       bbc2/hisat2/hisat2-2.2.1                  
-## bbc/biscuit/biscuit_1_0_0                  bbc/idr/idr-2.0.4.2                      bbc/sambamba/sambamba-0.7.1                   bbc2/HMMRATAC/HMMRATAC-1.2.10             
-## bbc/biscuit/biscuit_1_0_1                  bbc/igblast/igblast-1.17.1               bbc/samblaster/samblaster-0.1.24              bbc2/HOMER/HOMER-4.11.1                   
-## bbc/biscuit/biscuit_dev                    bbc/isl/isl-0.24                         bbc/samblaster/samblaster-0.1.26              bbc2/htslib/htslib-1.17                   
-## bbc/bismark/bismark-0.22.3                 bbc/jcvi/jcvi-1.1.18                     bbc/samclip/samclip-v0.4.0                    bbc2/jdk/jdk-17.0.7                       
-## bbc/bismark/bismark-0.23.0                 bbc/jellyfish/jellyfish-2.3.0            bbc/samtools/samtools-1.9                     bbc2/juicer/juicer-1.6                    
-## bbc/blast+/blast+-2.10.0                   bbc/jemalloc/jemalloc-5.3.0              bbc/samtools/samtools-1.12                    bbc2/kent-core/kent-core-v448             
-## bbc/bonito/bonito-0.0.5                    bbc/kallisto/kallisto-0.46.1             bbc/samtools/samtools-1.14                    bbc2/libBigWig/libBigWig-0.4.7            
-## bbc/Boost/boost-1.57.0                     bbc/kb-python/kb-python-0.24.4           bbc/seqkit/seqkit-v2.1.0                      bbc2/macs2/macs2-2.2.7.1                  
-## bbc/bowtie/bowtie-1.2.3                    bbc/kb-python/kb-python-0.27.3           bbc/seqtk/seqtk-1.3-r115-dirty                bbc2/multiqc/multiqc-1.14                 
-## bbc/bowtie2/bowtie2-2.3.5.1                bbc/Kraken2/kraken2-git                  bbc/shasta/shasta-0.4.0                       bbc2/nextflow/nextflow-23.04.1.5866       
-## bbc/bowtie2/bowtie2-2.4.1                  bbc/last/last-1256                       bbc/skewer/skewer                             bbc2/openjdk/17.0.2                       
-## bbc/Bracken/bracken-2.8                    bbc/libBigWig/libBigWig-0.4.6            bbc/snakemake/snakemake-5.10.0                bbc2/pandoc/pandoc-3.1.2 <aL>             
-## bbc/brename/brename-v2.11.1                bbc/libgd/libgd-2.2.5                    bbc/snakemake/snakemake-5.14.0                bbc2/perl/perl-5.36.1                     
-## bbc/bustools/bustools-0.39.3               bbc/libpng/png16                         bbc/snakemake/snakemake-5.15.0                bbc2/picard/picard-2.27.5                 
-## bbc/bustools/bustools-0.40.0               bbc/lisa/lisa-1.0                        bbc/snakemake/snakemake-5.17.0                bbc2/picard/picard-3.0.0                  
-## bbc/bwa-mem2/bwa-mem2-v2.2.1               bbc/llvm/llvm-11.1.0                     bbc/snakemake/snakemake-5.19.0                bbc2/pigz/pigz-2.7                        
-## bbc/bwa/bwa-0.7.17                         bbc/lz4/lz4-1.9.4                        bbc/snakemake/snakemake-5.20.1                bbc2/pkg-config-libs/BBC-pkg-config-libs  
-## bbc/byacc/byacc-1.9                        bbc/macs2/macs2-2.2.6                    bbc/snakemake/snakemake-5.23.0                bbc2/preseq/preseq-3.2.0                  
-## bbc/bzip2/bzip2-1.0.6                      bbc/macs2/macs2-2.2.7.1                  bbc/snakemake/snakemake-5.28.0                bbc2/python3/python-3.10.10               
-## bbc/canu/canu-1.9                          bbc/make/make-4.4                        bbc/snakemake/snakemake-5.32.2                bbc2/python3/python-3.11.3                
-## bbc/CaVEMan/CaVEMan-1.15.1                 bbc/manta/manta-1.6.0                    bbc/snakemake/snakemake-6.1.0                 bbc2/qualimap/qualimap_v.2.2.2            
-## bbc/cellranger-atac/cellranger-atac-1.1.0  bbc/MaSuRCA/MaSuRCA-4.1.0                bbc/snakemake/snakemake-6.13.1_test           bbc2/R/alt/R-4.2.1-setR_LIBS_USER <L>     
-## bbc/cellranger/cellranger-3.0.2            bbc/meme/meme-5.1.1                      bbc/snakemake/snakemake-6.15.0                bbc2/R/alt/R-4.2.3-setR_LIBS_USER         
-## bbc/cellranger/cellranger-3.1.0            bbc/meme/meme-5.3.3                      bbc/snakemake/snakemake-7.8.5                 bbc2/R/R-4.2.1 <aL>                       
-## bbc/cellranger/cellranger-4.0.0            bbc/Meraculous-2D/meraculous-2.2.6       bbc/snakePipes/snakePipes-2.1.2               bbc2/R/R-4.2.3                            
-## bbc/cellranger/cellranger-6.0.2            bbc/metilene/metilene-0.2-8              bbc/sniffles/sniffles-1.0.11                  bbc2/R/R-4.3.0
+## bbc2/fastqc/fastqc-0.12.1              bbc2/pigz/pigz-2.7                        bbc2/WiggleTools/WiggleTools-1.2.11
 ```
 
-Print the first 50 lines after subsetting to just the BBC-installed modules.
+## **Run FastQC**
+
+* Create a `fastqc` directory inside of your username directory and run FastQC.
 
 
 ```bash
-module av bbc 2>&1 | head -n50
-```
+module load bbc2/fastqc/fastqc-0.12.1
 
-```
-## -------------------------------------------------------------------------------- /cm/shared/modulefiles ---------------------------------------------------------------------------------
-## bbc/7zip/7zip-16.02                        bbc/gcc/gcc-10.4.0                       bbc/preseq/preseq-2.0.3                bbc/tophat/tophat-2.1.0                       
-## bbc/10x_bamtofastq/bamtofastq-1.2.0        bbc/gcc/gcc-11.3.0                       bbc/preseq/preseq-3.1.2                bbc/tophat/tophat-2.1.1                       
-## bbc/10x_bamtofastq/bamtofastq-1.3.2        bbc/gcc/gcc-12.2.0                       bbc/preseq/preseq-3.1.2-vari           bbc/transdecoder/transdecoder-5.5.0           
-## bbc/10x_subset-bam/10x_subset-bam-1.0      bbc/gcc/gcc-12.2.0-lto                   bbc/pyGenomeTracks/pyGenomeTracks-3.2  bbc/tree/tree-1.8.0                           
-## bbc/abyss/abyss-2.2.3                      bbc/gdc/gdc-1.6.0                        bbc/python2/python-2.7.18              bbc/trim_galore/trim_galore-0.6.0             
-## bbc/AWS/aws-cli                            bbc/genometools/genometools-1.6.2        bbc/python2/python2.7.0                bbc/Trimmomatic/trimmomatic-0.39              
-## bbc/bamtools/bamtools-2.5.1                bbc/gff3sort/gff3sort_dd881e1            bbc/python3/python-3.6.10              bbc/Trinity/Trinity-2.13.0                    
-## bbc/bbc2/perl-5.36.1                       bbc/gffcompare/gffcompare-0.12.6         bbc/python3/python-3.7.3               bbc/TRUST4/trust4-1.0.2b                      
-## bbc/bbc_projects/bbc_projects              bbc/gffread/gffread-0.12.7               bbc/python3/python-3.7.4               bbc/ucsc/ucsc-2020.06.11                      
-## bbc/bcftools/bcftools-1.10.2               bbc/gmp/gmp-6.2.1                        bbc/python3/python-3.8.1               bbc/UMI-Tools/UMI-Tools-1.1.1                 
-## bbc/bcftools/bcftools-1.12                 bbc/gnuplot/gnuplot-5.2.8                bbc/python3/python-3.8.1-bz            bbc/vcflib/vcflib-1.0.1                       
-## bbc/bcl2fastq/fastq-multx                  bbc/gnuplot/gnuplot-5.4.5                bbc/python3/python-3.8.1-bz-sqlite3    bbc/vcftools/vcftools-0.1.16                  
-## bbc/bcl2fastq2/bcl2fastq2-2.20.0           bbc/gridss/gridss-2.7.3                  bbc/qualimap/qualimap_v.2.2.2          bbc/vsearch/vsearch-2.21.1                    
-## bbc/bedops/bedops-2.4.37                   bbc/gsl/gsl-2.5                          bbc/quast/quast-5.2.0                  bbc/vt/vt-0.1.16                              
-## bbc/bedtools/bedtools-2.29.2               bbc/gsutil/gsutil-4.52                   bbc/R/alt/R-4.2.1-setR_LIBS_USER       bbc/WiggleTools/WiggleTools-1.2.11            
-## bbc/bedtools/bedtools-2.30.0               bbc/guppy/guppy-3.4.5                    bbc/R/alt2/R-4.2.1-setR_LIBS_USER_kin  bbc/xlsx2csv/xlsx2csv-0.7.8                   
-## bbc/bioawk/bioawk-git                      bbc/hisat2/hisat2-2.1.0                  bbc/R/R-3.6.0                          bbc/zstd/zstd-1.5.4                           
-## bbc/biscuit/biscuit_0_3_14                 bbc/hisat2/hisat2-2.2.1                  bbc/R/R-4.0.0-pcre2                    bbc/Zzz_deprecated/cairo-1.15.12              
-## bbc/biscuit/biscuit_0_3_16                 bbc/HMMRATAC/HMMRATAC-1.2.9              bbc/R/R-4.0.0-pcre2-setR_LIBS_USER     bbc/Zzz_deprecated/cairo-1.16.0               
-## bbc/biscuit/biscuit_1_0_0                  bbc/HMMRATAC/HMMRATAC-1.2.10             bbc/R/R-4.0.0-USE_PCRE2                bbc/Zzz_deprecated/multiqc-1.8                
-## bbc/biscuit/biscuit_1_0_1                  bbc/homer/homer-4.11                     bbc/R/R-4.0.2                          bbc/Zzz_deprecated/snakemake/snakemake-5.8.2  
-## bbc/biscuit/biscuit_dev                    bbc/HOMER/HOMER-4.11.1                   bbc/R/R-4.0.2-setR_LIBS_USER           bbc/Zzz_deprecated/zlib/zlib-1.2.11           
-## bbc/bismark/bismark-0.22.3                 bbc/htop/htop-2.2.0                      bbc/R/R-4.1.0                          bbc2/bamtools/bamtools-2.5.2                  
-## bbc/bismark/bismark-0.23.0                 bbc/htseq/htseq-0.13.5                   bbc/R/R-4.1.0-setR_LIBS_USER           bbc2/bcftools/bcftools-1.17                   
-## bbc/blast+/blast+-2.10.0                   bbc/htslib/htslib-1.10.2                 bbc/R/R-4.2.1                          bbc2/bcl2fastq2/bcl2fastq2-2.20.0             
-## bbc/bonito/bonito-0.0.5                    bbc/htslib/htslib-1.12                   bbc/R/R-4.2.1-C++17                    bbc2/bedops/bedops-2.4.41                     
-## bbc/Boost/boost-1.57.0                     bbc/htslib/htslib-1.14                   bbc/R/R-4.2.1-C++20                    bbc2/bedtools/bedtools-2.30.0                 
-## bbc/bowtie/bowtie-1.2.3                    bbc/iaap-cli/iaap-cli                    bbc/racon/racon-1.4.3                  bbc2/biscuit/biscuit_1_0_1                    
-## bbc/bowtie2/bowtie2-2.3.5.1                bbc/idr/idr-2.0.4.2                      bbc/readline/readline-8.0              bbc2/biscuit/biscuit_1_0_2                    
-## bbc/bowtie2/bowtie2-2.4.1                  bbc/igblast/igblast-1.17.1               bbc/rmats_turbo/rmats_turbo-4.1.1      bbc2/biscuit/biscuit_1_2_0                    
-## bbc/Bracken/bracken-2.8                    bbc/isl/isl-0.24                         bbc/rsat/rsat-2020.02.07               bbc2/bismark/bismark-0.24.0                   
-## bbc/brename/brename-v2.11.1                bbc/jcvi/jcvi-1.1.18                     bbc/RSeQC/RSeQC-4.0.0                  bbc2/blast+/blast-2.14.0                      
-## bbc/bustools/bustools-0.39.3               bbc/jellyfish/jellyfish-2.3.0            bbc/rust/rust-1.52.1                   bbc2/bowtie2/bowtie2-2.5.1                    
-## bbc/bustools/bustools-0.40.0               bbc/jemalloc/jemalloc-5.3.0              bbc/salmon/salmon-1.2.0                bbc2/bwa/bwa-0.7.17                           
-## bbc/bwa-mem2/bwa-mem2-v2.2.1               bbc/kallisto/kallisto-0.46.1             bbc/salmon/salmon-1.3.0                bbc2/cellranger/cellranger-7.1.0              
-## bbc/bwa/bwa-0.7.17                         bbc/kb-python/kb-python-0.24.4           bbc/salmon/salmon-1.4.0                bbc2/circexplorer/circexplorer-2.3.8          
-## bbc/byacc/byacc-1.9                        bbc/kb-python/kb-python-0.27.3           bbc/salmon/salmon-1.5.2                bbc2/CogentAP/CogentAP-2.0                    
-## bbc/bzip2/bzip2-1.0.6                      bbc/Kraken2/kraken2-git                  bbc/sambamba/sambamba-0.7.1            bbc2/cutadapt/cutadapt-4.3                    
-## bbc/canu/canu-1.9                          bbc/last/last-1256                       bbc/samblaster/samblaster-0.1.24       bbc2/deeptools/deeptools-3.5.2                
-## bbc/CaVEMan/CaVEMan-1.15.1                 bbc/libBigWig/libBigWig-0.4.6            bbc/samblaster/samblaster-0.1.26       bbc2/fastq_screen/fastq_screen-0.14.0         
-## bbc/cellranger-atac/cellranger-atac-1.1.0  bbc/libgd/libgd-2.2.5                    bbc/samclip/samclip-v0.4.0             bbc2/fastqc/fastqc-0.12.1                     
-## bbc/cellranger/cellranger-3.0.2            bbc/libpng/png16                         bbc/samtools/samtools-1.9              bbc2/gatk/gatk-4.1.8.1                        
-## bbc/cellranger/cellranger-3.1.0            bbc/lisa/lisa-1.0                        bbc/samtools/samtools-1.12             bbc2/gatk/gatk-4.3.0.0                        
-## bbc/cellranger/cellranger-4.0.0            bbc/llvm/llvm-11.1.0                     bbc/samtools/samtools-1.14             bbc2/gatk/gatk-4.4.0.0                        
-## bbc/cellranger/cellranger-6.0.2            bbc/lz4/lz4-1.9.4                        bbc/seqkit/seqkit-v2.1.0               bbc2/gsl/gsl-2.7                              
-## bbc/cellranger/cellranger-6.1.2            bbc/macs2/macs2-2.2.6                    bbc/seqtk/seqtk-1.3-r115-dirty         bbc2/hisat2/hisat2-2.2.1                      
-## bbc/changeo/changeo-1.1.0                  bbc/macs2/macs2-2.2.7.1                  bbc/shasta/shasta-0.4.0                bbc2/HMMRATAC/HMMRATAC-1.2.10                 
-## bbc/choose/choose-1.3.3                    bbc/make/make-4.4                        bbc/skewer/skewer                      bbc2/HOMER/HOMER-4.11.1                       
-## bbc/chromap/chromap                        bbc/manta/manta-1.6.0                    bbc/snakemake/snakemake-5.10.0         bbc2/htslib/htslib-1.17
-```
-
-Print the modules with the keyword, 'fastqc', in their names.
-
-
-```bash
-module av 2>&1 | grep 'fastqc'
-```
-
-```
-## bbc/bedops/bedops-2.4.37                   bbc/htop/htop-2.2.0                      bbc/RSeQC/RSeQC-4.0.0                         bbc2/fastqc/fastqc-0.12.1                 
-## bbc/fastqc/fastqc-0.11.8                   bbc/pkg-config-libs/BBC-pkg-config-libs  bbc/TRUST4/trust4-1.0.2b                      intel-cluster-runtime/intel64/2019.6      
-## bbc/fastqc/fastqc-0.11.9                   bbc/plink/plink-v1.90b6.18               bbc/ucsc/ucsc-2020.06.11                      intel-tbb-oss/ia32/2021.4.0
-```
-
-## Run FastQC on the fastq files
-
-We run fastqc on our raw fastq files for essentially all of the projects that we work on.
-
-The output of fastqc includes an html file for each fastq file. You can open up these in a regular browser to look at basic QC metrics for these fastq files. In the interest of time, we will simply run FastQC without viewing the results because we will aggregate all of our results into one html file at the end of this exercise.
-
-
-```bash
-module load bbc/fastqc/fastqc-0.11.9
-
-# make a directory for the output
 mkdir fastqc
 
-# run FastQC. Remember you can check out what the options do by typing `fastqc -h`.
+# Run FastQC. You can also run `fastqc -h` to see what different options do.
 fastqc -o fastqc fastqs/*fastq.gz
 ```
 
 ```
 ## mkdir: cannot create directory ‘fastqc’: File exists
+## application/gzip
+## application/gzip
 ## Started analysis of SRR1039520_1.fastq.gz
+## application/gzip
+## application/gzip
 ## Approx 5% complete for SRR1039520_1.fastq.gz
 ## Approx 10% complete for SRR1039520_1.fastq.gz
 ## Approx 15% complete for SRR1039520_1.fastq.gz
@@ -392,11 +297,11 @@ fastqc -o fastqc fastqs/*fastq.gz
 ## Analysis complete for SRR1039521_2.fastq.gz
 ```
 
-Look at the output from FastQC.
+* See what was produced by FastQC.
 
 
 ```bash
-ls fastqc
+ls fastqc/
 
 ```
 
@@ -411,42 +316,48 @@ ls fastqc
 ## SRR1039521_2_fastqc.zip
 ```
 
-## Set up a job to run Salmon
+## **Set up a job to run Salmon to align the reads**
 
 First, we `exit` from our interactive job because we want to get back on to the submit node to submit a non-interactive job to run Salmon.
 
 
 ```bash
-# exit the interactive job
+# You should see one job when you run this command, corresponding to your interactive job.
+squeue -u username
+
+# Exit the interactive job
 exit
 
-# verify that the interactive job has ended
-qstat -u username
+# Now you should see no jobs when you run this command because the interactive job has ended.
+squeue -u username
 
-# go back to the project directory
-cd /varidata/researchtemp/hpctmp/HPC_mini_workshop/Part3/firstname.lastname
+# Go back to the project directory
+cd /varidata/researchtemp/hpctmp/BBC_workshop_June2023/firstname.lastname
 
 ```
 
-Next, we can set up our job script to run Salmon. The job script code is below. Don't worry about the specifics of this code for now. Simply, copy the code and paste into your text editor to make your job script. Save the script as `run_salmon.sh` and ensure that it is in our project directory containing the `fastqs/` subfolder.
+## **Make a job script to run Salmon**
+
+Below is a SLURM job script to run Salmon. For now, do not worry about how the code works. Copy the code and paste it into a new file. Save it as `run_salmon.sh` in your username directory.
 
 
 ```bash
-#PBS -l nodes=1:ppn=3
-#PBS -l mem=36gb
-#PBS -l walltime=1:00:00
-#PBS -N salmon
-#PBS -o salmon.o
-#PBS -e salmon.e
+#!/bin/bash
 
-set -euo pipefail # see explanation at https://gist.github.com/mohanpedala/1e2ff5661761d3abd0385e8223e16425?permalink_comment_id=3945021
+#SBATCH --export=NONE
+#SBATCH -J run_salmon
+#SBATCH -o run_salmon.o
+#SBATCH -e run_salmon.e
+#SBATCH --ntasks 4
+#SBATCH --time 1:00:00
+#SBATCH --mem=36G
 
 start_time=$(date +"%T")
 
-# You need to navigate to your project directory. Conveniently, the $PBS_O_WORKDIR variable stores the path for where the job was submitted.
-cd ${PBS_O_WORKDIR}
+# You need to navigate to your project directory. Conveniently, the $SLURM_SUBMIT_DIR variable stores the path for where the job was submitted.
+cd ${SLURM_SUBMIT_DIR}
 
-module load bbc/salmon/salmon-1.5.2
+module load bbc2/salmon/salmon-1.10.0
 
 # Typically, you would have to first build an index before doing the aligning, but we have done this for you already. Here, we store the path to the index file in a variable called 'salmon_idx'.
 salmon_idx="/varidata/research/projects/bbc/versioned_references/2022-03-08_14.47.50_v9/data/hg38_gencode/indexes/salmon/hg38_gencode/"
@@ -454,10 +365,10 @@ salmon_idx="/varidata/research/projects/bbc/versioned_references/2022-03-08_14.4
 # make output directory for salmon
 mkdir -p salmon
 
-# this is called a for loop. We use this to run salmon quant on all the samples, one at a time. It is more efficient to run salmon on each sample "in parallel" but we will not do not today.
+# This is called a for loop. We use this to run salmon quant on all the samples, one at a time. It is more efficient to run salmon on each sample "in parallel" but we will not do that today.
 for samp_id in SRR1039520 SRR1039521
 do
-    salmon quant -p ${PBS_NUM_PPN} -l A -i $salmon_idx -1 fastqs/${samp_id}_1.fastq.gz -2 fastqs/${samp_id}_2.fastq.gz -o salmon/${samp_id} --validateMappings
+    salmon quant -p ${SLURM_NTASKS} -l A -i $salmon_idx -1 fastqs/${samp_id}_1.fastq.gz -2 fastqs/${samp_id}_2.fastq.gz -o salmon/${samp_id} --validateMappings
 
 done
 
@@ -466,24 +377,34 @@ echo "Start time: $start_time"
 echo "End time: $end_time"
 ```
 
-## Submit the job
+## **Submit a Job**
 
-Submit the job and keep monitoring the job using `qstat` as shown below. The job should complete in about 2 minutes.
+* Type `ls` to ensure `run_salmon.sh` file exist in the username directory.
 
 
 ```bash
-qsub run_salmon.sh
+ls
+```
 
-# check on the status of your job
-qstat -u firstname.lastname
+* Use the `sbatch` command to submit the job.
+
+
+```bash
+sbatch run_salmon.sh
 
 ```
 
-## Check the job logs to see if job finished running
+* Users can check if the job is running with the following command. The job should take about two minutes to complete.
+
+
+```bash
+squeue -u username
+
+```
+
+## **Examine the Standard Output (stdout) and Standard Error (stderr) log files**
 
 It is good practice to check the job logs after your job is done to ensure that the job completed successfully. If there is an error, the output files may not be reliable or could be incomplete.
-
-Look at the stderr from the script.
 
 
 ```bash
@@ -502,12 +423,9 @@ tail salmon.e
 ## [2022-09-20 23:32:27.307] [jointLog] [info] writing output
 ```
 
-Look at the stdout from the script.
-
 
 ```bash
 tail salmon.o
-
 ```
 
 ```
@@ -515,13 +433,15 @@ tail salmon.o
 ## End time: 23:32:30
 ```
 
-## Use grep to find the TPMs for specific genes
+## **Use grep to find the TPMs for a specific gene**
 
-As an example, let's try to extract out the TPMs for MUC1. These values can be found in the `quant.sf` file in each sample's folder. Let's take a look at one of these files to figure out the format of these files.
+As an example, let's try to extract out the TPMs (Transcripts per Million) for MUC1. These values can be found in the `quant.sf` file in each sample's folder. 
+
+* First, let's take a look at one of these files to figure out the format of these files.
 
 
 ```bash
-head salmon/SRR1039520/quant.sf 
+head salmon/SRR1039520/quant.sf
 
 ```
 
@@ -538,20 +458,19 @@ head salmon/SRR1039520/quant.sf
 ## ENST00000461467.1	590	435.180	0.000000	0.000
 ```
 
-We can see that the TPMs are in the 4th column of this file. We can also see that the transcript IDs are in ENSEMBL format. If we look up MUC1 on [Ensembl](http://useast.ensembl.org/Homo_sapiens/Gene/Summary?db=core;g=ENSG00000185499;r=1:155185824-155192916), we will find that the canonical transcript is `ENST00000620103`, so let's `grep` for this transcript ID. 
-
-Look for this transript for one specific sample.
+From the output above, we can see that the TPMs are in the 4th column of this file. The canonical transcript for [MUC1](http://useast.ensembl.org/Homo_sapiens/Gene/Summary?db=core;g=ENSG00000185499;r=1:155185824-155192916) is ENST00000620103, so we will search for that using `grep`.
 
 
 ```bash
 grep 'ENST00000620103' salmon/SRR1039520/quant.sf
+
 ```
 
 ```
 ## ENST00000620103.4	1811	1656.015	0.000000	0.000
 ```
 
-Look across all the samples at the same time. We can see that 'SRR1039521' has a TPM of 13.1 for MUC1 compared to 0 for 'SRR1039520'. Recall that the fastq files for this exercise were subsetted to a very small number of reads so don't interpret these results seriously.
+Look for MUC1 across all the samples at the same time. We can see that 'SRR1039521' has a TPM of 13.1 for MUC1 compared to 0 for 'SRR1039520'. Recall that the fastq files for this exercise were subsetted to a very small number of reads so don't interpret these results seriously.
 
 
 ```bash
@@ -563,26 +482,29 @@ grep 'ENST00000620103' salmon/*/quant.sf
 ## salmon/SRR1039521/quant.sf:ENST00000620103.4	1811	1655.481	13.145898	5.723
 ```
 
-## Use an interactive job to run multiQC on the Salmon and FastQC output
+## **BONUS: Use an interactive job to run multiQC on the Salmon and FastQC output**
 
-As our final exercise, let's run a tool called multiQC to summarize the results from FastQC and Salmon. Using the output from multiQC, we will be able to assess both the quality of the fastq sequences themselves and how well they match up with the reference transcriptome (mapping rate), and other useful information. We will start up another interactive job to do this.
+In this final step, users will start an interactive job to perform multiQC to collect and summarize the outcomes from FastQC and Salmon, then evaluate the quality of the fastq sequences with the reference transcriptome(mapping rate).
+
+* Start an interactive job.
 
 
 ```bash
-qsub -I -l nodes=1:ppn=1 -l mem=32gb -l walltime=1:00:00
+srun --nodes=1 --ntasks-per-node=1 --time=00:30:00 --pty bash
 
-# go back to your project directory
+```
+
+* Navigate to the project directory.
+
+```bash
 cd /varidata/researchtemp/hpctmp/HPC_mini_workshop/Part3/firstname.lastname/
 ```
 
-Now actually run multiQC.
+* Load the environment module for multiQC.
 
 
 ```bash
-module load bbc/multiqc/multiqc-1.12
-
-# multiqc creates the output directory automatically. You don't have to run mkdir manually.
-multiqc --outdir multiqc .
+module load bbc2/multiqc/multiqc-1.14
 ```
 
 ```
@@ -591,25 +513,17 @@ multiqc --outdir multiqc .
 ## 	Loading this module prepends to $PYTHONPATH
 ## 	Don't use with conda.
 ## ### End BBC module message.
-## 
-##   /// MultiQC 🔍 | v1.12
-## 
-## |           multiqc | Search path : /varidata/research/projects/bbc/research/hpc_workshop_202209
-## |         searching | ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 100% 356/356  
-## |            snippy | Found 4 reports
-## |          bargraph | Tried to make bar plot, but had no data: snippy_variants
-## |            salmon | Found 2 meta reports
-## |            salmon | Found 2 fragment length distributions
-## |            fastqc | Found 4 reports
-## |           multiqc | Compressing plot data
-## |           multiqc | Previous MultiQC output found! Adjusting filenames..
-## |           multiqc | Use -f or --force to overwrite existing reports instead
-## |           multiqc | Report      : multiqc/multiqc_report_3.html
-## |           multiqc | Data        : multiqc/multiqc_data_3
-## |           multiqc | MultiQC complete
 ```
 
-Look at the output from multiQC.
+* Run multiQC, which will summarize the results from FastQC and Salmon and output the results into a new directory called `multiqc/`.
+
+
+```bash
+multiqc --outdir multiqc .
+
+```
+
+* List the contents of the `multiqc` directory.
 
 
 ```bash
@@ -627,4 +541,5 @@ ls multiqc
 ## multiqc_report_3.html
 ```
 
-Note the newly created `multiqc_report.html` file. Your final task today is to view this file in your browser. If you have mounted the HPC file system to your computer, you can try to open up this file directly. Alternatively, you can copy this file to your computer's local storage first and then open it.
+Note the newly created `multiqc_report.html` file. Try to view this file in your preferred internet browser. If you have mounted the HPC file system to your computer, you can simply double-click on this file. Alternatively, you can copy this file to your computer's local storage first and then open it.
+

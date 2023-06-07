@@ -51,6 +51,8 @@
 <link href="assets/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
 <link href="assets/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
 <script src="assets/anchor-sections-1.1.0/anchor-sections.js"></script>
+<script src="assets/kePrint-0.0.1/kePrint.js"></script>
+<link href="assets/lightable-0.0.1/lightable.css" rel="stylesheet" />
 
 
 <style type="text/css">
@@ -148,21 +150,24 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2.5" data-path="basics-of-using-the-hpc-and-the-linux-commandline.html"><a href="basics-of-using-the-hpc-and-the-linux-commandline.html#exercise-3-file-viewing-and-manipulation"><i class="fa fa-check"></i><b>2.5</b> Exercise 3: File viewing and manipulation</a></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="hpc-basics-and-the-job-scheduler.html"><a href="hpc-basics-and-the-job-scheduler.html"><i class="fa fa-check"></i><b>3</b> HPC basics and the job scheduler</a></li>
-<li class="chapter" data-level="4" data-path="a-toy-bioinformatics-project.html"><a href="a-toy-bioinformatics-project.html"><i class="fa fa-check"></i><b>4</b> A toy bioinformatics project</a>
+<li class="chapter" data-level="4" data-path="mini-project.html"><a href="mini-project.html"><i class="fa fa-check"></i><b>4</b> <strong>Mini Project</strong></a>
 <ul>
-<li class="chapter" data-level="4.1" data-path="a-toy-bioinformatics-project.html"><a href="a-toy-bioinformatics-project.html#start-up-an-interactive-job"><i class="fa fa-check"></i><b>4.1</b> Start up an interactive job</a></li>
-<li class="chapter" data-level="4.2" data-path="a-toy-bioinformatics-project.html"><a href="a-toy-bioinformatics-project.html#create-a-project-directory-for-yourself-and-a-subdirectory-for-storing-the-raw-fastq-files"><i class="fa fa-check"></i><b>4.2</b> Create a project directory for yourself and a subdirectory for storing the raw fastq files</a></li>
-<li class="chapter" data-level="4.3" data-path="a-toy-bioinformatics-project.html"><a href="a-toy-bioinformatics-project.html#copy-fastqs-to-working-directory"><i class="fa fa-check"></i><b>4.3</b> Copy fastqs to working directory</a></li>
-<li class="chapter" data-level="4.4" data-path="a-toy-bioinformatics-project.html"><a href="a-toy-bioinformatics-project.html#check-that-the-files-transferred-properly"><i class="fa fa-check"></i><b>4.4</b> Check that the files transferred properly</a></li>
-<li class="chapter" data-level="4.5" data-path="a-toy-bioinformatics-project.html"><a href="a-toy-bioinformatics-project.html#use-zcat-to-take-a-look-into-fastq.gz-files"><i class="fa fa-check"></i><b>4.5</b> Use zcat to take a look into fastq.gz files</a></li>
-<li class="chapter" data-level="4.6" data-path="a-toy-bioinformatics-project.html"><a href="a-toy-bioinformatics-project.html#use-wc-to-see-how-many-reads-are-in-a-fastq-file-and-how-long-they-are."><i class="fa fa-check"></i><b>4.6</b> Use <code>wc</code> to see how many reads are in a fastq file and how long they are.</a></li>
-<li class="chapter" data-level="4.7" data-path="a-toy-bioinformatics-project.html"><a href="a-toy-bioinformatics-project.html#how-to-see-what-packages-are-installed-on-hpc."><i class="fa fa-check"></i><b>4.7</b> How to see what packages are installed on HPC.</a></li>
-<li class="chapter" data-level="4.8" data-path="a-toy-bioinformatics-project.html"><a href="a-toy-bioinformatics-project.html#run-fastqc-on-the-fastq-files"><i class="fa fa-check"></i><b>4.8</b> Run FastQC on the fastq files</a></li>
-<li class="chapter" data-level="4.9" data-path="a-toy-bioinformatics-project.html"><a href="a-toy-bioinformatics-project.html#set-up-a-job-to-run-salmon"><i class="fa fa-check"></i><b>4.9</b> Set up a job to run Salmon</a></li>
-<li class="chapter" data-level="4.10" data-path="a-toy-bioinformatics-project.html"><a href="a-toy-bioinformatics-project.html#submit-the-job"><i class="fa fa-check"></i><b>4.10</b> Submit the job</a></li>
-<li class="chapter" data-level="4.11" data-path="a-toy-bioinformatics-project.html"><a href="a-toy-bioinformatics-project.html#check-the-job-logs-to-see-if-job-finished-running"><i class="fa fa-check"></i><b>4.11</b> Check the job logs to see if job finished running</a></li>
-<li class="chapter" data-level="4.12" data-path="a-toy-bioinformatics-project.html"><a href="a-toy-bioinformatics-project.html#use-grep-to-find-the-tpms-for-specific-genes"><i class="fa fa-check"></i><b>4.12</b> Use grep to find the TPMs for specific genes</a></li>
-<li class="chapter" data-level="4.13" data-path="a-toy-bioinformatics-project.html"><a href="a-toy-bioinformatics-project.html#use-an-interactive-job-to-run-multiqc-on-the-salmon-and-fastqc-output"><i class="fa fa-check"></i><b>4.13</b> Use an interactive job to run multiQC on the Salmon and FastQC output</a></li>
+<li class="chapter" data-level="4.1" data-path="mini-project.html"><a href="mini-project.html#start-an-interactive-job"><i class="fa fa-check"></i><b>4.1</b> <strong>Start an Interactive Job</strong></a></li>
+<li class="chapter" data-level="4.2" data-path="mini-project.html"><a href="mini-project.html#create-directory"><i class="fa fa-check"></i><b>4.2</b> <strong>Create Directory</strong></a></li>
+<li class="chapter" data-level="4.3" data-path="mini-project.html"><a href="mini-project.html#copy-fastq-files-to-fastqs-subdirectory"><i class="fa fa-check"></i><b>4.3</b> <strong>Copy Fastq Files To <code>fastqs</code> subdirectory</strong></a></li>
+<li class="chapter" data-level="4.4" data-path="mini-project.html"><a href="mini-project.html#use-basic-linux-commands-to-explore-the-fastq-files"><i class="fa fa-check"></i><b>4.4</b> <strong>Use basic Linux commands to explore the fastq files</strong></a></li>
+<li class="chapter" data-level="4.5" data-path="mini-project.html"><a href="mini-project.html#working-with-environment-modules"><i class="fa fa-check"></i><b>4.5</b> <strong>Working With Environment Modules</strong></a></li>
+<li class="chapter" data-level="4.6" data-path="mini-project.html"><a href="mini-project.html#run-fastqc"><i class="fa fa-check"></i><b>4.6</b> <strong>Run FastQC</strong></a></li>
+<li class="chapter" data-level="4.7" data-path="mini-project.html"><a href="mini-project.html#set-up-a-job-to-run-salmon-to-align-the-reads"><i class="fa fa-check"></i><b>4.7</b> <strong>Set up a job to run Salmon to align the reads</strong></a></li>
+<li class="chapter" data-level="4.8" data-path="mini-project.html"><a href="mini-project.html#make-a-job-script-to-run-salmon"><i class="fa fa-check"></i><b>4.8</b> <strong>Make a job script to run Salmon</strong></a></li>
+<li class="chapter" data-level="4.9" data-path="mini-project.html"><a href="mini-project.html#submit-a-job"><i class="fa fa-check"></i><b>4.9</b> <strong>Submit a Job</strong></a></li>
+<li class="chapter" data-level="4.10" data-path="mini-project.html"><a href="mini-project.html#examine-the-standard-output-stdout-and-standard-error-stderr-log-files"><i class="fa fa-check"></i><b>4.10</b> <strong>Examine the Standard Output (stdout) and Standard Error (stderr) log files</strong></a></li>
+<li class="chapter" data-level="4.11" data-path="mini-project.html"><a href="mini-project.html#use-grep-to-find-the-tpms-for-a-specific-gene"><i class="fa fa-check"></i><b>4.11</b> <strong>Use grep to find the TPMs for a specific gene</strong></a></li>
+<li class="chapter" data-level="4.12" data-path="mini-project.html"><a href="mini-project.html#bonus-use-an-interactive-job-to-run-multiqc-on-the-salmon-and-fastqc-output"><i class="fa fa-check"></i><b>4.12</b> <strong>BONUS: Use an interactive job to run multiQC on the Salmon and FastQC output</strong></a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="glossary.html"><a href="glossary.html"><i class="fa fa-check"></i><b>5</b> <strong>Glossary</strong></a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="glossary.html"><a href="glossary.html#bash-cheatsheet"><i class="fa fa-check"></i><b>5.1</b> Bash cheatsheet</a></li>
 </ul></li>
 </ul>
 
