@@ -123,7 +123,7 @@ Type `module av bbc2` (modules beginning with just `bbc` are from the old HPC) t
 This command will output any modules containing the `fastqc` keyword.
 
 ```{bash, eval=TRUE, engine="sh"}
-module av bbc2 2>&1 | grep 'fastqc'
+module av -w 1 bbc2 2>&1 | grep 'fastqc'
 ```
 
 ## **Run FastQC**
