@@ -6,7 +6,6 @@ ex2-file-navigation
 commands-you-need-to-learn-for-ex-3
 so-what-is-pipe
 exercise-3-file-viewing-and-manipulation
-hpc-basics-and-the-job-scheduler
 mini-project
 start-an-interactive-job
 create-directory

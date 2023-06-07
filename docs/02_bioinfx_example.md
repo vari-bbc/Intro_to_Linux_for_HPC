@@ -184,7 +184,7 @@ module av bbc2 2>&1 | grep 'fastqc'
 ```
 
 ```
-## bbc2/fastqc/fastqc-0.12.1              bbc2/pigz/pigz-2.7                        bbc2/WiggleTools/WiggleTools-1.2.11
+## bbc2/fastqc/fastqc-0.12.1              bbc2/R/R-4.3.0
 ```
 
 ## **Run FastQC**
