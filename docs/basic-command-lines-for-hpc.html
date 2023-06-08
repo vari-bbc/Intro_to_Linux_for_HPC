@@ -148,11 +148,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2.2" data-path="basic-command-lines-for-hpc.html"><a href="basic-command-lines-for-hpc.html#file-navigation"><i class="fa fa-check"></i><b>2.2</b> <strong>File navigation</strong></a>
 <ul>
 <li class="chapter" data-level="2.2.1" data-path="basic-command-lines-for-hpc.html"><a href="basic-command-lines-for-hpc.html#navigate-to-a-directory"><i class="fa fa-check"></i><b>2.2.1</b> <strong>Navigate to a directory</strong></a></li>
-<li class="chapter" data-level="2.2.2" data-path="basic-command-lines-for-hpc.html"><a href="basic-command-lines-for-hpc.html#current-working-directory"><i class="fa fa-check"></i><b>2.2.2</b> <strong>Current working directory</strong></a></li>
-<li class="chapter" data-level="2.2.3" data-path="basic-command-lines-for-hpc.html"><a href="basic-command-lines-for-hpc.html#list-content-in-a-directory"><i class="fa fa-check"></i><b>2.2.3</b> <strong>List content in a directory</strong></a></li>
-<li class="chapter" data-level="2.2.4" data-path="basic-command-lines-for-hpc.html"><a href="basic-command-lines-for-hpc.html#navigate-to-home-irectory"><i class="fa fa-check"></i><b>2.2.4</b> <strong>Navigate to home irectory</strong></a></li>
-<li class="chapter" data-level="2.2.5" data-path="basic-command-lines-for-hpc.html"><a href="basic-command-lines-for-hpc.html#create-a-directory"><i class="fa fa-check"></i><b>2.2.5</b> <strong>Create a directory</strong></a></li>
-<li class="chapter" data-level="2.2.6" data-path="basic-command-lines-for-hpc.html"><a href="basic-command-lines-for-hpc.html#copy-a-file"><i class="fa fa-check"></i><b>2.2.6</b> <strong>Copy a file</strong></a></li>
+<li class="chapter" data-level="2.2.2" data-path="basic-command-lines-for-hpc.html"><a href="basic-command-lines-for-hpc.html#list-content-in-a-directory"><i class="fa fa-check"></i><b>2.2.2</b> <strong>List content in a directory</strong></a></li>
+<li class="chapter" data-level="2.2.3" data-path="basic-command-lines-for-hpc.html"><a href="basic-command-lines-for-hpc.html#navigate-to-home-directory"><i class="fa fa-check"></i><b>2.2.3</b> <strong>Navigate to home directory</strong></a></li>
+<li class="chapter" data-level="2.2.4" data-path="basic-command-lines-for-hpc.html"><a href="basic-command-lines-for-hpc.html#create-a-directory"><i class="fa fa-check"></i><b>2.2.4</b> <strong>Create a directory</strong></a></li>
+<li class="chapter" data-level="2.2.5" data-path="basic-command-lines-for-hpc.html"><a href="basic-command-lines-for-hpc.html#copy-a-file"><i class="fa fa-check"></i><b>2.2.5</b> <strong>Copy a file</strong></a></li>
 </ul></li>
 <li class="chapter" data-level="2.3" data-path="basic-command-lines-for-hpc.html"><a href="basic-command-lines-for-hpc.html#view-and-manipulate-files"><i class="fa fa-check"></i><b>2.3</b> <strong>View and manipulate files</strong></a>
 <ul>
@@ -227,41 +226,42 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="navigate-to-a-directory" class="section level3 hasAnchor" number="2.2.1">
 <h3><span class="header-section-number">2.2.1</span> <strong>Navigate to a directory</strong><a href="basic-command-lines-for-hpc.html#navigate-to-a-directory" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p><code>cd</code> - change directory, navigate to a directory. Tip, ./ means current working directory. ../ means the parent directory. / is the root directory, ~ is home directory. Pay attention to these differences.</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="basic-command-lines-for-hpc.html#cb1-1" tabindex="-1"></a><span class="bu">cd</span> /varidata/researchtemp/hpctmp/BBC_workshop_June2023_I</span></code></pre></div>
-</div>
-<div id="current-working-directory" class="section level3 hasAnchor" number="2.2.2">
-<h3><span class="header-section-number">2.2.2</span> <strong>Current working directory</strong><a href="basic-command-lines-for-hpc.html#current-working-directory" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p><code>pwd</code> - displays the current working directory</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb2-1"><a href="basic-command-lines-for-hpc.html#cb2-1" tabindex="-1"></a><span class="bu">pwd</span></span></code></pre></div>
-<pre><code>## /varidata/research/projects/bbc/research/hpc_workshop_202209</code></pre>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="basic-command-lines-for-hpc.html#cb1-1" tabindex="-1"></a><span class="bu">pwd</span></span>
+<span id="cb1-2"><a href="basic-command-lines-for-hpc.html#cb1-2" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="basic-command-lines-for-hpc.html#cb1-3" tabindex="-1"></a><span class="bu">cd</span> /varidata/researchtemp/hpctmp/BBC_workshop_June2023_I</span>
+<span id="cb1-4"><a href="basic-command-lines-for-hpc.html#cb1-4" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="basic-command-lines-for-hpc.html#cb1-5" tabindex="-1"></a><span class="bu">pwd</span></span></code></pre></div>
+<pre><code>## /varidata/research/projects/bbc/research/hpc_workshop_202209
+## /varidata/researchtemp/hpctmp/BBC_workshop_June2023_I</code></pre>
 </div>
-<div id="list-content-in-a-directory" class="section level3 hasAnchor" number="2.2.3">
-<h3><span class="header-section-number">2.2.3</span> <strong>List content in a directory</strong><a href="basic-command-lines-for-hpc.html#list-content-in-a-directory" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="list-content-in-a-directory" class="section level3 hasAnchor" number="2.2.2">
+<h3><span class="header-section-number">2.2.2</span> <strong>List content in a directory</strong><a href="basic-command-lines-for-hpc.html#list-content-in-a-directory" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p><code>ls</code> - list content; Without anything specified after ls, it will list the current directory. It can also list content of another directory.
 <code>ls -lht</code> – will show more details of content</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb4-1"><a href="basic-command-lines-for-hpc.html#cb4-1" tabindex="-1"></a><span class="fu">ls</span></span>
-<span id="cb4-2"><a href="basic-command-lines-for-hpc.html#cb4-2" tabindex="-1"></a><span class="fu">ls</span> <span class="at">-lht</span></span>
-<span id="cb4-3"><a href="basic-command-lines-for-hpc.html#cb4-3" tabindex="-1"></a><span class="fu">ls</span> <span class="at">-lht</span> /varidata/researchtemp/hpctmp/BBC_workshop_June2023_I</span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb3-1"><a href="basic-command-lines-for-hpc.html#cb3-1" tabindex="-1"></a><span class="fu">ls</span></span>
+<span id="cb3-2"><a href="basic-command-lines-for-hpc.html#cb3-2" tabindex="-1"></a><span class="fu">ls</span> <span class="at">-lht</span></span>
+<span id="cb3-3"><a href="basic-command-lines-for-hpc.html#cb3-3" tabindex="-1"></a><span class="fu">ls</span> <span class="at">-lht</span> /varidata/researchtemp/hpctmp/BBC_workshop_June2023_I</span></code></pre></div>
 </div>
-<div id="navigate-to-home-irectory" class="section level3 hasAnchor" number="2.2.4">
-<h3><span class="header-section-number">2.2.4</span> <strong>Navigate to home irectory</strong><a href="basic-command-lines-for-hpc.html#navigate-to-home-irectory" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="navigate-to-home-directory" class="section level3 hasAnchor" number="2.2.3">
+<h3><span class="header-section-number">2.2.3</span> <strong>Navigate to home directory</strong><a href="basic-command-lines-for-hpc.html#navigate-to-home-directory" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Without anything after <code>cd</code>, you will change to your home directory, which is <code>/home/username</code></p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb5-1"><a href="basic-command-lines-for-hpc.html#cb5-1" tabindex="-1"></a><span class="bu">cd</span></span>
-<span id="cb5-2"><a href="basic-command-lines-for-hpc.html#cb5-2" tabindex="-1"></a><span class="bu">pwd</span></span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb4-1"><a href="basic-command-lines-for-hpc.html#cb4-1" tabindex="-1"></a><span class="bu">cd</span></span>
+<span id="cb4-2"><a href="basic-command-lines-for-hpc.html#cb4-2" tabindex="-1"></a><span class="bu">pwd</span></span></code></pre></div>
 </div>
-<div id="create-a-directory" class="section level3 hasAnchor" number="2.2.5">
-<h3><span class="header-section-number">2.2.5</span> <strong>Create a directory</strong><a href="basic-command-lines-for-hpc.html#create-a-directory" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="create-a-directory" class="section level3 hasAnchor" number="2.2.4">
+<h3><span class="header-section-number">2.2.4</span> <strong>Create a directory</strong><a href="basic-command-lines-for-hpc.html#create-a-directory" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p><code>mkdir dir_name</code> - will create a directory “dir_name” in your current directory. You will be creating a directory in your home drectory. Make sure you are in your home directory first (use pwd), then create a directory called “hpc_workshop”</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb6-1"><a href="basic-command-lines-for-hpc.html#cb6-1" tabindex="-1"></a><span class="bu">pwd</span></span>
-<span id="cb6-2"><a href="basic-command-lines-for-hpc.html#cb6-2" tabindex="-1"></a><span class="fu">mkdir</span> hpc_workshop</span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb5-1"><a href="basic-command-lines-for-hpc.html#cb5-1" tabindex="-1"></a><span class="bu">pwd</span></span>
+<span id="cb5-2"><a href="basic-command-lines-for-hpc.html#cb5-2" tabindex="-1"></a><span class="fu">mkdir</span> hpc_workshop</span></code></pre></div>
 </div>
-<div id="copy-a-file" class="section level3 hasAnchor" number="2.2.6">
-<h3><span class="header-section-number">2.2.6</span> <strong>Copy a file</strong><a href="basic-command-lines-for-hpc.html#copy-a-file" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="copy-a-file" class="section level3 hasAnchor" number="2.2.5">
+<h3><span class="header-section-number">2.2.5</span> <strong>Copy a file</strong><a href="basic-command-lines-for-hpc.html#copy-a-file" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p><code>cp</code> - copy file/files
 Copy a file from <code>/varidata/researchtemp/hpctmp/BBC_workshop_June2023_I</code> to the directory you just created.</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb7-1"><a href="basic-command-lines-for-hpc.html#cb7-1" tabindex="-1"></a><span class="bu">pwd</span></span>
-<span id="cb7-2"><a href="basic-command-lines-for-hpc.html#cb7-2" tabindex="-1"></a><span class="fu">cp</span> /varidata/researchtemp/hpctmp/BBC_workshop_June2023_I/test_01_R1.fq hpc_workshop</span>
-<span id="cb7-3"><a href="basic-command-lines-for-hpc.html#cb7-3" tabindex="-1"></a><span class="fu">ls</span> hpc_workshop</span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb6-1"><a href="basic-command-lines-for-hpc.html#cb6-1" tabindex="-1"></a><span class="bu">pwd</span></span>
+<span id="cb6-2"><a href="basic-command-lines-for-hpc.html#cb6-2" tabindex="-1"></a><span class="fu">cp</span> /varidata/researchtemp/hpctmp/BBC_workshop_June2023_I/test_01_R1.fq hpc_workshop</span>
+<span id="cb6-3"><a href="basic-command-lines-for-hpc.html#cb6-3" tabindex="-1"></a><span class="fu">ls</span> hpc_workshop</span></code></pre></div>
 </div>
 </div>
 <div id="view-and-manipulate-files" class="section level2 hasAnchor" number="2.3">
@@ -270,12 +270,11 @@ Copy a file from <code>/varidata/researchtemp/hpctmp/BBC_workshop_June2023_I</co
 <h3><span class="header-section-number">2.3.1</span> <strong>Display content</strong><a href="basic-command-lines-for-hpc.html#display-content" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p><code>head</code> - display as standard output (stdout) the first 10 lines/rows of the a file.
 <code>tail</code> - display as standard output (stdout) the last 10 lines/rows of the a file. You can use “-n” to control how many lines you want to see, default is 10</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb8-1"><a href="basic-command-lines-for-hpc.html#cb8-1" tabindex="-1"></a><span class="bu">cd</span> hpc_workshop</span>
-<span id="cb8-2"><a href="basic-command-lines-for-hpc.html#cb8-2" tabindex="-1"></a><span class="fu">head</span> test_01_R1.fq</span>
-<span id="cb8-3"><a href="basic-command-lines-for-hpc.html#cb8-3" tabindex="-1"></a><span class="fu">tail</span> test_01_R1.fq</span>
-<span id="cb8-4"><a href="basic-command-lines-for-hpc.html#cb8-4" tabindex="-1"></a><span class="fu">head</span> <span class="at">-2</span> test_01_R1.fq</span></code></pre></div>
-<pre><code>## bash: line 1: cd: hpc_workshop: No such file or directory
-## @A00426:207:H537LDMXY:1:1101:2067:1000 1:N:0:NCTAAGAT+NCGCGGTT
+<div class="sourceCode" id="cb7"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb7-1"><a href="basic-command-lines-for-hpc.html#cb7-1" tabindex="-1"></a><span class="bu">cd</span> ~/hpc_workshop</span>
+<span id="cb7-2"><a href="basic-command-lines-for-hpc.html#cb7-2" tabindex="-1"></a><span class="fu">head</span> test_01_R1.fq</span>
+<span id="cb7-3"><a href="basic-command-lines-for-hpc.html#cb7-3" tabindex="-1"></a><span class="fu">tail</span> test_01_R1.fq</span>
+<span id="cb7-4"><a href="basic-command-lines-for-hpc.html#cb7-4" tabindex="-1"></a><span class="fu">head</span> <span class="at">-2</span> test_01_R1.fq</span></code></pre></div>
+<pre><code>## @A00426:207:H537LDMXY:1:1101:2067:1000 1:N:0:NCTAAGAT+NCGCGGTT
 ## NTAACAGTGACTTGCGGGGGAAGTCTACGCGCGTGTGCACGCGGCACTCTC
 ## +
 ## #FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
@@ -301,14 +300,14 @@ Copy a file from <code>/varidata/researchtemp/hpctmp/BBC_workshop_June2023_I</co
 <div id="pattern-search" class="section level3 hasAnchor" number="2.3.2">
 <h3><span class="header-section-number">2.3.2</span> <strong>Pattern search</strong><a href="basic-command-lines-for-hpc.html#pattern-search" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p><code>grep</code> - search a pattern by line</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb10-1"><a href="basic-command-lines-for-hpc.html#cb10-1" tabindex="-1"></a><span class="fu">grep</span> <span class="st">&quot;AATTGG&quot;</span> test_01_R1.fq</span></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb9-1"><a href="basic-command-lines-for-hpc.html#cb9-1" tabindex="-1"></a><span class="fu">grep</span> <span class="st">&quot;AATTGG&quot;</span> test_01_R1.fq</span></code></pre></div>
 <pre><code>## NTCTGAATTGGGTTATGAGGCCCGGGAGGTGCCTCACCTCAGCCATTGAAC
 ## TGCCATTCTGTGCTCTCAGGACCTCTAATTGGGGGCCGTGGCAAAGGAGTG</code></pre>
 </div>
 <div id="display-the-number-of-words-lines-and-characters" class="section level3 hasAnchor" number="2.3.3">
 <h3><span class="header-section-number">2.3.3</span> <strong>Display the number of words, lines, and characters</strong><a href="basic-command-lines-for-hpc.html#display-the-number-of-words-lines-and-characters" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb12"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb12-1"><a href="basic-command-lines-for-hpc.html#cb12-1" tabindex="-1"></a><span class="fu">wc</span> test_01_R1.fq</span>
-<span id="cb12-2"><a href="basic-command-lines-for-hpc.html#cb12-2" tabindex="-1"></a><span class="fu">wc</span> <span class="at">-l</span> test_01_R1.fq</span></code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb11-1"><a href="basic-command-lines-for-hpc.html#cb11-1" tabindex="-1"></a><span class="fu">wc</span> test_01_R1.fq</span>
+<span id="cb11-2"><a href="basic-command-lines-for-hpc.html#cb11-2" tabindex="-1"></a><span class="fu">wc</span> <span class="at">-l</span> test_01_R1.fq</span></code></pre></div>
 <pre><code>##  1000  1250 42064 test_01_R1.fq
 ## 1000 test_01_R1.fq</code></pre>
 </div>
@@ -321,42 +320,22 @@ It is useful to pipe the content of the file into another command.</p>
 <div id="pipe---redirection" class="section level3 hasAnchor" number="2.3.5">
 <h3><span class="header-section-number">2.3.5</span> <strong>Pipe - redirection</strong><a href="basic-command-lines-for-hpc.html#pipe---redirection" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>A pipe is a form of redirection (transfer of sdout to other destinations). You can send output from one command/program to another for further processing, such as <code>command 1| command 2 | command 3</code>.</p>
-<div class="sourceCode" id="cb14"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb14-1"><a href="basic-command-lines-for-hpc.html#cb14-1" tabindex="-1"></a><span class="fu">cat</span> test_01_R1.fq <span class="kw">|</span> <span class="fu">grep</span> <span class="st">&quot;@&quot;</span> <span class="kw">|</span> <span class="fu">wc</span> <span class="at">-l</span> </span></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb13-1"><a href="basic-command-lines-for-hpc.html#cb13-1" tabindex="-1"></a><span class="fu">cat</span> test_01_R1.fq <span class="kw">|</span> <span class="fu">grep</span> <span class="st">&quot;@&quot;</span> <span class="kw">|</span> <span class="fu">wc</span> <span class="at">-l</span> </span></code></pre></div>
 <pre><code>## 250</code></pre>
 </div>
 </div>
 <div id="exercise" class="section level2 hasAnchor" number="2.4">
 <h2><span class="header-section-number">2.4</span> <strong>Exercise</strong><a href="basic-command-lines-for-hpc.html#exercise" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Below we will copy another fowward reads into your home directory (~ means home directory), and combine them into one and count how many reads were there. You can direct the stdout of any command to a new file use &gt;.</p>
-<div class="sourceCode" id="cb16"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb16-1"><a href="basic-command-lines-for-hpc.html#cb16-1" tabindex="-1"></a><span class="bu">cd</span> ~/hpc_workshop</span>
-<span id="cb16-2"><a href="basic-command-lines-for-hpc.html#cb16-2" tabindex="-1"></a><span class="fu">cp</span> /varidata/researchtemp/hpctmp/BBC_workshop_June2023_I/test_54_R1.fq .</span>
-<span id="cb16-3"><a href="basic-command-lines-for-hpc.html#cb16-3" tabindex="-1"></a><span class="fu">cat</span> test_01_R1.fq test_54_R1.fq <span class="kw">|</span> <span class="fu">grep</span> <span class="st">&quot;@&quot;</span> <span class="kw">|</span> <span class="fu">wc</span> <span class="at">-l</span> </span>
-<span id="cb16-4"><a href="basic-command-lines-for-hpc.html#cb16-4" tabindex="-1"></a><span class="fu">cat</span> test_01_R1.fq test_54_R1.fq <span class="op">&gt;</span> combined.fq</span>
-<span id="cb16-5"><a href="basic-command-lines-for-hpc.html#cb16-5" tabindex="-1"></a><span class="fu">ls</span></span></code></pre></div>
-<pre><code>## bash: line 1: cd: /home/kin.lau/hpc_workshop: No such file or directory
-## 500
-## 01_linux_basics.Rmd
-## 02_bioinfx_example.Rmd
-## 999_glossary.Rmd
-## _bookdown.yml
-## _output.yml
-## bbc_bioinfx_book.rds
+<div class="sourceCode" id="cb15"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb15-1"><a href="basic-command-lines-for-hpc.html#cb15-1" tabindex="-1"></a><span class="bu">cd</span> ~/hpc_workshop</span>
+<span id="cb15-2"><a href="basic-command-lines-for-hpc.html#cb15-2" tabindex="-1"></a><span class="fu">cp</span> /varidata/researchtemp/hpctmp/BBC_workshop_June2023_I/test_54_R1.fq .</span>
+<span id="cb15-3"><a href="basic-command-lines-for-hpc.html#cb15-3" tabindex="-1"></a><span class="fu">cat</span> test_01_R1.fq test_54_R1.fq <span class="kw">|</span> <span class="fu">grep</span> <span class="st">&quot;@&quot;</span> <span class="kw">|</span> <span class="fu">wc</span> <span class="at">-l</span> </span>
+<span id="cb15-4"><a href="basic-command-lines-for-hpc.html#cb15-4" tabindex="-1"></a><span class="fu">cat</span> test_01_R1.fq test_54_R1.fq <span class="op">&gt;</span> combined.fq</span>
+<span id="cb15-5"><a href="basic-command-lines-for-hpc.html#cb15-5" tabindex="-1"></a><span class="fu">ls</span></span></code></pre></div>
+<pre><code>## 500
 ## combined.fq
-## docs
-## fastqs
-## full_fastqs
-## index.Rmd
-## index.md
-## multiqc
-## packages.bib
-## render1571c22d523052.rds
-## run_salmon.sh
-## salmon
-## salmon.e
-## salmon.o
 ## test_01_R1.fq
-## test_54_R1.fq
-## toc.css</code></pre>
+## test_54_R1.fq</code></pre>
 
 </div>
 </div>

@@ -403,29 +403,29 @@ It is good practice to check the job logs after your job is done to ensure that 
 
 
 ```bash
-tail salmon.e
+tail run_salmon.e
 ```
 
 ```
-## [2022-09-20 23:32:16.397] [jointLog] [info] Marked 0 weighted equivalence classes as degenerate
-## [2022-09-20 23:32:16.426] [jointLog] [info] iteration = 0 | max rel diff. = 202.929
-## [2022-09-20 23:32:18.786] [jointLog] [info] iteration = 100 | max rel diff. = 6.3715
-## [2022-09-20 23:32:21.080] [jointLog] [info] iteration = 200 | max rel diff. = 5.04421
-## [2022-09-20 23:32:23.395] [jointLog] [info] iteration = 300 | max rel diff. = 0.631388
-## [2022-09-20 23:32:25.725] [jointLog] [info] iteration = 400 | max rel diff. = 2.25551
-## [2022-09-20 23:32:27.268] [jointLog] [info] iteration = 467 | max rel diff. = 0.00956146
-## [2022-09-20 23:32:27.307] [jointLog] [info] Finished optimizer
-## [2022-09-20 23:32:27.307] [jointLog] [info] writing output
+## [2023-06-07 21:58:36.154] [jointLog] [info] iteration = 200 | max rel diff. = 0.491024
+## [2023-06-07 21:58:38.832] [jointLog] [info] iteration = 300 | max rel diff. = 3.96021
+## [2023-06-07 21:58:41.512] [jointLog] [info] iteration = 400 | max rel diff. = 0.644285
+## [2023-06-07 21:58:44.187] [jointLog] [info] iteration = 500 | max rel diff. = 0.323309
+## [2023-06-07 21:58:46.883] [jointLog] [info] iteration = 600 | max rel diff. = 0.287136
+## [2023-06-07 21:58:49.626] [jointLog] [info] iteration = 700 | max rel diff. = 0.814246
+## [2023-06-07 21:58:50.069] [jointLog] [info] iteration = 717 | max rel diff. = 0.00724807
+## [2023-06-07 21:58:50.107] [jointLog] [info] Finished optimizer
+## [2023-06-07 21:58:50.107] [jointLog] [info] writing output
 ```
 
 
 ```bash
-tail salmon.o
+tail run_salmon.o
 ```
 
 ```
-## Start time: 23:30:31
-## End time: 23:32:30
+## Start time: 21:57:16
+## End time: 21:58:51
 ```
 
 ## **Use grep to find the TPMs for a specific gene**
@@ -442,15 +442,15 @@ head salmon/SRR1039520/quant.sf
 
 ```
 ## Name	Length	EffectiveLength	TPM	NumReads
-## ENST00000456328.2	1657	1502.015	0.000000	0.000
-## ENST00000450305.2	632	477.136	0.000000	0.000
-## ENST00000488147.1	1351	1196.015	0.000000	0.000
-## ENST00000619216.1	68	1.932	0.000000	0.000
-## ENST00000473358.1	712	557.094	0.000000	0.000
-## ENST00000469289.1	535	380.252	0.000000	0.000
-## ENST00000607096.1	138	24.897	0.000000	0.000
-## ENST00000417324.1	1187	1032.015	0.000000	0.000
-## ENST00000461467.1	590	435.180	0.000000	0.000
+## ENST00000456328.2	1657	1502.194	0.000000	0.000
+## ENST00000450305.2	632	477.335	0.000000	0.000
+## ENST00000488147.1	1351	1196.194	0.000000	0.000
+## ENST00000619216.1	68	2.006	0.000000	0.000
+## ENST00000473358.1	712	557.286	0.000000	0.000
+## ENST00000469289.1	535	380.463	0.000000	0.000
+## ENST00000607096.1	138	25.002	0.000000	0.000
+## ENST00000417324.1	1187	1032.194	0.000000	0.000
+## ENST00000461467.1	590	435.379	0.000000	0.000
 ```
 
 From the output above, we can see that the TPMs are in the 4th column of this file. The canonical transcript for [MUC1](http://useast.ensembl.org/Homo_sapiens/Gene/Summary?db=core;g=ENSG00000185499;r=1:155185824-155192916) is ENST00000620103, so we will search for that using `grep`.
@@ -462,7 +462,7 @@ grep 'ENST00000620103' salmon/SRR1039520/quant.sf
 ```
 
 ```
-## ENST00000620103.4	1811	1656.015	0.000000	0.000
+## ENST00000620103.4	1811	1656.194	0.000000	0.000
 ```
 
 Look for MUC1 across all the samples at the same time. We can see that 'SRR1039521' has a TPM of 13.1 for MUC1 compared to 0 for 'SRR1039520'. Recall that the fastq files for this exercise were subsetted to a very small number of reads so don't interpret these results seriously.
@@ -473,8 +473,8 @@ grep 'ENST00000620103' salmon/*/quant.sf
 ```
 
 ```
-## salmon/SRR1039520/quant.sf:ENST00000620103.4	1811	1656.015	0.000000	0.000
-## salmon/SRR1039521/quant.sf:ENST00000620103.4	1811	1655.481	13.145898	5.723
+## salmon/SRR1039520/quant.sf:ENST00000620103.4	1811	1656.194	0.000000	0.000
+## salmon/SRR1039521/quant.sf:ENST00000620103.4	1811	1655.378	13.133596	5.717
 ```
 
 ## **BONUS: Use an interactive job to run multiQC on the Salmon and FastQC output**
@@ -527,13 +527,7 @@ ls multiqc
 
 ```
 ## multiqc_data
-## multiqc_data_1
-## multiqc_data_2
-## multiqc_data_3
 ## multiqc_report.html
-## multiqc_report_1.html
-## multiqc_report_2.html
-## multiqc_report_3.html
 ```
 
 Note the newly created `multiqc_report.html` file. Try to view this file in your preferred internet browser. If you have mounted the HPC file system to your computer, you can simply double-click on this file. Alternatively, you can copy this file to your computer's local storage first and then open it.

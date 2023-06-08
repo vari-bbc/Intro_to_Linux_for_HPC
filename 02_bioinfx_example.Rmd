@@ -230,11 +230,11 @@ squeue -u <username>
 It is good practice to check the job logs after your job is done to ensure that the job completed successfully. If there is an error, the output files may not be reliable or could be incomplete.
 
 ```{bash, eval=TRUE, engine="sh"}
-tail salmon.e
+tail run_salmon.e
 ```
 
 ```{bash, eval=TRUE, engine="sh"}
-tail salmon.o
+tail run_salmon.o
 ```
 
 ## **Use grep to find the TPMs for a specific gene**

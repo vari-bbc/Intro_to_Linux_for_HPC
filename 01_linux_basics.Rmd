@@ -46,18 +46,15 @@ Practice directory: `/varidata/researchtemp/hpctmp/BBC_workshop_June2023_I`.
 ### **Navigate to a directory**
 `cd` - change directory, navigate to a directory. Tip, ./ means current working directory. ../ means the parent directory. / is the root directory, ~ is home directory. Pay attention to these differences.
 
-```{bash, eval = FALSE, engine= "sh"}
-cd /varidata/researchtemp/hpctmp/BBC_workshop_June2023_I
-```
-
-
-### **Current working directory**
 `pwd` - displays the current working directory
 
-```{bash, eval= TRUE, engine= "sh"}
+```{bash, eval = TRUE, engine= "sh"}
+pwd
+
+cd /varidata/researchtemp/hpctmp/BBC_workshop_June2023_I
+
 pwd
 ```
-
 
 ### **List content in a directory**
 `ls`  - list content; Without anything specified after ls, it will list the current directory. It can also list content of another directory. 
@@ -69,7 +66,7 @@ ls -lht /varidata/researchtemp/hpctmp/BBC_workshop_June2023_I
 ```
 
 
-### **Navigate to home irectory**
+### **Navigate to home directory**
 Without anything after `cd`, you will change to your home directory, which is `/home/username`
 ```{bash, eval = FALSE, engine= "sh"}
 cd
@@ -101,7 +98,7 @@ ls hpc_workshop
 `head` - display as standard output (stdout) the first 10 lines/rows of the a file.
 `tail` - display as standard output (stdout) the last 10 lines/rows of the a file. You can use "-n" to control how many lines you want to see, default is 10
 ```{bash, eval= TRUE, engine= "sh"}
-cd hpc_workshop
+cd ~/hpc_workshop
 head test_01_R1.fq
 tail test_01_R1.fq
 head -2 test_01_R1.fq

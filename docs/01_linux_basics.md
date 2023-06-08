@@ -44,24 +44,21 @@ Practice directory: `/varidata/researchtemp/hpctmp/BBC_workshop_June2023_I`.
 ### **Navigate to a directory**
 `cd` - change directory, navigate to a directory. Tip, ./ means current working directory. ../ means the parent directory. / is the root directory, ~ is home directory. Pay attention to these differences.
 
-
-```bash
-cd /varidata/researchtemp/hpctmp/BBC_workshop_June2023_I
-```
-
-
-### **Current working directory**
 `pwd` - displays the current working directory
 
 
 ```bash
 pwd
+
+cd /varidata/researchtemp/hpctmp/BBC_workshop_June2023_I
+
+pwd
 ```
 
 ```
 ## /varidata/research/projects/bbc/research/hpc_workshop_202209
+## /varidata/researchtemp/hpctmp/BBC_workshop_June2023_I
 ```
-
 
 ### **List content in a directory**
 `ls`  - list content; Without anything specified after ls, it will list the current directory. It can also list content of another directory. 
@@ -74,7 +71,7 @@ ls -lht /varidata/researchtemp/hpctmp/BBC_workshop_June2023_I
 ```
 
 
-### **Navigate to home irectory**
+### **Navigate to home directory**
 Without anything after `cd`, you will change to your home directory, which is `/home/username`
 
 ```bash
@@ -110,14 +107,13 @@ ls hpc_workshop
 `tail` - display as standard output (stdout) the last 10 lines/rows of the a file. You can use "-n" to control how many lines you want to see, default is 10
 
 ```bash
-cd hpc_workshop
+cd ~/hpc_workshop
 head test_01_R1.fq
 tail test_01_R1.fq
 head -2 test_01_R1.fq
 ```
 
 ```
-## bash: line 1: cd: hpc_workshop: No such file or directory
 ## @A00426:207:H537LDMXY:1:1101:2067:1000 1:N:0:NCTAAGAT+NCGCGGTT
 ## NTAACAGTGACTTGCGGGGGAAGTCTACGCGCGTGTGCACGCGGCACTCTC
 ## +
@@ -200,28 +196,8 @@ ls
 ```
 
 ```
-## bash: line 1: cd: /home/kin.lau/hpc_workshop: No such file or directory
 ## 500
-## 01_linux_basics.Rmd
-## 02_bioinfx_example.Rmd
-## 999_glossary.Rmd
-## _bookdown.yml
-## _output.yml
-## bbc_bioinfx_book.rds
 ## combined.fq
-## docs
-## fastqs
-## full_fastqs
-## index.Rmd
-## index.md
-## multiqc
-## packages.bib
-## render1571c22d523052.rds
-## run_salmon.sh
-## salmon
-## salmon.e
-## salmon.o
 ## test_01_R1.fq
 ## test_54_R1.fq
-## toc.css
 ```

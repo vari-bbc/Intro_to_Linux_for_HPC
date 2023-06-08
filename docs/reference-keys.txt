@@ -5,9 +5,8 @@ mac-users
 windows-user
 file-navigation
 navigate-to-a-directory
-current-working-directory
 list-content-in-a-directory
-navigate-to-home-irectory
+navigate-to-home-directory
 create-a-directory
 copy-a-file
 view-and-manipulate-files
