@@ -1,150 +1,227 @@
+---
+title: "Basic command lines for HPC"
+site: bookdown::bookdown_site
+output: bookdown::gitbook
+documentclass: book
+bibliography: [packages.bib]
+biblio-style: apalike
+link-citations: yes
+github-repo: vari-bbc/Intro_to_Linux_for_HPC
+theme: "yeti"
+---
 
 
-# Basics of using the HPC and the Linux commandline
 
-Here we will learn the basics of using the Linux commandline on the HPC.
+# **Basic command lines for HPC**
 
-## Ex 1 Log into the HPC
 
-**Step 1.** Make sure you are on the VAI network, not VAI guest. 
+## **Access HPC**
 
-**Step 2.** 
-- For Mac user: open terminal, type `ssh you_vai_user_name@submit.hpc.vai.org`, and type your password. 
-- For Windows user, open MobarXterm, click new session under “Session”.
-Click on “SSH”, type “submit.hpc.vai.org” as Remote host name, your user name for  VAI as username, click “OK”. You need to type your VAI password. 
+Ensure that your laptop is connected to wifi "vai", not "vai-guest". 
 
 
-## Commands you need to learn for Ex2:
+### **Mac users**
 
-**Cmd1.** `pwd` - displays the current working directory
+Open your terminal, and type **ssh vai_username@access.hpc.vai.org**, and enter your VAI password.
 
-It is useful when directory changes are made frequently.
 
-**Cmd2.** `ls` - list content 
+### **Windows user**
 
-This command lists directory contents. Without anything specified after ls, it will list the current directory. It can also list content of another directory. You might not have any file in your home directory at this point, you can type `touch file.txt` to create your first file.
+If MobaXterm is not installed, please download the [free MobaXterm version](https://mobaxterm.mobatek.net/download.html), then set up, and agree with license agreements to proceed installation.
 
-`ls /varidata/`
+- Open MobaXterm
+- Click on `Session` in the top left corner
+- Click on `SSH`(Secure Shell)
+- Enter `access.hpc.vai.org` in Remote host
+- Click the little box on the left of Specify username, then type VAI `username` and enter VAI `password`
+- Next, click `OK`
 
-`ls -lht`  -- show more details of the files. 
 
-**Cmd3.**  `mkdir` -- create a new directory
+## **File navigation**
 
-Syntax is mkdir new_directory name. You can create a new directory in the current directory or another directory. For example, `mkdir projects` will create a new directory called "projects" in your home directory.
+Practice directory: `/varidata/researchtemp/hpctmp/BBC_workshop_June2023_I`. 
 
-**Cmd4.** `mv` -- move and rename file
+### **Navigate to a directory**
+`cd` - change directory, navigate to a directory. Tip, ./ means current working directory. ../ means the parent directory. / is the root directory, ~ is home directory. Pay attention to these differences.
 
-The arguments in `mv` are similar to the `cp` command. 
 
-To move a file, syntax is mv file_name destination’s directory. For example: `mv file.txt /home/username/projects`, will move `file.txt` from current directory to `/home/username/projects`
+```bash
+cd /varidata/researchtemp/hpctmp/BBC_workshop_June2023_I
+```
 
-To rename a file, the syntax is `mv old_file_name.txt new_file_name.txt`
 
-**Cmd5.** `cd` -- change directory
+### **Current working directory**
+`pwd` - displays the current working directory
 
-Let’s say you’re in `/home/username/` and you want to go to `projects`, a subdirectory of documents, type: `cd projects`
 
-Another scenario is if you want to switch to a completely new directory, for example, `/home/username/research`, you need to type `cd` followed by the directory’s absolute path: `cd /home/username/research`
+```bash
+pwd
+```
 
-_Tip_, `./` means current working directory. `../` means the parent directory. `/` is the root directory, `~` is home directory. Pay attention to these differences.  
+```
+## /varidata/research/projects/bbc/research/hpc_workshop_202209
+```
 
-**Cmd6.** `rm` -- remove a file 
 
-`rm file_name` will delete the file. 
+### **List content in a directory**
+`ls`  - list content; Without anything specified after ls, it will list the current directory. It can also list content of another directory. 
+`ls -lht` – will show more details of content
 
-`rm -r dir` will delete the whole directory. 
+```bash
+ls
+ls -lht
+ls -lht /varidata/researchtemp/hpctmp/BBC_workshop_June2023_I
+```
 
-Note, `rm` is permanent. Unlike Window and Mac where deleted files can be recovered from the Trash. Think carefully before you type `rm`. 
 
-**Cmd7.** `cp` -- copy a file or a dir 
+### **Navigate to home irectory**
+Without anything after `cd`, you will change to your home directory, which is `/home/username`
 
-Syntax: `cp old_file new_file` for file copy. 
-`cp -r old_dir new_dir` for directory copy. 
+```bash
+cd
+pwd
+```
 
-**Cmd8.** `find` -- look for a file based on its name 
 
-Typical usage: `find /home/username -name notes.txt` will search for a file called `notes.txt` within your home directory and its subdirectories.
+### **Create a directory**
+`mkdir dir_name` - will create a directory "dir_name" in your current directory. You will be creating a directory in your home drectory. Make sure you are in your home directory first (use pwd), then create a directory called "hpc_workshop"
 
-_Tip_, if you want to find all pdf files under the current directory, do `find . -name “*.pdf”`. Here, `*` is called wildcard, it will match any name. 
+```bash
+pwd
+mkdir hpc_workshop
+```
 
 
-## Ex2: file navigation
+### **Copy a file**
+`cp` - copy file/files
+Copy a file from `/varidata/researchtemp/hpctmp/BBC_workshop_June2023_I` to the directory you just created.
 
-1. Use the commands you just learned, go to
-
-/varidata/researchtemp/hpctmp/HPC_mini_workshop/Ex2
-
-
-2. List files in this the directory, how many files and directories did you see? Which file was created the earliest?
-
-
-3. Make a new directory in your home directory called “hpc_mini_workshop”
-
-
-4. Try to copy (not to move) one of the fastsq files to hpc_mini_workshop you just created in your home directory. 
-
-
-5. Use “find” command to list all the fastq files (file ends with fq) in /varidata/researchtemp/hpctmp/HPC_mini_workshop/Ex2
-
-
-## Commands you need to learn for Ex 3
-
-**Cmd9.**  `head` & `tail` -- view the first and last a few rows/lines of a file
-
-_Usage_: `head -n 5 file_name` will display as standard output (stdout) the first 5 lines/rows of the a file. Without -n, it will default display 10 lines. 
-
-**Cmd10.** `less` & `more` -- view content of a file one page at a time. 
-
-_Tip_, you can use `q` key to quit the viewing. 
-
-**Cmd11.** `cat` -- list the contents of a file as stdout
-
-`cat` (short for concatenate) is one of the most frequently used commands. 
-
-To run this command, type `cat` followed by the file’s name: `cat file.txt`
-
-Combine two files: `cat file1 file2`
-
-It is useful to **pipe** the content of the file into another command. 
-
-
-### So, what is pipe?
-
-A pipe is a form of redirection (transfer of sdout to other destinations). You can send output from one command/program/process to another command/program/process for further processing. You can do so by using the pipe character `|`.
-
-Lastly, you can direct the stdout of any command to a new file use `>`. 
-
-For example:
-
-`bwa mem genome.fa reads.fastq | samtools sort -o output.bam`
-
-`cat protein.fa | head -5 > first_5_protein.fa`
-
-
-**Cmd 12.** `grep` -- search a pattern by line 
-
-`grep “GCGGA” sequence_file.fastq` will output lines with GCGGA in it. 
-
-**Cmd 13.** `wc` - counting words, lines, and bytes in files
-
-Without any specification, wc will output three numbers. 
-
-The most useful is wc -l, it only outputs the line number. 
-
-## Exercise 3:  File viewing and manipulation
-
-6. Count how many lines in the fastq file you just copied to your home directory. 
-
-
-7. Create a file that only has protein sequence name from file:
-
-`/varidata/researchtemp/hpctmp/HPC_mini_workshop/Ex2/protein_seq.fa`
-
-(please copy this file to your home directory first). 
-
-_Hint_, use `grep` to look for pattern that is shared among all protein names; then use redirection to create a new file. 
-
-
-8. Copy a different fastq file from `/varidata/researchtemp/hpctmp/HPC_mini_workshop/Ex2/` to your home directory, and combine two fq files into a new file called `combined.fq`.
-
-
+```bash
+pwd
+cp /varidata/researchtemp/hpctmp/BBC_workshop_June2023_I/test_01_R1.fq hpc_workshop
+ls hpc_workshop
+```
+
+
+## **View and manipulate files**
+
+### **Display content**
+`head` - display as standard output (stdout) the first 10 lines/rows of the a file.
+`tail` - display as standard output (stdout) the last 10 lines/rows of the a file. You can use "-n" to control how many lines you want to see, default is 10
+
+```bash
+cd hpc_workshop
+head test_01_R1.fq
+tail test_01_R1.fq
+head -2 test_01_R1.fq
+```
+
+```
+## bash: line 1: cd: hpc_workshop: No such file or directory
+## @A00426:207:H537LDMXY:1:1101:2067:1000 1:N:0:NCTAAGAT+NCGCGGTT
+## NTAACAGTGACTTGCGGGGGAAGTCTACGCGCGTGTGCACGCGGCACTCTC
+## +
+## #FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+## @A00426:207:H537LDMXY:1:1101:2139:1000 1:N:0:NCTAAGAT+NCGCGGTT
+## NTGGCCATTCACAGTATGGTATTTCTGAATAACAATCTTATCCACAGAGTC
+## +
+## #FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+## @A00426:207:H537LDMXY:1:1101:2230:1000 1:N:0:NCTAAGAT+NCGCGGTT
+## NAGACTAATCATCAGATCTCCTCTCTCTATGCTACATCCACTCCATTCAA
+## +
+## FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+## @A00426:207:H537LDMXY:1:1101:7148:1063 1:N:0:NCTAAGAT+NCGCGGTT
+## TGGCCTTGCTCACAGAGCTGCGTGAGAAACAGACGGTGCTTGCGATCTCTG
+## +
+## FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+## @A00426:207:H537LDMXY:1:1101:7256:1063 1:N:0:NCTAAGAT+NCGCGGTT
+## GCACGGGCGAGGGCGGGAACGGCGGAGCGGGAAGAAGCCGCGAGCGCGGAT
+## +
+## FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+## @A00426:207:H537LDMXY:1:1101:2067:1000 1:N:0:NCTAAGAT+NCGCGGTT
+## NTAACAGTGACTTGCGGGGGAAGTCTACGCGCGTGTGCACGCGGCACTCTC
+```
+
+
+### **Pattern search**
+`grep` - search a pattern by line
+
+```bash
+grep "AATTGG" test_01_R1.fq
+```
+
+```
+## NTCTGAATTGGGTTATGAGGCCCGGGAGGTGCCTCACCTCAGCCATTGAAC
+## TGCCATTCTGTGCTCTCAGGACCTCTAATTGGGGGCCGTGGCAAAGGAGTG
+```
+
+
+### **Display the number of words, lines, and characters**
+
+```bash
+wc test_01_R1.fq
+wc -l test_01_R1.fq
+```
+
+```
+##  1000  1250 42064 test_01_R1.fq
+## 1000 test_01_R1.fq
+```
+
+
+### **List the content as stdout**
+`cat` – list the contents of a file as stdout; cat (short for concatenate) is one of the most frequently used commands. To run this command, type cat followed by the file’s name: `cat file.txt`
+
+Combine two files: `cat file1 file2`.
+It is useful to pipe the content of the file into another command.
+
+
+### **Pipe - redirection**
+A pipe is a form of redirection (transfer of sdout to other destinations). You can send output from one command/program to another for further processing, such as `command 1| command 2 | command 3`.
+
+```bash
+cat test_01_R1.fq | grep "@" | wc -l 
+```
+
+```
+## 250
+```
+
+
+## **Exercise**
+Below we will copy another fowward reads into your home directory (~ means home directory), and combine them into one and count how many reads were there. You can direct the stdout of any command to a new file use >.
+
+```bash
+cd ~/hpc_workshop
+cp /varidata/researchtemp/hpctmp/BBC_workshop_June2023_I/test_54_R1.fq .
+cat test_01_R1.fq test_54_R1.fq | grep "@" | wc -l 
+cat test_01_R1.fq test_54_R1.fq > combined.fq
+ls
+```
+
+```
+## bash: line 1: cd: /home/kin.lau/hpc_workshop: No such file or directory
+## 500
+## 01_linux_basics.Rmd
+## 02_bioinfx_example.Rmd
+## 999_glossary.Rmd
+## _bookdown.yml
+## _output.yml
+## bbc_bioinfx_book.rds
+## combined.fq
+## docs
+## fastqs
+## full_fastqs
+## index.Rmd
+## index.md
+## multiqc
+## packages.bib
+## render152aa91b473bbb.rds
+## run_salmon.sh
+## salmon
+## salmon.e
+## salmon.o
+## test_01_R1.fq
+## test_54_R1.fq
+## toc.css
+```

@@ -7,3 +7,4 @@ full_fastqs
 .Rhistory
 .RData
 .Ruserdata
+*.fq

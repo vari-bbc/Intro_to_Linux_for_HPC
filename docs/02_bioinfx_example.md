@@ -25,41 +25,39 @@ After a job has been submitted, users can check on the status (e.g. how long it 
 
 
 ```bash
-squeue -u username
+squeue -u <username>
 ```
 
 ## **Create Directory**
 
-Create a project directory with a **username** and a sub-directory for storing raw sequence data file name **fastqs** in `cd /varidata/researchtemp/hpctmp/HPC_mini_workshop/Part3 directory`.
-
-* Typically, one would work in their specific lab's folder on the HPC. For this workshop, we will work in a common directory so that the instructors and chck on your progress.
+Typically, one would work in their specific lab's folder on the HPC. For this workshop, we will work in a common directory so that the instructors and chck on your progress.
 
 
 ```bash
 cd /varidata/researchtemp/hpctmp/BBC_workshop_June2023
 ```
 
-* Create a directory based on your username to separate your work from other users'.
+Create a directory based on your username to separate your work from other users'.
 
 
 ```bash
 mkdir <username>
 ```
 
-* Navigate to the username directory
+Navigate to the username directory
 
 ```bash
-cd first.lastName
+cd <username>
 ```
 
-* Create a `fastqs` directory inside the username directory. It is good practice to keep your raw data separate from your analyses and never make changes to them directly.
+Create a `fastqs` directory inside the username directory. It is good practice to keep your raw data separate from your analyses and never make changes to them directly.
 
 
 ```bash
 mkdir fastqs
 ```
 
-* Use `ls` to confirm the `fastqs` directory was created.
+Use `ls` to confirm the `fastqs` directory was created.
 
 
 ```bash
@@ -68,14 +66,14 @@ ls
 
 ## **Copy Fastq Files To `fastqs` subdirectory**
 
-* Verify the current directory is in the username directory.
+Verify the current directory is in the username directory.
 
 
 ```bash
 pwd
 ```
 
-* Copy the 4 fastq.gz files and `md5sum.txt`, which you will use to check the validty of the files.
+Copy the 4 fastq.gz files and `md5sum.txt`, which you will use to check the validty of the files.
 
 
 ```bash
@@ -84,7 +82,7 @@ cp /varidata/researchtemp/hpctmp/BBC/hpc_workshop_fqs/*fastq.gz ./fastqs/
 cp /varidata/researchtemp/hpctmp/BBC/hpc_workshop_fqs/md5sum.txt ./fastqs/
 ```
 
-* Verify that the copied files are valid. The following code should return with an **OK** for each file.
+Verify that the copied files are valid. The following code should return with an **OK** for each file.
 
 
 ```bash
@@ -100,7 +98,7 @@ md5sum -c md5sum.txt
 ## SRR1039521_2.fastq.gz: OK
 ```
 
-* Go back to the username directory.
+Go back to the username directory.
 
 
 ```bash
@@ -180,16 +178,16 @@ This command will output any modules containing the `fastqc` keyword.
 
 
 ```bash
-module av bbc2 2>&1 | grep 'fastqc'
+module av -w 1 bbc2 2>&1 | grep 'fastqc'
 ```
 
 ```
-## bbc2/fastqc/fastqc-0.12.1              bbc2/R/R-4.3.0
+## bbc2/fastqc/fastqc-0.12.1
 ```
 
 ## **Run FastQC**
 
-* Create a `fastqc` directory inside of your username directory and run FastQC.
+Create a `fastqc` directory inside of your username directory and run FastQC.
 
 
 ```bash
@@ -202,7 +200,6 @@ fastqc -o fastqc fastqs/*fastq.gz
 ```
 
 ```
-## mkdir: cannot create directory ‘fastqc’: File exists
 ## application/gzip
 ## application/gzip
 ## Started analysis of SRR1039520_1.fastq.gz
@@ -297,7 +294,7 @@ fastqc -o fastqc fastqs/*fastq.gz
 ## Analysis complete for SRR1039521_2.fastq.gz
 ```
 
-* See what was produced by FastQC.
+See what was produced by FastQC.
 
 
 ```bash
@@ -332,7 +329,7 @@ exit
 squeue -u username
 
 # Go back to the project directory
-cd /varidata/researchtemp/hpctmp/BBC_workshop_June2023/firstname.lastname
+cd /varidata/researchtemp/hpctmp/BBC_workshop_June2023/<username>
 
 ```
 
@@ -379,14 +376,14 @@ echo "End time: $end_time"
 
 ## **Submit a Job**
 
-* Type `ls` to ensure `run_salmon.sh` file exist in the username directory.
+Type `ls` to ensure `run_salmon.sh` file exist in the username directory.
 
 
 ```bash
 ls
 ```
 
-* Use the `sbatch` command to submit the job.
+Use the `sbatch` command to submit the job.
 
 
 ```bash
@@ -394,7 +391,7 @@ sbatch run_salmon.sh
 
 ```
 
-* Users can check if the job is running with the following command. The job should take about two minutes to complete.
+Users can check if the job is running with the following command. The job should take about two minutes to complete.
 
 
 ```bash
@@ -437,7 +434,7 @@ tail salmon.o
 
 As an example, let's try to extract out the TPMs (Transcripts per Million) for MUC1. These values can be found in the `quant.sf` file in each sample's folder. 
 
-* First, let's take a look at one of these files to figure out the format of these files.
+First, let's take a look at one of these files to figure out the format of these files.
 
 
 ```bash
@@ -486,7 +483,7 @@ grep 'ENST00000620103' salmon/*/quant.sf
 
 In this final step, users will start an interactive job to perform multiQC to collect and summarize the outcomes from FastQC and Salmon, then evaluate the quality of the fastq sequences with the reference transcriptome(mapping rate).
 
-* Start an interactive job.
+Start an interactive job.
 
 
 ```bash
@@ -494,13 +491,13 @@ srun --nodes=1 --ntasks-per-node=1 --time=00:30:00 --pty bash
 
 ```
 
-* Navigate to the project directory.
+Navigate to the project directory.
 
 ```bash
-cd /varidata/researchtemp/hpctmp/HPC_mini_workshop/Part3/firstname.lastname/
+cd /varidata/researchtemp/hpctmp/BBC_workshop_June2023/<username>
 ```
 
-* Load the environment module for multiQC.
+Load the environment module for multiQC.
 
 
 ```bash
@@ -515,7 +512,7 @@ module load bbc2/multiqc/multiqc-1.14
 ## ### End BBC module message.
 ```
 
-* Run multiQC, which will summarize the results from FastQC and Salmon and output the results into a new directory called `multiqc/`.
+Run multiQC, which will summarize the results from FastQC and Salmon and output the results into a new directory called `multiqc/`.
 
 
 ```bash
@@ -523,7 +520,7 @@ multiqc --outdir multiqc .
 
 ```
 
-* List the contents of the `multiqc` directory.
+List the contents of the `multiqc` directory.
 
 
 ```bash
