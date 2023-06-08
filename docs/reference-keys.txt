@@ -24,8 +24,7 @@ copy-fastq-files-to-fastqs-subdirectory
 use-basic-linux-commands-to-explore-the-fastq-files
 working-with-environment-modules
 run-fastqc
-set-up-a-job-to-run-salmon-to-align-the-reads
-make-a-job-script-to-run-salmon
+set-up-a-job-script-to-run-salmon-to-align-the-reads
 submit-a-job
 examine-the-standard-output-stdout-and-standard-error-stderr-log-files
 use-grep-to-find-the-tpms-for-a-specific-gene

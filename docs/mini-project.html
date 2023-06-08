@@ -172,12 +172,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="3.4" data-path="mini-project.html"><a href="mini-project.html#use-basic-linux-commands-to-explore-the-fastq-files"><i class="fa fa-check"></i><b>3.4</b> <strong>Use basic Linux commands to explore the fastq files</strong></a></li>
 <li class="chapter" data-level="3.5" data-path="mini-project.html"><a href="mini-project.html#working-with-environment-modules"><i class="fa fa-check"></i><b>3.5</b> <strong>Working With Environment Modules</strong></a></li>
 <li class="chapter" data-level="3.6" data-path="mini-project.html"><a href="mini-project.html#run-fastqc"><i class="fa fa-check"></i><b>3.6</b> <strong>Run FastQC</strong></a></li>
-<li class="chapter" data-level="3.7" data-path="mini-project.html"><a href="mini-project.html#set-up-a-job-to-run-salmon-to-align-the-reads"><i class="fa fa-check"></i><b>3.7</b> <strong>Set up a job to run Salmon to align the reads</strong></a></li>
-<li class="chapter" data-level="3.8" data-path="mini-project.html"><a href="mini-project.html#make-a-job-script-to-run-salmon"><i class="fa fa-check"></i><b>3.8</b> <strong>Make a job script to run Salmon</strong></a></li>
-<li class="chapter" data-level="3.9" data-path="mini-project.html"><a href="mini-project.html#submit-a-job"><i class="fa fa-check"></i><b>3.9</b> <strong>Submit a Job</strong></a></li>
-<li class="chapter" data-level="3.10" data-path="mini-project.html"><a href="mini-project.html#examine-the-standard-output-stdout-and-standard-error-stderr-log-files"><i class="fa fa-check"></i><b>3.10</b> <strong>Examine the Standard Output (stdout) and Standard Error (stderr) log files</strong></a></li>
-<li class="chapter" data-level="3.11" data-path="mini-project.html"><a href="mini-project.html#use-grep-to-find-the-tpms-for-a-specific-gene"><i class="fa fa-check"></i><b>3.11</b> <strong>Use grep to find the TPMs for a specific gene</strong></a></li>
-<li class="chapter" data-level="3.12" data-path="mini-project.html"><a href="mini-project.html#bonus-use-an-interactive-job-to-run-multiqc-on-the-salmon-and-fastqc-output"><i class="fa fa-check"></i><b>3.12</b> <strong>BONUS: Use an interactive job to run multiQC on the Salmon and FastQC output</strong></a></li>
+<li class="chapter" data-level="3.7" data-path="mini-project.html"><a href="mini-project.html#set-up-a-job-script-to-run-salmon-to-align-the-reads"><i class="fa fa-check"></i><b>3.7</b> <strong>Set up a job script to run Salmon to align the reads</strong></a></li>
+<li class="chapter" data-level="3.8" data-path="mini-project.html"><a href="mini-project.html#submit-a-job"><i class="fa fa-check"></i><b>3.8</b> <strong>Submit a Job</strong></a></li>
+<li class="chapter" data-level="3.9" data-path="mini-project.html"><a href="mini-project.html#examine-the-standard-output-stdout-and-standard-error-stderr-log-files"><i class="fa fa-check"></i><b>3.9</b> <strong>Examine the Standard Output (stdout) and Standard Error (stderr) log files</strong></a></li>
+<li class="chapter" data-level="3.10" data-path="mini-project.html"><a href="mini-project.html#use-grep-to-find-the-tpms-for-a-specific-gene"><i class="fa fa-check"></i><b>3.10</b> <strong>Use grep to find the TPMs for a specific gene</strong></a></li>
+<li class="chapter" data-level="3.11" data-path="mini-project.html"><a href="mini-project.html#bonus-use-an-interactive-job-to-run-multiqc-on-the-salmon-and-fastqc-output"><i class="fa fa-check"></i><b>3.11</b> <strong>BONUS: Use an interactive job to run multiQC on the Salmon and FastQC output</strong></a></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="glossary.html"><a href="glossary.html"><i class="fa fa-check"></i><b>4</b> <strong>Glossary</strong></a>
 <ul>
@@ -400,24 +399,21 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## SRR1039521_2_fastqc.html
 ## SRR1039521_2_fastqc.zip</code></pre>
 </div>
-<div id="set-up-a-job-to-run-salmon-to-align-the-reads" class="section level2 hasAnchor" number="3.7">
-<h2><span class="header-section-number">3.7</span> <strong>Set up a job to run Salmon to align the reads</strong><a href="mini-project.html#set-up-a-job-to-run-salmon-to-align-the-reads" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="set-up-a-job-script-to-run-salmon-to-align-the-reads" class="section level2 hasAnchor" number="3.7">
+<h2><span class="header-section-number">3.7</span> <strong>Set up a job script to run Salmon to align the reads</strong><a href="mini-project.html#set-up-a-job-script-to-run-salmon-to-align-the-reads" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>First, we <code>exit</code> from our interactive job because we want to get back on to the submit node to submit a non-interactive job to run Salmon.</p>
 <div class="sourceCode" id="cb44"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb44-1"><a href="mini-project.html#cb44-1" tabindex="-1"></a><span class="co"># You should see one job when you run this command, corresponding to your interactive job.</span></span>
-<span id="cb44-2"><a href="mini-project.html#cb44-2" tabindex="-1"></a><span class="ex">squeue</span> <span class="at">-u</span> username</span>
+<span id="cb44-2"><a href="mini-project.html#cb44-2" tabindex="-1"></a><span class="ex">squeue</span> <span class="at">-u</span> <span class="op">&lt;</span>username<span class="op">&gt;</span></span>
 <span id="cb44-3"><a href="mini-project.html#cb44-3" tabindex="-1"></a></span>
 <span id="cb44-4"><a href="mini-project.html#cb44-4" tabindex="-1"></a><span class="co"># Exit the interactive job</span></span>
 <span id="cb44-5"><a href="mini-project.html#cb44-5" tabindex="-1"></a><span class="bu">exit</span></span>
 <span id="cb44-6"><a href="mini-project.html#cb44-6" tabindex="-1"></a></span>
 <span id="cb44-7"><a href="mini-project.html#cb44-7" tabindex="-1"></a><span class="co"># Now you should see no jobs when you run this command because the interactive job has ended.</span></span>
-<span id="cb44-8"><a href="mini-project.html#cb44-8" tabindex="-1"></a><span class="ex">squeue</span> <span class="at">-u</span> username</span>
+<span id="cb44-8"><a href="mini-project.html#cb44-8" tabindex="-1"></a><span class="ex">squeue</span> <span class="at">-u</span> <span class="op">&lt;</span>username<span class="op">&gt;</span></span>
 <span id="cb44-9"><a href="mini-project.html#cb44-9" tabindex="-1"></a></span>
 <span id="cb44-10"><a href="mini-project.html#cb44-10" tabindex="-1"></a><span class="co"># Go back to the project directory</span></span>
 <span id="cb44-11"><a href="mini-project.html#cb44-11" tabindex="-1"></a><span class="bu">cd</span> /varidata/researchtemp/hpctmp/BBC_workshop_June2023/<span class="op">&lt;</span>username<span class="op">&gt;</span></span></code></pre></div>
-</div>
-<div id="make-a-job-script-to-run-salmon" class="section level2 hasAnchor" number="3.8">
-<h2><span class="header-section-number">3.8</span> <strong>Make a job script to run Salmon</strong><a href="mini-project.html#make-a-job-script-to-run-salmon" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>Below is a SLURM job script to run Salmon. For now, do not worry about how the code works. Copy the code and paste it into a new file. Save it as <code>run_salmon.sh</code> in your username directory.</p>
+<p>Below is a SLURM job script to run Salmon. For now, do not worry about how the code works. Copy the code and paste it into a new file. Save it as <code>run_salmon.sh</code> in your username directory. If you have issues with this task, you can copy the job script directly using the command, <code>cp /varidata/researchtemp/hpctmp/BBC_workshop_June2023/kin.lau/run_salmon.sh .</code>.</p>
 <div class="sourceCode" id="cb45"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb45-1"><a href="mini-project.html#cb45-1" tabindex="-1"></a><span class="co">#!/bin/bash</span></span>
 <span id="cb45-2"><a href="mini-project.html#cb45-2" tabindex="-1"></a></span>
 <span id="cb45-3"><a href="mini-project.html#cb45-3" tabindex="-1"></a><span class="co">#SBATCH --export=NONE</span></span>
@@ -452,17 +448,17 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb45-32"><a href="mini-project.html#cb45-32" tabindex="-1"></a><span class="bu">echo</span> <span class="st">&quot;Start time: </span><span class="va">$start_time</span><span class="st">&quot;</span></span>
 <span id="cb45-33"><a href="mini-project.html#cb45-33" tabindex="-1"></a><span class="bu">echo</span> <span class="st">&quot;End time: </span><span class="va">$end_time</span><span class="st">&quot;</span></span></code></pre></div>
 </div>
-<div id="submit-a-job" class="section level2 hasAnchor" number="3.9">
-<h2><span class="header-section-number">3.9</span> <strong>Submit a Job</strong><a href="mini-project.html#submit-a-job" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="submit-a-job" class="section level2 hasAnchor" number="3.8">
+<h2><span class="header-section-number">3.8</span> <strong>Submit a Job</strong><a href="mini-project.html#submit-a-job" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Type <code>ls</code> to ensure <code>run_salmon.sh</code> file exist in the username directory.</p>
 <div class="sourceCode" id="cb46"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb46-1"><a href="mini-project.html#cb46-1" tabindex="-1"></a><span class="fu">ls</span></span></code></pre></div>
 <p>Use the <code>sbatch</code> command to submit the job.</p>
-<div class="sourceCode" id="cb47"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb47-1"><a href="mini-project.html#cb47-1" tabindex="-1"></a><span class="ex">sbatch</span> run_salmon.sh</span></code></pre></div>
+<div class="sourceCode" id="cb47"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb47-1"><a href="mini-project.html#cb47-1" tabindex="-1"></a><span class="ex">sbatch</span> <span class="at">-p</span> big run_salmon.sh</span></code></pre></div>
 <p>Users can check if the job is running with the following command. The job should take about two minutes to complete.</p>
-<div class="sourceCode" id="cb48"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb48-1"><a href="mini-project.html#cb48-1" tabindex="-1"></a><span class="ex">squeue</span> <span class="at">-u</span> username</span></code></pre></div>
+<div class="sourceCode" id="cb48"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb48-1"><a href="mini-project.html#cb48-1" tabindex="-1"></a><span class="ex">squeue</span> <span class="at">-u</span> <span class="op">&lt;</span>username<span class="op">&gt;</span></span></code></pre></div>
 </div>
-<div id="examine-the-standard-output-stdout-and-standard-error-stderr-log-files" class="section level2 hasAnchor" number="3.10">
-<h2><span class="header-section-number">3.10</span> <strong>Examine the Standard Output (stdout) and Standard Error (stderr) log files</strong><a href="mini-project.html#examine-the-standard-output-stdout-and-standard-error-stderr-log-files" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="examine-the-standard-output-stdout-and-standard-error-stderr-log-files" class="section level2 hasAnchor" number="3.9">
+<h2><span class="header-section-number">3.9</span> <strong>Examine the Standard Output (stdout) and Standard Error (stderr) log files</strong><a href="mini-project.html#examine-the-standard-output-stdout-and-standard-error-stderr-log-files" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>It is good practice to check the job logs after your job is done to ensure that the job completed successfully. If there is an error, the output files may not be reliable or could be incomplete.</p>
 <div class="sourceCode" id="cb49"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb49-1"><a href="mini-project.html#cb49-1" tabindex="-1"></a><span class="fu">tail</span> salmon.e</span></code></pre></div>
 <pre><code>## [2022-09-20 23:32:16.397] [jointLog] [info] Marked 0 weighted equivalence classes as degenerate
@@ -478,8 +474,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <pre><code>## Start time: 23:30:31
 ## End time: 23:32:30</code></pre>
 </div>
-<div id="use-grep-to-find-the-tpms-for-a-specific-gene" class="section level2 hasAnchor" number="3.11">
-<h2><span class="header-section-number">3.11</span> <strong>Use grep to find the TPMs for a specific gene</strong><a href="mini-project.html#use-grep-to-find-the-tpms-for-a-specific-gene" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="use-grep-to-find-the-tpms-for-a-specific-gene" class="section level2 hasAnchor" number="3.10">
+<h2><span class="header-section-number">3.10</span> <strong>Use grep to find the TPMs for a specific gene</strong><a href="mini-project.html#use-grep-to-find-the-tpms-for-a-specific-gene" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>As an example, let’s try to extract out the TPMs (Transcripts per Million) for MUC1. These values can be found in the <code>quant.sf</code> file in each sample’s folder.</p>
 <p>First, let’s take a look at one of these files to figure out the format of these files.</p>
 <div class="sourceCode" id="cb53"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb53-1"><a href="mini-project.html#cb53-1" tabindex="-1"></a><span class="fu">head</span> salmon/SRR1039520/quant.sf</span></code></pre></div>
@@ -501,8 +497,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <pre><code>## salmon/SRR1039520/quant.sf:ENST00000620103.4 1811    1656.015    0.000000    0.000
 ## salmon/SRR1039521/quant.sf:ENST00000620103.4 1811    1655.481    13.145898   5.723</code></pre>
 </div>
-<div id="bonus-use-an-interactive-job-to-run-multiqc-on-the-salmon-and-fastqc-output" class="section level2 hasAnchor" number="3.12">
-<h2><span class="header-section-number">3.12</span> <strong>BONUS: Use an interactive job to run multiQC on the Salmon and FastQC output</strong><a href="mini-project.html#bonus-use-an-interactive-job-to-run-multiqc-on-the-salmon-and-fastqc-output" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="bonus-use-an-interactive-job-to-run-multiqc-on-the-salmon-and-fastqc-output" class="section level2 hasAnchor" number="3.11">
+<h2><span class="header-section-number">3.11</span> <strong>BONUS: Use an interactive job to run multiQC on the Salmon and FastQC output</strong><a href="mini-project.html#bonus-use-an-interactive-job-to-run-multiqc-on-the-salmon-and-fastqc-output" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>In this final step, users will start an interactive job to perform multiQC to collect and summarize the outcomes from FastQC and Salmon, then evaluate the quality of the fastq sequences with the reference transcriptome(mapping rate).</p>
 <p>Start an interactive job.</p>
 <div class="sourceCode" id="cb59"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb59-1"><a href="mini-project.html#cb59-1" tabindex="-1"></a><span class="ex">srun</span> <span class="at">--nodes</span><span class="op">=</span>1 <span class="at">--ntasks-per-node</span><span class="op">=</span>1 <span class="at">--time</span><span class="op">=</span>00:30:00 <span class="at">--pty</span> bash</span></code></pre></div>

@@ -313,29 +313,27 @@ ls fastqc/
 ## SRR1039521_2_fastqc.zip
 ```
 
-## **Set up a job to run Salmon to align the reads**
+## **Set up a job script to run Salmon to align the reads**
 
 First, we `exit` from our interactive job because we want to get back on to the submit node to submit a non-interactive job to run Salmon.
 
 
 ```bash
 # You should see one job when you run this command, corresponding to your interactive job.
-squeue -u username
+squeue -u <username>
 
 # Exit the interactive job
 exit
 
 # Now you should see no jobs when you run this command because the interactive job has ended.
-squeue -u username
+squeue -u <username>
 
 # Go back to the project directory
 cd /varidata/researchtemp/hpctmp/BBC_workshop_June2023/<username>
 
 ```
 
-## **Make a job script to run Salmon**
-
-Below is a SLURM job script to run Salmon. For now, do not worry about how the code works. Copy the code and paste it into a new file. Save it as `run_salmon.sh` in your username directory.
+Below is a SLURM job script to run Salmon. For now, do not worry about how the code works. Copy the code and paste it into a new file. Save it as `run_salmon.sh` in your username directory. If you have issues with this task, you can copy the job script directly using the command, `cp /varidata/researchtemp/hpctmp/BBC_workshop_June2023/kin.lau/run_salmon.sh .`.
 
 
 ```bash
@@ -387,7 +385,7 @@ Use the `sbatch` command to submit the job.
 
 
 ```bash
-sbatch run_salmon.sh
+sbatch -p big run_salmon.sh
 
 ```
 
@@ -395,7 +393,7 @@ Users can check if the job is running with the following command. The job should
 
 
 ```bash
-squeue -u username
+squeue -u <username>
 
 ```
 
