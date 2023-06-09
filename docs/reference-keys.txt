@@ -28,5 +28,6 @@ submit-a-job
 examine-the-standard-output-stdout-and-standard-error-stderr-log-files
 use-grep-to-find-the-tpms-for-a-specific-gene
 bonus-use-an-interactive-job-to-run-multiqc-on-the-salmon-and-fastqc-output
-glossary
+appendices
+workshop-powerpoint-files
 bash-cheatsheet

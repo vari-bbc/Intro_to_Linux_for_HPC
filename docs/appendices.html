@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Page not found | Basic command lines for HPC</title>
+  <title>Part 4 Appendices | Basic command lines for HPC</title>
   <meta name="description" content="Bioinformatics tutorials with hands-on exercises and examples." />
   <meta name="generator" content="bookdown 0.34 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Page not found | Basic command lines for HPC" />
+  <meta property="og:title" content="Part 4 Appendices | Basic command lines for HPC" />
   <meta property="og:type" content="book" />
   
   <meta property="og:description" content="Bioinformatics tutorials with hands-on exercises and examples." />
   <meta name="github-repo" content="vari-bbc/Intro_to_Linux_for_HPC" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Page not found | Basic command lines for HPC" />
+  <meta name="twitter:title" content="Part 4 Appendices | Basic command lines for HPC" />
   
   <meta name="twitter:description" content="Bioinformatics tutorials with hands-on exercises and examples." />
   
@@ -29,7 +29,7 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-
+<link rel="prev" href="mini-project.html"/>
 
 <script src="assets/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
@@ -199,18 +199,317 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="page-not-found" class="section level1">
-<h1>Page not found</h1>
-<p>The page you requested cannot be found (perhaps it was moved or renamed).</p>
-<p>You may want to try searching to find the page's new location, or use
-the table of contents to find the page you are looking for.</p>
+<div id="appendices" class="section level1 hasAnchor" number="4">
+<h1><span class="header-section-number">Part 4</span> <strong>Appendices</strong><a href="appendices.html#appendices" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="workshop-powerpoint-files" class="section level2 hasAnchor" number="4.1">
+<h2><span class="header-section-number">4.1</span> <strong>Workshop Powerpoint files</strong><a href="appendices.html#workshop-powerpoint-files" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p><a href="https://vanandelinstitute-my.sharepoint.com/personal/daisy_fu_vai_org/Documents/Workshop_Jun_2023/Workshop1_BBC_merged.pdf">June 8, 2023; Summer workshop I</a></p>
+</div>
+<div id="bash-cheatsheet" class="section level2 hasAnchor" number="4.2">
+<h2><span class="header-section-number">4.2</span> <strong>Bash cheatsheet</strong><a href="appendices.html#bash-cheatsheet" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<table class="table" style="margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;">
+Name
+</th>
+<th style="text-align:left;">
+Command Line
+</th>
+<th style="text-align:left;">
+Description
+</th>
+<th style="text-align:left;">
+Example
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Print Working Directory
+</td>
+<td style="text-align:left;">
+<code>pwd</code>
+</td>
+<td style="text-align:left;">
+Displays the current working directory
+</td>
+<td style="text-align:left;">
+<p><strong><code>[username\@submit002 ~]$ pwd</code></strong></p>
+Result:/home/username
+</td>
+</tr>
+<tr>
+<td style="text-align:left;background-color: #e9f5f8 !important;">
+List
+</td>
+<td style="text-align:left;background-color: #e9f5f8 !important;">
+<code>ls</code>
+</td>
+<td style="text-align:left;background-color: #e9f5f8 !important;">
+Lists the files and directories in the current directory
+</td>
+<td style="text-align:left;background-color: #e9f5f8 !important;">
+<p><strong><code>[username\@submit002 ~]$ ls</code></strong></p>
+Result: It returns empty after the $
+symbol since nothing has been created.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+List More Detail
+</td>
+<td style="text-align:left;">
+<code>ls -lht</code>
+</td>
+<td style="text-align:left;">
+Display more details about the file
+</td>
+<td style="text-align:left;">
+<p><strong><code>[username\@submit002 ~]$ ls -lht</code></strong></p>
+Result: Display file detail in the current director
+</td>
+</tr>
+<tr>
+<td style="text-align:left;background-color: #e9f5f8 !important;">
+Make Directory
+</td>
+<td style="text-align:left;background-color: #e9f5f8 !important;">
+<code>mkdir</code>
+</td>
+<td style="text-align:left;background-color: #e9f5f8 !important;">
+Creates a new directory
+</td>
+<td style="text-align:left;background-color: #e9f5f8 !important;">
+<p><strong><code>[username\@submit002 ~]$ mkdir hpc_mini_workshop</code></strong></p>
+Result: A hpc_mini_workshop folder is created.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Move
+</td>
+<td style="text-align:left;">
+<code>mv</code>
+</td>
+<td style="text-align:left;">
+Moves or renames files or directories
+</td>
+<td style="text-align:left;">
+<p><strong><code>[username\@submit002 ~]$ mv hpc_mini_workshop workshopTraining</code></strong></p>
+Result: Now the hpc_mini_workshop directory is called workshopTraining
+</td>
+</tr>
+<tr>
+<td style="text-align:left;background-color: #e9f5f8 !important;">
+Change Directory
+</td>
+<td style="text-align:left;background-color: #e9f5f8 !important;">
+<code>cd</code>
+</td>
+<td style="text-align:left;background-color: #e9f5f8 !important;">
+Change to an existing directory
+</td>
+<td style="text-align:left;background-color: #e9f5f8 !important;">
+<p><strong><code>[username\@submit002 ~]$ cd workshopTraining</code></strong></p>
+Result: [username@submit002 workshopTraining]$ Notice ~ was in the home directory, now in the workshopTraining directory.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Remove
+</td>
+<td style="text-align:left;">
+<code>rm</code>
+</td>
+<td style="text-align:left;">
+Deletes files and directories
+</td>
+<td style="text-align:left;">
+<p><strong><code>[username\@submit002 ~]$ rm -r TaskProject</code></strong></p>
+<p>*Note: -r means directory</p>
+Result: TaskProject is deleted
+</td>
+</tr>
+<tr>
+<td style="text-align:left;background-color: #e9f5f8 !important;">
+Copy
+</td>
+<td style="text-align:left;background-color: #e9f5f8 !important;">
+<code>cp</code>
+</td>
+<td style="text-align:left;background-color: #e9f5f8 !important;">
+Copies files or directories
+</td>
+<td style="text-align:left;background-color: #e9f5f8 !important;">
+<p><strong><code>[username\@submit002 ~]$ cp -r Task1 Project</code></strong></p>
+Result: Task1 directory has moved to the Project directory.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Search for File
+</td>
+<td style="text-align:left;">
+<code>find</code>
+</td>
+<td style="text-align:left;">
+Search for files and directories based on various criteria like name, size, and modification time
+</td>
+<td style="text-align:left;">
+<p><strong><code>[username\@submit002 ~]$ find Project</code></strong></p>
+<p>Result: Task1 will appear within the Project directory</p>
+Project
+Project/Task1
+</td>
+</tr>
+<tr>
+<td style="text-align:left;background-color: #e9f5f8 !important;">
+Head
+</td>
+<td style="text-align:left;background-color: #e9f5f8 !important;">
+<code>head</code>
+</td>
+<td style="text-align:left;background-color: #e9f5f8 !important;">
+Display at the beginning of a file
+</td>
+<td style="text-align:left;background-color: #e9f5f8 !important;">
+<p><strong><code>[username\@submit002 ~]$ head -n5 file_name</code></strong></p>
+Result: It will display the first 5 lines from the beginning of the file_name.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Tail
+</td>
+<td style="text-align:left;">
+<code>tail</code>
+</td>
+<td style="text-align:left;">
+Display at the end of a file
+</td>
+<td style="text-align:left;">
+<p><strong><code>[username\@submit002 ~]$ tail -n5 file_name</code></strong></p>
+Result: It will display the last 5 lines from the end of the file_name
+</td>
+</tr>
+<tr>
+<td style="text-align:left;background-color: #e9f5f8 !important;">
+Less
+</td>
+<td style="text-align:left;background-color: #e9f5f8 !important;">
+<code>less</code>
+</td>
+<td style="text-align:left;background-color: #e9f5f8 !important;">
+Load the necessary portion of a file
+</td>
+<td style="text-align:left;background-color: #e9f5f8 !important;">
+<p><strong><code>[username\@submit002 ~]$ less file.txt</code></strong></p>
+Result: The user is able to view a portion of the file.txt.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+More
+</td>
+<td style="text-align:left;">
+<code>more</code>
+</td>
+<td style="text-align:left;">
+Load the entire file
+</td>
+<td style="text-align:left;">
+<p><strong><code>[username\@submit002 ~]$ more file.txt</code></strong></p>
+Result: The user is able to view the entire file.txt.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;background-color: #e9f5f8 !important;">
+Quit
+</td>
+<td style="text-align:left;background-color: #e9f5f8 !important;">
+<code>q</code>
+</td>
+<td style="text-align:left;background-color: #e9f5f8 !important;">
+Stop viewing the current file
+</td>
+<td style="text-align:left;background-color: #e9f5f8 !important;">
+quit viewing the current file
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Concatenate
+</td>
+<td style="text-align:left;">
+<code>cat</code>
+</td>
+<td style="text-align:left;">
+Display the contents of a file
+</td>
+<td style="text-align:left;">
+<p><strong><code>[username\@submit002 ~]$ cat file.txt</code></strong></p>
+Result: Display the contents of file.txt
+</td>
+</tr>
+<tr>
+<td style="text-align:left;background-color: #e9f5f8 !important;">
+Search for Text
+</td>
+<td style="text-align:left;background-color: #e9f5f8 !important;">
+<code>grep</code>
+</td>
+<td style="text-align:left;background-color: #e9f5f8 !important;">
+Search for a specific pattern of text within files
+</td>
+<td style="text-align:left;background-color: #e9f5f8 !important;">
+<p><strong><code>[username\@submit002 ~]$ grep “GCGGA” sequence_file.fastq</code></strong></p>
+Result: Display any GCGGA pattern in sequence_file.fastq
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Word, Line, and Character Count
+</td>
+<td style="text-align:left;">
+<code>wc</code>
+</td>
+<td style="text-align:left;">
+Display the number of words, lines, and characters in a file
+</td>
+<td style="text-align:left;">
+<p><strong><code>[username\@submit002 ~]$ wc file.txt</code></strong></p>
+Result: Display the number of words, lines, and characters in the file.txt.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;background-color: #e9f5f8 !important;">
+Touch
+</td>
+<td style="text-align:left;background-color: #e9f5f8 !important;">
+<code>touch</code>
+</td>
+<td style="text-align:left;background-color: #e9f5f8 !important;">
+Create a new empty file
+</td>
+<td style="text-align:left;background-color: #e9f5f8 !important;">
+<p><strong><code>[username\@submit002 ~]$ touch exampleFile.txt</code></strong></p>
+Result: The command line will display file details in
+the current directory
+</td>
+</tr>
+</tbody>
+</table>
+
+</div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-
+<a href="mini-project.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
 
     </div>
   </div>
