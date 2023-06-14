@@ -329,14 +329,34 @@ It is useful to pipe the content of the file into another command.</p>
 <h2><span class="header-section-number">2.4</span> <strong>Exercise</strong><a href="basic-command-lines-for-hpc.html#exercise" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Below we will copy another fowward reads into your home directory (~ means home directory), and combine them into one and count how many reads were there. You can direct the stdout of any command to a new file use &gt;.</p>
 <div class="sourceCode" id="cb15"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb15-1"><a href="basic-command-lines-for-hpc.html#cb15-1" tabindex="-1"></a><span class="bu">cd</span> ~/hpc_workshop</span>
-<span id="cb15-2"><a href="basic-command-lines-for-hpc.html#cb15-2" tabindex="-1"></a><span class="fu">cp</span> /varidata/researchtemp/hpctmp/BBC_workshop_June2023_I/test_54_R1.fq .</span>
-<span id="cb15-3"><a href="basic-command-lines-for-hpc.html#cb15-3" tabindex="-1"></a><span class="fu">cat</span> test_01_R1.fq test_54_R1.fq <span class="kw">|</span> <span class="fu">grep</span> <span class="st">&quot;@&quot;</span> <span class="kw">|</span> <span class="fu">wc</span> <span class="at">-l</span> </span>
-<span id="cb15-4"><a href="basic-command-lines-for-hpc.html#cb15-4" tabindex="-1"></a><span class="fu">cat</span> test_01_R1.fq test_54_R1.fq <span class="op">&gt;</span> combined.fq</span>
-<span id="cb15-5"><a href="basic-command-lines-for-hpc.html#cb15-5" tabindex="-1"></a><span class="fu">ls</span></span></code></pre></div>
+<span id="cb15-2"><a href="basic-command-lines-for-hpc.html#cb15-2" tabindex="-1"></a><span class="fu">cp</span> /varidata/researchtemp/hpctmp/BBC_workshop_June2023_I/test_54_R1.fq .</span></code></pre></div>
+<div class="sourceCode" id="cb16"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb16-1"><a href="basic-command-lines-for-hpc.html#cb16-1" tabindex="-1"></a><span class="fu">cat</span> test_01_R1.fq test_54_R1.fq <span class="kw">|</span> <span class="fu">grep</span> <span class="st">&quot;@&quot;</span> <span class="kw">|</span> <span class="fu">wc</span> <span class="at">-l</span> </span>
+<span id="cb16-2"><a href="basic-command-lines-for-hpc.html#cb16-2" tabindex="-1"></a><span class="fu">cat</span> test_01_R1.fq test_54_R1.fq <span class="op">&gt;</span> combined.fq</span>
+<span id="cb16-3"><a href="basic-command-lines-for-hpc.html#cb16-3" tabindex="-1"></a><span class="fu">ls</span></span></code></pre></div>
 <pre><code>## 500
+## 01_linux_basics.Rmd
+## 02_bioinfx_example.Rmd
+## 999_appendices.Rmd
+## _bookdown.yml
+## _output.yml
+## bbc_bioinfx_book.rds
 ## combined.fq
+## docs
+## fastqs
+## full_fastqs
+## index.Rmd
+## index.md
+## multiqc
+## packages.bib
+## prep_render.sh
+## render34b03236ada626.rds
+## run_salmon.e
+## run_salmon.o
+## run_salmon.sh
+## salmon
 ## test_01_R1.fq
-## test_54_R1.fq</code></pre>
+## test_54_R1.fq
+## toc.css</code></pre>
 
 </div>
 </div>

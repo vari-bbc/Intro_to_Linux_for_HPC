@@ -135,9 +135,12 @@ cat test_01_R1.fq | grep "@" | wc -l
 
 ## **Exercise**
 Below we will copy another fowward reads into your home directory (~ means home directory), and combine them into one and count how many reads were there. You can direct the stdout of any command to a new file use >.
-```{bash, eval= TRUE, engine= "sh"}
+```{bash, eval= FALSE, engine= "sh"}
 cd ~/hpc_workshop
 cp /varidata/researchtemp/hpctmp/BBC_workshop_June2023_I/test_54_R1.fq .
+```
+
+```{bash, eval= TRUE, engine= "sh"}
 cat test_01_R1.fq test_54_R1.fq | grep "@" | wc -l 
 cat test_01_R1.fq test_54_R1.fq > combined.fq
 ls

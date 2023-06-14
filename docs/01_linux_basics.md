@@ -190,6 +190,10 @@ Below we will copy another fowward reads into your home directory (~ means home 
 ```bash
 cd ~/hpc_workshop
 cp /varidata/researchtemp/hpctmp/BBC_workshop_June2023_I/test_54_R1.fq .
+```
+
+
+```bash
 cat test_01_R1.fq test_54_R1.fq | grep "@" | wc -l 
 cat test_01_R1.fq test_54_R1.fq > combined.fq
 ls
@@ -197,7 +201,27 @@ ls
 
 ```
 ## 500
+## 01_linux_basics.Rmd
+## 02_bioinfx_example.Rmd
+## 999_appendices.Rmd
+## _bookdown.yml
+## _output.yml
+## bbc_bioinfx_book.rds
 ## combined.fq
+## docs
+## fastqs
+## full_fastqs
+## index.Rmd
+## index.md
+## multiqc
+## packages.bib
+## prep_render.sh
+## render34b03236ada626.rds
+## run_salmon.e
+## run_salmon.o
+## run_salmon.sh
+## salmon
 ## test_01_R1.fq
 ## test_54_R1.fq
+## toc.css
 ```
