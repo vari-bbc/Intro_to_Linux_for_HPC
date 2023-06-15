@@ -8,3 +8,6 @@ full_fastqs
 .RData
 .Ruserdata
 *.fq
+SummarizedExperiment.rds
+._.Rhistory
+._03_rnaseq_workflow.Rmd

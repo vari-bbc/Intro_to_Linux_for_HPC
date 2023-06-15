@@ -6,6 +6,17 @@
 
 [June 8, 2023; Summer workshop I](https://vanandelinstitute-my.sharepoint.com/personal/daisy_fu_vai_org/Documents/Workshop_Jun_2023/Workshop1_BBC_merged.pdf)
 
+## **Local access of files on the HPC**
+
+Mac: 
+1. Click Finder > "Go" in task bar > "Connect to Server" in the pulldown menu.
+2. Type `smb://pn.vai.org` and click "Connect".
+3. Select 'projects' and 'researchtemp'. Click "OK".
+4. You can now navigate using Finder, or type `ls /Volumes/projects/` or `ls /Volumes/researchtemp/` in the Terminal.
+
+Windows:
+* In File Explorer, type `\\pn.vai.org\` and hit Enter.
+
 ## **Bash cheatsheet**
 
 <table class="table" style="margin-left: auto; margin-right: auto;">

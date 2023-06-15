@@ -14,8 +14,8 @@ bookdown::gitbook:
       vk: false
       whatsapp: false
       all: false #['facebook', 'twitter', 'linkedin', 'weibo', 'instapaper']
-  toc:
-      collapse: section
+  # toc:
+    # collapse: section
 bookdown::pdf_book:
   keep_tex: yes
 bookdown::html_book:

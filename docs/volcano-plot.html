@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Part 7 Volcano plot | Introductory Bioinformatics for VAI Users</title>
+  <meta name="description" content="Bioinformatics tutorials with hands-on exercises and examples." />
+  <meta name="generator" content="bookdown 0.34 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Part 7 Volcano plot | Introductory Bioinformatics for VAI Users" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:description" content="Bioinformatics tutorials with hands-on exercises and examples." />
+  <meta name="github-repo" content="vari-bbc/Intro_to_Linux_for_HPC" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Part 7 Volcano plot | Introductory Bioinformatics for VAI Users" />
+  
+  <meta name="twitter:description" content="Bioinformatics tutorials with hands-on exercises and examples." />
+  
+
+<meta name="author" content="The Bioinformatics and Biostatistics Core (BBC)" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="ma-plots---shrunken-lfc.html"/>
+<link rel="next" href="p-value-distribution.html"/>
+<script src="assets/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="assets/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="assets/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="assets/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="assets/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="assets/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="assets/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="assets/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="assets/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="assets/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="assets/anchor-sections-1.1.0/anchor-sections.js"></script>
+<script src="assets/kePrint-0.0.1/kePrint.js"></script>
+<link href="assets/lightable-0.0.1/lightable.css" rel="stylesheet" />
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> <strong>Introduction</strong></a></li>
+<li class="chapter" data-level="2" data-path="basic-command-lines-for-hpc.html"><a href="basic-command-lines-for-hpc.html"><i class="fa fa-check"></i><b>2</b> <strong>Basic command lines for HPC</strong></a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="basic-command-lines-for-hpc.html"><a href="basic-command-lines-for-hpc.html#access-hpc"><i class="fa fa-check"></i><b>2.1</b> <strong>Access HPC</strong></a>
+<ul>
+<li class="chapter" data-level="2.1.1" data-path="basic-command-lines-for-hpc.html"><a href="basic-command-lines-for-hpc.html#mac-users"><i class="fa fa-check"></i><b>2.1.1</b> <strong>Mac users</strong></a></li>
+<li class="chapter" data-level="2.1.2" data-path="basic-command-lines-for-hpc.html"><a href="basic-command-lines-for-hpc.html#windows-user"><i class="fa fa-check"></i><b>2.1.2</b> <strong>Windows user</strong></a></li>
+</ul></li>
+<li class="chapter" data-level="2.2" data-path="basic-command-lines-for-hpc.html"><a href="basic-command-lines-for-hpc.html#file-navigation"><i class="fa fa-check"></i><b>2.2</b> <strong>File navigation</strong></a>
+<ul>
+<li class="chapter" data-level="2.2.1" data-path="basic-command-lines-for-hpc.html"><a href="basic-command-lines-for-hpc.html#navigate-to-a-directory"><i class="fa fa-check"></i><b>2.2.1</b> <strong>Navigate to a directory</strong></a></li>
+<li class="chapter" data-level="2.2.2" data-path="basic-command-lines-for-hpc.html"><a href="basic-command-lines-for-hpc.html#list-content-in-a-directory"><i class="fa fa-check"></i><b>2.2.2</b> <strong>List content in a directory</strong></a></li>
+<li class="chapter" data-level="2.2.3" data-path="basic-command-lines-for-hpc.html"><a href="basic-command-lines-for-hpc.html#navigate-to-home-directory"><i class="fa fa-check"></i><b>2.2.3</b> <strong>Navigate to home directory</strong></a></li>
+<li class="chapter" data-level="2.2.4" data-path="basic-command-lines-for-hpc.html"><a href="basic-command-lines-for-hpc.html#create-a-directory"><i class="fa fa-check"></i><b>2.2.4</b> <strong>Create a directory</strong></a></li>
+<li class="chapter" data-level="2.2.5" data-path="basic-command-lines-for-hpc.html"><a href="basic-command-lines-for-hpc.html#copy-a-file"><i class="fa fa-check"></i><b>2.2.5</b> <strong>Copy a file</strong></a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="basic-command-lines-for-hpc.html"><a href="basic-command-lines-for-hpc.html#view-and-manipulate-files"><i class="fa fa-check"></i><b>2.3</b> <strong>View and manipulate files</strong></a>
+<ul>
+<li class="chapter" data-level="2.3.1" data-path="basic-command-lines-for-hpc.html"><a href="basic-command-lines-for-hpc.html#display-content"><i class="fa fa-check"></i><b>2.3.1</b> <strong>Display content</strong></a></li>
+<li class="chapter" data-level="2.3.2" data-path="basic-command-lines-for-hpc.html"><a href="basic-command-lines-for-hpc.html#pattern-search"><i class="fa fa-check"></i><b>2.3.2</b> <strong>Pattern search</strong></a></li>
+<li class="chapter" data-level="2.3.3" data-path="basic-command-lines-for-hpc.html"><a href="basic-command-lines-for-hpc.html#display-the-number-of-words-lines-and-characters"><i class="fa fa-check"></i><b>2.3.3</b> <strong>Display the number of words, lines, and characters</strong></a></li>
+<li class="chapter" data-level="2.3.4" data-path="basic-command-lines-for-hpc.html"><a href="basic-command-lines-for-hpc.html#list-the-content-as-stdout"><i class="fa fa-check"></i><b>2.3.4</b> <strong>List the content as stdout</strong></a></li>
+<li class="chapter" data-level="2.3.5" data-path="basic-command-lines-for-hpc.html"><a href="basic-command-lines-for-hpc.html#pipe---redirection"><i class="fa fa-check"></i><b>2.3.5</b> <strong>Pipe - redirection</strong></a></li>
+</ul></li>
+<li class="chapter" data-level="2.4" data-path="basic-command-lines-for-hpc.html"><a href="basic-command-lines-for-hpc.html#exercise"><i class="fa fa-check"></i><b>2.4</b> <strong>Exercise</strong></a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="mini-project.html"><a href="mini-project.html"><i class="fa fa-check"></i><b>3</b> <strong>Mini Project</strong></a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="mini-project.html"><a href="mini-project.html#start-an-interactive-job"><i class="fa fa-check"></i><b>3.1</b> <strong>Start an Interactive Job</strong></a></li>
+<li class="chapter" data-level="3.2" data-path="mini-project.html"><a href="mini-project.html#create-directory"><i class="fa fa-check"></i><b>3.2</b> <strong>Create Directory</strong></a></li>
+<li class="chapter" data-level="3.3" data-path="mini-project.html"><a href="mini-project.html#copy-fastq-files-to-fastqs-subdirectory"><i class="fa fa-check"></i><b>3.3</b> <strong>Copy Fastq Files To <code>fastqs</code> subdirectory</strong></a></li>
+<li class="chapter" data-level="3.4" data-path="mini-project.html"><a href="mini-project.html#use-basic-linux-commands-to-explore-the-fastq-files"><i class="fa fa-check"></i><b>3.4</b> <strong>Use basic Linux commands to explore the fastq files</strong></a></li>
+<li class="chapter" data-level="3.5" data-path="mini-project.html"><a href="mini-project.html#working-with-environment-modules"><i class="fa fa-check"></i><b>3.5</b> <strong>Working With Environment Modules</strong></a></li>
+<li class="chapter" data-level="3.6" data-path="mini-project.html"><a href="mini-project.html#run-fastqc"><i class="fa fa-check"></i><b>3.6</b> <strong>Run FastQC</strong></a></li>
+<li class="chapter" data-level="3.7" data-path="mini-project.html"><a href="mini-project.html#set-up-a-job-script-to-run-salmon-to-align-the-reads"><i class="fa fa-check"></i><b>3.7</b> <strong>Set up a job script to run Salmon to align the reads</strong></a></li>
+<li class="chapter" data-level="3.8" data-path="mini-project.html"><a href="mini-project.html#submit-a-job"><i class="fa fa-check"></i><b>3.8</b> <strong>Submit a Job</strong></a></li>
+<li class="chapter" data-level="3.9" data-path="mini-project.html"><a href="mini-project.html#examine-the-standard-output-stdout-and-standard-error-stderr-log-files"><i class="fa fa-check"></i><b>3.9</b> <strong>Examine the Standard Output (stdout) and Standard Error (stderr) log files</strong></a></li>
+<li class="chapter" data-level="3.10" data-path="mini-project.html"><a href="mini-project.html#use-grep-to-find-the-tpms-for-a-specific-gene"><i class="fa fa-check"></i><b>3.10</b> <strong>Use grep to find the TPMs for a specific gene</strong></a></li>
+<li class="chapter" data-level="3.11" data-path="mini-project.html"><a href="mini-project.html#bonus-use-an-interactive-job-to-run-multiqc-on-the-salmon-and-fastqc-output"><i class="fa fa-check"></i><b>3.11</b> <strong>BONUS: Use an interactive job to run multiQC on the Salmon and FastQC output</strong></a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="basic-rna-seq-analysis-from-fastq-files-to-de-genes.html"><a href="basic-rna-seq-analysis-from-fastq-files-to-de-genes.html"><i class="fa fa-check"></i><b>4</b> Basic RNA-Seq Analysis – From fastq files to DE genes</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="basic-rna-seq-analysis-from-fastq-files-to-de-genes.html"><a href="basic-rna-seq-analysis-from-fastq-files-to-de-genes.html#run-the-bbc-pipeline-to-align-the-reads"><i class="fa fa-check"></i><b>4.1</b> Run the BBC pipeline to align the reads</a>
+<ul>
+<li class="chapter" data-level="4.1.1" data-path="basic-rna-seq-analysis-from-fastq-files-to-de-genes.html"><a href="basic-rna-seq-analysis-from-fastq-files-to-de-genes.html#clone-the-github-repo"><i class="fa fa-check"></i><b>4.1.1</b> Clone the Github repo</a></li>
+<li class="chapter" data-level="4.1.2" data-path="basic-rna-seq-analysis-from-fastq-files-to-de-genes.html"><a href="basic-rna-seq-analysis-from-fastq-files-to-de-genes.html#add-your-fastq-files-to-raw_data"><i class="fa fa-check"></i><b>4.1.2</b> Add your fastq files to <code>raw_data/</code></a></li>
+<li class="chapter" data-level="4.1.3" data-path="basic-rna-seq-analysis-from-fastq-files-to-de-genes.html"><a href="basic-rna-seq-analysis-from-fastq-files-to-de-genes.html#fill-out-the-samplesheet"><i class="fa fa-check"></i><b>4.1.3</b> Fill out the samplesheet</a></li>
+<li class="chapter" data-level="4.1.4" data-path="basic-rna-seq-analysis-from-fastq-files-to-de-genes.html"><a href="basic-rna-seq-analysis-from-fastq-files-to-de-genes.html#fill-out-the-config-file"><i class="fa fa-check"></i><b>4.1.4</b> Fill out the config file</a></li>
+</ul></li>
+<li class="chapter" data-level="4.2" data-path="basic-rna-seq-analysis-from-fastq-files-to-de-genes.html"><a href="basic-rna-seq-analysis-from-fastq-files-to-de-genes.html#quality-control"><i class="fa fa-check"></i><b>4.2</b> Quality control</a>
+<ul>
+<li class="chapter" data-level="4.2.1" data-path="basic-rna-seq-analysis-from-fastq-files-to-de-genes.html"><a href="basic-rna-seq-analysis-from-fastq-files-to-de-genes.html#multiqc-report"><i class="fa fa-check"></i><b>4.2.1</b> multiQC report</a></li>
+<li class="chapter" data-level="4.2.2" data-path="basic-rna-seq-analysis-from-fastq-files-to-de-genes.html"><a href="basic-rna-seq-analysis-from-fastq-files-to-de-genes.html#other-considerations"><i class="fa fa-check"></i><b>4.2.2</b> Other considerations</a></li>
+</ul></li>
+<li class="chapter" data-level="4.3" data-path="basic-rna-seq-analysis-from-fastq-files-to-de-genes.html"><a href="basic-rna-seq-analysis-from-fastq-files-to-de-genes.html#exploring-the-data-using-isee"><i class="fa fa-check"></i><b>4.3</b> Exploring the data using iSEE</a></li>
+<li class="chapter" data-level="4.4" data-path="basic-rna-seq-analysis-from-fastq-files-to-de-genes.html"><a href="basic-rna-seq-analysis-from-fastq-files-to-de-genes.html#de-analysis-using-r-and-deseq2"><i class="fa fa-check"></i><b>4.4</b> DE analysis using R and DESeq2</a>
+<ul>
+<li class="chapter" data-level="4.4.1" data-path="basic-rna-seq-analysis-from-fastq-files-to-de-genes.html"><a href="basic-rna-seq-analysis-from-fastq-files-to-de-genes.html#make-an-output-directory"><i class="fa fa-check"></i><b>4.4.1</b> Make an output directory</a></li>
+<li class="chapter" data-level="4.4.2" data-path="basic-rna-seq-analysis-from-fastq-files-to-de-genes.html"><a href="basic-rna-seq-analysis-from-fastq-files-to-de-genes.html#load-packages"><i class="fa fa-check"></i><b>4.4.2</b> Load packages</a></li>
+<li class="chapter" data-level="4.4.3" data-path="basic-rna-seq-analysis-from-fastq-files-to-de-genes.html"><a href="basic-rna-seq-analysis-from-fastq-files-to-de-genes.html#set-up-your-deseq-object"><i class="fa fa-check"></i><b>4.4.3</b> Set up your DESeq object</a></li>
+<li class="chapter" data-level="4.4.4" data-path="basic-rna-seq-analysis-from-fastq-files-to-de-genes.html"><a href="basic-rna-seq-analysis-from-fastq-files-to-de-genes.html#filter-lowly-expressed-genes"><i class="fa fa-check"></i><b>4.4.4</b> Filter lowly expressed genes</a></li>
+<li class="chapter" data-level="4.4.5" data-path="basic-rna-seq-analysis-from-fastq-files-to-de-genes.html"><a href="basic-rna-seq-analysis-from-fastq-files-to-de-genes.html#run-the-de-workflow"><i class="fa fa-check"></i><b>4.4.5</b> Run the DE workflow</a></li>
+<li class="chapter" data-level="4.4.6" data-path="basic-rna-seq-analysis-from-fastq-files-to-de-genes.html"><a href="basic-rna-seq-analysis-from-fastq-files-to-de-genes.html#shrink-log-fold-changes-for-lowly-expressed-genes"><i class="fa fa-check"></i><b>4.4.6</b> Shrink log fold changes for lowly expressed genes</a></li>
+<li class="chapter" data-level="4.4.7" data-path="basic-rna-seq-analysis-from-fastq-files-to-de-genes.html"><a href="basic-rna-seq-analysis-from-fastq-files-to-de-genes.html#summarize-de-results"><i class="fa fa-check"></i><b>4.4.7</b> Summarize DE results</a></li>
+<li class="chapter" data-level="4.4.8" data-path="basic-rna-seq-analysis-from-fastq-files-to-de-genes.html"><a href="basic-rna-seq-analysis-from-fastq-files-to-de-genes.html#output-de-results"><i class="fa fa-check"></i><b>4.4.8</b> Output DE results</a></li>
+<li class="chapter" data-level="4.4.9" data-path="basic-rna-seq-analysis-from-fastq-files-to-de-genes.html"><a href="basic-rna-seq-analysis-from-fastq-files-to-de-genes.html#look-for-specific-genes"><i class="fa fa-check"></i><b>4.4.9</b> Look for specific genes</a></li>
+<li class="chapter" data-level="4.4.10" data-path="basic-rna-seq-analysis-from-fastq-files-to-de-genes.html"><a href="basic-rna-seq-analysis-from-fastq-files-to-de-genes.html#output-tables-with-raw-counts"><i class="fa fa-check"></i><b>4.4.10</b> Output tables with raw counts</a></li>
+<li class="chapter" data-level="4.4.11" data-path="basic-rna-seq-analysis-from-fastq-files-to-de-genes.html"><a href="basic-rna-seq-analysis-from-fastq-files-to-de-genes.html#output-tables-with-log2-normalized-counts"><i class="fa fa-check"></i><b>4.4.11</b> Output tables with log2 normalized counts</a></li>
+</ul></li>
+<li class="chapter" data-level="4.5" data-path="basic-rna-seq-analysis-from-fastq-files-to-de-genes.html"><a href="basic-rna-seq-analysis-from-fastq-files-to-de-genes.html#some-common-plots-for-deg-analysis"><i class="fa fa-check"></i><b>4.5</b> Some common plots for DEG analysis</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="ma-plots---default-lfcs.html"><a href="ma-plots---default-lfcs.html"><i class="fa fa-check"></i><b>5</b> MA plots - default LFCs</a></li>
+<li class="chapter" data-level="6" data-path="ma-plots---shrunken-lfc.html"><a href="ma-plots---shrunken-lfc.html"><i class="fa fa-check"></i><b>6</b> MA plots - Shrunken LFC</a></li>
+<li class="chapter" data-level="7" data-path="volcano-plot.html"><a href="volcano-plot.html"><i class="fa fa-check"></i><b>7</b> Volcano plot</a></li>
+<li class="chapter" data-level="8" data-path="p-value-distribution.html"><a href="p-value-distribution.html"><i class="fa fa-check"></i><b>8</b> P value distribution</a></li>
+<li class="chapter" data-level="9" data-path="appendices.html"><a href="appendices.html"><i class="fa fa-check"></i><b>9</b> <strong>Appendices</strong></a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="appendices.html"><a href="appendices.html#workshop-powerpoint-files"><i class="fa fa-check"></i><b>9.1</b> <strong>Workshop Powerpoint files</strong></a></li>
+<li class="chapter" data-level="9.2" data-path="appendices.html"><a href="appendices.html#bash-cheatsheet"><i class="fa fa-check"></i><b>9.2</b> <strong>Bash cheatsheet</strong></a></li>
+</ul></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Introductory Bioinformatics for VAI Users</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="volcano-plot" class="section level1 hasAnchor" number="7">
+<h1><span class="header-section-number">Part 7</span> Volcano plot<a href="volcano-plot.html#volcano-plot" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div class="sourceCode" id="cb84"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb84-1"><a href="volcano-plot.html#cb84-1" tabindex="-1"></a>make_volcano <span class="ot">&lt;-</span> <span class="cf">function</span>(df, pval_nm, <span class="at">pval_cutoff=</span><span class="fl">0.1</span>){</span>
+<span id="cb84-2"><a href="volcano-plot.html#cb84-2" tabindex="-1"></a>  <span class="co"># remove genes with NA for pvalue</span></span>
+<span id="cb84-3"><a href="volcano-plot.html#cb84-3" tabindex="-1"></a>  df <span class="ot">&lt;-</span> df[<span class="fu">which</span>(<span class="sc">!</span><span class="fu">is.na</span>(df[[pval_nm]])), ]</span>
+<span id="cb84-4"><a href="volcano-plot.html#cb84-4" tabindex="-1"></a></span>
+<span id="cb84-5"><a href="volcano-plot.html#cb84-5" tabindex="-1"></a>  <span class="co"># add gene names</span></span>
+<span id="cb84-6"><a href="volcano-plot.html#cb84-6" tabindex="-1"></a>  df <span class="ot">&lt;-</span> <span class="fu">cbind</span>(df, <span class="fu">rowData</span>(dds)[<span class="fu">rownames</span>(df), <span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>])</span>
+<span id="cb84-7"><a href="volcano-plot.html#cb84-7" tabindex="-1"></a></span>
+<span id="cb84-8"><a href="volcano-plot.html#cb84-8" tabindex="-1"></a>  top_genes <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span></span>
+<span id="cb84-9"><a href="volcano-plot.html#cb84-9" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">arrange</span>(<span class="fu">desc</span>(<span class="fu">abs</span>(df<span class="sc">$</span>log2FoldChange))) <span class="sc">%&gt;%</span></span>
+<span id="cb84-10"><a href="volcano-plot.html#cb84-10" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">filter</span>(<span class="fu">row_number</span>() <span class="sc">&lt;=</span> <span class="dv">10</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb84-11"><a href="volcano-plot.html#cb84-11" tabindex="-1"></a>    <span class="fu">rownames</span>()</span>
+<span id="cb84-12"><a href="volcano-plot.html#cb84-12" tabindex="-1"></a></span>
+<span id="cb84-13"><a href="volcano-plot.html#cb84-13" tabindex="-1"></a>  df<span class="sc">$</span>Sig <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(df<span class="sc">$</span>padj <span class="sc">&lt;=</span> pval_cutoff, <span class="st">&quot;Sig&quot;</span>, <span class="st">&quot;NS&quot;</span>)</span>
+<span id="cb84-14"><a href="volcano-plot.html#cb84-14" tabindex="-1"></a></span>
+<span id="cb84-15"><a href="volcano-plot.html#cb84-15" tabindex="-1"></a>  df[[pval_nm]] <span class="ot">&lt;-</span> <span class="sc">-</span><span class="fu">log10</span>(df[[pval_nm]])</span>
+<span id="cb84-16"><a href="volcano-plot.html#cb84-16" tabindex="-1"></a></span>
+<span id="cb84-17"><a href="volcano-plot.html#cb84-17" tabindex="-1"></a></span>
+<span id="cb84-18"><a href="volcano-plot.html#cb84-18" tabindex="-1"></a>  <span class="fu">ggplot</span>(df, <span class="fu">aes_string</span>(<span class="at">x=</span><span class="st">&quot;log2FoldChange&quot;</span>, <span class="at">y=</span>pval_nm)) <span class="sc">+</span></span>
+<span id="cb84-19"><a href="volcano-plot.html#cb84-19" tabindex="-1"></a>    <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">color=</span>Sig), <span class="at">size=</span><span class="fl">0.6</span>) <span class="sc">+</span></span>
+<span id="cb84-20"><a href="volcano-plot.html#cb84-20" tabindex="-1"></a>    <span class="fu">scale_color_manual</span>(<span class="at">values=</span><span class="fu">c</span>(<span class="st">&quot;black&quot;</span>, <span class="st">&quot;salmon&quot;</span>)) <span class="sc">+</span></span>
+<span id="cb84-21"><a href="volcano-plot.html#cb84-21" tabindex="-1"></a>    <span class="fu">theme_bw</span>() <span class="sc">+</span> <span class="fu">ylab</span>(<span class="fu">str_glue</span>(<span class="st">&quot;-log10(&quot;</span>, pval_nm,<span class="st">&quot;)&quot;</span>)) <span class="sc">+</span></span>
+<span id="cb84-22"><a href="volcano-plot.html#cb84-22" tabindex="-1"></a>    <span class="fu">geom_text_repel</span>(<span class="at">data=</span>df[top_genes, ],</span>
+<span id="cb84-23"><a href="volcano-plot.html#cb84-23" tabindex="-1"></a>                    <span class="fu">aes</span>(<span class="at">label=</span>Uniq_syms), <span class="at">max.overlaps=</span><span class="cn">Inf</span>, <span class="at">min.segment.length =</span> <span class="dv">0</span>)</span>
+<span id="cb84-24"><a href="volcano-plot.html#cb84-24" tabindex="-1"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb85"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb85-1"><a href="volcano-plot.html#cb85-1" tabindex="-1"></a><span class="fu">make_volcano</span>(<span class="fu">as.data.frame</span>(lfc_shrink),</span>
+<span id="cb85-2"><a href="volcano-plot.html#cb85-2" tabindex="-1"></a>             <span class="at">pval_nm=</span><span class="st">&quot;padj&quot;</span>, <span class="at">pval_cutoff=</span>fdr_cutoff)</span></code></pre></div>
+<pre><code>## Warning: `aes_string()` was deprecated in ggplot2 3.0.0.
+## ℹ Please use tidy evaluation idioms with `aes()`.
+## ℹ See also `vignette(&quot;ggplot2-in-packages&quot;)` for more information.
+## This warning is displayed once every 8 hours.
+## Call `lifecycle::last_lifecycle_warnings()` to see where this warning was generated.</code></pre>
+<p><img src="03_rnaseq_workflow_files/figure-html/volcano-1.svg" width="384" /></p>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="ma-plots---shrunken-lfc.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="p-value-distribution.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="assets/gitbook-2.6.7/js/app.min.js"></script>
+<script src="assets/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="assets/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="assets/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="assets/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="assets/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="assets/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="assets/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": true,
+"facebook": false,
+"twitter": false,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": false
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+},
+"toolbar": {
+"position": "static"
+}
+});
+});
+</script>
+
+</body>
+
+</html>
