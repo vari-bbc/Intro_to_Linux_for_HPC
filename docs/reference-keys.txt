@@ -58,6 +58,9 @@ some-common-plots-for-deg-analysis
 volcano-plot
 heatmap
 p-value-distribution
+pathway-enrichment-and-experimental-design
+downstream-of-de-gene-analysis
+copy-the-project-directory
 appendices
 workshop-powerpoint-files
 local-access-of-files-on-the-hpc

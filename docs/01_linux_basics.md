@@ -205,6 +205,7 @@ ls
 ## 02_bioinfx_example.Rmd
 ## 03_rnaseq_workflow.Rmd
 ## 03_rnaseq_workflow_files
+## 04_pathway_enrichment.Rmd
 ## 999_appendices.Rmd
 ## SummarizedExperiment.rds
 ## _bookdown.yml
@@ -221,7 +222,7 @@ ls
 ## multiqc
 ## packages.bib
 ## prep_render.sh
-## render110e63d936524.rds
+## render3bf38255731e8b.rds
 ## run_salmon.e
 ## run_salmon.o
 ## run_salmon.sh
