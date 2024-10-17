@@ -1,0 +1,635 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Part 2 Basic Command Line Utilities on the HPC | Introductory Bioinformatics for VAI Users</title>
+  <meta name="description" content="Bioinformatics tutorials with hands-on exercises and examples." />
+  <meta name="generator" content="bookdown 0.36 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Part 2 Basic Command Line Utilities on the HPC | Introductory Bioinformatics for VAI Users" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:description" content="Bioinformatics tutorials with hands-on exercises and examples." />
+  <meta name="github-repo" content="vari-bbc/Intro_to_Linux_for_HPC" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Part 2 Basic Command Line Utilities on the HPC | Introductory Bioinformatics for VAI Users" />
+  
+  <meta name="twitter:description" content="Bioinformatics tutorials with hands-on exercises and examples." />
+  
+
+<meta name="author" content="The Bioinformatics and Biostatistics Core (BBC)" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="index.html"/>
+<link rel="next" href="mini-project.html"/>
+<script src="assets/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="assets/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="assets/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="assets/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="assets/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="assets/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="assets/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="assets/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="assets/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="assets/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="assets/anchor-sections-1.1.0/anchor-sections.js"></script>
+<script src="assets/kePrint-0.0.1/kePrint.js"></script>
+<link href="assets/lightable-0.0.1/lightable.css" rel="stylesheet" />
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> <strong>Introduction</strong></a></li>
+<li class="chapter" data-level="2" data-path="basic-command-line-utilities-on-the-hpc.html"><a href="basic-command-line-utilities-on-the-hpc.html"><i class="fa fa-check"></i><b>2</b> <strong>Basic Command Line Utilities on the HPC</strong></a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="basic-command-line-utilities-on-the-hpc.html"><a href="basic-command-line-utilities-on-the-hpc.html#access-hpc"><i class="fa fa-check"></i><b>2.1</b> <strong>Access HPC</strong></a>
+<ul>
+<li class="chapter" data-level="2.1.1" data-path="basic-command-line-utilities-on-the-hpc.html"><a href="basic-command-line-utilities-on-the-hpc.html#ondemand-instructions"><i class="fa fa-check"></i><b>2.1.1</b> <strong>OnDemand Instructions</strong></a></li>
+</ul></li>
+<li class="chapter" data-level="2.2" data-path="basic-command-line-utilities-on-the-hpc.html"><a href="basic-command-line-utilities-on-the-hpc.html#file-navigation"><i class="fa fa-check"></i><b>2.2</b> <strong>File navigation</strong></a>
+<ul>
+<li class="chapter" data-level="2.2.1" data-path="basic-command-line-utilities-on-the-hpc.html"><a href="basic-command-line-utilities-on-the-hpc.html#navigate-to-a-directory-folder"><i class="fa fa-check"></i><b>2.2.1</b> <strong>Navigate to a directory (folder)</strong></a></li>
+<li class="chapter" data-level="2.2.2" data-path="basic-command-line-utilities-on-the-hpc.html"><a href="basic-command-line-utilities-on-the-hpc.html#list-content-in-a-directory"><i class="fa fa-check"></i><b>2.2.2</b> <strong>List content in a directory</strong></a></li>
+<li class="chapter" data-level="2.2.3" data-path="basic-command-line-utilities-on-the-hpc.html"><a href="basic-command-line-utilities-on-the-hpc.html#navigate-back-to-home-directory"><i class="fa fa-check"></i><b>2.2.3</b> <strong>Navigate back to home directory</strong></a></li>
+<li class="chapter" data-level="2.2.4" data-path="basic-command-line-utilities-on-the-hpc.html"><a href="basic-command-line-utilities-on-the-hpc.html#create-a-directory"><i class="fa fa-check"></i><b>2.2.4</b> <strong>Create a directory</strong></a></li>
+<li class="chapter" data-level="2.2.5" data-path="basic-command-line-utilities-on-the-hpc.html"><a href="basic-command-line-utilities-on-the-hpc.html#copy-a-file"><i class="fa fa-check"></i><b>2.2.5</b> <strong>Copy a file</strong></a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="basic-command-line-utilities-on-the-hpc.html"><a href="basic-command-line-utilities-on-the-hpc.html#view-and-manipulate-files"><i class="fa fa-check"></i><b>2.3</b> <strong>View and manipulate files</strong></a>
+<ul>
+<li class="chapter" data-level="2.3.1" data-path="basic-command-line-utilities-on-the-hpc.html"><a href="basic-command-line-utilities-on-the-hpc.html#display-content"><i class="fa fa-check"></i><b>2.3.1</b> <strong>Display content</strong></a></li>
+<li class="chapter" data-level="2.3.2" data-path="basic-command-line-utilities-on-the-hpc.html"><a href="basic-command-line-utilities-on-the-hpc.html#pattern-search"><i class="fa fa-check"></i><b>2.3.2</b> <strong>Pattern search</strong></a></li>
+<li class="chapter" data-level="2.3.3" data-path="basic-command-line-utilities-on-the-hpc.html"><a href="basic-command-line-utilities-on-the-hpc.html#display-the-number-of-words-lines-and-characters"><i class="fa fa-check"></i><b>2.3.3</b> <strong>Display the number of words, lines, and characters</strong></a></li>
+<li class="chapter" data-level="2.3.4" data-path="basic-command-line-utilities-on-the-hpc.html"><a href="basic-command-line-utilities-on-the-hpc.html#pipe---redirection"><i class="fa fa-check"></i><b>2.3.4</b> <strong>Pipe - redirection</strong></a></li>
+<li class="chapter" data-level="2.3.5" data-path="basic-command-line-utilities-on-the-hpc.html"><a href="basic-command-line-utilities-on-the-hpc.html#output-redirection"><i class="fa fa-check"></i><b>2.3.5</b> <strong>Output redirection</strong></a></li>
+</ul></li>
+<li class="chapter" data-level="2.4" data-path="basic-command-line-utilities-on-the-hpc.html"><a href="basic-command-line-utilities-on-the-hpc.html#exercise"><i class="fa fa-check"></i><b>2.4</b> <strong>Exercise</strong></a>
+<ul>
+<li class="chapter" data-level="2.4.1" data-path="basic-command-line-utilities-on-the-hpc.html"><a href="basic-command-line-utilities-on-the-hpc.html#step-1-copy-the-files"><i class="fa fa-check"></i><b>2.4.1</b> <strong>Step 1: Copy the files</strong></a></li>
+<li class="chapter" data-level="2.4.2" data-path="basic-command-line-utilities-on-the-hpc.html"><a href="basic-command-line-utilities-on-the-hpc.html#step-2-combine-the-files"><i class="fa fa-check"></i><b>2.4.2</b> <strong>Step 2: Combine the files</strong></a></li>
+<li class="chapter" data-level="2.4.3" data-path="basic-command-line-utilities-on-the-hpc.html"><a href="basic-command-line-utilities-on-the-hpc.html#step-3-count-the-number-of-reads"><i class="fa fa-check"></i><b>2.4.3</b> <strong>Step 3: Count the number of reads</strong></a></li>
+</ul></li>
+<li class="chapter" data-level="2.5" data-path="basic-command-line-utilities-on-the-hpc.html"><a href="basic-command-line-utilities-on-the-hpc.html#summary"><i class="fa fa-check"></i><b>2.5</b> <strong>Summary</strong></a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="mini-project.html"><a href="mini-project.html"><i class="fa fa-check"></i><b>3</b> <strong>Mini Project</strong></a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="mini-project.html"><a href="mini-project.html#start-an-interactive-job"><i class="fa fa-check"></i><b>3.1</b> <strong>Start an Interactive Job</strong></a></li>
+<li class="chapter" data-level="3.2" data-path="mini-project.html"><a href="mini-project.html#create-directory"><i class="fa fa-check"></i><b>3.2</b> <strong>Create Directory</strong></a></li>
+<li class="chapter" data-level="3.3" data-path="mini-project.html"><a href="mini-project.html#copy-fastq-files-to-fastqs-subdirectory"><i class="fa fa-check"></i><b>3.3</b> <strong>Copy Fastq Files To <code>fastqs</code> subdirectory</strong></a></li>
+<li class="chapter" data-level="3.4" data-path="mini-project.html"><a href="mini-project.html#use-basic-linux-commands-to-explore-the-fastq-files"><i class="fa fa-check"></i><b>3.4</b> <strong>Use basic Linux commands to explore the fastq files</strong></a></li>
+<li class="chapter" data-level="3.5" data-path="mini-project.html"><a href="mini-project.html#working-with-environment-modules"><i class="fa fa-check"></i><b>3.5</b> <strong>Working With Environment Modules</strong></a></li>
+<li class="chapter" data-level="3.6" data-path="mini-project.html"><a href="mini-project.html#run-fastqc"><i class="fa fa-check"></i><b>3.6</b> <strong>Run FastQC</strong></a></li>
+<li class="chapter" data-level="3.7" data-path="mini-project.html"><a href="mini-project.html#set-up-a-job-script-to-run-salmon-to-align-the-reads"><i class="fa fa-check"></i><b>3.7</b> <strong>Set up a job script to run Salmon to align the reads</strong></a></li>
+<li class="chapter" data-level="3.8" data-path="mini-project.html"><a href="mini-project.html#submit-a-job"><i class="fa fa-check"></i><b>3.8</b> <strong>Submit a Job</strong></a></li>
+<li class="chapter" data-level="3.9" data-path="mini-project.html"><a href="mini-project.html#examine-the-standard-output-stdout-and-standard-error-stderr-log-files"><i class="fa fa-check"></i><b>3.9</b> <strong>Examine the Standard Output (stdout) and Standard Error (stderr) log files</strong></a></li>
+<li class="chapter" data-level="3.10" data-path="mini-project.html"><a href="mini-project.html#use-grep-to-find-the-tpms-for-a-specific-gene"><i class="fa fa-check"></i><b>3.10</b> <strong>Use grep to find the TPMs for a specific gene</strong></a></li>
+<li class="chapter" data-level="3.11" data-path="mini-project.html"><a href="mini-project.html#bonus-use-an-interactive-job-to-run-multiqc-on-the-salmon-and-fastqc-output"><i class="fa fa-check"></i><b>3.11</b> <strong>BONUS: Use an interactive job to run multiQC on the Salmon and FastQC output</strong></a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="basic-rna-seq-analysis-from-fastq-files-to-de-genes.html"><a href="basic-rna-seq-analysis-from-fastq-files-to-de-genes.html"><i class="fa fa-check"></i><b>4</b> <strong>Basic RNA-Seq Analysis – From fastq files to DE genes</strong></a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="basic-rna-seq-analysis-from-fastq-files-to-de-genes.html"><a href="basic-rna-seq-analysis-from-fastq-files-to-de-genes.html#run-the-bbc-pipeline-to-align-the-reads"><i class="fa fa-check"></i><b>4.1</b> <strong>Run the BBC pipeline to align the reads</strong></a>
+<ul>
+<li class="chapter" data-level="4.1.1" data-path="basic-rna-seq-analysis-from-fastq-files-to-de-genes.html"><a href="basic-rna-seq-analysis-from-fastq-files-to-de-genes.html#the-workflow-as-a-graph"><i class="fa fa-check"></i><b>4.1.1</b> <strong>The workflow as a graph</strong></a></li>
+<li class="chapter" data-level="4.1.2" data-path="basic-rna-seq-analysis-from-fastq-files-to-de-genes.html"><a href="basic-rna-seq-analysis-from-fastq-files-to-de-genes.html#clone-the-github-repo"><i class="fa fa-check"></i><b>4.1.2</b> <strong>Clone the Github repo</strong></a></li>
+<li class="chapter" data-level="4.1.3" data-path="basic-rna-seq-analysis-from-fastq-files-to-de-genes.html"><a href="basic-rna-seq-analysis-from-fastq-files-to-de-genes.html#add-your-fastq-files-to-raw_data"><i class="fa fa-check"></i><b>4.1.3</b> <strong>Add your fastq files to <code>raw_data/</code></strong></a></li>
+<li class="chapter" data-level="4.1.4" data-path="basic-rna-seq-analysis-from-fastq-files-to-de-genes.html"><a href="basic-rna-seq-analysis-from-fastq-files-to-de-genes.html#fill-out-the-samplesheet"><i class="fa fa-check"></i><b>4.1.4</b> <strong>Fill out the samplesheet</strong></a></li>
+<li class="chapter" data-level="4.1.5" data-path="basic-rna-seq-analysis-from-fastq-files-to-de-genes.html"><a href="basic-rna-seq-analysis-from-fastq-files-to-de-genes.html#fill-out-the-config-file"><i class="fa fa-check"></i><b>4.1.5</b> <strong>Fill out the config file</strong></a></li>
+<li class="chapter" data-level="4.1.6" data-path="basic-rna-seq-analysis-from-fastq-files-to-de-genes.html"><a href="basic-rna-seq-analysis-from-fastq-files-to-de-genes.html#submit-the-main-snakemake-job"><i class="fa fa-check"></i><b>4.1.6</b> <strong>Submit the main Snakemake job</strong></a></li>
+<li class="chapter" data-level="4.1.7" data-path="basic-rna-seq-analysis-from-fastq-files-to-de-genes.html"><a href="basic-rna-seq-analysis-from-fastq-files-to-de-genes.html#bbc-maintained-reference-files"><i class="fa fa-check"></i><b>4.1.7</b> <strong>BBC-maintained reference files</strong></a></li>
+</ul></li>
+<li class="chapter" data-level="4.2" data-path="basic-rna-seq-analysis-from-fastq-files-to-de-genes.html"><a href="basic-rna-seq-analysis-from-fastq-files-to-de-genes.html#quality-control"><i class="fa fa-check"></i><b>4.2</b> <strong>Quality control</strong></a>
+<ul>
+<li class="chapter" data-level="4.2.1" data-path="basic-rna-seq-analysis-from-fastq-files-to-de-genes.html"><a href="basic-rna-seq-analysis-from-fastq-files-to-de-genes.html#multiqc-report"><i class="fa fa-check"></i><b>4.2.1</b> <strong>multiQC report</strong></a></li>
+<li class="chapter" data-level="4.2.2" data-path="basic-rna-seq-analysis-from-fastq-files-to-de-genes.html"><a href="basic-rna-seq-analysis-from-fastq-files-to-de-genes.html#other-considerations"><i class="fa fa-check"></i><b>4.2.2</b> <strong>Other considerations</strong></a></li>
+</ul></li>
+<li class="chapter" data-level="4.3" data-path="basic-rna-seq-analysis-from-fastq-files-to-de-genes.html"><a href="basic-rna-seq-analysis-from-fastq-files-to-de-genes.html#exploring-the-data-using-isee"><i class="fa fa-check"></i><b>4.3</b> <strong>Exploring the data using iSEE</strong></a></li>
+<li class="chapter" data-level="4.4" data-path="basic-rna-seq-analysis-from-fastq-files-to-de-genes.html"><a href="basic-rna-seq-analysis-from-fastq-files-to-de-genes.html#de-analysis-using-r-and-deseq2"><i class="fa fa-check"></i><b>4.4</b> <strong>DE analysis using R and DESeq2</strong></a>
+<ul>
+<li class="chapter" data-level="4.4.1" data-path="basic-rna-seq-analysis-from-fastq-files-to-de-genes.html"><a href="basic-rna-seq-analysis-from-fastq-files-to-de-genes.html#make-an-output-directory"><i class="fa fa-check"></i><b>4.4.1</b> <strong>Make an output directory</strong></a></li>
+<li class="chapter" data-level="4.4.2" data-path="basic-rna-seq-analysis-from-fastq-files-to-de-genes.html"><a href="basic-rna-seq-analysis-from-fastq-files-to-de-genes.html#load-packages"><i class="fa fa-check"></i><b>4.4.2</b> <strong>Load packages</strong></a></li>
+<li class="chapter" data-level="4.4.3" data-path="basic-rna-seq-analysis-from-fastq-files-to-de-genes.html"><a href="basic-rna-seq-analysis-from-fastq-files-to-de-genes.html#set-up-your-deseq-object"><i class="fa fa-check"></i><b>4.4.3</b> <strong>Set up your DESeq object</strong></a></li>
+<li class="chapter" data-level="4.4.4" data-path="basic-rna-seq-analysis-from-fastq-files-to-de-genes.html"><a href="basic-rna-seq-analysis-from-fastq-files-to-de-genes.html#remove-genes-with-lowno-expression"><i class="fa fa-check"></i><b>4.4.4</b> <strong>Remove genes with low/no expression</strong></a></li>
+<li class="chapter" data-level="4.4.5" data-path="basic-rna-seq-analysis-from-fastq-files-to-de-genes.html"><a href="basic-rna-seq-analysis-from-fastq-files-to-de-genes.html#different-normalization-approaches-for-different-biases"><i class="fa fa-check"></i><b>4.4.5</b> <strong>Different normalization approaches for different biases</strong></a></li>
+<li class="chapter" data-level="4.4.6" data-path="basic-rna-seq-analysis-from-fastq-files-to-de-genes.html"><a href="basic-rna-seq-analysis-from-fastq-files-to-de-genes.html#run-the-de-workflow"><i class="fa fa-check"></i><b>4.4.6</b> <strong>Run the DE workflow</strong></a></li>
+<li class="chapter" data-level="4.4.7" data-path="basic-rna-seq-analysis-from-fastq-files-to-de-genes.html"><a href="basic-rna-seq-analysis-from-fastq-files-to-de-genes.html#summarize-de-results"><i class="fa fa-check"></i><b>4.4.7</b> <strong>Summarize DE results</strong></a></li>
+<li class="chapter" data-level="4.4.8" data-path="basic-rna-seq-analysis-from-fastq-files-to-de-genes.html"><a href="basic-rna-seq-analysis-from-fastq-files-to-de-genes.html#shrink-log-fold-changes-for-lowly-expressed-genes"><i class="fa fa-check"></i><b>4.4.8</b> <strong>Shrink log fold changes for lowly expressed genes</strong></a></li>
+<li class="chapter" data-level="4.4.9" data-path="basic-rna-seq-analysis-from-fastq-files-to-de-genes.html"><a href="basic-rna-seq-analysis-from-fastq-files-to-de-genes.html#output-de-results"><i class="fa fa-check"></i><b>4.4.9</b> <strong>Output DE results</strong></a></li>
+<li class="chapter" data-level="4.4.10" data-path="basic-rna-seq-analysis-from-fastq-files-to-de-genes.html"><a href="basic-rna-seq-analysis-from-fastq-files-to-de-genes.html#look-for-specific-genes"><i class="fa fa-check"></i><b>4.4.10</b> <strong>Look for specific genes</strong></a></li>
+<li class="chapter" data-level="4.4.11" data-path="basic-rna-seq-analysis-from-fastq-files-to-de-genes.html"><a href="basic-rna-seq-analysis-from-fastq-files-to-de-genes.html#output-tables-with-raw-counts"><i class="fa fa-check"></i><b>4.4.11</b> <strong>Output tables with raw counts</strong></a></li>
+<li class="chapter" data-level="4.4.12" data-path="basic-rna-seq-analysis-from-fastq-files-to-de-genes.html"><a href="basic-rna-seq-analysis-from-fastq-files-to-de-genes.html#output-tables-with-log2-normalized-counts"><i class="fa fa-check"></i><b>4.4.12</b> <strong>Output tables with log2 normalized counts</strong></a></li>
+</ul></li>
+<li class="chapter" data-level="4.5" data-path="basic-rna-seq-analysis-from-fastq-files-to-de-genes.html"><a href="basic-rna-seq-analysis-from-fastq-files-to-de-genes.html#some-common-plots-for-deg-analysis"><i class="fa fa-check"></i><b>4.5</b> <strong>Some common plots for DEG analysis</strong></a>
+<ul>
+<li class="chapter" data-level="4.5.1" data-path="basic-rna-seq-analysis-from-fastq-files-to-de-genes.html"><a href="basic-rna-seq-analysis-from-fastq-files-to-de-genes.html#volcano-plot"><i class="fa fa-check"></i><b>4.5.1</b> <strong>Volcano plot</strong></a></li>
+<li class="chapter" data-level="4.5.2" data-path="basic-rna-seq-analysis-from-fastq-files-to-de-genes.html"><a href="basic-rna-seq-analysis-from-fastq-files-to-de-genes.html#heatmap"><i class="fa fa-check"></i><b>4.5.2</b> <strong>Heatmap</strong></a></li>
+<li class="chapter" data-level="4.5.3" data-path="basic-rna-seq-analysis-from-fastq-files-to-de-genes.html"><a href="basic-rna-seq-analysis-from-fastq-files-to-de-genes.html#p-value-distribution"><i class="fa fa-check"></i><b>4.5.3</b> <strong>P value distribution</strong></a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="pathway-enrichment-and-experimental-design.html"><a href="pathway-enrichment-and-experimental-design.html"><i class="fa fa-check"></i><b>5</b> <strong>Pathway, enrichment, and experimental design</strong></a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="pathway-enrichment-and-experimental-design.html"><a href="pathway-enrichment-and-experimental-design.html#downstream-of-de-gene-analysis"><i class="fa fa-check"></i><b>5.1</b> <strong>Downstream of DE gene analysis</strong></a>
+<ul>
+<li class="chapter" data-level="5.1.1" data-path="pathway-enrichment-and-experimental-design.html"><a href="pathway-enrichment-and-experimental-design.html#copy-the-project-directory"><i class="fa fa-check"></i><b>5.1.1</b> <strong>Copy the project directory</strong></a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="appendices.html"><a href="appendices.html"><i class="fa fa-check"></i><b>6</b> <strong>Appendices</strong></a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="appendices.html"><a href="appendices.html#workshop-powerpoint-files"><i class="fa fa-check"></i><b>6.1</b> <strong>Workshop Powerpoint files</strong></a></li>
+<li class="chapter" data-level="6.2" data-path="appendices.html"><a href="appendices.html#local-access-of-files-on-the-hpc"><i class="fa fa-check"></i><b>6.2</b> <strong>Local access of files on the HPC</strong></a></li>
+<li class="chapter" data-level="6.3" data-path="appendices.html"><a href="appendices.html#bash-cheatsheet"><i class="fa fa-check"></i><b>6.3</b> <strong>Bash cheatsheet</strong></a></li>
+</ul></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Introductory Bioinformatics for VAI Users</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="basic-command-line-utilities-on-the-hpc" class="section level1 hasAnchor" number="2">
+<h1><span class="header-section-number">Part 2</span> <strong>Basic Command Line Utilities on the HPC</strong><a href="basic-command-line-utilities-on-the-hpc.html#basic-command-line-utilities-on-the-hpc" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="access-hpc" class="section level2 hasAnchor" number="2.1">
+<h2><span class="header-section-number">2.1</span> <strong>Access HPC</strong><a href="basic-command-line-utilities-on-the-hpc.html#access-hpc" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Ensure that your laptop is connected to wifi “vai”, not “vai-guest”.</p>
+<details>
+<summary>
+<strong>archived content:</strong> previous ssh connection instructions
+</summary>
+<blockquote>
+<p><strong>Note:</strong>
+The platform-specific instructions below are <strong>hidden by default</strong> because of the
+newer HPC OnDemand platform, which we can all access from our laptops using a
+web browser.</p>
+<p>However, for archival purposes, we will still provide the platform-specific
+instructions to access the HPC on your laptop.</p>
+<div id="mac-users" class="section level4 hasAnchor" number="2.1.0.1">
+<h4><span class="header-section-number">2.1.0.1</span> <strong>Mac users</strong><a href="basic-command-line-utilities-on-the-hpc.html#mac-users" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<ol style="list-style-type: decimal">
+<li>Open your terminal (search for the app)</li>
+<li>Type the following command to connect to the HPC.
+<em>Replace <code>firstname.lastname</code> with your actual VAI username.</em></li>
+</ol>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="basic-command-line-utilities-on-the-hpc.html#cb1-1" tabindex="-1"></a><span class="fu">ssh</span> firstname.lastname@access.hpc.vai.org</span></code></pre></div>
+<ol start="3" style="list-style-type: decimal">
+<li>Enter your VAI password. (Note: you will not see the password as you type it,
+but it <em>is</em> working! Press your enter/return key when you’re done.)</li>
+</ol>
+</div>
+<div id="windows-users" class="section level4 hasAnchor" number="2.1.0.2">
+<h4><span class="header-section-number">2.1.0.2</span> <strong>Windows users</strong><a href="basic-command-line-utilities-on-the-hpc.html#windows-users" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>If MobaXterm is not installed, please download the <a href="https://mobaxterm.mobatek.net/download.html">free MobaXterm version</a>, then set up, and agree with license agreements to proceed installation.</p>
+<ol style="list-style-type: decimal">
+<li>Open MobaXterm</li>
+<li>Click on <code>Session</code> in the top left corner</li>
+<li>Click on <code>SSH</code>(Secure Shell)</li>
+<li>Enter <code>access.hpc.vai.org</code> in the Remote host field</li>
+<li>Click the box on the left of Specify username, then enter your VAI <code>username</code> and <code>password</code></li>
+<li>Click <code>OK</code></li>
+</ol>
+</blockquote>
+</details>
+</div>
+<div id="ondemand-instructions" class="section level3 hasAnchor" number="2.1.1">
+<h3><span class="header-section-number">2.1.1</span> <strong>OnDemand Instructions</strong><a href="basic-command-line-utilities-on-the-hpc.html#ondemand-instructions" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>OnDemand is a web-based portal that lets you access the HPC resources right from your browser, without needing VPN or ssh tools on your local computer.
+You can read more about this on the <a href="https://vanandelinstitute.sharepoint.com/sites/SC/SitePages/HPC-OnDemand.aspx">HPC OnDemand sharepoint page</a>.</p>
+<p>Below are the steps to access the HPC command line using OnDemand:</p>
+<ol style="list-style-type: decimal">
+<li>Open a web browser (Chrome, Firefox, Safari, etc.)</li>
+<li>Go to the following URL: <a href="https://ondemand3.vai.zone/">https://ondemand3.vai.zone/</a>
+<ul>
+<li>if you see an error, try this instead: <a href="https://ondemandlocal.hpc.vai.org/">https://ondemandlocal.hpc.vai.org</a></li>
+<li>if neither or those links work, please let us know!</li>
+</ul></li>
+<li>Select “hpc Shell Access” from the list of several “pinned apps”. (“hpc Shell Access” is similar to the terminal on your laptop)</li>
+</ol>
+<p>Congrats – you’ve successfully connected to the HPC!</p>
+</div>
+</div>
+<div id="file-navigation" class="section level2 hasAnchor" number="2.2">
+<h2><span class="header-section-number">2.2</span> <strong>File navigation</strong><a href="basic-command-line-utilities-on-the-hpc.html#file-navigation" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Practice directory: <code>/varidata/researchtemp/hpctmp/BBC_workshop_Oct2024_II</code>.</p>
+<div id="navigate-to-a-directory-folder" class="section level3 hasAnchor" number="2.2.1">
+<h3><span class="header-section-number">2.2.1</span> <strong>Navigate to a directory (folder)</strong><a href="basic-command-line-utilities-on-the-hpc.html#navigate-to-a-directory-folder" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p><code>cd</code> - Change Directory. Allows you to navigate to a different directory (folder).
+Note the following special symbols:</p>
+<ul>
+<li><code>.</code> refers to the folder you’re currently in (your “working” directory).</li>
+<li><code>..</code> refers to the folder before where you currently are - this is your “parent” directory.</li>
+<li><code>/</code> is the root directory.</li>
+<li><code>~</code> is your personal home directory.</li>
+</ul>
+<p><code>pwd</code> - Print Working Directory. Displays the current directory (folder) you are in.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb2-1"><a href="basic-command-line-utilities-on-the-hpc.html#cb2-1" tabindex="-1"></a><span class="co"># Display the current directory</span></span>
+<span id="cb2-2"><a href="basic-command-line-utilities-on-the-hpc.html#cb2-2" tabindex="-1"></a><span class="bu">pwd</span></span>
+<span id="cb2-3"><a href="basic-command-line-utilities-on-the-hpc.html#cb2-3" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="basic-command-line-utilities-on-the-hpc.html#cb2-4" tabindex="-1"></a><span class="co"># Change to the practice directory</span></span>
+<span id="cb2-5"><a href="basic-command-line-utilities-on-the-hpc.html#cb2-5" tabindex="-1"></a><span class="bu">cd</span> /varidata/researchtemp/hpctmp/BBC_workshop_Oct2024_II</span>
+<span id="cb2-6"><a href="basic-command-line-utilities-on-the-hpc.html#cb2-6" tabindex="-1"></a></span>
+<span id="cb2-7"><a href="basic-command-line-utilities-on-the-hpc.html#cb2-7" tabindex="-1"></a><span class="co"># Display the current directory again to confirm the change</span></span>
+<span id="cb2-8"><a href="basic-command-line-utilities-on-the-hpc.html#cb2-8" tabindex="-1"></a><span class="bu">pwd</span></span></code></pre></div>
+<pre><code>## /home/kaitlyn.denhaan
+## /varidata/researchtemp/hpctmp/BBC_workshop_Oct2024_II</code></pre>
+</div>
+<div id="list-content-in-a-directory" class="section level3 hasAnchor" number="2.2.2">
+<h3><span class="header-section-number">2.2.2</span> <strong>List content in a directory</strong><a href="basic-command-line-utilities-on-the-hpc.html#list-content-in-a-directory" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<ul>
+<li><code>ls</code> - list contents (files and folders). Without anything specified after <code>ls</code>, it will list what’s in the current directory.
+<ul>
+<li><code>ls -lht</code> – list contents, with added options (<code>-l</code> more details in a <em>long</em> list, <code>-h</code> <em>h</em>uman-readable sizes, <code>t</code> sorted by modification <em>t</em>ime).<br />
+</li>
+<li><code>ls foldername</code> - list contents of the specified folder.</li>
+</ul></li>
+</ul>
+<p>Shows more details about the files and folders,</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb4-1"><a href="basic-command-line-utilities-on-the-hpc.html#cb4-1" tabindex="-1"></a><span class="fu">ls</span></span>
+<span id="cb4-2"><a href="basic-command-line-utilities-on-the-hpc.html#cb4-2" tabindex="-1"></a><span class="fu">ls</span> <span class="at">-lht</span></span>
+<span id="cb4-3"><a href="basic-command-line-utilities-on-the-hpc.html#cb4-3" tabindex="-1"></a><span class="fu">ls</span> <span class="at">-lht</span> /varidata/researchtemp/hpctmp/BBC_workshop_Oct2024_II</span>
+<span id="cb4-4"><a href="basic-command-line-utilities-on-the-hpc.html#cb4-4" tabindex="-1"></a><span class="fu">ls</span> <span class="at">-lht</span> ~</span></code></pre></div>
+</div>
+<div id="navigate-back-to-home-directory" class="section level3 hasAnchor" number="2.2.3">
+<h3><span class="header-section-number">2.2.3</span> <strong>Navigate back to home directory</strong><a href="basic-command-line-utilities-on-the-hpc.html#navigate-back-to-home-directory" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Without anything after <code>cd</code>, you will go to your home directory, which is <code>/home/username</code> (same as <code>~</code>).</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb5-1"><a href="basic-command-line-utilities-on-the-hpc.html#cb5-1" tabindex="-1"></a><span class="co"># same as &quot;cd ~&quot; or &quot;cd /home/username&quot;</span></span>
+<span id="cb5-2"><a href="basic-command-line-utilities-on-the-hpc.html#cb5-2" tabindex="-1"></a><span class="bu">cd</span></span>
+<span id="cb5-3"><a href="basic-command-line-utilities-on-the-hpc.html#cb5-3" tabindex="-1"></a></span>
+<span id="cb5-4"><a href="basic-command-line-utilities-on-the-hpc.html#cb5-4" tabindex="-1"></a><span class="co"># check: where are you now?</span></span>
+<span id="cb5-5"><a href="basic-command-line-utilities-on-the-hpc.html#cb5-5" tabindex="-1"></a><span class="bu">pwd</span></span></code></pre></div>
+</div>
+<div id="create-a-directory" class="section level3 hasAnchor" number="2.2.4">
+<h3><span class="header-section-number">2.2.4</span> <strong>Create a directory</strong><a href="basic-command-line-utilities-on-the-hpc.html#create-a-directory" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p><code>mkdir dir_name</code> - will create a directory “dir_name” in your current directory.
+You will be creating a directory in your home drectory (because we just navigated to it).</p>
+<p>Make sure you are in your home directory first (use pwd), then create a directory called “hpc_workshop_2024”</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb6-1"><a href="basic-command-line-utilities-on-the-hpc.html#cb6-1" tabindex="-1"></a><span class="bu">pwd</span></span>
+<span id="cb6-2"><a href="basic-command-line-utilities-on-the-hpc.html#cb6-2" tabindex="-1"></a><span class="fu">mkdir</span> hpc_workshop_2024</span></code></pre></div>
+</div>
+<div id="copy-a-file" class="section level3 hasAnchor" number="2.2.5">
+<h3><span class="header-section-number">2.2.5</span> <strong>Copy a file</strong><a href="basic-command-line-utilities-on-the-hpc.html#copy-a-file" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p><code>cp</code> - copy file/files</p>
+<p>Copy a file from <code>/varidata/researchtemp/hpctmp/BBC_workshop_Oct2024_II</code> to the directory you just created.</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb7-1"><a href="basic-command-line-utilities-on-the-hpc.html#cb7-1" tabindex="-1"></a><span class="bu">pwd</span></span>
+<span id="cb7-2"><a href="basic-command-line-utilities-on-the-hpc.html#cb7-2" tabindex="-1"></a><span class="fu">cp</span> /varidata/researchtemp/hpctmp/BBC_workshop_Oct2024_II/metadata.tsv hpc_workshop_2024</span>
+<span id="cb7-3"><a href="basic-command-line-utilities-on-the-hpc.html#cb7-3" tabindex="-1"></a><span class="fu">ls</span> hpc_workshop_2024</span></code></pre></div>
+<!-- What if we want to copy *multiple* files? -->
+<!-- There are a few different ways of doing this, but we'll use `*`.  -->
+<!-- This symbol (an asterisk) can be thought of as a "select all" symbol. -->
+<!-- To copy all the files in this folder, we can use the following command: -->
+<!-- ```{bash, eval=FALSE, engine="sh"} -->
+<!-- cp /varidata/researchtemp/hpctmp/BBC_workshop_Oct2024_II/* hpc_workshop_2024 -->
+<!-- ls hpc_workshop_2024 -->
+<!-- ``` -->
+</div>
+</div>
+<div id="view-and-manipulate-files" class="section level2 hasAnchor" number="2.3">
+<h2><span class="header-section-number">2.3</span> <strong>View and manipulate files</strong><a href="basic-command-line-utilities-on-the-hpc.html#view-and-manipulate-files" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="display-content" class="section level3 hasAnchor" number="2.3.1">
+<h3><span class="header-section-number">2.3.1</span> <strong>Display content</strong><a href="basic-command-line-utilities-on-the-hpc.html#display-content" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p><code>cat</code> - display the entire contents of a file.<br />
+<code>head</code> - display the <em>first</em> 10 lines/rows of the a file.<br />
+<code>tail</code> - display the <em>last</em> 10 lines/rows of the a file. You can use “-n” to control how many lines you want to see, default is 10.</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb8-1"><a href="basic-command-line-utilities-on-the-hpc.html#cb8-1" tabindex="-1"></a><span class="bu">cd</span> ~/hpc_workshop_2024</span>
+<span id="cb8-2"><a href="basic-command-line-utilities-on-the-hpc.html#cb8-2" tabindex="-1"></a></span>
+<span id="cb8-3"><a href="basic-command-line-utilities-on-the-hpc.html#cb8-3" tabindex="-1"></a><span class="fu">cat</span> metadata.tsv</span>
+<span id="cb8-4"><a href="basic-command-line-utilities-on-the-hpc.html#cb8-4" tabindex="-1"></a><span class="fu">head</span> metadata.tsv</span>
+<span id="cb8-5"><a href="basic-command-line-utilities-on-the-hpc.html#cb8-5" tabindex="-1"></a><span class="fu">tail</span> metadata.tsv</span>
+<span id="cb8-6"><a href="basic-command-line-utilities-on-the-hpc.html#cb8-6" tabindex="-1"></a><span class="fu">head</span> <span class="at">-n</span> 2 metadata.tsv</span></code></pre></div>
+<p>The <code>cat</code> command can also be used to combine files. (This is where the command’s name comes from: con<em>cat</em>enate)
+Note that we won’t run the command below, but keep this in mind for future reference.</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb9-1"><a href="basic-command-line-utilities-on-the-hpc.html#cb9-1" tabindex="-1"></a><span class="fu">cat</span> file1.txt file2.txt <span class="op">&gt;</span> combined.txt</span></code></pre></div>
+</div>
+<div id="pattern-search" class="section level3 hasAnchor" number="2.3.2">
+<h3><span class="header-section-number">2.3.2</span> <strong>Pattern search</strong><a href="basic-command-line-utilities-on-the-hpc.html#pattern-search" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p><code>grep</code> - search a pattern by line</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb10-1"><a href="basic-command-line-utilities-on-the-hpc.html#cb10-1" tabindex="-1"></a><span class="bu">pwd</span></span>
+<span id="cb10-2"><a href="basic-command-line-utilities-on-the-hpc.html#cb10-2" tabindex="-1"></a><span class="fu">grep</span> <span class="st">&quot;13&quot;</span> metadata.tsv </span></code></pre></div>
+<pre><code>## /home/kaitlyn.denhaan/hpc_workshop_2024
+## M    13  sample 13   replicate a
+## Z    26  sample 13   replicate b</code></pre>
+</div>
+<div id="display-the-number-of-words-lines-and-characters" class="section level3 hasAnchor" number="2.3.3">
+<h3><span class="header-section-number">2.3.3</span> <strong>Display the number of words, lines, and characters</strong><a href="basic-command-line-utilities-on-the-hpc.html#display-the-number-of-words-lines-and-characters" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p><code>wc</code> - word count. It counts the number of words, lines, and characters in a file.</p>
+<p>Adding the <code>-l</code> option afterwards just gives the number of <em><strong>l</strong>ines</em> in the file.</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb12-1"><a href="basic-command-line-utilities-on-the-hpc.html#cb12-1" tabindex="-1"></a><span class="fu">wc</span> metadata.tsv</span>
+<span id="cb12-2"><a href="basic-command-line-utilities-on-the-hpc.html#cb12-2" tabindex="-1"></a><span class="fu">wc</span> <span class="at">-l</span> metadata.tsv</span></code></pre></div>
+<pre><code>##  26 156 675 metadata.tsv
+## 26 metadata.tsv</code></pre>
+</div>
+<div id="pipe---redirection" class="section level3 hasAnchor" number="2.3.4">
+<h3><span class="header-section-number">2.3.4</span> <strong>Pipe - redirection</strong><a href="basic-command-line-utilities-on-the-hpc.html#pipe---redirection" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>A pipe is a form of redirection (instead of printing output to the screen,
+it sends it to other destinations). You can send output from one command/program
+to another for further processing, such as:
+<code>command 1 | command 2 | command 3</code>.</p>
+<ul>
+<li>Above, the output from <code>command 1</code> is used as input for <code>command 2</code>, and the
+output from <code>command 2</code> is used as input for <code>command 3</code>.</li>
+</ul>
+<p>In the example below, we will use 3 commands subsequently to count the number of lines that contain the number “13” in the file.</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb14-1"><a href="basic-command-line-utilities-on-the-hpc.html#cb14-1" tabindex="-1"></a><span class="fu">cat</span> metadata.tsv <span class="kw">|</span> <span class="fu">grep</span> <span class="st">&quot;13&quot;</span> <span class="kw">|</span> <span class="fu">wc</span> <span class="at">-l</span></span></code></pre></div>
+<pre><code>## 2</code></pre>
+</div>
+<div id="output-redirection" class="section level3 hasAnchor" number="2.3.5">
+<h3><span class="header-section-number">2.3.5</span> <strong>Output redirection</strong><a href="basic-command-line-utilities-on-the-hpc.html#output-redirection" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Instead of printing output to your screen (typical command output) or
+another command (pipe), you can redirect the output to a file.</p>
+<p><code>&gt;</code> - redirect output to a file. Note that it will <strong>overwrite</strong> the file if it already exists – be careful!<br />
+<code>&gt;&gt;</code> - append output to a file. It will <strong>add the output to the end</strong> of the file.</p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb16-1"><a href="basic-command-line-utilities-on-the-hpc.html#cb16-1" tabindex="-1"></a><span class="co"># note that no output will be displayed on the screen -- it&#39;s saved in the file instead</span></span>
+<span id="cb16-2"><a href="basic-command-line-utilities-on-the-hpc.html#cb16-2" tabindex="-1"></a><span class="fu">grep</span> <span class="st">&quot;13&quot;</span> metadata.tsv <span class="op">&gt;</span> lines_with_13.tsv</span>
+<span id="cb16-3"><a href="basic-command-line-utilities-on-the-hpc.html#cb16-3" tabindex="-1"></a></span>
+<span id="cb16-4"><a href="basic-command-line-utilities-on-the-hpc.html#cb16-4" tabindex="-1"></a><span class="co"># check: do we see the file we just created?</span></span>
+<span id="cb16-5"><a href="basic-command-line-utilities-on-the-hpc.html#cb16-5" tabindex="-1"></a><span class="fu">ls</span></span>
+<span id="cb16-6"><a href="basic-command-line-utilities-on-the-hpc.html#cb16-6" tabindex="-1"></a></span>
+<span id="cb16-7"><a href="basic-command-line-utilities-on-the-hpc.html#cb16-7" tabindex="-1"></a><span class="co"># display the content of the file</span></span>
+<span id="cb16-8"><a href="basic-command-line-utilities-on-the-hpc.html#cb16-8" tabindex="-1"></a><span class="fu">cat</span> lines_with_13.tsv</span></code></pre></div>
+<pre><code>## combined.fq
+## data_01_R1.fq
+## data_54_R1.fq
+## lines_with_13.tsv
+## metadata.tsv
+## M    13  sample 13   replicate a
+## Z    26  sample 13   replicate b</code></pre>
+</div>
+</div>
+<div id="exercise" class="section level2 hasAnchor" number="2.4">
+<h2><span class="header-section-number">2.4</span> <strong>Exercise</strong><a href="basic-command-line-utilities-on-the-hpc.html#exercise" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Below, we’ll be doing something similar to the exercises above, but with real genomic data!
+We’ll be using a fastq file (format containing raw sequencing &amp; quality information).</p>
+<p>We will:</p>
+<ol style="list-style-type: decimal">
+<li>copy fastq files from the practice directory to the folder you created</li>
+<li>combine the two fastq files into one</li>
+<li>count the number of reads in the combined file</li>
+</ol>
+<p>See if you can do each step on your own – if you get stuck, don’t worry!
+Try to remember the commands we’ve learned so far, and you can always <strong>refer back to the examples above.</strong>
+To check your work, you can view the commands below.</p>
+<div id="step-1-copy-the-files" class="section level3 hasAnchor" number="2.4.1">
+<h3><span class="header-section-number">2.4.1</span> <strong>Step 1: Copy the files</strong><a href="basic-command-line-utilities-on-the-hpc.html#step-1-copy-the-files" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Once you’re in your <code>hpc_workshop_2024</code> directory, copy the files <code>data_01_R1.fq</code> and <code>data_54_R1.fq</code>
+from the practice directory (<code>/varidata/researchtemp/hpctmp/BBC_workshop_Oct2024_II</code>) into your folder.</p>
+<details>
+<summary>
+Click here to see a solution
+</summary>
+<div class="sourceCode" id="cb18"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb18-1"><a href="basic-command-line-utilities-on-the-hpc.html#cb18-1" tabindex="-1"></a><span class="bu">cd</span> ~/hpc_workshop_2024</span>
+<span id="cb18-2"><a href="basic-command-line-utilities-on-the-hpc.html#cb18-2" tabindex="-1"></a><span class="fu">cp</span> /varidata/researchtemp/hpctmp/BBC_workshop_Oct2024_II/data_01_R1.fq .</span>
+<span id="cb18-3"><a href="basic-command-line-utilities-on-the-hpc.html#cb18-3" tabindex="-1"></a><span class="fu">cp</span> /varidata/researchtemp/hpctmp/BBC_workshop_Oct2024_II/data_54_R1.fq .</span></code></pre></div>
+</details>
+</div>
+<div id="step-2-combine-the-files" class="section level3 hasAnchor" number="2.4.2">
+<h3><span class="header-section-number">2.4.2</span> <strong>Step 2: Combine the files</strong><a href="basic-command-line-utilities-on-the-hpc.html#step-2-combine-the-files" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Combine the two fastq files into one file called <code>combined.fq</code>.</p>
+<details>
+<summary>
+Click here to see a solution
+</summary>
+<div class="sourceCode" id="cb19"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb19-1"><a href="basic-command-line-utilities-on-the-hpc.html#cb19-1" tabindex="-1"></a><span class="fu">cat</span> data_01_R1.fq data_54_R1.fq <span class="op">&gt;</span> combined.fq</span>
+<span id="cb19-2"><a href="basic-command-line-utilities-on-the-hpc.html#cb19-2" tabindex="-1"></a><span class="fu">ls</span></span></code></pre></div>
+<pre><code>## combined.fq
+## data_01_R1.fq
+## data_54_R1.fq
+## lines_with_13.tsv
+## metadata.tsv</code></pre>
+</details>
+</div>
+<div id="step-3-count-the-number-of-reads" class="section level3 hasAnchor" number="2.4.3">
+<h3><span class="header-section-number">2.4.3</span> <strong>Step 3: Count the number of reads</strong><a href="basic-command-line-utilities-on-the-hpc.html#step-3-count-the-number-of-reads" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Count the number of reads in the combined file.</p>
+<details>
+<summary>
+Hint #1 – what is a “read”?
+</summary>
+In a fastq file, reads start with the “@” symbol.
+</details>
+<details>
+<summary>
+Hint #2 – how to approach this?
+</summary>
+See if you can <strong>combine</strong> a few commands together! Plan out each of the steps you need to do, then put them all together.
+</details>
+<p><br></p>
+<details>
+<summary>
+Click here to see an example solution
+</summary>
+<div class="sourceCode" id="cb21"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb21-1"><a href="basic-command-line-utilities-on-the-hpc.html#cb21-1" tabindex="-1"></a><span class="co"># use that combined file</span></span>
+<span id="cb21-2"><a href="basic-command-line-utilities-on-the-hpc.html#cb21-2" tabindex="-1"></a><span class="fu">grep</span> <span class="st">&quot;@&quot;</span> combined.fq <span class="kw">|</span> <span class="fu">wc</span> <span class="at">-l</span></span>
+<span id="cb21-3"><a href="basic-command-line-utilities-on-the-hpc.html#cb21-3" tabindex="-1"></a></span>
+<span id="cb21-4"><a href="basic-command-line-utilities-on-the-hpc.html#cb21-4" tabindex="-1"></a><span class="co"># a different way to do the same thing</span></span>
+<span id="cb21-5"><a href="basic-command-line-utilities-on-the-hpc.html#cb21-5" tabindex="-1"></a><span class="fu">cat</span> combined.fq <span class="kw">|</span> <span class="fu">grep</span> <span class="st">&quot;@&quot;</span> <span class="kw">|</span> <span class="fu">wc</span> <span class="at">-l</span></span>
+<span id="cb21-6"><a href="basic-command-line-utilities-on-the-hpc.html#cb21-6" tabindex="-1"></a></span>
+<span id="cb21-7"><a href="basic-command-line-utilities-on-the-hpc.html#cb21-7" tabindex="-1"></a><span class="co"># or, combine the commands all together</span></span>
+<span id="cb21-8"><a href="basic-command-line-utilities-on-the-hpc.html#cb21-8" tabindex="-1"></a><span class="fu">cat</span> data_01_R1.fq data_54_R1.fq <span class="kw">|</span> <span class="fu">grep</span> <span class="st">&quot;@&quot;</span> <span class="kw">|</span> <span class="fu">wc</span> <span class="at">-l</span></span></code></pre></div>
+<pre><code>## 500
+## 500
+## 500</code></pre>
+</details>
+<p><br></p>
+<p>Can you explain why your solution works? Which solution above does yours look most similar to?</p>
+<p>Congratulations! You’ve successfully completed the exercise.</p>
+<p><strong>BONUS:</strong> If you have extra time, use the skills you’ve learned to explore the fastq file format further:</p>
+<ol style="list-style-type: decimal">
+<li>Count the total number of <strong>lines</strong> in the combined file.</li>
+<li>Using your answer from the exercise above (count the number of <strong>reads</strong>) – how are the number of reads related to the total number of lines in the file?</li>
+<li>Look at some of the contents of the combined fastq file. What do you notice about the structure of the file? Can you find any patterns? What do you think each line represents?<br />
+</li>
+<li>What are some questions you have about the fastq file format?</li>
+</ol>
+</div>
+</div>
+<div id="summary" class="section level2 hasAnchor" number="2.5">
+<h2><span class="header-section-number">2.5</span> <strong>Summary</strong><a href="basic-command-line-utilities-on-the-hpc.html#summary" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>In this section, we’ve covered the basic commands for navigating directories, viewing and manipulating files, using pipes, and redirecting output.</p>
+<p>You’ve learned how to:</p>
+<ul>
+<li>Navigate to a directory</li>
+<li>List content in a directory</li>
+<li>Create a directory</li>
+<li>Copy a file</li>
+<li>Display content</li>
+<li>Search for patterns</li>
+<li>Display the number of words, lines, and characters</li>
+<li>Use pipes for redirection</li>
+<li>Use output redirection</li>
+</ul>
+<p>These are the fundamental commands you’ll need to work with files and directories on the HPC.</p>
+<p>In the next section, we’ll work through a real bioinformatics “mini-project” that builds on these commands, so you can see how they can be used together to solve a problem.</p>
+<p><a href="mini-project.html">Next: Bioinformatics Mini Project</a></p>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="index.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="mini-project.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="assets/gitbook-2.6.7/js/app.min.js"></script>
+<script src="assets/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="assets/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="assets/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="assets/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="assets/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="assets/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="assets/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": true,
+"facebook": false,
+"twitter": false,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": false
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+},
+"toolbar": {
+"position": "static"
+}
+});
+});
+</script>
+
+</body>
+
+</html>
