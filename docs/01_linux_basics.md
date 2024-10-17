@@ -1,14 +1,14 @@
----
-title: "Basic Command Line Utilities on the HPC"
-site: bookdown::bookdown_site
-output: bookdown::gitbook
-documentclass: book
-bibliography: [packages.bib]
-biblio-style: apalike
-link-citations: yes
-github-repo: vari-bbc/Intro_to_Linux_for_HPC
-theme: "yeti"
----
+<!----- -->
+<!--title: "Basic Command Line Utilities on the HPC" -->
+<!--site: bookdown::bookdown_site -->
+<!--output: bookdown::gitbook -->
+<!--documentclass: book -->
+<!--bibliography: [packages.bib] -->
+<!--biblio-style: apalike -->
+<!--link-citations: yes -->
+<!--github-repo: vari-bbc/Intro_to_Linux_for_HPC -->
+<!--theme: "yeti" -->
+<!----- -->
 
 
 
