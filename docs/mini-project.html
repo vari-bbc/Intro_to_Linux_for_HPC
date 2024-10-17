@@ -263,14 +263,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="start-an-interactive-job" class="section level2 hasAnchor" number="3.1">
 <h2><span class="header-section-number">3.1</span> <strong>Start an Interactive Job</strong><a href="mini-project.html#start-an-interactive-job" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>While simple file manipulations can be done on the submit node, computationally intensive operations should be performed using preallocated computational resources. An <strong>interactive job</strong> allows us to preallocate resources while still being able to run commands line by line.</p>
-<p>We will start an interactive job, requesting one CPU core and 6 hours of walltime.</p>
-<div class="sourceCode" id="cb23"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb23-1"><a href="mini-project.html#cb23-1" tabindex="-1"></a><span class="ex">srun</span> <span class="at">--nodes</span><span class="op">=</span>1 <span class="at">--ntasks-per-node</span><span class="op">=</span>1 <span class="at">--time</span><span class="op">=</span>06:00:00 <span class="at">--pty</span> bash</span></code></pre></div>
+<p>We will start an interactive job, requesting one CPU core and 1 hour and 30 minutes of walltime.</p>
+<div class="sourceCode" id="cb23"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb23-1"><a href="mini-project.html#cb23-1" tabindex="-1"></a><span class="ex">srun</span> <span class="at">--nodes</span><span class="op">=</span>1 <span class="at">--ntasks-per-node</span><span class="op">=</span>1 <span class="at">--time</span><span class="op">=</span>01:30:00 <span class="at">--pty</span> bash <span class="at">-p</span> quick</span></code></pre></div>
 <p>After a job has been submitted, users can check on the status (e.g. how long it has been running) of it using the following.</p>
-<div class="sourceCode" id="cb24"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb24-1"><a href="mini-project.html#cb24-1" tabindex="-1"></a><span class="ex">squeue</span> <span class="at">-u</span> <span class="op">&lt;</span>username<span class="op">&gt;</span></span></code></pre></div>
+<div class="sourceCode" id="cb24"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb24-1"><a href="mini-project.html#cb24-1" tabindex="-1"></a><span class="ex">squeue</span> <span class="at">--me</span></span></code></pre></div>
 </div>
 <div id="create-directory" class="section level2 hasAnchor" number="3.2">
 <h2><span class="header-section-number">3.2</span> <strong>Create Directory</strong><a href="mini-project.html#create-directory" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>Typically, one would work in their specific lab’s folder on the HPC. For this workshop, we will work in a common directory so that the instructors and chck on your progress.</p>
+<p>Typically, one would work in their specific lab’s folder on the HPC. For this workshop, we will work in a common directory so that the instructors and check on your progress.</p>
 <div class="sourceCode" id="cb25"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb25-1"><a href="mini-project.html#cb25-1" tabindex="-1"></a><span class="bu">cd</span> /varidata/researchtemp/hpctmp/BBC_workshop_June2023</span></code></pre></div>
 <p>Create a directory based on your username to separate your work from other users’.</p>
 <div class="sourceCode" id="cb26"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb26-1"><a href="mini-project.html#cb26-1" tabindex="-1"></a><span class="fu">mkdir</span> <span class="op">&lt;</span>username<span class="op">&gt;</span></span></code></pre></div>
@@ -509,9 +509,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Type <code>ls</code> to ensure <code>run_salmon.sh</code> file exist in the username directory.</p>
 <div class="sourceCode" id="cb51"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb51-1"><a href="mini-project.html#cb51-1" tabindex="-1"></a><span class="fu">ls</span></span></code></pre></div>
 <p>Use the <code>sbatch</code> command to submit the job.</p>
-<div class="sourceCode" id="cb52"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb52-1"><a href="mini-project.html#cb52-1" tabindex="-1"></a><span class="ex">sbatch</span> <span class="at">-p</span> big run_salmon.sh</span></code></pre></div>
+<div class="sourceCode" id="cb52"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb52-1"><a href="mini-project.html#cb52-1" tabindex="-1"></a><span class="ex">sbatch</span> <span class="at">-p</span> quick run_salmon.sh</span></code></pre></div>
 <p>Users can check if the job is running with the following command. The job should take about two minutes to complete.</p>
-<div class="sourceCode" id="cb53"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb53-1"><a href="mini-project.html#cb53-1" tabindex="-1"></a><span class="ex">squeue</span> <span class="at">-u</span> <span class="op">&lt;</span>username<span class="op">&gt;</span></span></code></pre></div>
+<div class="sourceCode" id="cb53"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb53-1"><a href="mini-project.html#cb53-1" tabindex="-1"></a><span class="ex">squeue</span> <span class="at">--me</span></span></code></pre></div>
 </div>
 <div id="examine-the-standard-output-stdout-and-standard-error-stderr-log-files" class="section level2 hasAnchor" number="3.9">
 <h2><span class="header-section-number">3.9</span> <strong>Examine the Standard Output (stdout) and Standard Error (stderr) log files</strong><a href="mini-project.html#examine-the-standard-output-stdout-and-standard-error-stderr-log-files" class="anchor-section" aria-label="Anchor link to header"></a></h2>
