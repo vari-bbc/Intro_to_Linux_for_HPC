@@ -14,23 +14,23 @@ Here, we will combine some of the commands we have learned today to perform a to
 
 While simple file manipulations can be done on the submit node, computationally intensive operations should be performed using preallocated computational resources. An **interactive job** allows us to preallocate resources while still being able to run commands line by line.
 
-We will start an interactive job, requesting one CPU core and 6 hours of walltime.
+We will start an interactive job, requesting one CPU core and 1 hour and 30 minutes of walltime.
 
 
 ```bash
-srun --nodes=1 --ntasks-per-node=1 --time=06:00:00 --pty bash
+srun --nodes=1 --ntasks-per-node=1 --time=01:30:00 --pty bash -p quick
 ```
 
 After a job has been submitted, users can check on the status (e.g. how long it has been running) of it using the following.
 
 
 ```bash
-squeue -u <username>
+squeue --me
 ```
 
 ## **Create Directory**
 
-Typically, one would work in their specific lab's folder on the HPC. For this workshop, we will work in a common directory so that the instructors and chck on your progress.
+Typically, one would work in their specific lab's folder on the HPC. For this workshop, we will work in a common directory so that the instructors and check on your progress.
 
 
 ```bash
@@ -385,7 +385,7 @@ Use the `sbatch` command to submit the job.
 
 
 ```bash
-sbatch -p big run_salmon.sh
+sbatch -p quick run_salmon.sh
 
 ```
 
@@ -393,7 +393,7 @@ Users can check if the job is running with the following command. The job should
 
 
 ```bash
-squeue -u <username>
+squeue --me
 
 ```
 
