@@ -5,7 +5,7 @@ knitr::opts_chunk$set(echo = TRUE)
 # **Mini Project**
 
 
-Here, we will combine some of the commands we have learned today to perform a toy bioinformatic analysis. Two human paired-end samples (four total fastq files) have already been downloaded from [GSE52778](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE52778). To save time for the workshop, each file has been randomly subsetted to just a small fraction of the total reads. Here each user will:
+Here, we will combine some of the commands we have learned today to perform a toy bioinformatic analysis. Two human paired-end samples (four total fastq files) have already been downloaded from [GSE52778](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE52778) and are in the directory `/varidata/researchtemp/hpctmp/BBC_workshop_Oct2024_II/fastqs`. To save time for the workshop, each file has been randomly subsetted to just a small fraction of the total reads. Here each user will:
 
 1. Copy these fastq files their own private project directory.
 2. Use basic Linux commands to learn some characteristics of these files.
@@ -19,7 +19,7 @@ While simple file manipulations can be done on the submit node, computationally 
 We will start an interactive job, requesting one CPU core and 1 hour and 30 minutes of walltime.
 
 ```{bash, eval= FALSE, engine= "sh"}
-srun --nodes=1 --ntasks-per-node=1 --time=01:30:00 --pty bash -p quick
+srun -p quick --nodes=1 --ntasks-per-node=1 --time=01:30:00 --pty bash 
 ```
 
 After a job has been submitted, users can check on the status (e.g. how long it has been running) of it using the following.
@@ -33,7 +33,7 @@ squeue --me
 Typically, one would work in their specific lab's folder on the HPC. For this workshop, we will work in a common directory so that the instructors and check on your progress.
 
 ```{bash, eval=FALSE, engine= "sh"}
-cd /varidata/researchtemp/hpctmp/BBC_workshop_June2023
+cd /varidata/researchtemp/hpctmp/BBC_workshop_Oct2024_II/
 ```
 
 Create a directory based on your username to separate your work from other users'.
@@ -70,9 +70,9 @@ pwd
 Copy the 4 fastq.gz files and `md5sum.txt`, which you will use to check the validty of the files.
 
 ```{bash, eval=FALSE, engine="sh"}
-cp /varidata/researchtemp/hpctmp/BBC/hpc_workshop_fqs/*fastq.gz ./fastqs/
+cp /varidata/researchtemp/hpctmp/BBC_workshop_Oct2024_II/fastqs/*fastq.gz ./fastqs/
 
-cp /varidata/researchtemp/hpctmp/BBC/hpc_workshop_fqs/md5sum.txt ./fastqs/
+cp /varidata/researchtemp/hpctmp/BBC_workshop_Oct2024_II/fastqs/md5sum.txt ./fastqs/
 ```
 
 Verify that the copied files are valid. The following code should return with an **OK** for each file.
@@ -152,16 +152,16 @@ First, we `exit` from our interactive job because we want to get back on to the 
 
 ```{bash, eval=FALSE, engine="sh"}
 # You should see one job when you run this command, corresponding to your interactive job.
-squeue -u <username>
+squeue --me
 
 # Exit the interactive job
 exit
 
 # Now you should see no jobs when you run this command because the interactive job has ended.
-squeue -u <username>
+squeue --me
 
-# Go back to the project directory
-cd /varidata/researchtemp/hpctmp/BBC_workshop_June2023/<username>
+# Go back to your project directory
+cd /varidata/researchtemp/hpctmp/BBC_workshop_Oct2024_II/<username>
 
 ```
 
@@ -176,7 +176,7 @@ Below is a SLURM job script to run Salmon. For now, do not worry about how the c
 #SBATCH -e run_salmon.e
 #SBATCH --ntasks 4
 #SBATCH --time 1:00:00
-#SBATCH --mem=36G
+#SBATCH --mem=31G
 
 start_time=$(date +"%T")
 
@@ -274,7 +274,7 @@ srun --nodes=1 --ntasks-per-node=1 --time=00:30:00 --pty bash
 
 Navigate to the project directory.
 ```{bash, eval=FALSE, engine="sh"}
-cd /varidata/researchtemp/hpctmp/BBC_workshop_June2023/<username>
+cd /varidata/researchtemp/hpctmp/BBC_workshop_Oct2024_II/<username>
 ```
 
 Load the environment module for multiQC.
