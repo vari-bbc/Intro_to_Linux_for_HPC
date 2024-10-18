@@ -13,7 +13,7 @@ copy-a-file
 view-and-manipulate-files
 display-content
 pattern-search
-display-the-number-of-words-lines-and-characters
+display-the-number-of-lines-words-and-characters
 pipe---redirection
 output-redirection
 exercise

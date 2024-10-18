@@ -156,7 +156,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li class="chapter" data-level="2.3.1" data-path="basic-command-line-utilities-on-the-hpc.html"><a href="basic-command-line-utilities-on-the-hpc.html#display-content"><i class="fa fa-check"></i><b>2.3.1</b> <strong>Display content</strong></a></li>
 <li class="chapter" data-level="2.3.2" data-path="basic-command-line-utilities-on-the-hpc.html"><a href="basic-command-line-utilities-on-the-hpc.html#pattern-search"><i class="fa fa-check"></i><b>2.3.2</b> <strong>Pattern search</strong></a></li>
-<li class="chapter" data-level="2.3.3" data-path="basic-command-line-utilities-on-the-hpc.html"><a href="basic-command-line-utilities-on-the-hpc.html#display-the-number-of-words-lines-and-characters"><i class="fa fa-check"></i><b>2.3.3</b> <strong>Display the number of words, lines, and characters</strong></a></li>
+<li class="chapter" data-level="2.3.3" data-path="basic-command-line-utilities-on-the-hpc.html"><a href="basic-command-line-utilities-on-the-hpc.html#display-the-number-of-lines-words-and-characters"><i class="fa fa-check"></i><b>2.3.3</b> <strong>Display the number of lines, words, and characters</strong></a></li>
 <li class="chapter" data-level="2.3.4" data-path="basic-command-line-utilities-on-the-hpc.html"><a href="basic-command-line-utilities-on-the-hpc.html#pipe---redirection"><i class="fa fa-check"></i><b>2.3.4</b> <strong>Pipe - redirection</strong></a></li>
 <li class="chapter" data-level="2.3.5" data-path="basic-command-line-utilities-on-the-hpc.html"><a href="basic-command-line-utilities-on-the-hpc.html#output-redirection"><i class="fa fa-check"></i><b>2.3.5</b> <strong>Output redirection</strong></a></li>
 </ul></li>
@@ -342,7 +342,7 @@ Note the following special symbols:</p>
 <ul>
 <li><code>ls</code> - list contents (files and folders). Without anything specified after <code>ls</code>, it will list what’s in the current directory.
 <ul>
-<li><code>ls -lht</code> – list contents, with added options (<code>-l</code> more details in a <em>long</em> list, <code>-h</code> <em>h</em>uman-readable sizes, <code>t</code> sorted by modification <em>t</em>ime).<br />
+<li><code>ls -lht</code> – list contents, with added options (<code>-l</code> more details in a <em>long</em> list, <code>-h</code> <em>h</em>uman-readable sizes, <code>-t</code> sorted by modification <em>t</em>ime).<br />
 </li>
 <li><code>ls foldername</code> - list contents of the specified folder.</li>
 </ul></li>
@@ -413,9 +413,9 @@ Note that we won’t run the command below, but keep this in mind for future ref
 ## M    13  sample 13   replicate a
 ## Z    26  sample 13   replicate b</code></pre>
 </div>
-<div id="display-the-number-of-words-lines-and-characters" class="section level3 hasAnchor" number="2.3.3">
-<h3><span class="header-section-number">2.3.3</span> <strong>Display the number of words, lines, and characters</strong><a href="basic-command-line-utilities-on-the-hpc.html#display-the-number-of-words-lines-and-characters" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p><code>wc</code> - word count. It counts the number of words, lines, and characters in a file.</p>
+<div id="display-the-number-of-lines-words-and-characters" class="section level3 hasAnchor" number="2.3.3">
+<h3><span class="header-section-number">2.3.3</span> <strong>Display the number of lines, words, and characters</strong><a href="basic-command-line-utilities-on-the-hpc.html#display-the-number-of-lines-words-and-characters" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p><code>wc</code> - word count. It counts the number of lines, words, and characters in a file.</p>
 <p>Adding the <code>-l</code> option afterwards just gives the number of <em><strong>l</strong>ines</em> in the file.</p>
 <div class="sourceCode" id="cb12"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb12-1"><a href="basic-command-line-utilities-on-the-hpc.html#cb12-1" tabindex="-1"></a><span class="fu">wc</span> metadata.tsv</span>
 <span id="cb12-2"><a href="basic-command-line-utilities-on-the-hpc.html#cb12-2" tabindex="-1"></a><span class="fu">wc</span> <span class="at">-l</span> metadata.tsv</span></code></pre></div>
@@ -450,8 +450,7 @@ another command (pipe), you can redirect the output to a file.</p>
 <span id="cb16-6"><a href="basic-command-line-utilities-on-the-hpc.html#cb16-6" tabindex="-1"></a></span>
 <span id="cb16-7"><a href="basic-command-line-utilities-on-the-hpc.html#cb16-7" tabindex="-1"></a><span class="co"># display the content of the file</span></span>
 <span id="cb16-8"><a href="basic-command-line-utilities-on-the-hpc.html#cb16-8" tabindex="-1"></a><span class="fu">cat</span> lines_with_13.tsv</span></code></pre></div>
-<pre><code>## combined.fq
-## data_01_R1.fq
+<pre><code>## data_01_R1.fq
 ## data_54_R1.fq
 ## lines_with_13.tsv
 ## metadata.tsv
