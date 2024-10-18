@@ -115,7 +115,7 @@ pwd
 ### **List content in a directory**
 
 - `ls`  - list contents (files and folders). Without anything specified after `ls`, it will list what's in the current directory. 
-  - `ls -lht` – list contents, with added options (`-l` more details in a *long* list, `-h` *h*uman-readable sizes, `t` sorted by modification *t*ime).  
+  - `ls -lht` – list contents, with added options (`-l` more details in a *long* list, `-h` *h*uman-readable sizes, `-t` sorted by modification *t*ime).  
   - `ls foldername` - list contents of the specified folder. 
 
 Shows more details about the files and folders, 
@@ -227,9 +227,9 @@ grep "13" metadata.tsv
 ```
 
 
-### **Display the number of words, lines, and characters**
+### **Display the number of lines, words, and characters**
 
-`wc` - word count. It counts the number of words, lines, and characters in a file.
+`wc` - word count. It counts the number of lines, words, and characters in a file.
 
 Adding the `-l` option afterwards just gives the number of ***l**ines* in the file.
 
@@ -287,7 +287,6 @@ cat lines_with_13.tsv
 ```
 
 ```
-## combined.fq
 ## data_01_R1.fq
 ## data_54_R1.fq
 ## lines_with_13.tsv

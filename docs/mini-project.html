@@ -156,7 +156,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li class="chapter" data-level="2.3.1" data-path="basic-command-line-utilities-on-the-hpc.html"><a href="basic-command-line-utilities-on-the-hpc.html#display-content"><i class="fa fa-check"></i><b>2.3.1</b> <strong>Display content</strong></a></li>
 <li class="chapter" data-level="2.3.2" data-path="basic-command-line-utilities-on-the-hpc.html"><a href="basic-command-line-utilities-on-the-hpc.html#pattern-search"><i class="fa fa-check"></i><b>2.3.2</b> <strong>Pattern search</strong></a></li>
-<li class="chapter" data-level="2.3.3" data-path="basic-command-line-utilities-on-the-hpc.html"><a href="basic-command-line-utilities-on-the-hpc.html#display-the-number-of-words-lines-and-characters"><i class="fa fa-check"></i><b>2.3.3</b> <strong>Display the number of words, lines, and characters</strong></a></li>
+<li class="chapter" data-level="2.3.3" data-path="basic-command-line-utilities-on-the-hpc.html"><a href="basic-command-line-utilities-on-the-hpc.html#display-the-number-of-lines-words-and-characters"><i class="fa fa-check"></i><b>2.3.3</b> <strong>Display the number of lines, words, and characters</strong></a></li>
 <li class="chapter" data-level="2.3.4" data-path="basic-command-line-utilities-on-the-hpc.html"><a href="basic-command-line-utilities-on-the-hpc.html#pipe---redirection"><i class="fa fa-check"></i><b>2.3.4</b> <strong>Pipe - redirection</strong></a></li>
 <li class="chapter" data-level="2.3.5" data-path="basic-command-line-utilities-on-the-hpc.html"><a href="basic-command-line-utilities-on-the-hpc.html#output-redirection"><i class="fa fa-check"></i><b>2.3.5</b> <strong>Output redirection</strong></a></li>
 </ul></li>
@@ -254,7 +254,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="mini-project" class="section level1 hasAnchor" number="3">
 <h1><span class="header-section-number">Part 3</span> <strong>Mini Project</strong><a href="mini-project.html#mini-project" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<p>Here, we will combine some of the commands we have learned today to perform a toy bioinformatic analysis. Two human paired-end samples (four total fastq files) have already been downloaded from <a href="https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE52778">GSE52778</a>. To save time for the workshop, each file has been randomly subsetted to just a small fraction of the total reads. Here each user will:</p>
+<p>Here, we will combine some of the commands we have learned today to perform a toy bioinformatic analysis. Two human paired-end samples (four total fastq files) have already been downloaded from <a href="https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE52778">GSE52778</a> and are in the directory <code>/varidata/researchtemp/hpctmp/BBC_workshop_Oct2024_II/fastqs</code>. To save time for the workshop, each file has been randomly subsetted to just a small fraction of the total reads. Here each user will:</p>
 <ol style="list-style-type: decimal">
 <li>Copy these fastq files their own private project directory.</li>
 <li>Use basic Linux commands to learn some characteristics of these files.</li>
@@ -264,14 +264,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2><span class="header-section-number">3.1</span> <strong>Start an Interactive Job</strong><a href="mini-project.html#start-an-interactive-job" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>While simple file manipulations can be done on the submit node, computationally intensive operations should be performed using preallocated computational resources. An <strong>interactive job</strong> allows us to preallocate resources while still being able to run commands line by line.</p>
 <p>We will start an interactive job, requesting one CPU core and 1 hour and 30 minutes of walltime.</p>
-<div class="sourceCode" id="cb23"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb23-1"><a href="mini-project.html#cb23-1" tabindex="-1"></a><span class="ex">srun</span> <span class="at">--nodes</span><span class="op">=</span>1 <span class="at">--ntasks-per-node</span><span class="op">=</span>1 <span class="at">--time</span><span class="op">=</span>01:30:00 <span class="at">--pty</span> bash <span class="at">-p</span> quick</span></code></pre></div>
+<div class="sourceCode" id="cb23"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb23-1"><a href="mini-project.html#cb23-1" tabindex="-1"></a><span class="ex">srun</span> <span class="at">-p</span> quick <span class="at">--nodes</span><span class="op">=</span>1 <span class="at">--ntasks-per-node</span><span class="op">=</span>1 <span class="at">--time</span><span class="op">=</span>01:30:00 <span class="at">--pty</span> bash </span></code></pre></div>
 <p>After a job has been submitted, users can check on the status (e.g. how long it has been running) of it using the following.</p>
 <div class="sourceCode" id="cb24"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb24-1"><a href="mini-project.html#cb24-1" tabindex="-1"></a><span class="ex">squeue</span> <span class="at">--me</span></span></code></pre></div>
 </div>
 <div id="create-directory" class="section level2 hasAnchor" number="3.2">
 <h2><span class="header-section-number">3.2</span> <strong>Create Directory</strong><a href="mini-project.html#create-directory" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Typically, one would work in their specific lab’s folder on the HPC. For this workshop, we will work in a common directory so that the instructors and check on your progress.</p>
-<div class="sourceCode" id="cb25"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb25-1"><a href="mini-project.html#cb25-1" tabindex="-1"></a><span class="bu">cd</span> /varidata/researchtemp/hpctmp/BBC_workshop_June2023</span></code></pre></div>
+<div class="sourceCode" id="cb25"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb25-1"><a href="mini-project.html#cb25-1" tabindex="-1"></a><span class="bu">cd</span> /varidata/researchtemp/hpctmp/BBC_workshop_Oct2024_II/</span></code></pre></div>
 <p>Create a directory based on your username to separate your work from other users’.</p>
 <div class="sourceCode" id="cb26"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb26-1"><a href="mini-project.html#cb26-1" tabindex="-1"></a><span class="fu">mkdir</span> <span class="op">&lt;</span>username<span class="op">&gt;</span></span></code></pre></div>
 <p>Navigate to the username directory</p>
@@ -286,9 +286,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Verify the current directory is in the username directory.</p>
 <div class="sourceCode" id="cb30"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb30-1"><a href="mini-project.html#cb30-1" tabindex="-1"></a><span class="bu">pwd</span></span></code></pre></div>
 <p>Copy the 4 fastq.gz files and <code>md5sum.txt</code>, which you will use to check the validty of the files.</p>
-<div class="sourceCode" id="cb31"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb31-1"><a href="mini-project.html#cb31-1" tabindex="-1"></a><span class="fu">cp</span> /varidata/researchtemp/hpctmp/BBC/hpc_workshop_fqs/<span class="pp">*</span>fastq.gz ./fastqs/</span>
+<div class="sourceCode" id="cb31"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb31-1"><a href="mini-project.html#cb31-1" tabindex="-1"></a><span class="fu">cp</span> /varidata/researchtemp/hpctmp/BBC_workshop_Oct2024_II/fastqs/<span class="pp">*</span>fastq.gz ./fastqs/</span>
 <span id="cb31-2"><a href="mini-project.html#cb31-2" tabindex="-1"></a></span>
-<span id="cb31-3"><a href="mini-project.html#cb31-3" tabindex="-1"></a><span class="fu">cp</span> /varidata/researchtemp/hpctmp/BBC/hpc_workshop_fqs/md5sum.txt ./fastqs/</span></code></pre></div>
+<span id="cb31-3"><a href="mini-project.html#cb31-3" tabindex="-1"></a><span class="fu">cp</span> /varidata/researchtemp/hpctmp/BBC_workshop_Oct2024_II/fastqs/md5sum.txt ./fastqs/</span></code></pre></div>
 <p>Verify that the copied files are valid. The following code should return with an <strong>OK</strong> for each file.</p>
 <div class="sourceCode" id="cb32"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb32-1"><a href="mini-project.html#cb32-1" tabindex="-1"></a><span class="bu">cd</span> fastqs</span>
 <span id="cb32-2"><a href="mini-project.html#cb32-2" tabindex="-1"></a></span>
@@ -459,16 +459,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2><span class="header-section-number">3.7</span> <strong>Set up a job script to run Salmon to align the reads</strong><a href="mini-project.html#set-up-a-job-script-to-run-salmon-to-align-the-reads" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>First, we <code>exit</code> from our interactive job because we want to get back on to the submit node to submit a non-interactive job to run Salmon.</p>
 <div class="sourceCode" id="cb49"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb49-1"><a href="mini-project.html#cb49-1" tabindex="-1"></a><span class="co"># You should see one job when you run this command, corresponding to your interactive job.</span></span>
-<span id="cb49-2"><a href="mini-project.html#cb49-2" tabindex="-1"></a><span class="ex">squeue</span> <span class="at">-u</span> <span class="op">&lt;</span>username<span class="op">&gt;</span></span>
+<span id="cb49-2"><a href="mini-project.html#cb49-2" tabindex="-1"></a><span class="ex">squeue</span> <span class="at">--me</span></span>
 <span id="cb49-3"><a href="mini-project.html#cb49-3" tabindex="-1"></a></span>
 <span id="cb49-4"><a href="mini-project.html#cb49-4" tabindex="-1"></a><span class="co"># Exit the interactive job</span></span>
 <span id="cb49-5"><a href="mini-project.html#cb49-5" tabindex="-1"></a><span class="bu">exit</span></span>
 <span id="cb49-6"><a href="mini-project.html#cb49-6" tabindex="-1"></a></span>
 <span id="cb49-7"><a href="mini-project.html#cb49-7" tabindex="-1"></a><span class="co"># Now you should see no jobs when you run this command because the interactive job has ended.</span></span>
-<span id="cb49-8"><a href="mini-project.html#cb49-8" tabindex="-1"></a><span class="ex">squeue</span> <span class="at">-u</span> <span class="op">&lt;</span>username<span class="op">&gt;</span></span>
+<span id="cb49-8"><a href="mini-project.html#cb49-8" tabindex="-1"></a><span class="ex">squeue</span> <span class="at">--me</span></span>
 <span id="cb49-9"><a href="mini-project.html#cb49-9" tabindex="-1"></a></span>
-<span id="cb49-10"><a href="mini-project.html#cb49-10" tabindex="-1"></a><span class="co"># Go back to the project directory</span></span>
-<span id="cb49-11"><a href="mini-project.html#cb49-11" tabindex="-1"></a><span class="bu">cd</span> /varidata/researchtemp/hpctmp/BBC_workshop_June2023/<span class="op">&lt;</span>username<span class="op">&gt;</span></span></code></pre></div>
+<span id="cb49-10"><a href="mini-project.html#cb49-10" tabindex="-1"></a><span class="co"># Go back to your project directory</span></span>
+<span id="cb49-11"><a href="mini-project.html#cb49-11" tabindex="-1"></a><span class="bu">cd</span> /varidata/researchtemp/hpctmp/BBC_workshop_Oct2024_II/<span class="op">&lt;</span>username<span class="op">&gt;</span></span></code></pre></div>
 <p>Below is a SLURM job script to run Salmon. For now, do not worry about how the code works. Copy the code and paste it into a new file. Save it as <code>run_salmon.sh</code> in your username directory. If you have issues with this task, you can copy the job script directly using the command, <code>cp /varidata/researchtemp/hpctmp/BBC_workshop_June2023/kin.lau/run_salmon.sh .</code>.</p>
 <div class="sourceCode" id="cb50"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb50-1"><a href="mini-project.html#cb50-1" tabindex="-1"></a><span class="co">#!/bin/bash</span></span>
 <span id="cb50-2"><a href="mini-project.html#cb50-2" tabindex="-1"></a></span>
@@ -478,7 +478,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb50-6"><a href="mini-project.html#cb50-6" tabindex="-1"></a><span class="co">#SBATCH -e run_salmon.e</span></span>
 <span id="cb50-7"><a href="mini-project.html#cb50-7" tabindex="-1"></a><span class="co">#SBATCH --ntasks 4</span></span>
 <span id="cb50-8"><a href="mini-project.html#cb50-8" tabindex="-1"></a><span class="co">#SBATCH --time 1:00:00</span></span>
-<span id="cb50-9"><a href="mini-project.html#cb50-9" tabindex="-1"></a><span class="co">#SBATCH --mem=36G</span></span>
+<span id="cb50-9"><a href="mini-project.html#cb50-9" tabindex="-1"></a><span class="co">#SBATCH --mem=31G</span></span>
 <span id="cb50-10"><a href="mini-project.html#cb50-10" tabindex="-1"></a></span>
 <span id="cb50-11"><a href="mini-project.html#cb50-11" tabindex="-1"></a><span class="va">start_time</span><span class="op">=</span><span class="va">$(</span><span class="fu">date</span> +<span class="st">&quot;%T&quot;</span><span class="va">)</span></span>
 <span id="cb50-12"><a href="mini-project.html#cb50-12" tabindex="-1"></a></span>
@@ -559,7 +559,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Start an interactive job.</p>
 <div class="sourceCode" id="cb64"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb64-1"><a href="mini-project.html#cb64-1" tabindex="-1"></a><span class="ex">srun</span> <span class="at">--nodes</span><span class="op">=</span>1 <span class="at">--ntasks-per-node</span><span class="op">=</span>1 <span class="at">--time</span><span class="op">=</span>00:30:00 <span class="at">--pty</span> bash</span></code></pre></div>
 <p>Navigate to the project directory.</p>
-<div class="sourceCode" id="cb65"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb65-1"><a href="mini-project.html#cb65-1" tabindex="-1"></a><span class="bu">cd</span> /varidata/researchtemp/hpctmp/BBC_workshop_June2023/<span class="op">&lt;</span>username<span class="op">&gt;</span></span></code></pre></div>
+<div class="sourceCode" id="cb65"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb65-1"><a href="mini-project.html#cb65-1" tabindex="-1"></a><span class="bu">cd</span> /varidata/researchtemp/hpctmp/BBC_workshop_Oct2024_II/<span class="op">&lt;</span>username<span class="op">&gt;</span></span></code></pre></div>
 <p>Load the environment module for multiQC.</p>
 <div class="sourceCode" id="cb66"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb66-1"><a href="mini-project.html#cb66-1" tabindex="-1"></a><span class="ex">module</span> load bbc2/multiqc/multiqc-1.14</span></code></pre></div>
 <pre><code>## 

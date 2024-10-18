@@ -3,7 +3,7 @@
 # **Mini Project**
 
 
-Here, we will combine some of the commands we have learned today to perform a toy bioinformatic analysis. Two human paired-end samples (four total fastq files) have already been downloaded from [GSE52778](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE52778). To save time for the workshop, each file has been randomly subsetted to just a small fraction of the total reads. Here each user will:
+Here, we will combine some of the commands we have learned today to perform a toy bioinformatic analysis. Two human paired-end samples (four total fastq files) have already been downloaded from [GSE52778](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE52778) and are in the directory `/varidata/researchtemp/hpctmp/BBC_workshop_Oct2024_II/fastqs`. To save time for the workshop, each file has been randomly subsetted to just a small fraction of the total reads. Here each user will:
 
 1. Copy these fastq files their own private project directory.
 2. Use basic Linux commands to learn some characteristics of these files.
@@ -18,7 +18,7 @@ We will start an interactive job, requesting one CPU core and 1 hour and 30 minu
 
 
 ```bash
-srun --nodes=1 --ntasks-per-node=1 --time=01:30:00 --pty bash -p quick
+srun -p quick --nodes=1 --ntasks-per-node=1 --time=01:30:00 --pty bash 
 ```
 
 After a job has been submitted, users can check on the status (e.g. how long it has been running) of it using the following.
@@ -34,7 +34,7 @@ Typically, one would work in their specific lab's folder on the HPC. For this wo
 
 
 ```bash
-cd /varidata/researchtemp/hpctmp/BBC_workshop_June2023
+cd /varidata/researchtemp/hpctmp/BBC_workshop_Oct2024_II/
 ```
 
 Create a directory based on your username to separate your work from other users'.
@@ -77,9 +77,9 @@ Copy the 4 fastq.gz files and `md5sum.txt`, which you will use to check the vali
 
 
 ```bash
-cp /varidata/researchtemp/hpctmp/BBC/hpc_workshop_fqs/*fastq.gz ./fastqs/
+cp /varidata/researchtemp/hpctmp/BBC_workshop_Oct2024_II/fastqs/*fastq.gz ./fastqs/
 
-cp /varidata/researchtemp/hpctmp/BBC/hpc_workshop_fqs/md5sum.txt ./fastqs/
+cp /varidata/researchtemp/hpctmp/BBC_workshop_Oct2024_II/fastqs/md5sum.txt ./fastqs/
 ```
 
 Verify that the copied files are valid. The following code should return with an **OK** for each file.
@@ -200,6 +200,9 @@ fastqc -o fastqc fastqs/*fastq.gz
 ```
 
 ```
+## Loading bbc2/fastqc/fastqc-0.12.1
+##   Loading requirement: VARI/java/1.8.0_202
+## mkdir: cannot create directory ‘fastqc’: File exists
 ## application/gzip
 ## application/gzip
 ## Started analysis of SRR1039520_1.fastq.gz
@@ -320,16 +323,16 @@ First, we `exit` from our interactive job because we want to get back on to the 
 
 ```bash
 # You should see one job when you run this command, corresponding to your interactive job.
-squeue -u <username>
+squeue --me
 
 # Exit the interactive job
 exit
 
 # Now you should see no jobs when you run this command because the interactive job has ended.
-squeue -u <username>
+squeue --me
 
-# Go back to the project directory
-cd /varidata/researchtemp/hpctmp/BBC_workshop_June2023/<username>
+# Go back to your project directory
+cd /varidata/researchtemp/hpctmp/BBC_workshop_Oct2024_II/<username>
 
 ```
 
@@ -345,7 +348,7 @@ Below is a SLURM job script to run Salmon. For now, do not worry about how the c
 #SBATCH -e run_salmon.e
 #SBATCH --ntasks 4
 #SBATCH --time 1:00:00
-#SBATCH --mem=36G
+#SBATCH --mem=31G
 
 start_time=$(date +"%T")
 
@@ -407,15 +410,15 @@ tail run_salmon.e
 ```
 
 ```
-## [2023-06-07 21:58:36.154] [jointLog] [info] iteration = 200 | max rel diff. = 0.491024
-## [2023-06-07 21:58:38.832] [jointLog] [info] iteration = 300 | max rel diff. = 3.96021
-## [2023-06-07 21:58:41.512] [jointLog] [info] iteration = 400 | max rel diff. = 0.644285
-## [2023-06-07 21:58:44.187] [jointLog] [info] iteration = 500 | max rel diff. = 0.323309
-## [2023-06-07 21:58:46.883] [jointLog] [info] iteration = 600 | max rel diff. = 0.287136
-## [2023-06-07 21:58:49.626] [jointLog] [info] iteration = 700 | max rel diff. = 0.814246
-## [2023-06-07 21:58:50.069] [jointLog] [info] iteration = 717 | max rel diff. = 0.00724807
-## [2023-06-07 21:58:50.107] [jointLog] [info] Finished optimizer
-## [2023-06-07 21:58:50.107] [jointLog] [info] writing output
+## [2023-06-07 22:33:35.747] [jointLog] [info] Marked 0 weighted equivalence classes as degenerate
+## [2023-06-07 22:33:35.775] [jointLog] [info] iteration = 0 | max rel diff. = 202.323
+## [2023-06-07 22:33:38.554] [jointLog] [info] iteration = 100 | max rel diff. = 6.56983
+## [2023-06-07 22:33:41.286] [jointLog] [info] iteration = 200 | max rel diff. = 0.770961
+## [2023-06-07 22:33:44.016] [jointLog] [info] iteration = 300 | max rel diff. = 5.57356
+## [2023-06-07 22:33:46.748] [jointLog] [info] iteration = 400 | max rel diff. = 0.0347411
+## [2023-06-07 22:33:48.577] [jointLog] [info] iteration = 468 | max rel diff. = 0.00847769
+## [2023-06-07 22:33:48.619] [jointLog] [info] Finished optimizer
+## [2023-06-07 22:33:48.619] [jointLog] [info] writing output
 ```
 
 
@@ -424,8 +427,8 @@ tail run_salmon.o
 ```
 
 ```
-## Start time: 21:57:16
-## End time: 21:58:51
+## Start time: 22:32:29
+## End time: 22:33:50
 ```
 
 ## **Use grep to find the TPMs for a specific gene**
@@ -442,15 +445,15 @@ head salmon/SRR1039520/quant.sf
 
 ```
 ## Name	Length	EffectiveLength	TPM	NumReads
-## ENST00000456328.2	1657	1502.194	0.000000	0.000
-## ENST00000450305.2	632	477.335	0.000000	0.000
-## ENST00000488147.1	1351	1196.194	0.000000	0.000
-## ENST00000619216.1	68	2.006	0.000000	0.000
-## ENST00000473358.1	712	557.286	0.000000	0.000
-## ENST00000469289.1	535	380.463	0.000000	0.000
-## ENST00000607096.1	138	25.002	0.000000	0.000
-## ENST00000417324.1	1187	1032.194	0.000000	0.000
-## ENST00000461467.1	590	435.379	0.000000	0.000
+## ENST00000456328.2	1657	1502.026	0.000000	0.000
+## ENST00000450305.2	632	477.161	0.000000	0.000
+## ENST00000488147.1	1351	1196.026	0.000000	0.000
+## ENST00000619216.1	68	1.953	0.000000	0.000
+## ENST00000473358.1	712	557.109	0.000000	0.000
+## ENST00000469289.1	535	380.280	0.000000	0.000
+## ENST00000607096.1	138	24.930	0.000000	0.000
+## ENST00000417324.1	1187	1032.026	0.000000	0.000
+## ENST00000461467.1	590	435.202	0.000000	0.000
 ```
 
 From the output above, we can see that the TPMs are in the 4th column of this file. The canonical transcript for [MUC1](http://useast.ensembl.org/Homo_sapiens/Gene/Summary?db=core;g=ENSG00000185499;r=1:155185824-155192916) is ENST00000620103, so we will search for that using `grep`.
@@ -462,7 +465,7 @@ grep 'ENST00000620103' salmon/SRR1039520/quant.sf
 ```
 
 ```
-## ENST00000620103.4	1811	1656.194	0.000000	0.000
+## ENST00000620103.4	1811	1656.026	0.000000	0.000
 ```
 
 Look for MUC1 across all the samples at the same time. We can see that 'SRR1039521' has a TPM of 13.1 for MUC1 compared to 0 for 'SRR1039520'. Recall that the fastq files for this exercise were subsetted to a very small number of reads so don't interpret these results seriously.
@@ -473,8 +476,8 @@ grep 'ENST00000620103' salmon/*/quant.sf
 ```
 
 ```
-## salmon/SRR1039520/quant.sf:ENST00000620103.4	1811	1656.194	0.000000	0.000
-## salmon/SRR1039521/quant.sf:ENST00000620103.4	1811	1655.378	13.133596	5.717
+## salmon/SRR1039520/quant.sf:ENST00000620103.4	1811	1656.026	0.000000	0.000
+## salmon/SRR1039521/quant.sf:ENST00000620103.4	1811	1655.632	13.165700	5.728
 ```
 
 ## **BONUS: Use an interactive job to run multiQC on the Salmon and FastQC output**
@@ -492,7 +495,7 @@ srun --nodes=1 --ntasks-per-node=1 --time=00:30:00 --pty bash
 Navigate to the project directory.
 
 ```bash
-cd /varidata/researchtemp/hpctmp/BBC_workshop_June2023/<username>
+cd /varidata/researchtemp/hpctmp/BBC_workshop_Oct2024_II/<username>
 ```
 
 Load the environment module for multiQC.
