@@ -18,7 +18,7 @@ This book is divided into three sections:
 
 1. Basic command-line commands on the High-Performance Computing System (HPC).
 2. Performing a simple RNA-Seq analysis from read alignment to the identification of differentially expressed genes (DEGs).
-3. TBD
+3. Pathway and enrichment analyses based on DEGs reuslts.  
 
 ```{r include=FALSE}
 # automatically create a bib database for R packages
