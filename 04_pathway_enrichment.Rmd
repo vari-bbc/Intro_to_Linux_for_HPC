@@ -17,13 +17,13 @@ If you have are not in RStudio yet:
 <blockquote>
 **Creating an R Project in RStudio is recommended for several reasons:**  
 1. A R Project creates a dedicated working directory for your project files, including R scripts, data files, figures, and output. This helps in organizing your files that are related to a specific project.      
-2. Automatic working directory Setup. When you open an R Project, RStudio automatically sets the working directory to the project folder.           
+2. Automatic working directory setup. When you open an R Project, RStudio automatically sets the working directory to the project folder.           
 3. Reproducibility. With a project-based setup, the code and files related to a project stay together, making it easier to reproduce results.    
 4. Version control integration and package development support. 
 </blockquote>
 </details>
 
-### **load packaages**
+### **load packages**
 
 ```{r load_packages}
 suppressPackageStartupMessages({
@@ -44,15 +44,17 @@ library(pathview)
 
 de_res <- read_tsv("./de_res.tsv", show_col_types = FALSE)
 
-outdir <- "./enrichment_res/"
-
-dir.create(outdir, recursive=TRUE)
-
 ```
 
 ### **Import previous DE results**
 
+Create a output dir first, then read the DE gene results. 
+
 ```{r import_DE_genes, eval=F}
+outdir <- "./enrichment_res/"
+
+dir.create(outdir, recursive=TRUE)
+
 de_res <- read_tsv("../DE_genes/deseq2_out_files/de_res.tsv")
 ```
 
@@ -95,6 +97,7 @@ To describe the roles of genes and gene products, GO terms are organized into th
 3. Cellular component: refers to the location in the cell of the gene product, such as “lysosome” and “plasma membrane”.  
     
 The GO terms are loosely hierarchical, ranging from general, ‘parent’, terms to more specific, ‘child’ terms.
+
 </blockquote>
 </details>
 
@@ -105,7 +108,7 @@ In this session, we will be mostly using [clusterProfiler](https://guangchuangyu
 In the ORA here, we will be testing whether 2 fold up-regulated (logfold-change = 1, as log fold change is often log2 based) genes are enriched in which GO terms. We will be using enrichGO function from clusterProfiler, and use the whole dataset (~20,000 genes) as the background (universe in enrichGO function).
 
 ```{r ORA_analysis, fig.align='center', fig.height=6, fig.width=8}
-## only getting DE genes at least have 2 fold change, so log2FC > 1, both up and down-regulated.
+## only getting DE genes at least have 2 fold change, so log2FC > 1, only up-regulated genes.
 genes_2f_up <- de_res |>
   filter(padj < fdr_cutoff & log2FoldChange > 1)
 
@@ -150,9 +153,11 @@ write_tsv(ego_BP_df, paste0(outdir, "/clusterProfiler_BP_res.tsv"))
 
 <blockquote>
 **Try to rerun the analyses: **    
-1. Using the same conditions, return the enriched GO processes for the Molecular Function ontology.
+
+1. Using the same conditions, return the enriched GO processes for the Molecular Function ontology.  
 
 2. How would the enrichGO() function change if our organism was mouse?
+
 </blockquote>
 </details>
 
@@ -255,7 +260,7 @@ pathview(gene.data = foldchanges,
 
 
 
-## **Other R packages and tools**.   
+## **Other R packages and tools**   
 
 We introduced a few commonly used R packages to conduct enrichment and pathway analyses. Other popular tools and R packages include:  
 - [g:Profiler](https://biit.cs.ut.ee/gprofiler/gost): a web based toolfor functional profiling of gene or protein lists.  
