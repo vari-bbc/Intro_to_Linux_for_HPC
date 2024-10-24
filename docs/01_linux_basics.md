@@ -105,7 +105,7 @@ pwd
 ```
 
 ```
-## /home/kaitlyn.denhaan
+## /home/daisy.fu
 ## /varidata/researchtemp/hpctmp/BBC_workshop_Oct2024_II
 ```
 
@@ -221,7 +221,7 @@ grep "13" metadata.tsv
 ```
 
 ```
-## /home/kaitlyn.denhaan/hpc_workshop_2024
+## /home/daisy.fu/hpc_workshop_2024
 ## M	13	sample 13	replicate a
 ## Z	26	sample 13	replicate b
 ```
@@ -287,8 +287,12 @@ cat lines_with_13.tsv
 ```
 
 ```
+## combined.fq
 ## data_01_R1.fq
 ## data_54_R1.fq
+## de_res.tsv
+## fastq
+## fastqs
 ## lines_with_13.tsv
 ## metadata.tsv
 ## M	13	sample 13	replicate a
@@ -344,6 +348,9 @@ ls
 ## combined.fq
 ## data_01_R1.fq
 ## data_54_R1.fq
+## de_res.tsv
+## fastq
+## fastqs
 ## lines_with_13.tsv
 ## metadata.tsv
 ```

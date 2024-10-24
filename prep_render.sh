@@ -21,11 +21,17 @@ rm -r fastqc
 
 # 3
 section03_files="SummarizedExperiment.rds"
-for file in $section02_files
+for file in $section03_files
 do
     [[ -f $file ]] || { echo "${file} does not exist."; exit 1; }
 done
 
+# 4
+section04_files="de_res.tsv"
+for file in $section04_files
+do
+    [[ -f $file ]] || { echo "${file} does not exist."; exit 1; }
+done
 
 echo "Good to go."
 # module load bbc2/R/alt/R-4.2.1-setR_LIBS_USER

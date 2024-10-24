@@ -38,10 +38,10 @@ Windows:
 Result:/home/username </td>
   </tr>
   <tr>
-   <td style="text-align:left;background-color: #e9f5f8 !important;"> List </td>
-   <td style="text-align:left;background-color: #e9f5f8 !important;"> `ls` </td>
-   <td style="text-align:left;background-color: #e9f5f8 !important;"> Lists the files and directories in the current directory </td>
-   <td style="text-align:left;background-color: #e9f5f8 !important;"> **`[username\@submit002 ~]$ ls`**
+   <td style="text-align:left;background-color: rgba(233, 245, 248, 255) !important;"> List </td>
+   <td style="text-align:left;background-color: rgba(233, 245, 248, 255) !important;"> `ls` </td>
+   <td style="text-align:left;background-color: rgba(233, 245, 248, 255) !important;"> Lists the files and directories in the current directory </td>
+   <td style="text-align:left;background-color: rgba(233, 245, 248, 255) !important;"> **`[username\@submit002 ~]$ ls`**
 
 Result: It returns empty after the $
   symbol since nothing has been created. </td>
@@ -55,10 +55,10 @@ Result: It returns empty after the $
 Result: Display file detail in the current director </td>
   </tr>
   <tr>
-   <td style="text-align:left;background-color: #e9f5f8 !important;"> Make Directory </td>
-   <td style="text-align:left;background-color: #e9f5f8 !important;"> `mkdir` </td>
-   <td style="text-align:left;background-color: #e9f5f8 !important;"> Creates a new directory </td>
-   <td style="text-align:left;background-color: #e9f5f8 !important;"> **`[username\@submit002 ~]$ mkdir hpc_mini_workshop`**
+   <td style="text-align:left;background-color: rgba(233, 245, 248, 255) !important;"> Make Directory </td>
+   <td style="text-align:left;background-color: rgba(233, 245, 248, 255) !important;"> `mkdir` </td>
+   <td style="text-align:left;background-color: rgba(233, 245, 248, 255) !important;"> Creates a new directory </td>
+   <td style="text-align:left;background-color: rgba(233, 245, 248, 255) !important;"> **`[username\@submit002 ~]$ mkdir hpc_mini_workshop`**
 
 Result: A hpc_mini_workshop folder is created. </td>
   </tr>
@@ -71,10 +71,10 @@ Result: A hpc_mini_workshop folder is created. </td>
 Result: Now the hpc_mini_workshop directory is called workshopTraining </td>
   </tr>
   <tr>
-   <td style="text-align:left;background-color: #e9f5f8 !important;"> Change Directory </td>
-   <td style="text-align:left;background-color: #e9f5f8 !important;"> `cd` </td>
-   <td style="text-align:left;background-color: #e9f5f8 !important;"> Change to an existing directory </td>
-   <td style="text-align:left;background-color: #e9f5f8 !important;"> **`[username\@submit002 ~]$ cd workshopTraining`**
+   <td style="text-align:left;background-color: rgba(233, 245, 248, 255) !important;"> Change Directory </td>
+   <td style="text-align:left;background-color: rgba(233, 245, 248, 255) !important;"> `cd` </td>
+   <td style="text-align:left;background-color: rgba(233, 245, 248, 255) !important;"> Change to an existing directory </td>
+   <td style="text-align:left;background-color: rgba(233, 245, 248, 255) !important;"> **`[username\@submit002 ~]$ cd workshopTraining`**
 
 Result: [username\@submit002 workshopTraining]$ Notice ~ was in the home directory, now in the workshopTraining directory. </td>
   </tr>
@@ -89,10 +89,10 @@ Result: [username\@submit002 workshopTraining]$ Notice ~ was in the home directo
 Result: TaskProject is deleted </td>
   </tr>
   <tr>
-   <td style="text-align:left;background-color: #e9f5f8 !important;"> Copy </td>
-   <td style="text-align:left;background-color: #e9f5f8 !important;"> `cp` </td>
-   <td style="text-align:left;background-color: #e9f5f8 !important;"> Copies files or directories </td>
-   <td style="text-align:left;background-color: #e9f5f8 !important;"> **`[username\@submit002 ~]$ cp -r Task1 Project`**
+   <td style="text-align:left;background-color: rgba(233, 245, 248, 255) !important;"> Copy </td>
+   <td style="text-align:left;background-color: rgba(233, 245, 248, 255) !important;"> `cp` </td>
+   <td style="text-align:left;background-color: rgba(233, 245, 248, 255) !important;"> Copies files or directories </td>
+   <td style="text-align:left;background-color: rgba(233, 245, 248, 255) !important;"> **`[username\@submit002 ~]$ cp -r Task1 Project`**
 
 Result: Task1 directory has moved to the Project directory. </td>
   </tr>
@@ -108,10 +108,10 @@ Project
 Project/Task1 </td>
   </tr>
   <tr>
-   <td style="text-align:left;background-color: #e9f5f8 !important;"> Head </td>
-   <td style="text-align:left;background-color: #e9f5f8 !important;"> `head` </td>
-   <td style="text-align:left;background-color: #e9f5f8 !important;"> Display at the beginning of a file </td>
-   <td style="text-align:left;background-color: #e9f5f8 !important;"> **`[username\@submit002 ~]$ head -n5 file_name`**
+   <td style="text-align:left;background-color: rgba(233, 245, 248, 255) !important;"> Head </td>
+   <td style="text-align:left;background-color: rgba(233, 245, 248, 255) !important;"> `head` </td>
+   <td style="text-align:left;background-color: rgba(233, 245, 248, 255) !important;"> Display at the beginning of a file </td>
+   <td style="text-align:left;background-color: rgba(233, 245, 248, 255) !important;"> **`[username\@submit002 ~]$ head -n5 file_name`**
 
 Result: It will display the first 5 lines from the beginning of the file_name. </td>
   </tr>
@@ -124,10 +124,10 @@ Result: It will display the first 5 lines from the beginning of the file_name. <
 Result: It will display the last 5 lines from the end of the file_name </td>
   </tr>
   <tr>
-   <td style="text-align:left;background-color: #e9f5f8 !important;"> Less </td>
-   <td style="text-align:left;background-color: #e9f5f8 !important;"> `less` </td>
-   <td style="text-align:left;background-color: #e9f5f8 !important;"> Load the necessary portion of a file </td>
-   <td style="text-align:left;background-color: #e9f5f8 !important;"> **`[username\@submit002 ~]$ less file.txt`**
+   <td style="text-align:left;background-color: rgba(233, 245, 248, 255) !important;"> Less </td>
+   <td style="text-align:left;background-color: rgba(233, 245, 248, 255) !important;"> `less` </td>
+   <td style="text-align:left;background-color: rgba(233, 245, 248, 255) !important;"> Load the necessary portion of a file </td>
+   <td style="text-align:left;background-color: rgba(233, 245, 248, 255) !important;"> **`[username\@submit002 ~]$ less file.txt`**
 
 Result: The user is able to view a portion of the file.txt. </td>
   </tr>
@@ -140,10 +140,10 @@ Result: The user is able to view a portion of the file.txt. </td>
 Result: The user is able to view the entire file.txt. </td>
   </tr>
   <tr>
-   <td style="text-align:left;background-color: #e9f5f8 !important;"> Quit </td>
-   <td style="text-align:left;background-color: #e9f5f8 !important;"> `q` </td>
-   <td style="text-align:left;background-color: #e9f5f8 !important;"> Stop viewing the current file </td>
-   <td style="text-align:left;background-color: #e9f5f8 !important;"> quit viewing the current file </td>
+   <td style="text-align:left;background-color: rgba(233, 245, 248, 255) !important;"> Quit </td>
+   <td style="text-align:left;background-color: rgba(233, 245, 248, 255) !important;"> `q` </td>
+   <td style="text-align:left;background-color: rgba(233, 245, 248, 255) !important;"> Stop viewing the current file </td>
+   <td style="text-align:left;background-color: rgba(233, 245, 248, 255) !important;"> quit viewing the current file </td>
   </tr>
   <tr>
    <td style="text-align:left;"> Concatenate </td>
@@ -154,10 +154,10 @@ Result: The user is able to view the entire file.txt. </td>
 Result: Display the contents of file.txt </td>
   </tr>
   <tr>
-   <td style="text-align:left;background-color: #e9f5f8 !important;"> Search for Text </td>
-   <td style="text-align:left;background-color: #e9f5f8 !important;"> `grep` </td>
-   <td style="text-align:left;background-color: #e9f5f8 !important;"> Search for a specific pattern of text within files </td>
-   <td style="text-align:left;background-color: #e9f5f8 !important;"> **`[username\@submit002 ~]$ grep “GCGGA” sequence_file.fastq`**
+   <td style="text-align:left;background-color: rgba(233, 245, 248, 255) !important;"> Search for Text </td>
+   <td style="text-align:left;background-color: rgba(233, 245, 248, 255) !important;"> `grep` </td>
+   <td style="text-align:left;background-color: rgba(233, 245, 248, 255) !important;"> Search for a specific pattern of text within files </td>
+   <td style="text-align:left;background-color: rgba(233, 245, 248, 255) !important;"> **`[username\@submit002 ~]$ grep “GCGGA” sequence_file.fastq`**
 
 Result: Display any GCGGA pattern in sequence_file.fastq </td>
   </tr>
@@ -170,10 +170,10 @@ Result: Display any GCGGA pattern in sequence_file.fastq </td>
 Result: Display the number of words, lines, and characters in the file.txt. </td>
   </tr>
   <tr>
-   <td style="text-align:left;background-color: #e9f5f8 !important;"> Touch </td>
-   <td style="text-align:left;background-color: #e9f5f8 !important;"> `touch` </td>
-   <td style="text-align:left;background-color: #e9f5f8 !important;"> Create a new empty file </td>
-   <td style="text-align:left;background-color: #e9f5f8 !important;"> **`[username\@submit002 ~]$ touch exampleFile.txt`**
+   <td style="text-align:left;background-color: rgba(233, 245, 248, 255) !important;"> Touch </td>
+   <td style="text-align:left;background-color: rgba(233, 245, 248, 255) !important;"> `touch` </td>
+   <td style="text-align:left;background-color: rgba(233, 245, 248, 255) !important;"> Create a new empty file </td>
+   <td style="text-align:left;background-color: rgba(233, 245, 248, 255) !important;"> **`[username\@submit002 ~]$ touch exampleFile.txt`**
 
 Result: The command line will display file details in
   the current directory </td>

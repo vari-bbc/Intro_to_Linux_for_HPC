@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Part 5 Pathway, enrichment, and experimental design | Introductory Bioinformatics for VAI Users</title>
   <meta name="description" content="Bioinformatics tutorials with hands-on exercises and examples." />
-  <meta name="generator" content="bookdown 0.36 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.38 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Part 5 Pathway, enrichment, and experimental design | Introductory Bioinformatics for VAI Users" />
   <meta property="og:type" content="book" />
@@ -226,7 +226,21 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li class="chapter" data-level="5.1" data-path="pathway-enrichment-and-experimental-design.html"><a href="pathway-enrichment-and-experimental-design.html#downstream-of-de-gene-analysis"><i class="fa fa-check"></i><b>5.1</b> <strong>Downstream of DE gene analysis</strong></a>
 <ul>
-<li class="chapter" data-level="5.1.1" data-path="pathway-enrichment-and-experimental-design.html"><a href="pathway-enrichment-and-experimental-design.html#copy-the-project-directory"><i class="fa fa-check"></i><b>5.1.1</b> <strong>Copy the project directory</strong></a></li>
+<li class="chapter" data-level="5.1.1" data-path="pathway-enrichment-and-experimental-design.html"><a href="pathway-enrichment-and-experimental-design.html#create-a-new-project-directory-for-enrichment-analysis"><i class="fa fa-check"></i><b>5.1.1</b> <strong>Create a new project directory for enrichment analysis</strong></a></li>
+<li class="chapter" data-level="5.1.2" data-path="pathway-enrichment-and-experimental-design.html"><a href="pathway-enrichment-and-experimental-design.html#create-a-r-project"><i class="fa fa-check"></i><b>5.1.2</b> <strong>Create a R project</strong></a></li>
+<li class="chapter" data-level="5.1.3" data-path="pathway-enrichment-and-experimental-design.html"><a href="pathway-enrichment-and-experimental-design.html#load-packaages"><i class="fa fa-check"></i><b>5.1.3</b> load packaages</a></li>
+<li class="chapter" data-level="5.1.4" data-path="pathway-enrichment-and-experimental-design.html"><a href="pathway-enrichment-and-experimental-design.html#import-previous-de-results"><i class="fa fa-check"></i><b>5.1.4</b> Import previous DE results</a></li>
+<li class="chapter" data-level="5.1.5" data-path="pathway-enrichment-and-experimental-design.html"><a href="pathway-enrichment-and-experimental-design.html#how-many-de-genes"><i class="fa fa-check"></i><b>5.1.5</b> How many DE genes</a></li>
+</ul></li>
+<li class="chapter" data-level="5.2" data-path="pathway-enrichment-and-experimental-design.html"><a href="pathway-enrichment-and-experimental-design.html#why-enrichment-and-pathway-analysis"><i class="fa fa-check"></i><b>5.2</b> Why enrichment and pathway analysis?</a></li>
+<li class="chapter" data-level="5.3" data-path="pathway-enrichment-and-experimental-design.html"><a href="pathway-enrichment-and-experimental-design.html#ora"><i class="fa fa-check"></i><b>5.3</b> ORA</a>
+<ul>
+<li class="chapter" data-level="5.3.1" data-path="pathway-enrichment-and-experimental-design.html"><a href="pathway-enrichment-and-experimental-design.html#plot-ora-results"><i class="fa fa-check"></i><b>5.3.1</b> plot ORA results</a></li>
+<li class="chapter" data-level="5.3.2" data-path="pathway-enrichment-and-experimental-design.html"><a href="pathway-enrichment-and-experimental-design.html#exercise-on-your-own"><i class="fa fa-check"></i><b>5.3.2</b> Exercise on your own</a></li>
+</ul></li>
+<li class="chapter" data-level="5.4" data-path="pathway-enrichment-and-experimental-design.html"><a href="pathway-enrichment-and-experimental-design.html#gsea"><i class="fa fa-check"></i><b>5.4</b> GSEA</a>
+<ul>
+<li class="chapter" data-level="5.4.1" data-path="pathway-enrichment-and-experimental-design.html"><a href="pathway-enrichment-and-experimental-design.html#plot-gsea-results"><i class="fa fa-check"></i><b>5.4.1</b> plot GSEA results</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="6" data-path="appendices.html"><a href="appendices.html"><i class="fa fa-check"></i><b>6</b> <strong>Appendices</strong></a>
@@ -256,22 +270,265 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h1><span class="header-section-number">Part 5</span> <strong>Pathway, enrichment, and experimental design</strong><a href="pathway-enrichment-and-experimental-design.html#pathway-enrichment-and-experimental-design" class="anchor-section" aria-label="Anchor link to header"></a></h1>
 <div id="downstream-of-de-gene-analysis" class="section level2 hasAnchor" number="5.1">
 <h2><span class="header-section-number">5.1</span> <strong>Downstream of DE gene analysis</strong><a href="pathway-enrichment-and-experimental-design.html#downstream-of-de-gene-analysis" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div id="copy-the-project-directory" class="section level3 hasAnchor" number="5.1.1">
-<h3><span class="header-section-number">5.1.1</span> <strong>Copy the project directory</strong><a href="pathway-enrichment-and-experimental-design.html#copy-the-project-directory" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>You will make your own directory, and copy the directory containing data and R code into your own.</p>
-<div class="sourceCode" id="cb136"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb136-1"><a href="pathway-enrichment-and-experimental-design.html#cb136-1" tabindex="-1"></a><span class="bu">cd</span> /varidata/researchtemp/hpctmp/BBC_workshop_June2023_III/</span>
-<span id="cb136-2"><a href="pathway-enrichment-and-experimental-design.html#cb136-2" tabindex="-1"></a></span>
-<span id="cb136-3"><a href="pathway-enrichment-and-experimental-design.html#cb136-3" tabindex="-1"></a><span class="fu">mkdir</span> <span class="op">&lt;</span>username<span class="op">&gt;</span></span>
-<span id="cb136-4"><a href="pathway-enrichment-and-experimental-design.html#cb136-4" tabindex="-1"></a></span>
-<span id="cb136-5"><a href="pathway-enrichment-and-experimental-design.html#cb136-5" tabindex="-1"></a><span class="bu">cd</span> <span class="op">&lt;</span>username<span class="op">&gt;</span></span>
-<span id="cb136-6"><a href="pathway-enrichment-and-experimental-design.html#cb136-6" tabindex="-1"></a></span>
-<span id="cb136-7"><a href="pathway-enrichment-and-experimental-design.html#cb136-7" tabindex="-1"></a><span class="bu">pwd</span>  <span class="co">## make sure you are in your dir</span></span>
-<span id="cb136-8"><a href="pathway-enrichment-and-experimental-design.html#cb136-8" tabindex="-1"></a></span>
-<span id="cb136-9"><a href="pathway-enrichment-and-experimental-design.html#cb136-9" tabindex="-1"></a><span class="fu">cp</span> <span class="at">-r</span> ../workshopIII_files .</span>
-<span id="cb136-10"><a href="pathway-enrichment-and-experimental-design.html#cb136-10" tabindex="-1"></a></span>
-<span id="cb136-11"><a href="pathway-enrichment-and-experimental-design.html#cb136-11" tabindex="-1"></a><span class="bu">cd</span> workshopIII_files</span>
-<span id="cb136-12"><a href="pathway-enrichment-and-experimental-design.html#cb136-12" tabindex="-1"></a></span>
-<span id="cb136-13"><a href="pathway-enrichment-and-experimental-design.html#cb136-13" tabindex="-1"></a><span class="fu">ls</span></span></code></pre></div>
+<div id="create-a-new-project-directory-for-enrichment-analysis" class="section level3 hasAnchor" number="5.1.1">
+<h3><span class="header-section-number">5.1.1</span> <strong>Create a new project directory for enrichment analysis</strong><a href="pathway-enrichment-and-experimental-design.html#create-a-new-project-directory-for-enrichment-analysis" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>You will make a new directory named “enrichment”, which is under “rnaseq_workflow”, and then you will create a R project in the “enrichment” folder.
+First, located where you run your RNA-seq workflow and cd to that dir.</p>
+<div class="sourceCode" id="cb133"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb133-1"><a href="pathway-enrichment-and-experimental-design.html#cb133-1" tabindex="-1"></a></span>
+<span id="cb133-2"><a href="pathway-enrichment-and-experimental-design.html#cb133-2" tabindex="-1"></a><span class="bu">cd</span> /varidata/researchtemp/hpctmp/BBC_workshop_Oct2024_II/<span class="op">&lt;</span>user.name<span class="op">&gt;</span>/rnaseq_workflow</span>
+<span id="cb133-3"><a href="pathway-enrichment-and-experimental-design.html#cb133-3" tabindex="-1"></a></span>
+<span id="cb133-4"><a href="pathway-enrichment-and-experimental-design.html#cb133-4" tabindex="-1"></a><span class="fu">mkdir</span> enrichment</span>
+<span id="cb133-5"><a href="pathway-enrichment-and-experimental-design.html#cb133-5" tabindex="-1"></a></span>
+<span id="cb133-6"><a href="pathway-enrichment-and-experimental-design.html#cb133-6" tabindex="-1"></a><span class="bu">cd</span> enrichment</span>
+<span id="cb133-7"><a href="pathway-enrichment-and-experimental-design.html#cb133-7" tabindex="-1"></a></span>
+<span id="cb133-8"><a href="pathway-enrichment-and-experimental-design.html#cb133-8" tabindex="-1"></a><span class="bu">pwd</span>  <span class="co">## make sure you are in the right dir. </span></span></code></pre></div>
+</div>
+<div id="create-a-r-project" class="section level3 hasAnchor" number="5.1.2">
+<h3><span class="header-section-number">5.1.2</span> <strong>Create a R project</strong><a href="pathway-enrichment-and-experimental-design.html#create-a-r-project" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>If you have are not in RStudio yet:
+1. Please go to the following URL:<a href="https://ondemand3.vai.zone/">https://ondemand3.vai.zone/</a>.<br />
+2. Click on RStudio Server, and create a new RStudio session on OnDemand. Please make sure you are loading the right R version, bbc2/R/alt/R-4.4.0-setR_LIBS_USER, which you can select from the drop down menu. Partition can be “short”, “long”, or “quick”, or “big”; Set CPU as 2, memory as 32, and time as 8 hours.<br />
+3. In the Rstudio window, click “file” at the upper left corner, click on “New Project” -&gt; “New Directory” -&gt; “New Project”; Then click on “Browser”, and see if you can find your own rnaseq_workflow folder; if you can not find it, you can also click on triple dot horizontal button and manually type “/varidata/researchtemp/hpctmp/BBC_workshop_Oct2024_II” (make sure no typo), try to find your own folder then “rnaseq_workflow”, click on “choose”. Next you will go back to the project wizard, and type “enrichment”. Now, you should have created a R project under the rnaseq_workflow in the folder “enrichment”.
+4. Lastly, you can create a R script file to put all your code for analysis there.</p>
+<details>
+<summary>
+<strong>Click to expand</strong>Why create R project?
+</summary>
+<blockquote>
+Creating an R Project in RStudio is recommended for several reasons:
+1. A R Project creates a dedicated working directory for your project files, including R scripts, data files, figures, and output. This helps in org anise your files related to your specific project.<br />
+2. Automatic Working Directory Setup. When you open an R Project, RStudio automatically sets the working directory to the project folder.<br />
+3. Reproducibility. With a project-based setup, the code and files related to a project stay together, making it easier to reproduce results.
+4. Version control integration and package development support.
+</blockquote>
+</details>
+</div>
+<div id="load-packaages" class="section level3 hasAnchor" number="5.1.3">
+<h3><span class="header-section-number">5.1.3</span> load packaages<a href="pathway-enrichment-and-experimental-design.html#load-packaages" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb134"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb134-1"><a href="pathway-enrichment-and-experimental-design.html#cb134-1" tabindex="-1"></a><span class="fu">suppressPackageStartupMessages</span>({</span>
+<span id="cb134-2"><a href="pathway-enrichment-and-experimental-design.html#cb134-2" tabindex="-1"></a><span class="fu">library</span>(DESeq2)</span>
+<span id="cb134-3"><a href="pathway-enrichment-and-experimental-design.html#cb134-3" tabindex="-1"></a><span class="fu">library</span>(ggrepel)</span>
+<span id="cb134-4"><a href="pathway-enrichment-and-experimental-design.html#cb134-4" tabindex="-1"></a><span class="fu">library</span>(msigdbr)</span>
+<span id="cb134-5"><a href="pathway-enrichment-and-experimental-design.html#cb134-5" tabindex="-1"></a><span class="fu">library</span>(clusterProfiler)</span>
+<span id="cb134-6"><a href="pathway-enrichment-and-experimental-design.html#cb134-6" tabindex="-1"></a><span class="fu">library</span>(ggvenn)</span>
+<span id="cb134-7"><a href="pathway-enrichment-and-experimental-design.html#cb134-7" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb134-8"><a href="pathway-enrichment-and-experimental-design.html#cb134-8" tabindex="-1"></a><span class="fu">library</span>(enrichplot)</span>
+<span id="cb134-9"><a href="pathway-enrichment-and-experimental-design.html#cb134-9" tabindex="-1"></a><span class="fu">library</span>(org.Hs.eg.db)</span>
+<span id="cb134-10"><a href="pathway-enrichment-and-experimental-design.html#cb134-10" tabindex="-1"></a><span class="fu">library</span>(pathview)</span>
+<span id="cb134-11"><a href="pathway-enrichment-and-experimental-design.html#cb134-11" tabindex="-1"></a>})</span></code></pre></div>
+<pre><code>## Rows: 21485 Columns: 10
+## ── Column specification ────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+## Delimiter: &quot;\t&quot;
+## chr (4): ens_gene, Symbol, Uniq_syms, Gene_name
+## dbl (6): entrez, baseMean, log2FoldChange, lfcSE, pvalue, padj
+## 
+## ℹ Use `spec()` to retrieve the full column specification for this data.
+## ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
+<pre><code>## Warning in dir.create(outdir, recursive = TRUE): &#39;./enrichment_res&#39; already
+## exists</code></pre>
+</div>
+<div id="import-previous-de-results" class="section level3 hasAnchor" number="5.1.4">
+<h3><span class="header-section-number">5.1.4</span> Import previous DE results<a href="pathway-enrichment-and-experimental-design.html#import-previous-de-results" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb137"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb137-1"><a href="pathway-enrichment-and-experimental-design.html#cb137-1" tabindex="-1"></a>de_res <span class="ot">&lt;-</span> <span class="fu">read_tsv</span>(<span class="st">&quot;../DE_genes/deseq2_out_files/de_res.tsv&quot;</span>)</span></code></pre></div>
+</div>
+<div id="how-many-de-genes" class="section level3 hasAnchor" number="5.1.5">
+<h3><span class="header-section-number">5.1.5</span> How many DE genes<a href="pathway-enrichment-and-experimental-design.html#how-many-de-genes" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb138"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb138-1"><a href="pathway-enrichment-and-experimental-design.html#cb138-1" tabindex="-1"></a><span class="do">## note the part after the &quot;.&quot; sign is the version number, here we can just remove it.</span></span>
+<span id="cb138-2"><a href="pathway-enrichment-and-experimental-design.html#cb138-2" tabindex="-1"></a>de_res<span class="sc">$</span>ens_gene <span class="ot">&lt;-</span> <span class="fu">str_split_fixed</span>(de_res<span class="sc">$</span>ens_gene, <span class="st">&quot;</span><span class="sc">\\</span><span class="st">.&quot;</span>, <span class="dv">2</span>)[, <span class="dv">1</span>]</span>
+<span id="cb138-3"><a href="pathway-enrichment-and-experimental-design.html#cb138-3" tabindex="-1"></a></span>
+<span id="cb138-4"><a href="pathway-enrichment-and-experimental-design.html#cb138-4" tabindex="-1"></a><span class="do">## check the first a few rows again</span></span>
+<span id="cb138-5"><a href="pathway-enrichment-and-experimental-design.html#cb138-5" tabindex="-1"></a><span class="fu">head</span>(de_res)</span></code></pre></div>
+<pre><code>## # A tibble: 6 × 10
+##   ens_gene      Symbol Uniq_syms entrez Gene_name baseMean log2FoldChange  lfcSE
+##   &lt;chr&gt;         &lt;chr&gt;  &lt;chr&gt;      &lt;dbl&gt; &lt;chr&gt;        &lt;dbl&gt;          &lt;dbl&gt;  &lt;dbl&gt;
+## 1 ENSG00000152… SPARC… SPARCL1     8404 SPARC li…     994.           4.54 0.210 
+## 2 ENSG00000148… STOM   STOM        2040 stomatin    13368.           1.41 0.0881
+## 3 ENSG00000179… PER1   PER1        5187 period c…     764.           3.13 0.204 
+## 4 ENSG00000134… PHC2   PHC2        1912 polyhome…    2708.           1.37 0.0902
+## 5 ENSG00000120… DUSP1  DUSP1       1843 dual spe…    3357.           2.90 0.198 
+## 6 ENSG00000125… MT2A   MT2A        4502 metallot…    3627.           2.17 0.150 
+## # ℹ 2 more variables: pvalue &lt;dbl&gt;, padj &lt;dbl&gt;</code></pre>
+<div class="sourceCode" id="cb140"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb140-1"><a href="pathway-enrichment-and-experimental-design.html#cb140-1" tabindex="-1"></a>fdr_cutoff <span class="ot">&lt;-</span> <span class="fl">0.1</span></span>
+<span id="cb140-2"><a href="pathway-enrichment-and-experimental-design.html#cb140-2" tabindex="-1"></a>up_reg_genes <span class="ot">&lt;-</span> de_res <span class="sc">|&gt;</span></span>
+<span id="cb140-3"><a href="pathway-enrichment-and-experimental-design.html#cb140-3" tabindex="-1"></a>  <span class="fu">filter</span>(padj <span class="sc">&lt;</span> fdr_cutoff <span class="sc">&amp;</span> log2FoldChange <span class="sc">&gt;</span> <span class="dv">0</span> )  </span>
+<span id="cb140-4"><a href="pathway-enrichment-and-experimental-design.html#cb140-4" tabindex="-1"></a>down_reg_genes <span class="ot">&lt;-</span> de_res <span class="sc">|&gt;</span></span>
+<span id="cb140-5"><a href="pathway-enrichment-and-experimental-design.html#cb140-5" tabindex="-1"></a>  <span class="fu">filter</span>(padj <span class="sc">&lt;</span> fdr_cutoff <span class="sc">&amp;</span> log2FoldChange <span class="sc">&lt;</span> <span class="dv">0</span> )  </span>
+<span id="cb140-6"><a href="pathway-enrichment-and-experimental-design.html#cb140-6" tabindex="-1"></a></span>
+<span id="cb140-7"><a href="pathway-enrichment-and-experimental-design.html#cb140-7" tabindex="-1"></a><span class="fu">message</span>(<span class="st">&quot;Number of up-regulated genes is: &quot;</span>, <span class="fu">nrow</span>(up_reg_genes))</span></code></pre></div>
+<pre><code>## Number of up-regulated genes is: 1872</code></pre>
+<div class="sourceCode" id="cb142"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb142-1"><a href="pathway-enrichment-and-experimental-design.html#cb142-1" tabindex="-1"></a><span class="fu">message</span>(<span class="st">&quot;Number of down-regulated genes is: &quot;</span>, <span class="fu">nrow</span>(down_reg_genes))</span></code></pre></div>
+<pre><code>## Number of down-regulated genes is: 1481</code></pre>
+</div>
+</div>
+<div id="why-enrichment-and-pathway-analysis" class="section level2 hasAnchor" number="5.2">
+<h2><span class="header-section-number">5.2</span> Why enrichment and pathway analysis?<a href="pathway-enrichment-and-experimental-design.html#why-enrichment-and-pathway-analysis" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>It can be difficult to look at so many genes as sometimes a list of genes do not provide any biological insights. Enrichment and pathway analyses are performed to determine if there is any konwn biological functions, interactions or pathways in your DE gene studies. Generally speaking, Enrichment and pathway analyses are restricted for DE gene expression, they can be performed on protemics data, ChIP-seq, and genomic data as well. There are different algorithms for enrichment and pathway analyses. Today, we will be focus on two types: ORA (over representation analysis) and GSEA (gene set enrichment analysis).</p>
+</div>
+<div id="ora" class="section level2 hasAnchor" number="5.3">
+<h2><span class="header-section-number">5.3</span> ORA<a href="pathway-enrichment-and-experimental-design.html#ora" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>ORA explores whether there is enrichment of known biological functions or pathways in a particular set of genes (e.g. significant up or down-regulated genes). Gene ontology (GO) is a framework used to represent and categorize gene functions across different species in a standardized manner. It provides a controlled vocabulary that describes genes in terms of their associated biological processes, cellular components, and molecular functions. The Gene Ontology Consortium maintains the GO vocabulary, as known as GO terms, and these GO terms are incorporated into gene annotations in many of the popular repositories for many organism.</p>
+<details>
+<summary>
+<strong>Click to expand</strong>More details on GO:
+</summary>
+<blockquote>
+<p>To describe the roles of genes and gene products, GO terms are organized into three independent components in a species-independent manner:</p>
+<ul>
+<li><p>Biological process: refers to the biological role involving the gene or gene product, and could include “transcription”, “signal transduction”, and “apoptosis”.</p></li>
+<li><p>Molecular function: represents the biochemical activity of the gene product, such activities could include “ligand”, “protein binding”, and “enzyme activity”.</p></li>
+<li><p>Cellular component: refers to the location in the cell of the gene product, such as “lysosome” and “plasma membrane”.</p></li>
+<li><p>The GO terms are loosely hierarchical, ranging from general, ‘parent’, terms to more specific, ‘child’ terms.</p></li>
+</ul>
+</blockquote>
+</details>
+<p>Lastly, we are primarily using clusterProfiler for conducting enrichment analyses.</p>
+<p>In the ORA here, we will be testing whether 2 fold up-regulated (logfC = 1, as logfold change is often log2 based) genes are enriched in which GO terms. We will be using enrichGO function from clusterProfiler, and use the whole dataset as the background (universe in enrichGO function).</p>
+<div class="sourceCode" id="cb144"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb144-1"><a href="pathway-enrichment-and-experimental-design.html#cb144-1" tabindex="-1"></a><span class="do">## only getting DE genes at least have 2 fold change, so log2FC &gt; 1, both up and down-regulated.</span></span>
+<span id="cb144-2"><a href="pathway-enrichment-and-experimental-design.html#cb144-2" tabindex="-1"></a>genes_2f_up <span class="ot">&lt;-</span> de_res <span class="sc">%&gt;%</span> <span class="fu">filter</span>(padj <span class="sc">&lt;</span> fdr_cutoff <span class="sc">&amp;</span> log2FoldChange <span class="sc">&gt;</span> <span class="dv">1</span>)</span>
+<span id="cb144-3"><a href="pathway-enrichment-and-experimental-design.html#cb144-3" tabindex="-1"></a></span>
+<span id="cb144-4"><a href="pathway-enrichment-and-experimental-design.html#cb144-4" tabindex="-1"></a><span class="fu">message</span>(<span class="st">&quot;Number of DE genes have at least 2 fold change is: &quot;</span>, <span class="fu">nrow</span>(genes_2f_up))</span></code></pre></div>
+<pre><code>## Number of DE genes have at least 2 fold change is: 317</code></pre>
+<div class="sourceCode" id="cb146"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb146-1"><a href="pathway-enrichment-and-experimental-design.html#cb146-1" tabindex="-1"></a>ego_BP <span class="ot">&lt;-</span> <span class="fu">enrichGO</span>(<span class="at">gene          =</span> <span class="fu">as.character</span>(genes_2f_up<span class="sc">$</span>entrez),</span>
+<span id="cb146-2"><a href="pathway-enrichment-and-experimental-design.html#cb146-2" tabindex="-1"></a>                <span class="at">universe      =</span> <span class="fu">as.character</span>(de_res<span class="sc">$</span>entrez),</span>
+<span id="cb146-3"><a href="pathway-enrichment-and-experimental-design.html#cb146-3" tabindex="-1"></a>                <span class="at">OrgDb         =</span> org.Hs.eg.db,</span>
+<span id="cb146-4"><a href="pathway-enrichment-and-experimental-design.html#cb146-4" tabindex="-1"></a>                <span class="at">ont           =</span> <span class="st">&quot;BP&quot;</span>,</span>
+<span id="cb146-5"><a href="pathway-enrichment-and-experimental-design.html#cb146-5" tabindex="-1"></a>                <span class="at">pAdjustMethod =</span> <span class="st">&quot;BH&quot;</span>,</span>
+<span id="cb146-6"><a href="pathway-enrichment-and-experimental-design.html#cb146-6" tabindex="-1"></a>                <span class="at">qvalueCutoff  =</span> <span class="fl">0.05</span>,</span>
+<span id="cb146-7"><a href="pathway-enrichment-and-experimental-design.html#cb146-7" tabindex="-1"></a>                <span class="at">keyType =</span> <span class="st">&quot;ENTREZID&quot;</span>,</span>
+<span id="cb146-8"><a href="pathway-enrichment-and-experimental-design.html#cb146-8" tabindex="-1"></a>                <span class="at">readable =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<div id="plot-ora-results" class="section level3 hasAnchor" number="5.3.1">
+<h3><span class="header-section-number">5.3.1</span> plot ORA results<a href="pathway-enrichment-and-experimental-design.html#plot-ora-results" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Dotplots can be used to depict the enrichment scores (e.g. p values) and gene count or ratio as circle size and colors. Cneplots, gene-concept network, allows us to know which genes are involved in these significant terms or pathways, as well as the linkages among GO terms or pathways.</p>
+<div class="sourceCode" id="cb147"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb147-1"><a href="pathway-enrichment-and-experimental-design.html#cb147-1" tabindex="-1"></a><span class="fu">dotplot</span>(ego_BP, <span class="at">showCategory =</span> <span class="dv">20</span>, <span class="at">font.size =</span> <span class="dv">9</span> ) <span class="sc">+</span> <span class="fu">ggtitle</span>(<span class="st">&quot;dotplot for ORA - BP&quot;</span>)</span></code></pre></div>
+<p><img src="04_pathway_enrichment_files/figure-html/plot_ORA-1.svg" width="768" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb148"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb148-1"><a href="pathway-enrichment-and-experimental-design.html#cb148-1" tabindex="-1"></a><span class="fu">cnetplot</span>(ego_BP, <span class="at">showCategory =</span> <span class="dv">10</span>, <span class="at">node_label_size =</span> <span class="fl">0.6</span>, <span class="at">cex_label_category =</span> <span class="fl">0.8</span>,</span>
+<span id="cb148-2"><a href="pathway-enrichment-and-experimental-design.html#cb148-2" tabindex="-1"></a>  <span class="at">cex_label_gene =</span> <span class="fl">0.5</span>, <span class="at">cex_category =</span> <span class="fl">0.8</span>, <span class="at">cex_genes =</span> <span class="fl">0.5</span>, </span>
+<span id="cb148-3"><a href="pathway-enrichment-and-experimental-design.html#cb148-3" tabindex="-1"></a>  <span class="at">max.overlaps =</span> <span class="cn">Inf</span>) <span class="sc">+</span> <span class="fu">ggtitle</span>(<span class="st">&quot;Gene-concept network for ORA - GO:BP&quot;</span>)</span></code></pre></div>
+<pre><code>## Warning in cnetplot.enrichResult(x, ...): Use &#39;cex.params = list(category_node = your_value)&#39; instead of &#39;cex_category&#39;.
+##  The cex_category parameter will be removed in the next version.</code></pre>
+<pre><code>## Warning in cnetplot.enrichResult(x, ...): Use &#39;cex.params = list(category_label = your_value)&#39; instead of &#39;cex_label_category&#39;.
+##  The cex_label_category parameter will be removed in the next version.</code></pre>
+<pre><code>## Warning in cnetplot.enrichResult(x, ...): Use &#39;cex.params = list(gene_label = your_value)&#39; instead of &#39;cex_label_gene&#39;.
+##  The cex_label_gene parameter will be removed in the next version.</code></pre>
+<pre><code>## Warning: ggrepel: 1 unlabeled data points (too many overlaps). Consider
+## increasing max.overlaps</code></pre>
+<p><img src="04_pathway_enrichment_files/figure-html/plot_ORA-2.svg" width="768" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb153"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb153-1"><a href="pathway-enrichment-and-experimental-design.html#cb153-1" tabindex="-1"></a>ego_BP_df <span class="ot">&lt;-</span> ego_BP <span class="sc">|&gt;</span> <span class="fu">as.data.frame</span>() </span>
+<span id="cb153-2"><a href="pathway-enrichment-and-experimental-design.html#cb153-2" tabindex="-1"></a></span>
+<span id="cb153-3"><a href="pathway-enrichment-and-experimental-design.html#cb153-3" tabindex="-1"></a><span class="do">## output the BP enrichment results into a tsv file</span></span>
+<span id="cb153-4"><a href="pathway-enrichment-and-experimental-design.html#cb153-4" tabindex="-1"></a><span class="fu">write_tsv</span>(ego_BP_df, <span class="fu">paste0</span>(outdir, <span class="st">&quot;/clusterProfiler_BP_res.tsv&quot;</span>))</span></code></pre></div>
+<details>
+<summary>
+<strong>Click to expand</strong>Exercise on your own:
+</summary>
+<blockquote>
+</div>
+<div id="exercise-on-your-own" class="section level3 hasAnchor" number="5.3.2">
+<h3><span class="header-section-number">5.3.2</span> Exercise on your own<a href="pathway-enrichment-and-experimental-design.html#exercise-on-your-own" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<ol style="list-style-type: decimal">
+<li><p>Using the same conditions, return the enriched GO processes for the Molecular Function ontology.</p></li>
+<li><p>How would the enrichGO() function change if our organism was rat?</p></li>
+</ol>
+</blockquote>
+</details>
+</div>
+</div>
+<div id="gsea" class="section level2 hasAnchor" number="5.4">
+<h2><span class="header-section-number">5.4</span> GSEA<a href="pathway-enrichment-and-experimental-design.html#gsea" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>the difference is small, but evidenced in coordinated way in a set of related genes. GSEA (Subramanian et al. 2005) directly addresses this limitation. Unlike ORA where an arbitary threshold is set as “significant DE genes”, all genes can be used in GSEA. We usually sort genes based on their fold changes or pvalues, and compare this sorted gene list to a predefined gene set, such as genes in certain pathways. It will help to detect situations where all genes in a predefined set change in a small but coordinated manner. P-values are generated through permutation tests. This type of analysis can be particularly helpful if the differential expression analysis only outputs a small number of significant DE genes.</p>
+<p>Here, what we create is a sorted list of all the genes in our dataset sorted by -log10(pvalue) and sign of fold change; this way, up-regulated and down-regulated genes will be at the top and bottom of the list. In GSEA, we will show how to run GSEA on <a href="https://www.genome.jp/kegg/pathway.html">KEGG pathways</a></p>
+<div class="sourceCode" id="cb154"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb154-1"><a href="pathway-enrichment-and-experimental-design.html#cb154-1" tabindex="-1"></a><span class="do">## we will use all the genes. Get the fold change first</span></span>
+<span id="cb154-2"><a href="pathway-enrichment-and-experimental-design.html#cb154-2" tabindex="-1"></a>gene_list <span class="ot">&lt;-</span> <span class="fu">sign</span>(de_res<span class="sc">$</span>log2FoldChange) <span class="sc">*</span> <span class="sc">-</span><span class="fu">log10</span>(de_res<span class="sc">$</span>pvalue)</span>
+<span id="cb154-3"><a href="pathway-enrichment-and-experimental-design.html#cb154-3" tabindex="-1"></a><span class="do">## or we can just use fold change data. </span></span>
+<span id="cb154-4"><a href="pathway-enrichment-and-experimental-design.html#cb154-4" tabindex="-1"></a></span>
+<span id="cb154-5"><a href="pathway-enrichment-and-experimental-design.html#cb154-5" tabindex="-1"></a><span class="do">## get the name of the genes. </span></span>
+<span id="cb154-6"><a href="pathway-enrichment-and-experimental-design.html#cb154-6" tabindex="-1"></a><span class="fu">names</span>(gene_list) <span class="ot">&lt;-</span> de_res<span class="sc">$</span>entrez <span class="do">## the names of the gene list is the en ID. </span></span>
+<span id="cb154-7"><a href="pathway-enrichment-and-experimental-design.html#cb154-7" tabindex="-1"></a></span>
+<span id="cb154-8"><a href="pathway-enrichment-and-experimental-design.html#cb154-8" tabindex="-1"></a><span class="do">## remove NA is there is any in the fold change or gene names</span></span>
+<span id="cb154-9"><a href="pathway-enrichment-and-experimental-design.html#cb154-9" tabindex="-1"></a><span class="cf">if</span>(<span class="fu">any</span>(<span class="fu">is.na</span>(gene_list))){ </span>
+<span id="cb154-10"><a href="pathway-enrichment-and-experimental-design.html#cb154-10" tabindex="-1"></a>  gene_list <span class="ot">=</span> gene_list[<span class="sc">-</span><span class="fu">which</span>(<span class="fu">is.na</span>(gene_list))]</span>
+<span id="cb154-11"><a href="pathway-enrichment-and-experimental-design.html#cb154-11" tabindex="-1"></a>}</span>
+<span id="cb154-12"><a href="pathway-enrichment-and-experimental-design.html#cb154-12" tabindex="-1"></a><span class="cf">if</span>(<span class="fu">any</span>(<span class="fu">is.na</span>(<span class="fu">names</span>(gene_list)))) {</span>
+<span id="cb154-13"><a href="pathway-enrichment-and-experimental-design.html#cb154-13" tabindex="-1"></a>  gene_list <span class="ot">=</span> gene_list[<span class="sc">-</span><span class="fu">which</span>(<span class="fu">is.na</span>(<span class="fu">names</span>(gene_list)))]</span>
+<span id="cb154-14"><a href="pathway-enrichment-and-experimental-design.html#cb154-14" tabindex="-1"></a>}</span>
+<span id="cb154-15"><a href="pathway-enrichment-and-experimental-design.html#cb154-15" tabindex="-1"></a></span>
+<span id="cb154-16"><a href="pathway-enrichment-and-experimental-design.html#cb154-16" tabindex="-1"></a><span class="do">## also remove duplicated gene names</span></span>
+<span id="cb154-17"><a href="pathway-enrichment-and-experimental-design.html#cb154-17" tabindex="-1"></a>gene_list <span class="ot">&lt;-</span> gene_list[<span class="sc">!</span><span class="fu">duplicated</span>(<span class="fu">names</span>(gene_list))]</span>
+<span id="cb154-18"><a href="pathway-enrichment-and-experimental-design.html#cb154-18" tabindex="-1"></a></span>
+<span id="cb154-19"><a href="pathway-enrichment-and-experimental-design.html#cb154-19" tabindex="-1"></a><span class="do">## sort from largest to smallest.</span></span>
+<span id="cb154-20"><a href="pathway-enrichment-and-experimental-design.html#cb154-20" tabindex="-1"></a>gene_list <span class="ot">&lt;-</span> <span class="fu">sort</span>(gene_list, <span class="at">decreasing =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb154-21"><a href="pathway-enrichment-and-experimental-design.html#cb154-21" tabindex="-1"></a></span>
+<span id="cb154-22"><a href="pathway-enrichment-and-experimental-design.html#cb154-22" tabindex="-1"></a><span class="fu">head</span>(gene_list)</span></code></pre></div>
+<pre><code>##      8404      2040      5187      1912      1843      4502 
+## 106.41851  59.25457  54.02435  53.41694  49.03381  48.37430</code></pre>
+<div class="sourceCode" id="cb156"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb156-1"><a href="pathway-enrichment-and-experimental-design.html#cb156-1" tabindex="-1"></a><span class="co"># set seeds</span></span>
+<span id="cb156-2"><a href="pathway-enrichment-and-experimental-design.html#cb156-2" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1234</span>)</span>
+<span id="cb156-3"><a href="pathway-enrichment-and-experimental-design.html#cb156-3" tabindex="-1"></a></span>
+<span id="cb156-4"><a href="pathway-enrichment-and-experimental-design.html#cb156-4" tabindex="-1"></a><span class="do">## run GSEA using clusterProfiler</span></span>
+<span id="cb156-5"><a href="pathway-enrichment-and-experimental-design.html#cb156-5" tabindex="-1"></a>gseaKEGG <span class="ot">&lt;-</span> <span class="fu">gseKEGG</span>(<span class="at">geneList =</span> gene_list, <span class="co"># ordered named vector of fold changes (Entrez IDs are the associated names)</span></span>
+<span id="cb156-6"><a href="pathway-enrichment-and-experimental-design.html#cb156-6" tabindex="-1"></a>              <span class="at">organism =</span> <span class="st">&quot;hsa&quot;</span>, </span>
+<span id="cb156-7"><a href="pathway-enrichment-and-experimental-design.html#cb156-7" tabindex="-1"></a>              <span class="at">nPerm =</span> <span class="dv">1000</span>, <span class="co"># default number permutations</span></span>
+<span id="cb156-8"><a href="pathway-enrichment-and-experimental-design.html#cb156-8" tabindex="-1"></a>              <span class="at">minGSSize =</span> <span class="dv">100</span>, <span class="co"># minimum gene set size (# genes in set) - change to test more sets or recover sets with fewer # genes</span></span>
+<span id="cb156-9"><a href="pathway-enrichment-and-experimental-design.html#cb156-9" tabindex="-1"></a>              <span class="at">pvalueCutoff =</span> <span class="fl">0.1</span>, <span class="co"># padj cutoff value</span></span>
+<span id="cb156-10"><a href="pathway-enrichment-and-experimental-design.html#cb156-10" tabindex="-1"></a>              <span class="at">verbose =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
+<pre><code>## Reading KEGG annotation online: &quot;https://rest.kegg.jp/link/hsa/pathway&quot;...</code></pre>
+<pre><code>## Reading KEGG annotation online: &quot;https://rest.kegg.jp/list/pathway/hsa&quot;...</code></pre>
+<pre><code>## Warning in .GSEA(geneList = geneList, exponent = exponent, minGSSize =
+## minGSSize, : We do not recommend using nPerm parameter incurrent and future
+## releases</code></pre>
+<pre><code>## Warning in fgsea(pathways = geneSets, stats = geneList, nperm = nPerm, minSize
+## = minGSSize, : You are trying to run fgseaSimple. It is recommended to use
+## fgseaMultilevel. To run fgseaMultilevel, you need to remove the nperm argument
+## in the fgsea function call.</code></pre>
+<pre><code>## Warning in preparePathwaysAndStats(pathways, stats, minSize, maxSize, gseaParam, : There are ties in the preranked stats (0.04% of the list).
+## The order of those tied genes will be arbitrary, which may produce unexpected results.</code></pre>
+<div class="sourceCode" id="cb162"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb162-1"><a href="pathway-enrichment-and-experimental-design.html#cb162-1" tabindex="-1"></a>gseaKEGG_gene_symbol <span class="ot">&lt;-</span> <span class="fu">setReadable</span>(gseaKEGG, <span class="st">&#39;org.Hs.eg.db&#39;</span>, <span class="st">&#39;ENTREZID&#39;</span>)</span>
+<span id="cb162-2"><a href="pathway-enrichment-and-experimental-design.html#cb162-2" tabindex="-1"></a></span>
+<span id="cb162-3"><a href="pathway-enrichment-and-experimental-design.html#cb162-3" tabindex="-1"></a></span>
+<span id="cb162-4"><a href="pathway-enrichment-and-experimental-design.html#cb162-4" tabindex="-1"></a><span class="do">### again, gsea is a large list, and we convert it to a data frame, and save the results</span></span>
+<span id="cb162-5"><a href="pathway-enrichment-and-experimental-design.html#cb162-5" tabindex="-1"></a>gsea_df <span class="ot">&lt;-</span> gseaKEGG_gene_symbol <span class="sc">|&gt;</span> <span class="fu">as.data.frame</span>()</span>
+<span id="cb162-6"><a href="pathway-enrichment-and-experimental-design.html#cb162-6" tabindex="-1"></a></span>
+<span id="cb162-7"><a href="pathway-enrichment-and-experimental-design.html#cb162-7" tabindex="-1"></a><span class="fu">write_tsv</span>(gsea_df, <span class="fu">paste0</span>(outdir, <span class="st">&quot;/clusterProfiler_KEGG_GSEA_res.tsv&quot;</span>))</span></code></pre></div>
+<div id="plot-gsea-results" class="section level3 hasAnchor" number="5.4.1">
+<h3><span class="header-section-number">5.4.1</span> plot GSEA results<a href="pathway-enrichment-and-experimental-design.html#plot-gsea-results" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Similarity, we can make dotplot and gene-concept network plots here.</p>
+<div class="sourceCode" id="cb163"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb163-1"><a href="pathway-enrichment-and-experimental-design.html#cb163-1" tabindex="-1"></a><span class="co"># first dotplot</span></span>
+<span id="cb163-2"><a href="pathway-enrichment-and-experimental-design.html#cb163-2" tabindex="-1"></a><span class="fu">dotplot</span>(gseaKEGG_gene_symbol, <span class="at">showCategory =</span> <span class="dv">15</span>) <span class="sc">+</span> <span class="fu">ggtitle</span>(<span class="st">&quot;dotplot for gsea - KEGG pathways&quot;</span>)</span></code></pre></div>
+<p><img src="04_pathway_enrichment_files/figure-html/plot_GSEA1-1.svg" width="768" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb164"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb164-1"><a href="pathway-enrichment-and-experimental-design.html#cb164-1" tabindex="-1"></a><span class="fu">cnetplot</span>(gseaKEGG_gene_symbol, </span>
+<span id="cb164-2"><a href="pathway-enrichment-and-experimental-design.html#cb164-2" tabindex="-1"></a>         <span class="at">showCategory =</span> <span class="dv">5</span>, </span>
+<span id="cb164-3"><a href="pathway-enrichment-and-experimental-design.html#cb164-3" tabindex="-1"></a>         <span class="at">node_label_size =</span> <span class="fl">0.6</span>, </span>
+<span id="cb164-4"><a href="pathway-enrichment-and-experimental-design.html#cb164-4" tabindex="-1"></a>         <span class="at">cex_label_category =</span> <span class="fl">0.8</span>,</span>
+<span id="cb164-5"><a href="pathway-enrichment-and-experimental-design.html#cb164-5" tabindex="-1"></a>         <span class="at">cex_label_gene =</span> <span class="fl">0.5</span>, </span>
+<span id="cb164-6"><a href="pathway-enrichment-and-experimental-design.html#cb164-6" tabindex="-1"></a>         <span class="at">cex_category =</span> <span class="fl">0.8</span>, <span class="at">cex_genes =</span> <span class="fl">0.5</span>, </span>
+<span id="cb164-7"><a href="pathway-enrichment-and-experimental-design.html#cb164-7" tabindex="-1"></a>         <span class="at">max.overlaps =</span> <span class="cn">Inf</span>) <span class="sc">+</span> <span class="fu">ggtitle</span>(<span class="st">&quot;Gene-concept network for gsea-KEGG pathways&quot;</span>)</span></code></pre></div>
+<pre><code>## Warning in cnetplot.enrichResult(x, ...): Use &#39;cex.params = list(category_node = your_value)&#39; instead of &#39;cex_category&#39;.
+##  The cex_category parameter will be removed in the next version.</code></pre>
+<pre><code>## Warning in cnetplot.enrichResult(x, ...): Use &#39;cex.params = list(category_label = your_value)&#39; instead of &#39;cex_label_category&#39;.
+##  The cex_label_category parameter will be removed in the next version.</code></pre>
+<pre><code>## Warning in cnetplot.enrichResult(x, ...): Use &#39;cex.params = list(gene_label = your_value)&#39; instead of &#39;cex_label_gene&#39;.
+##  The cex_label_gene parameter will be removed in the next version.</code></pre>
+<pre><code>## Warning: ggrepel: 1 unlabeled data points (too many overlaps). Consider
+## increasing max.overlaps</code></pre>
+<p><img src="04_pathway_enrichment_files/figure-html/plot_GSEA1-2.svg" width="768" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb169"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb169-1"><a href="pathway-enrichment-and-experimental-design.html#cb169-1" tabindex="-1"></a><span class="co"># Specific plots we can make for GSEA results</span></span>
+<span id="cb169-2"><a href="pathway-enrichment-and-experimental-design.html#cb169-2" tabindex="-1"></a><span class="fu">gseaplot</span>(gseaKEGG_gene_symbol, <span class="at">geneSetID =</span> <span class="st">&#39;hsa04910&#39;</span>)</span></code></pre></div>
+<p><img src="04_pathway_enrichment_files/figure-html/plot_GSEA1-3.svg" width="768" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb170"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb170-1"><a href="pathway-enrichment-and-experimental-design.html#cb170-1" tabindex="-1"></a><span class="co"># Lastly, we can map gene expression to a KEGG map</span></span>
+<span id="cb170-2"><a href="pathway-enrichment-and-experimental-design.html#cb170-2" tabindex="-1"></a>foldchanges <span class="ot">&lt;-</span> de_res<span class="sc">$</span>log2FoldChange</span>
+<span id="cb170-3"><a href="pathway-enrichment-and-experimental-design.html#cb170-3" tabindex="-1"></a><span class="fu">names</span>(foldchanges) <span class="ot">&lt;-</span> de_res<span class="sc">$</span>entrez</span>
+<span id="cb170-4"><a href="pathway-enrichment-and-experimental-design.html#cb170-4" tabindex="-1"></a></span>
+<span id="cb170-5"><a href="pathway-enrichment-and-experimental-design.html#cb170-5" tabindex="-1"></a><span class="fu">pathview</span>(<span class="at">gene.data =</span> foldchanges,</span>
+<span id="cb170-6"><a href="pathway-enrichment-and-experimental-design.html#cb170-6" tabindex="-1"></a>              <span class="at">pathway.id =</span> <span class="st">&#39;hsa04910&#39;</span>,</span>
+<span id="cb170-7"><a href="pathway-enrichment-and-experimental-design.html#cb170-7" tabindex="-1"></a>              <span class="at">species =</span> <span class="st">&quot;hsa&quot;</span>,</span>
+<span id="cb170-8"><a href="pathway-enrichment-and-experimental-design.html#cb170-8" tabindex="-1"></a>              <span class="at">limit =</span> <span class="fu">list</span>(<span class="at">gene =</span> <span class="dv">2</span>, <span class="co"># value gives the max/min limit for foldchanges</span></span>
+<span id="cb170-9"><a href="pathway-enrichment-and-experimental-design.html#cb170-9" tabindex="-1"></a>              <span class="at">cpd =</span> <span class="dv">1</span>))</span>
+<span id="cb170-10"><a href="pathway-enrichment-and-experimental-design.html#cb170-10" tabindex="-1"></a></span>
+<span id="cb170-11"><a href="pathway-enrichment-and-experimental-design.html#cb170-11" tabindex="-1"></a><span class="do">## you can download the map from in Rstudio, but you will be seeing something like this. </span></span></code></pre></div>
+<div class="float">
+<img src="img/hsa04910.pathview.png" alt="Example pathview output." />
+<div class="figcaption">Example pathview output.</div>
+</div>
 
 </div>
 </div>
