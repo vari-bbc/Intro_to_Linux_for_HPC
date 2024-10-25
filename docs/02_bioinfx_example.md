@@ -17,14 +17,14 @@ While simple file manipulations can be done on the submit node, computationally 
 We will start an interactive job, requesting one CPU core and 1 hour and 30 minutes of walltime.
 
 
-```bash
+``` bash
 srun -p quick --nodes=1 --ntasks-per-node=1 --time=01:30:00 --pty bash 
 ```
 
 After a job has been submitted, users can check on the status (e.g. how long it has been running) of it using the following.
 
 
-```bash
+``` bash
 squeue --me
 ```
 
@@ -33,34 +33,34 @@ squeue --me
 Typically, one would work in their specific lab's folder on the HPC. For this workshop, we will work in a common directory so that the instructors and check on your progress.
 
 
-```bash
+``` bash
 cd /varidata/researchtemp/hpctmp/BBC_workshop_Oct2024_II/
 ```
 
 Create a directory based on your username to separate your work from other users'.
 
 
-```bash
+``` bash
 mkdir <username>
 ```
 
 Navigate to the username directory
 
-```bash
+``` bash
 cd <username>
 ```
 
 Create a `fastqs` directory inside the username directory. It is good practice to keep your raw data separate from your analyses and never make changes to them directly.
 
 
-```bash
+``` bash
 mkdir fastqs
 ```
 
 Use `ls` to confirm the `fastqs` directory was created.
 
 
-```bash
+``` bash
 ls
 ```
 
@@ -69,14 +69,14 @@ ls
 Verify the current directory is in the username directory.
 
 
-```bash
+``` bash
 pwd
 ```
 
 Copy the 4 fastq.gz files and `md5sum.txt`, which you will use to check the validty of the files.
 
 
-```bash
+``` bash
 cp /varidata/researchtemp/hpctmp/BBC_workshop_Oct2024_II/fastqs/*fastq.gz ./fastqs/
 
 cp /varidata/researchtemp/hpctmp/BBC_workshop_Oct2024_II/fastqs/md5sum.txt ./fastqs/
@@ -85,7 +85,7 @@ cp /varidata/researchtemp/hpctmp/BBC_workshop_Oct2024_II/fastqs/md5sum.txt ./fas
 Verify that the copied files are valid. The following code should return with an **OK** for each file.
 
 
-```bash
+``` bash
 cd fastqs
 
 md5sum -c md5sum.txt
@@ -101,7 +101,7 @@ md5sum -c md5sum.txt
 Go back to the username directory.
 
 
-```bash
+``` bash
 cd ..
 ```
 
@@ -110,7 +110,7 @@ cd ..
 Notice all of the sequence data files end with a `.gz` extension, indicating they are gzip compressed. To view such files, one must use `zcat` instead of `cat` so that the files are decompressed into human-readable format.
 
 
-```bash
+``` bash
 zcat fastqs/SRR1039520_1.fastq.gz | head
 ```
 
@@ -128,7 +128,7 @@ zcat fastqs/SRR1039520_1.fastq.gz | head
 ```
 
 
-```bash
+``` bash
 zcat fastqs/SRR1039520_2.fastq.gz | head
 ```
 
@@ -150,7 +150,7 @@ Notice that `SRR1039520_1.fastq.gz` and `SRR1039520_2.fastq.gz` files have the s
 Next, we can figure out how many reads are in a fastq file using `wc -l`. Recall that each read is represented by 4 lines in a fastq file, so we need to divide the results of `wc -l` by 4 to get the number of reads.
 
 
-```bash
+``` bash
 zcat fastqs/SRR1039520_1.fastq.gz | wc -l
 ```
 
@@ -161,7 +161,7 @@ zcat fastqs/SRR1039520_1.fastq.gz | wc -l
 Finally, we can use `wc -m` to figure out the read length in a fastq file. Below, we use a combination of `head -n2` and `tail -n1` to get the second line of the first read. You may notice that the results of `wc -m` will be 1 higher than the actual read length. This is because the tool counts the newline character also.
 
 
-```bash
+``` bash
 zcat fastqs/SRR1039520_1.fastq.gz | head -n2 | tail -n1 | wc -m
 
 ```
@@ -177,7 +177,7 @@ Type `module av bbc2` (modules beginning with just `bbc` are from the old HPC) t
 This command will output any modules containing the `fastqc` keyword.
 
 
-```bash
+``` bash
 module av -w 1 bbc2 2>&1 | grep 'fastqc'
 ```
 
@@ -190,7 +190,7 @@ module av -w 1 bbc2 2>&1 | grep 'fastqc'
 Create a `fastqc` directory inside of your username directory and run FastQC.
 
 
-```bash
+``` bash
 module load bbc2/fastqc/fastqc-0.12.1
 
 mkdir fastqc
@@ -202,7 +202,6 @@ fastqc -o fastqc fastqs/*fastq.gz
 ```
 ## Loading bbc2/fastqc/fastqc-0.12.1
 ##   Loading requirement: VARI/java/1.8.0_202
-## mkdir: cannot create directory ‘fastqc’: File exists
 ## application/gzip
 ## application/gzip
 ## Started analysis of SRR1039520_1.fastq.gz
@@ -300,7 +299,7 @@ fastqc -o fastqc fastqs/*fastq.gz
 See what was produced by FastQC.
 
 
-```bash
+``` bash
 ls fastqc/
 
 ```
@@ -321,7 +320,7 @@ ls fastqc/
 First, we `exit` from our interactive job because we want to get back on to the submit node to submit a non-interactive job to run Salmon.
 
 
-```bash
+``` bash
 # You should see one job when you run this command, corresponding to your interactive job.
 squeue --me
 
@@ -339,7 +338,7 @@ cd /varidata/researchtemp/hpctmp/BBC_workshop_Oct2024_II/<username>
 Below is a SLURM job script to run Salmon. For now, do not worry about how the code works. Copy the code and paste it into a new file. Save it as `run_salmon.sh` in your username directory. If you have issues with this task, you can copy the job script directly using the command, `cp /varidata/researchtemp/hpctmp/BBC_workshop_June2023/kin.lau/run_salmon.sh .`.
 
 
-```bash
+``` bash
 #!/bin/bash
 
 #SBATCH --export=NONE
@@ -380,14 +379,14 @@ echo "End time: $end_time"
 Type `ls` to ensure `run_salmon.sh` file exist in the username directory.
 
 
-```bash
+``` bash
 ls
 ```
 
 Use the `sbatch` command to submit the job.
 
 
-```bash
+``` bash
 sbatch -p quick run_salmon.sh
 
 ```
@@ -395,7 +394,7 @@ sbatch -p quick run_salmon.sh
 Users can check if the job is running with the following command. The job should take about two minutes to complete.
 
 
-```bash
+``` bash
 squeue --me
 
 ```
@@ -405,13 +404,30 @@ squeue --me
 It is good practice to check the job logs after your job is done to ensure that the job completed successfully. If there is an error, the output files may not be reliable or could be incomplete.
 
 
-```bash
+``` bash
 tail run_salmon.e
 ```
 
+```
+## [2024-10-18 11:02:24.242] [jointLog] [info] Marked 0 weighted equivalence classes as degenerate
+## [2024-10-18 11:02:24.269] [jointLog] [info] iteration = 0 | max rel diff. = 202.856
+## [2024-10-18 11:02:26.830] [jointLog] [info] iteration = 100 | max rel diff. = 2.70344
+## [2024-10-18 11:02:29.410] [jointLog] [info] iteration = 200 | max rel diff. = 8.44748
+## [2024-10-18 11:02:32.123] [jointLog] [info] iteration = 300 | max rel diff. = 1.20046
+## [2024-10-18 11:02:34.825] [jointLog] [info] iteration = 400 | max rel diff. = 17.8856
+## [2024-10-18 11:02:36.638] [jointLog] [info] iteration = 468 | max rel diff. = 0.00941437
+## [2024-10-18 11:02:36.678] [jointLog] [info] Finished optimizer
+## [2024-10-18 11:02:36.678] [jointLog] [info] writing output
+```
 
-```bash
+
+``` bash
 tail run_salmon.o
+```
+
+```
+## Start time: 11:01:15
+## End time: 11:02:38
 ```
 
 ## **Use grep to find the TPMs for a specific gene**
@@ -421,45 +437,46 @@ As an example, let's try to extract out the TPMs (Transcripts per Million) for M
 First, let's take a look at one of these files to figure out the format of these files.
 
 
-```bash
+``` bash
 head salmon/SRR1039520/quant.sf
 
 ```
 
 ```
 ## Name	Length	EffectiveLength	TPM	NumReads
-## ENST00000456328.2	1657	1501.916	0.000000	0.000
-## ENST00000450305.2	632	477.048	0.000000	0.000
-## ENST00000488147.1	1351	1195.916	0.000000	0.000
-## ENST00000619216.1	68	1.986	0.000000	0.000
-## ENST00000473358.1	712	557.005	0.000000	0.000
-## ENST00000469289.1	535	380.174	0.000000	0.000
-## ENST00000607096.1	138	24.957	0.000000	0.000
-## ENST00000417324.1	1187	1031.916	0.000000	0.000
-## ENST00000461467.1	590	435.099	0.000000	0.000
+## ENST00000456328.2	1657	1502.149	0.000000	0.000
+## ENST00000450305.2	632	477.287	0.000000	0.000
+## ENST00000488147.1	1351	1196.149	0.000000	0.000
+## ENST00000619216.1	68	1.878	0.000000	0.000
+## ENST00000473358.1	712	557.240	0.000000	0.000
+## ENST00000469289.1	535	380.407	0.000000	0.000
+## ENST00000607096.1	138	24.897	0.000000	0.000
+## ENST00000417324.1	1187	1032.149	0.000000	0.000
+## ENST00000461467.1	590	435.330	0.000000	0.000
 ```
 
 From the output above, we can see that the TPMs are in the 4th column of this file. The canonical transcript for [MUC1](http://useast.ensembl.org/Homo_sapiens/Gene/Summary?db=core;g=ENSG00000185499;r=1:155185824-155192916) is ENST00000620103, so we will search for that using `grep`.
 
 
-```bash
+``` bash
 grep 'ENST00000620103' salmon/SRR1039520/quant.sf
 
 ```
 
 ```
-## ENST00000620103.4	1811	1655.916	0.000000	0.000
+## ENST00000620103.4	1811	1656.149	0.000000	0.000
 ```
 
 Look for MUC1 across all the samples at the same time. We can see that 'SRR1039521' has a TPM of 13.1 for MUC1 compared to 0 for 'SRR1039520'. Recall that the fastq files for this exercise were subsetted to a very small number of reads so don't interpret these results seriously.
 
 
-```bash
+``` bash
 grep 'ENST00000620103' salmon/*/quant.sf
 ```
 
 ```
-## ENST00000620103.4	1811	1655.916	0.000000	0.000
+## salmon/SRR1039520/quant.sf:ENST00000620103.4	1811	1656.149	0.000000	0.000
+## salmon/SRR1039521/quant.sf:ENST00000620103.4	1811	1655.487	13.171514	5.733
 ```
 
 ## **BONUS: Use an interactive job to run multiQC on the Salmon and FastQC output**
@@ -469,21 +486,21 @@ In this final step, users will start an interactive job to perform multiQC to co
 Start an interactive job.
 
 
-```bash
+``` bash
 srun --nodes=1 --ntasks-per-node=1 --time=00:30:00 --pty bash
 
 ```
 
 Navigate to the project directory.
 
-```bash
+``` bash
 cd /varidata/researchtemp/hpctmp/BBC_workshop_Oct2024_II/<username>
 ```
 
 Load the environment module for multiQC.
 
 
-```bash
+``` bash
 module load bbc2/multiqc/multiqc-1.14
 ```
 
@@ -498,7 +515,7 @@ module load bbc2/multiqc/multiqc-1.14
 Run multiQC, which will summarize the results from FastQC and Salmon and output the results into a new directory called `multiqc/`.
 
 
-```bash
+``` bash
 multiqc --outdir multiqc .
 
 ```
@@ -506,8 +523,15 @@ multiqc --outdir multiqc .
 List the contents of the `multiqc` directory.
 
 
-```bash
+``` bash
 ls multiqc
+```
+
+```
+## multiqc_data
+## multiqc_data_1
+## multiqc_report.html
+## multiqc_report_1.html
 ```
 
 Note the newly created `multiqc_report.html` file. Try to view this file in your preferred internet browser. If you have mounted the HPC file system to your computer, you can simply double-click on this file. Alternatively, you can copy this file to your computer's local storage first and then open it.

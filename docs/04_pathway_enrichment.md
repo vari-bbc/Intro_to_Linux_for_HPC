@@ -2,37 +2,21 @@
 
 ## **Downstream of DE gene analysis**
 
+It is likely that you have a R object created for DE gene analysis, we will be loading DE gene results and conduct enrichment analyses. We will create a new R script called enrichment_script, under a new folder pathways:
 
-### **Create a R project**
+1. Click "Files", "New Folder" and enter "pathways" for the folder name. 
 
-If you have are not in RStudio yet:     
-1. Please go to the following URL:[https://ondemand3.vai.zone/](https://ondemand3.vai.zone/)      
-2. Click on RStudio Server, and create a new RStudio session on OnDemand. Please make sure you are loading the right R version, "bbc2/R/alt/R-4.4.0-setR_LIBS_USER", which you can select from the drop down menu. Partition can be "short", "long", "quick", or "big"; Set CPU as 2, memory as 32, and time as 8 hours      
-3. In the Rstudio window, click "file" at the upper left corner, click on "New Project" > "New Directory" > "New Project"; Then click on "Browser", you can click on triple dot horizontal button and manually type "/varidata/researchtemp/hpctmp/BBC_workshop_Oct2024_II" (make sure no typo), try to find your own folder then "rnaseq_workflow", click on "choose". Next you will go back to the project wizard, and type "enrichment". Now, you should have created a R project under rnaseq_workflow folder named "enrichment"    
-4. Lastly, you can create a R script file to put all your code for analysis there by click File > New File > R script. 
-
-<details>
-<summary>**Click to expand ** Why create R project? </summary>
-
-<blockquote>
-**Creating an R Project in RStudio is recommended for several reasons:**  
-1. A R Project creates a dedicated working directory for your project files, including R scripts, data files, figures, and output. This helps in organizing your files that are related to a specific project.      
-2. Automatic working directory Setup. When you open an R Project, RStudio automatically sets the working directory to the project folder.           
-3. Reproducibility. With a project-based setup, the code and files related to a project stay together, making it easier to reproduce results.    
-4. Version control integration and package development support. 
-</blockquote>
-</details>
-
-### **load packaages**
+2. Create an R script file to record the code that you will use for enrichment analysis: click "File" > "New File" > "R script". Click "File" > "Save"; save the file as "enrichment_script.R" under "pathway" (you might have to click pathway folder icon)
 
 
-```r
+### **load packages**
+
+
+``` r
 suppressPackageStartupMessages({
 library(DESeq2)
 library(ggrepel)
-library(msigdbr)
 library(clusterProfiler)
-library(ggvenn)
 library(tidyverse)
 library(enrichplot)
 library(org.Hs.eg.db)
@@ -45,15 +29,21 @@ library(pathview)
 
 ### **Import previous DE results**
 
+Create a output dir first, then read the DE gene results. 
 
-```r
-de_res <- read_tsv("../DE_genes/deseq2_out_files/de_res.tsv")
+
+``` r
+outdir <- "./enrichment_res/"
+
+dir.create(outdir, recursive=TRUE)
+
+de_res <- read_tsv("DE_genes/deseq2_out_files/de_res.tsv")
 ```
 
 ### **How many DE genes**
 
 
-```r
+``` r
 ## note the part after the "." sign is the version number, here we can just remove it.
 de_res$ens_gene <- str_split_fixed(de_res$ens_gene, "\\.", 2)[, 1]
 
@@ -65,16 +55,16 @@ head(de_res)
 ## # A tibble: 6 × 10
 ##   ens_gene      Symbol Uniq_syms entrez Gene_name baseMean log2FoldChange  lfcSE
 ##   <chr>         <chr>  <chr>      <dbl> <chr>        <dbl>          <dbl>  <dbl>
-## 1 ENSG00000152… SPARC… SPARCL1     8404 SPARC li…     994.           4.54 0.210 
-## 2 ENSG00000148… STOM   STOM        2040 stomatin    13368.           1.41 0.0881
-## 3 ENSG00000179… PER1   PER1        5187 period c…     764.           3.13 0.204 
-## 4 ENSG00000134… PHC2   PHC2        1912 polyhome…    2708.           1.37 0.0902
-## 5 ENSG00000120… DUSP1  DUSP1       1843 dual spe…    3357.           2.90 0.198 
-## 6 ENSG00000125… MT2A   MT2A        4502 metallot…    3627.           2.17 0.150 
+## 1 ENSG00000152… SPARC… SPARCL1     8404 SPARC li…     994.          -4.54 0.210 
+## 2 ENSG00000148… STOM   STOM        2040 stomatin    13368.          -1.41 0.0881
+## 3 ENSG00000179… PER1   PER1        5187 period c…     764.          -3.13 0.204 
+## 4 ENSG00000134… PHC2   PHC2        1912 polyhome…    2708.          -1.37 0.0902
+## 5 ENSG00000120… DUSP1  DUSP1       1843 dual spe…    3357.          -2.90 0.198 
+## 6 ENSG00000125… MT2A   MT2A        4502 metallot…    3627.          -2.17 0.150 
 ## # ℹ 2 more variables: pvalue <dbl>, padj <dbl>
 ```
 
-```r
+``` r
 fdr_cutoff <- 0.1
 up_reg_genes <- de_res |>
   filter(padj < fdr_cutoff & log2FoldChange > 0 )  
@@ -85,15 +75,15 @@ message("Number of up-regulated genes is: ", nrow(up_reg_genes))
 ```
 
 ```
-## Number of up-regulated genes is: 1872
+## Number of up-regulated genes is: 1481
 ```
 
-```r
+``` r
 message("Number of down-regulated genes is: ", nrow(down_reg_genes))
 ```
 
 ```
-## Number of down-regulated genes is: 1481
+## Number of down-regulated genes is: 1872
 ```
 
 ## **Why enrichment and pathway analysis?**
@@ -115,6 +105,7 @@ To describe the roles of genes and gene products, GO terms are organized into th
 3. Cellular component: refers to the location in the cell of the gene product, such as “lysosome” and “plasma membrane”.  
     
 The GO terms are loosely hierarchical, ranging from general, ‘parent’, terms to more specific, ‘child’ terms.
+
 </blockquote>
 </details>
 
@@ -125,8 +116,8 @@ In this session, we will be mostly using [clusterProfiler](https://guangchuangyu
 In the ORA here, we will be testing whether 2 fold up-regulated (logfold-change = 1, as log fold change is often log2 based) genes are enriched in which GO terms. We will be using enrichGO function from clusterProfiler, and use the whole dataset (~20,000 genes) as the background (universe in enrichGO function).
 
 
-```r
-## only getting DE genes at least have 2 fold change, so log2FC > 1, both up and down-regulated.
+``` r
+## only getting DE genes at least have 2 fold change, so log2FC > 1, only up-regulated genes.
 genes_2f_up <- de_res |>
   filter(padj < fdr_cutoff & log2FoldChange > 1)
 
@@ -134,10 +125,10 @@ message("Number of DE genes have at least 2 fold change is: ", nrow(genes_2f_up)
 ```
 
 ```
-## Number of DE genes have at least 2 fold change is: 317
+## Number of DE genes have at least 2 fold change is: 246
 ```
 
-```r
+``` r
 ego_BP <- enrichGO(gene          = as.character(genes_2f_up$entrez),
                 universe      = as.character(de_res$entrez),
                 OrgDb         = org.Hs.eg.db,
@@ -153,25 +144,25 @@ ego_BP <- enrichGO(gene          = as.character(genes_2f_up$entrez),
 Dotplots can be used to depict the enrichment scores (e.g. p values) and gene count or ratio as circle size and colors. Cneplots, gene-concept network, allows us to know which genes are involved in these significant GO terms or pathways, as well as the linkages among GO terms or pathways.
 
 
-```r
+``` r
 dotplot(ego_BP, showCategory = 20, font.size = 9 ) + ggtitle("dotplot for ORA - BP")
 ```
 
-<img src="04_pathway_enrichment_files/figure-html/plot_ORA-1.svg" width="768" style="display: block; margin: auto;" />
+<img src="04_pathway_enrichment_files/figure-html/plot_ORA-1.png" width="768" style="display: block; margin: auto;" />
 
-```r
+``` r
 cnetplot(ego_BP, showCategory = 10, node_label_size = 0.6, cex_label_category = 0.8,
   cex_label_gene = 0.5, cex_category = 0.8, cex_genes = 0.5, 
   max.overlaps = Inf) + ggtitle("Gene-concept network for ORA - GO:BP")
 ```
 
-<img src="04_pathway_enrichment_files/figure-html/plot_ORA-2.svg" width="768" style="display: block; margin: auto;" />
+<img src="04_pathway_enrichment_files/figure-html/plot_ORA-2.png" width="768" style="display: block; margin: auto;" />
 
 
 ### **save ORA results to a tsv file** 
 You can easily load this into Excel    
 
-```r
+``` r
 ego_BP_df <- ego_BP |>
   as.data.frame() 
 
@@ -185,9 +176,11 @@ write_tsv(ego_BP_df, paste0(outdir, "/clusterProfiler_BP_res.tsv"))
 
 <blockquote>
 **Try to rerun the analyses: **    
-1. Using the same conditions, return the enriched GO processes for the Molecular Function ontology.
+
+1. Using the same conditions, return the enriched GO processes for the Molecular Function ontology.  
 
 2. How would the enrichGO() function change if our organism was mouse?
+
 </blockquote>
 </details>
 
@@ -198,7 +191,7 @@ ORA is based on these differentially expressed genes. This approach will find ge
 Here, what we create is a sorted list of all genes (~20,000 genes) in our dataset sorted by -log10(pvalue) and sign of fold change; this way, up-regulated and down-regulated genes will be at the top and bottom of the list. In GSEA, we will show how to run GSEA on [KEGG pathways](https://www.genome.jp/kegg/pathway.html)
 
 
-```r
+``` r
 ## we will use all the genes. Get the fold change and pvalues.
 gene_list <- sign(de_res$log2FoldChange) * -log10(de_res$pvalue)
 ## or we can just use fold change data. 
@@ -224,11 +217,11 @@ head(gene_list)
 ```
 
 ```
-##      8404      2040      5187      1912      1843      4502 
-## 106.41851  59.25457  54.02435  53.41694  49.03381  48.37430
+##   115207     6536     9181   165215   338382     1277 
+## 43.56579 42.34242 32.18764 31.64835 29.16647 28.73637
 ```
 
-```r
+``` r
 # set seeds
 set.seed(1234)
 
@@ -250,13 +243,13 @@ gseaKEGG <- gseKEGG(geneList = gene_list, # ordered named vector of fold changes
 ## Reading KEGG annotation online: "https://rest.kegg.jp/list/pathway/hsa"...
 ```
 
-```r
+``` r
 gseaKEGG_gene_symbol <- setReadable(gseaKEGG, 'org.Hs.eg.db', 'ENTREZID')
 ```
 
 ### **save gsea results** 
 
-```r
+``` r
 # gsea is a large list, and we convert it to a data frame, and save the results
 gsea_df <- gseaKEGG_gene_symbol |> as.data.frame()
 
@@ -269,14 +262,14 @@ write_tsv(gsea_df, paste0(outdir, "/clusterProfiler_KEGG_GSEA_res.tsv"))
 Similarity, we can make dotplot and gene-concept network plots here.
 
 
-```r
+``` r
 # first dotplot
 dotplot(gseaKEGG_gene_symbol, showCategory = 15) + ggtitle("dotplot for gsea - KEGG pathways")
 ```
 
-<img src="04_pathway_enrichment_files/figure-html/plot_GSEA1-1.svg" width="768" style="display: block; margin: auto;" />
+<img src="04_pathway_enrichment_files/figure-html/plot_GSEA1-1.png" width="768" style="display: block; margin: auto;" />
 
-```r
+``` r
 cnetplot(gseaKEGG_gene_symbol, 
          showCategory = 5, 
          node_label_size = 0.6, 
@@ -286,19 +279,19 @@ cnetplot(gseaKEGG_gene_symbol,
          max.overlaps = Inf) + ggtitle("Gene-concept network for gsea-KEGG pathways")
 ```
 
-<img src="04_pathway_enrichment_files/figure-html/plot_GSEA1-2.svg" width="768" style="display: block; margin: auto;" />
+<img src="04_pathway_enrichment_files/figure-html/plot_GSEA1-2.png" width="768" style="display: block; margin: auto;" />
 
-```r
+``` r
 # Specific plots we can make for GSEA results
 gseaplot(gseaKEGG_gene_symbol, geneSetID = 'hsa04910')
 ```
 
-<img src="04_pathway_enrichment_files/figure-html/plot_GSEA1-3.svg" width="768" style="display: block; margin: auto;" />
+<img src="04_pathway_enrichment_files/figure-html/plot_GSEA1-3.png" width="768" style="display: block; margin: auto;" />
 
 ### **plot KEGG map**
 
 
-```r
+``` r
 # Lastly, we can map gene expression to a KEGG map
 foldchanges <- de_res$log2FoldChange
 names(foldchanges) <- de_res$entrez
@@ -317,7 +310,7 @@ pathview(gene.data = foldchanges,
 
 
 
-## **Other R packages and tools**.   
+## **Other R packages and tools**   
 
 We introduced a few commonly used R packages to conduct enrichment and pathway analyses. Other popular tools and R packages include:  
 - [g:Profiler](https://biit.cs.ut.ee/gprofiler/gost): a web based toolfor functional profiling of gene or protein lists.  

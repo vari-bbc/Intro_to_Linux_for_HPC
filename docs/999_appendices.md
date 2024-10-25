@@ -2,9 +2,9 @@
 
 # **Appendices**
 
-## **Workshop Powerpoint files**
+## **Other workshop files**
 
-[June 8, 2023; Summer workshop I](https://vanandelinstitute-my.sharepoint.com/personal/daisy_fu_vai_org/Documents/Workshop_Jun_2023/Workshop1_BBC_merged.pdf)
+[First workshop material](http://hpcworkshop.vai.org)
 
 ## **Local access of files on the HPC**
 

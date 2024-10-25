@@ -93,7 +93,7 @@ Note the following special symbols:
 
 
 
-```bash
+``` bash
 # Display the current directory
 pwd
 
@@ -105,7 +105,7 @@ pwd
 ```
 
 ```
-## /home/daisy.fu
+## /home/kin.lau
 ## /varidata/researchtemp/hpctmp/BBC_workshop_Oct2024_II
 ```
 
@@ -120,7 +120,7 @@ pwd
 
 Shows more details about the files and folders, 
 
-```bash
+``` bash
 ls
 ls -lht
 ls -lht /varidata/researchtemp/hpctmp/BBC_workshop_Oct2024_II
@@ -133,7 +133,7 @@ ls -lht ~
 Without anything after `cd`, you will go to your home directory, which is `/home/username` (same as `~`).
 
 
-```bash
+``` bash
 # same as "cd ~" or "cd /home/username"
 cd
 
@@ -150,7 +150,7 @@ You will be creating a directory in your home drectory (because we just navigate
 Make sure you are in your home directory first (use pwd), then create a directory called "hpc_workshop_2024"
 
 
-```bash
+``` bash
 pwd
 mkdir hpc_workshop_2024
 ```
@@ -163,7 +163,7 @@ mkdir hpc_workshop_2024
 Copy a file from `/varidata/researchtemp/hpctmp/BBC_workshop_Oct2024_II` to the directory you just created.
 
 
-```bash
+``` bash
 pwd
 cp /varidata/researchtemp/hpctmp/BBC_workshop_Oct2024_II/metadata.tsv hpc_workshop_2024
 ls hpc_workshop_2024
@@ -191,7 +191,7 @@ ls hpc_workshop_2024
 `tail` - display the *last* 10 lines/rows of the a file. You can use "-n" to control how many lines you want to see, default is 10.
 
 
-```bash
+``` bash
 cd ~/hpc_workshop_2024
 
 cat metadata.tsv
@@ -204,7 +204,7 @@ The `cat` command can also be used to combine files. (This is where the command'
 Note that we won't run the command below, but keep this in mind for future reference.
 
 
-```bash
+``` bash
 cat file1.txt file2.txt > combined.txt
 ```
 
@@ -215,13 +215,13 @@ cat file1.txt file2.txt > combined.txt
 `grep` - search a pattern by line
 
 
-```bash
+``` bash
 pwd
 grep "13" metadata.tsv 
 ```
 
 ```
-## /home/daisy.fu/hpc_workshop_2024
+## /home/kin.lau/hpc_workshop_2024
 ## M	13	sample 13	replicate a
 ## Z	26	sample 13	replicate b
 ```
@@ -234,7 +234,7 @@ grep "13" metadata.tsv
 Adding the `-l` option afterwards just gives the number of ***l**ines* in the file.
 
 
-```bash
+``` bash
 wc metadata.tsv
 wc -l metadata.tsv
 ```
@@ -258,7 +258,7 @@ output from `command 2` is used as input for `command 3`.
 In the example below, we will use 3 commands subsequently to count the number of lines that contain the number "13" in the file.
 
 
-```bash
+``` bash
 cat metadata.tsv | grep "13" | wc -l
 ```
 
@@ -275,7 +275,7 @@ another command (pipe), you can redirect the output to a file.
 `>>` - append output to a file. It will **add the output to the end** of the file.
 
 
-```bash
+``` bash
 # note that no output will be displayed on the screen -- it's saved in the file instead
 grep "13" metadata.tsv > lines_with_13.tsv
 
@@ -290,9 +290,6 @@ cat lines_with_13.tsv
 ## combined.fq
 ## data_01_R1.fq
 ## data_54_R1.fq
-## de_res.tsv
-## fastq
-## fastqs
 ## lines_with_13.tsv
 ## metadata.tsv
 ## M	13	sample 13	replicate a
@@ -323,7 +320,7 @@ from the practice directory (`/varidata/researchtemp/hpctmp/BBC_workshop_Oct2024
 <summary>Click here to see a solution</summary>
 
 
-```bash
+``` bash
 cd ~/hpc_workshop_2024
 cp /varidata/researchtemp/hpctmp/BBC_workshop_Oct2024_II/data_01_R1.fq .
 cp /varidata/researchtemp/hpctmp/BBC_workshop_Oct2024_II/data_54_R1.fq .
@@ -339,7 +336,7 @@ Combine the two fastq files into one file called `combined.fq`.
 <summary>Click here to see a solution</summary>
 
 
-```bash
+``` bash
 cat data_01_R1.fq data_54_R1.fq > combined.fq
 ls
 ```
@@ -348,9 +345,6 @@ ls
 ## combined.fq
 ## data_01_R1.fq
 ## data_54_R1.fq
-## de_res.tsv
-## fastq
-## fastqs
 ## lines_with_13.tsv
 ## metadata.tsv
 ```
@@ -377,7 +371,7 @@ See if you can **combine** a few commands together! Plan out each of the steps y
 <summary>Click here to see an example solution</summary>
 
 
-```bash
+``` bash
 # use that combined file
 grep "@" combined.fq | wc -l
 
