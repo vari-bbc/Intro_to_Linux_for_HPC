@@ -8,10 +8,14 @@
 
 ### **Clone the Github repo**
 
-Instructions for running it are on the [Github README](https://github.com/vari-bbc/rnaseq_workflow), but here we will go through each step in more detail.
+First, go to [VAI OnDemand](https://ondemand.vai.zone/) and click on "Apps" > "hpc Shell Access".
+
+Instructions for running the RNA-seq workflow are on the [Github README](https://github.com/vari-bbc/rnaseq_workflow), but here we will go through each step in more detail.
+
+For a normal project, you would be working in your lab's storage space, but for today we will work in the `hpctmp` folder.
 
 ```{bash, eval=FALSE, engine="sh"}
-cd /varidata/researchtemp/hpctmp/BBC_workshop_June2023_II/
+cd /varidata/researchtemp/hpctmp/BBC_workshop_Oct2024_III/
 
 mkdir <username>
 
@@ -19,14 +23,14 @@ cd <username>
 ```
 
 ```{bash, eval=FALSE, engine="sh"}
-git clone https://github.com/vari-bbc/rnaseq_workflow.git 
+git clone https://github.com/vari-bbc/rnaseq_workflow.git rnaseq_workflow_testrun
 
 ```
 
-The Github repository consisting of the RNA-seq workflow should now be downloaded in a folder named `rnaseq_workflow`.
+The Github repository consisting of the RNA-seq workflow should now be downloaded in a folder named `rnaseq_workflow_testrun`.
 
 ```{bash, eval=FALSE, engine="sh"}
-cd rnaseq_workflow
+cd rnaseq_workflow_testrun
 
 ls
 ```
@@ -70,8 +74,27 @@ ls
 We can replace the 'units.tsv' with 'units_template.tsv'.
 
 ```{bash, eval=FALSE, engine="sh"}
-mv units_template.tsv units.tsv
+cp units_template.tsv units.tsv
 ```
+
+Use `cat` to look at the samplesheet.
+
+```{bash, eval=FALSE, engine="sh"}
+cat units.tsv
+```
+
+The "group" column in `units.tsv` needs to be edited. Use the built-in editor in OnDemand to correct this column according to the values below. Tip: Within the OnDemand file explorer, click 'Change directory' and type `/varidata/researchtemp/hpctmp/BBC_workshop_Oct2024_III/<username>/rnaseq_workflow_testrun/config/samplesheet` to navigate directly to the correct folder.
+
+| sample     | group |
+| ---------- | ----- |
+| SRR1039508 | trt   |
+| SRR1039509 | untrt | 
+| SRR1039512 | trt   |   
+| SRR1039513 | untrt |
+| SRR1039516 | trt   |
+| SRR1039517 | untrt | 
+| SRR1039520 | trt   |
+| SRR1039521 | untrt |  
 
 Go back to the base level of the project directory.
 
@@ -79,7 +102,7 @@ Go back to the base level of the project directory.
 cd ../..
 ```
 
-Make sure you are at `/varidata/researchtemp/hpctmp/BBC_workshop_June2023_II/<username>/rnaseq_workflow`.
+Make sure you are at `/varidata/researchtemp/hpctmp/BBC_workshop_Oct2024_III/<username>/rnaseq_workflow_testrun`.
 
 ```{bash, eval=FALSE, engine="sh"}
 pwd 
@@ -94,7 +117,7 @@ Typically, the main thing is to specify reference files corresponding to the spe
 
 Index files allow alignment algorithms to align reads to specific reference sequences.
 
-FOR THIS WORKSHOP, NO CHANGES NEED TO BE MADE.
+FOR THIS WORKSHOP, NO CHANGES NEED TO BE MADE BECAUSE THE CORRECT INFORMATION HAVE ALREADY BEEN ENTERED.
 
 ```{bash, eval=FALSE, engine="sh"}
 
@@ -103,8 +126,10 @@ cat config/config.yaml
 
 ### **Submit the main Snakemake job**
 
+If your lab has their own nodes that you wish to use, use `sbatch -p <lab_name> bin/run_snake.sh` instead of the command below.
+
 ```{bash, eval=FALSE, engine="sh"}
-sbatch -p big bin/run_snake.sh
+sbatch bin/run_snake.sh
 ```
 
 ### **BBC-maintained reference files**
@@ -131,13 +156,30 @@ The versions of the software used to generate the index files can be found in th
 cat /varidata/research/projects/bbc/versioned_references/2023-05-03_15.28.41_v12/bin/config.yaml
 ```
 
+## **Symlink pre-run results to your directory**
+
+Because the workflow will take a while (up to several hours) to run, we have run the workflow for you beforehand so that you don't have to wait for your workflow to finish running.
+
+First, go to the base level of your "<username>" directory.
+
+```{bash, eval=FALSE, engine="sh"}
+cd /varidata/researchtemp/hpctmp/BBC_workshop_Oct2024_III/<username>
+
+```
+
+Then create the symlink.
+
+```{bash, eval=FALSE, engine="sh"}
+ln -s ../kin.lau/rnaseq_workflow/ .
+```
+
 ## **Quality control**
 
 It's important to look through QC metrics to ensure that the data is likely to produce meaningful results. Ideally, you don't want to waste time trying to interpret bad data.
 
 ### **multiQC report**
 
-Navigate to your project folder using Finder (Mac) or File Explorer (Windows). Find `results/multiqc/multiqc_report.html` and double-click it.
+Use the OnDemand file explorer to download and open `/varidata/researchtemp/hpctmp/BBC_workshop_Oct2024_III/<username>/rnaseq_workflow/results/multiqc/multiqc_report.html`. _Remember_ that within the OnDemand file explorer, you can click 'Change directory' to navigate directly to the enclosing directory.
 
 * Alignment rate?
 * Higher duplication rate can be normal for RNA-seq.
@@ -153,24 +195,87 @@ Navigate to your project folder using Finder (Mac) or File Explorer (Windows). F
 * Any genes supposed to knocked out or knocked down? Use iSEE.
 * Does the PCA show clustering? Use iSEE.
 
-## **Exploring the data using iSEE**
-
-Navigate to your project folder using Finder (Mac) or File Explorer (Windows). Find `iSEE/app.R` and double-click it.
-
-![iSEE screenshot.](img/iSEE_screenshot.png)
 
 ## **DE analysis using R and DESeq2**
 
+### **Create an R project**
+
+1. Please go to [VAI OnDemand](https://ondemand.vai.zone/).
+
+2. Click on RStudio Server, and create a new RStudio session. Please make sure you are loading the correct R module for this workshop, `bbc2/R/alt/R-4.4.0-setR_LIBS_USER`, which you can select from the drop down menu. Type "quick" in the "Partition" field. can be "quick" (if you encounter issues, you can also try "short" or "long"). Set CPU as 1, memory as 16GB, and time as 6 hours. Click "Launch".
+
+3. In the Rstudio window, click "File" in the upper left corner, click on "New Project" > "New Directory" > "New Project". Then, click on "Browse...", you can click on triple dot horizontal button and type `/varidata/researchtemp/hpctmp/BBC_workshop_Oct2024_III/<username>`. Click "choose". Next, you will go back to the project wizard, and type "workshop_2024" in the "Directory name" field. Click "Create Project". You will be the newly created "workshop_2024" folder, which will contain a new file named "workshop_2024.Rproj", which Rstudio uses to store details about your R project.
+
+
+#### Why create R projects?
+
+**Creating an R Project in RStudio is recommended for several reasons:**  
+
+1. A R Project creates a dedicated working directory for your project files, including R scripts, data files, figures, and output. This helps in organizing your files that are related to a specific project.     
+
+2. Automatic working directory setup. When you open an R Project, RStudio automatically sets the working directory to the project folder.  
+
+3. Reproducibility. With a project-based setup, the code and files related to a project stay together, making it easier to reproduce results.   
+
+4. Version control integration and package development support. 
+
+
+### **Exploring the data using iSEE**
+
+The [iSEE](https://www.bioconductor.org/packages/release/bioc/html/iSEE.html) app allows us to explore our data interactively, making changes on-the-fly. It is more convenient to mount the HPC storage to your computer and run iSEE locally, but for simplicity we will follow the steps below to run iSEE via OnDemand Rstudio.
+
+Go to the terminal. Go to your newly created `workshop_2024` R project directory, then copy `app.R` and `sce.rds` from `rnaseq_workflow/iSEE/` to there.
+
+```{bash, eval=FALSE, engine="sh"}
+cd /varidata/researchtemp/hpctmp/BBC_workshop_Oct2024_III/<username>/workshop_2024
+
+cp ../rnaseq_workflow/iSEE/* .
+
+```
+
+To run the iSEE app, go back to OnDemand Rstudio, open the `app.R` file and click "Source".
+
+![iSEE screenshot.](img/iSEE_screenshot.png)
+
+
+### **Make a separate folder for DE analysis and a script file to store our commands**
+
+1. We will create a new folder for the differential expression analysis of this workshop. Click "New Folder" and enter "DE_genes" for the folder name.
+
+2. Create an R script file to record the code that you will use for this part of the workshop today. Click on the "DE_genes" folder to enter it. Click "New Blank File" > "R script". Type in "deseq2.R" for the filename and click "OK". Unless otherwise noted, run all following code by copying and pasting into "deseq2.R" then highlighting the commands you want to run and typing either Cmd + Enter (Mac) or Ctrl + Enter (Windows).
+
+
 ### **Make an output directory**
+
+To ensure it is clear which files are produced by a given script, it is good practice to make a unique folder for storing each script's output.
 
 ```{r make_outdir, eval=FALSE}
 
-outdir <- "./deseq2_out_files/"
+outdir <- "./DE_genes/deseq2_out_files/"
 
 dir.create(outdir, recursive=TRUE)
 ```
 
+
+### **Install packages**
+
+For this workshop, we ran the Rstudio job with the `bbc2/R/alt/R-4.4.0-setR_LIBS_USER` module. This allows you to use R packages that we have installed beforehand. For your actual work, we encourage you to run Rstudio jobs with the `bbc2/R/R-4.4.0` module which will allows you to make and maintain your own R package library, avoiding permission issues when updating packages or installing new ones.
+
+While CRAN packages can be installed with `install.packages()`, [Bioconductor](https://bioconductor.org/) packages have to be installed with the `install()` function in the [BiocManager package](https://cran.r-project.org/web/packages/BiocManager/vignettes/BiocManager.html).
+
+```{r install_pkges}
+
+# AS EXPLAINED ABOVE, NO NEED TO RUN THESE FOR THE WORKSHOP
+# if (!require("BiocManager", quietly = TRUE))
+#     install.packages("BiocManager")
+# 
+# BiocManager::install(c("dplyr","stringr","ggplot2","readr","ggrepel","ComplexHeatmap","DESeq2","iSEE"))
+
+```
+
 ### **Load packages**
+
+In order to let R know where to look for the functions we will use, we need to load them using the `library()` function. The `suppressPackageStartupMessages()` function calls here are simply to mute the automatic start-up messages of some of these packages to avoid cluttering what we are looking at.
 
 ```{r load_pkges}
 suppressMessages(library(dplyr))
@@ -184,8 +289,13 @@ suppressMessages(library(DESeq2))
 
 ### **Set up your DESeq object**
 
+The BBC Snakemake workflow collates all the gene counts into an R object saved in the `results/SummarizedExperiment/SummarizedExperiment.rds` file. The `readRDS` function loads that object into our environment.
+
 ```{r read_se, eval=FALSE}
-se <- readRDS("../results/SummarizedExperiment/SummarizedExperiment.rds")
+se <- readRDS("../rnaseq_workflow/results/SummarizedExperiment/SummarizedExperiment.rds")
+
+# What is type of object is this?
+class(se)
 ```
 
 ```{r read_se_for_rendering, eval=TRUE, echo=FALSE}
@@ -193,7 +303,13 @@ se <- readRDS("SummarizedExperiment.rds")
 
 ```
 
-Let's take a look to see what assays are stored in the SummarizedExperiment object. Note that DESeq2 assumes the first assay is the raw counts.
+### **What is a SummarizedExperiment object?**
+
+A [SummarizedExperiment](https://bioconductor.org/packages/release/bioc/vignettes/SummarizedExperiment/inst/doc/SummarizedExperiment.html) object allows us to store and manipulate sample meta data, gene meta data and gene counts in separate, coordinated dataframes and matrices. Subsetting and reordering samples or genes can be done using the familiar `object[row, column]` R syntax, where the genes are the rows and the samples are the columns (`object[genes, samples]`). Later on, we will go through some exercises to further demonstrate the usefulness of "SummarizedExperiment" objects.
+
+![SummarizedExperiment](img/SummarizedExperiment.png)
+
+Let's take a look to see what assays are stored in the SummarizedExperiment object. Note that DESeq2 requires the first assay to be named "counts" and assumes it contains the raw counts.
 
 ```{r check_assays}
 assayNames(se)
@@ -201,13 +317,19 @@ assayNames(se)
 stopifnot(assayNames(se)[1] == "counts")
 ```
 
-To print more information about this SummarizedExperiment object, you can just type its name.
+Let's take a look at the sample meta data in the "se" object. The BBC snakemake workflow automatically adds the samplesheet metadata into the "se" object.
 
-```{r look_se}
-se
+```{r look_coldata}
+colData(se)
 ```
 
-The counts and the meta data need to be stored inside a special DESeq2 object called a 'DESeqDataSet'. Here, we also specify that each gene will be fit with a model design of '~ group'.
+Similarly, the gene meta data can be used to store alternate gene names. These will come in handy for downstream visualizations or pathway analyses.
+
+```{r look_rowdata}
+rowData(se)
+```
+
+The counts and the meta data need to be stored inside a DESeq2 object called a 'DESeqDataSet', which is also a 'SummarizedExperiment' so 'SummarizedExperiment' functions will work on it. We specify that each gene will be fit with a model design of '~ group'.
 
 ```{r make_dds}
 dds <- DESeqDataSet(se, design = ~ group)
@@ -215,11 +337,11 @@ dds <- DESeqDataSet(se, design = ~ group)
 
 ### **Remove genes with low/no expression**
 
-We cannot do meaningful analyses of genes with very low counts. This will speed up the analysis.
+We cannot do meaningful analyses of genes with very low counts. This will also speed up the analysis.
 
 ```{r filter_low_genes}
 # prefilter genes, keeping only genes with 10 or more total read counts across samples
-keep <- rowSums(counts(dds)) >= 10
+keep <- rowSums(counts(dds)) >= 10 # counts() is the same as assay(dds, "counts")
 
 message(str_glue("Keeping {sum(keep)} genes."))
 
@@ -230,7 +352,6 @@ dds <- dds[keep, ]
 
 [Types of biases in RNA-seq](https://vanandelinstitute-my.sharepoint.com/:b:/g/personal/kin_lau_vai_org/EcruvwL-OrBIvCzXZ7HMPlcBo65fu0pucrivMmCwzM98dA?e=yCkfTa)
 
-
 ### **Run the DE workflow**
 
 The [DESeq](https://www.rdocumentation.org/packages/DESeq2/versions/1.12.3/topics/DESeq) function is a convenience function from DESeq2 that estimates size factors (normalization) and fits negative binomial GLMs.
@@ -240,17 +361,19 @@ dds <- DESeq(dds)
 message(paste0("Coefficient names are: ", paste(resultsNames(dds), collapse = " ")))
 ```
 
-After the models are fitted, we can test specific pairs of groups for differential expression. For DESeq2, it is recommended to provide the significance cutoff that you wish to use as it affects the multiple testing correction procedure (see [docs](https://www.rdocumentation.org/packages/DESeq2/versions/1.12.3/topics/results)).
+After the models are fitted, we can test specific pairs of groups for differential expression. For DESeq2, it is recommended to provide the significance cutoff that you wish to use as it affects the multiple testing correction procedure (see [docs](https://www.rdocumentation.org/packages/DESeq2/versions/1.12.3/topics/results)). Here we specify a significance cutoff of 0.05.
 
 ```{r run_contrast}
 contrast <- c("group", "trt", "untrt")
-fdr_cutoff <- 0.1
+fdr_cutoff <- 0.05
 
 res <- results(dds, contrast=contrast, alpha=fdr_cutoff)
 res <- res[order(res$pvalue), ]
 ```
 
 ### **Summarize DE results**
+
+Let's see how many genes were significantly up or down regulated.
 
 ```{r de_summ}
 df <- as.data.frame(res)
@@ -261,10 +384,24 @@ data.frame(
 )
 ```
 
+### **P value distribution**
+
+Ideally, we will see an anti-conservative (if there are many DE genes) or uniform pattern (not many DE genes). See [here](http://varianceexplained.org/statistics/interpreting-pvalue-histogram/) for more details about how to interpret these.
+
+```{r pval, fig.width=4, fig.height=4}
+
+ggplot(data = df %>%
+         dplyr::filter(!is.na(pvalue)),
+       aes(x = pvalue)) +
+  geom_histogram(color = "black", fill = "gray55",
+                 breaks = seq(0, 1, 0.05)) + theme_bw() + theme(plot.title=element_text(size=10))
+
+```
+
 
 ### **Shrink log fold changes for lowly expressed genes**
 
-This step does not affect the identification of DE genes, but it can be useful to perform this to obtain more reliable estimates of the log fold changes for visualizations or for ranking genes (e.g. GSEA).
+This step does not affect which genes are statistically DE, but we perform this to obtain more reliable estimates of the log fold changes for visualizations or for ranking genes (e.g. GSEA).
 
 ```{r lfc_shrink}
 lfc_shrink <- lfcShrink(dds, contrast=contrast, type="ashr")
@@ -272,6 +409,8 @@ lfc_shrink <- lfcShrink(dds, contrast=contrast, type="ashr")
 lfc_shrink <- lfc_shrink[order(lfc_shrink$pvalue), ]
 
 ```
+
+Let's visualize the effect of shrinking the LFCs using MA plots.
 
 ```{r ma_plots, fig.width=5, fig.height=5}
 DESeq2::plotMA(res, main="Default LFC")
@@ -287,6 +426,8 @@ DESeq2::plotMA(lfc_shrink, main="Shrunken LFC")
 
 Here, we merge the different gene name columns to the DE results and output to a tab-delimited file, which can be opened in Excel for manual perusal.
 
+NOTE: You will use this file for the next section of the workshop about pathway analysis.
+
 ```{r out_de_res_prep}
 df <- cbind(as.data.frame(rowData(dds)[rownames(lfc_shrink), 1:4]),
             as.data.frame(lfc_shrink)) %>%
@@ -295,30 +436,6 @@ df <- cbind(as.data.frame(rowData(dds)[rownames(lfc_shrink), 1:4]),
 
 ```{r out_de_res, eval=FALSE}
 write_tsv(df, file.path(outdir, "de_res.tsv"))
-```
-
-### **Look for specific genes**
-
-We know certain genes should be differentially expressed based on the [paper](https://pubmed.ncbi.nlm.nih.gov/24926665/) that this dataset came from. We can check that these genes were significantly DE in our analysis.
-
-Likewise, this would be a good time to check for knocked down, knocked out etc genes if such prior knowledge is available, though that is not always the case.
-
-```{r specific_genes}
-df %>% dplyr::filter(Symbol %in% c("DUSP1", "KLF15", "CRISPLD2"))
-```
-
-### **Output tables with raw counts**
-
-Some folks also find it useful to have tables of the raw counts or the normalized counts. The raw counts can be extracted from the DESeq2 object using either `assay()` or `counts()`.
-
-```{r out_counts_prep}
-df <- cbind(as.data.frame(rowData(dds)[, 1:4]),
-            assay(dds, "counts")) %>%
-  tibble::rownames_to_column("ens_gene")
-```
-
-```{r out_counts, eval=FALSE}
-write_tsv(df, file.path(outdir, "counts.tsv"))
 ```
 
 ### **Output tables with log2 normalized counts**
@@ -337,10 +454,29 @@ write_tsv(vst_df, file.path(outdir, "vst.tsv"))
 
 ```
 
-## **Some common plots for DEG analysis**
+### **Why should we transform counts for visualizations or clustering?**
+
+Biological factors can increase gene count variation, but this can be muddied by dependence of the variance on the magnitude of the mean. Below, we can visualize how different transformations impact the mean-variance relationship. Here we also reiterate that these transformations are only for analyses downstream of DE analysis; the statistical framework in DESeq2 (and edgeR) is designed to work with raw counts.
+
+```{r mv_plots, fig.width=12, fig.height=3}
+library(vsn)
+library(patchwork)
+
+ntd <- normTransform(dds) # log2(n + 1)
+
+gg1 <- meanSdPlot(counts(dds), plot=FALSE)[["gg"]] + ggtitle("Raw counts")
+gg2 <- meanSdPlot(assay(ntd), plot=FALSE)[["gg"]] + ggtitle("log2(n+1)")
+gg3 <- meanSdPlot(assay(vsd), plot=FALSE)[["gg"]] + ggtitle("Variance stabilizing transformed")
+
+# use patchwork to combine the three plots into one figure.
+(gg1 | gg2 | gg3) + plot_layout(nrow = 1)
+
+```
 
 
-### **Volcano plot**
+## **Volcano plot**
+
+First, run the code below which makes a new function to make a volcano plot.
 
 ```{r make_volc_func}
 make_volcano <- function(df, pval_nm, pval_cutoff=0.1){
@@ -360,7 +496,7 @@ make_volcano <- function(df, pval_nm, pval_cutoff=0.1){
   df[[pval_nm]] <- -log10(df[[pval_nm]])
   
   
-  ggplot(df, aes_string(x="log2FoldChange", y=pval_nm)) +
+  ggplot(df, aes(x=.data[["log2FoldChange"]], y=.data[[pval_nm]])) +
     geom_point(aes(color=Sig), size=0.6) +
     scale_color_manual(values=c("black", "salmon")) +
     theme_bw() + ylab(str_glue("-log10(", pval_nm,")")) +
@@ -369,53 +505,110 @@ make_volcano <- function(df, pval_nm, pval_cutoff=0.1){
 }
 ```
 
+Run the command below to use the above function to make a volcano plot. Functions can help reduce the amount of code we have to write if we have to run similar code multiple times; for example, if we had multiple groups in our experiment and wanted to make volcano plots for several different contrasts.
+
 ```{r volcano, fig.width=4, fig.height=4}
 make_volcano(as.data.frame(lfc_shrink),
              pval_nm="padj", pval_cutoff=fdr_cutoff)
 ```
 
-### **Heatmap**
 
-```{r heatmap}
-top_genes <- rownames(res)[1:20]
+## **Make a new SummarizedExperiment to store all results**
 
-top_se <- se[top_genes, ]
-mat <- assay(top_se, "vst")
-mat <- t(scale(t(mat), scale=FALSE, center = TRUE))
+```{r stuff_se}
+# recall that we removed some genes new little or no expression.
+se2 <- se[rownames(dds), ]
+
+# replace the old variance-stabilized transformed counts
+stopifnot(identical(rownames(se2), rownames(vsd)))
+assay(se2, "vst") <- assay(vsd)
+
+# Add DE results
+rowData(se2)$trt.v.untrt.pval <- as.data.frame(lfc_shrink)[rownames(se2), "pvalue"]
+rowData(se2)$trt.v.untrt.padj <- as.data.frame(lfc_shrink)[rownames(se2), "padj"]
+rowData(se2)$trt.v.untrt.lfc <- as.data.frame(lfc_shrink)[rownames(se2), "log2FoldChange"]
+rowData(se2)
+```
+
+
+## **Heatmap of top DE genes**
+
+```{r heatmap_func}
+make_ht <- function(se, genes, assay_nm="vst", col_annot = "group", row_label = "Uniq_syms"){
+  ht_se <- se[genes, ]
+  coldat <- as.data.frame(colData(ht_se)[, col_annot, drop=FALSE])
+  coldat_lvls <- unique(coldat[, 1])
+  ht_col_colors <- list(setNames(nm=coldat_lvls, object = viridis::viridis(length(coldat_lvls))))
+  names(ht_col_colors) <- col_annot
   
-# column annot
-ht_col_annot <- as.data.frame(colData(top_se)[, "group", drop=FALSE])
+  Heatmap(t(scale(t(assay(ht_se, assay_nm)), scale=FALSE, center = TRUE)), 
+          name = "Mean-centered\nexpression", 
+          cluster_columns = FALSE,
+          row_labels=rowData(ht_se)[, row_label],
+          show_column_names = TRUE,
+          top_annotation=HeatmapAnnotation(df=coldat, 
+                                           col=ht_col_colors),
+          row_title = paste0(nrow(ht_se), " genes")
+  )
+}
+```
 
-group_lvls <- unique(ht_col_annot$group)
-ht_col_colors <- list(group=setNames(c("#440154FF","#2A788EFF"),
-                                         nm=group_lvls))
+```{r top_degs_ht}
+# sort genes in the se object based on significance.
+se2 <- se2[order(rowData(se2)$trt.v.untrt.pval), ]
+top_genes <- rownames(se2)[1:20]
 
-Heatmap(mat, 
-        name = "Mean-centered", 
-        cluster_columns = FALSE,
-        row_labels=rowData(top_se)$Uniq_syms,
-        show_column_names = FALSE,
-        top_annotation=HeatmapAnnotation(df=ht_col_annot, 
-                                         col=ht_col_colors),
-        column_title = "Top DE genes",
-        row_title = paste0(nrow(mat), " genes")
-)
+make_ht(se=se2, genes=top_genes, assay_nm="vst", col_annot = "group")
+```
 
+
+## **Look for specific genes**
+
+We know certain genes should be differentially expressed based on the [paper](https://pubmed.ncbi.nlm.nih.gov/24926665/) that this dataset came from. We can check that these genes were significantly DE in our analysis.
+
+```{r specific_genes}
+gois <- c("DUSP1", "KLF15", "CRISPLD2")
+
+# we need to convert these to ensembl IDs
+gois <- rownames(se2)[match(gois, rowData(se2)[, "Symbol"])]
+
+make_ht(se=se2, genes=gois, assay_nm="vst", col_annot = "group")
 
 ```
 
-### **P value distribution**
 
-Ideally, we will see an anti-conservative (if there are many DE genes) or uniform pattern (not many DE genes). See [here](http://varianceexplained.org/statistics/interpreting-pvalue-histogram/) for more details about how to interpret these.
+## **Your turn**
 
-```{r pval, fig.width=4, fig.height=4}
+1. Copy 'se2' to make a new object. Filter for significance then rank by the absolute value of LFC, largest to smallest.
+2. Reorder the samples in the new object so that 'untrt' samples are on the left in the heatmap.
+3. Plot top DEGs heatmap based on LFC ranking.
 
-ggplot(data = as.data.frame(lfc_shrink) %>%
-         dplyr::filter(!is.na(pvalue)),
-       aes(x = pvalue)) +
-  geom_histogram(color = "black", fill = "gray55",
-                 breaks = seq(0, 1, 0.05)) + theme_bw() + theme(plot.title=element_text(size=10))
+<details>
+<summary>Click here to see an example solution</summary>
+
+```{r ht_hint, eval=FALSE}
+se3 <- se2
+se3 <- se3[which(rowData(se3)$trt.v.untrt.padj <= 0.05), ] # note that some rows have NAs in this column, so we use which()
+se3 <- se3[order(abs(rowData(se3)$trt.v.untrt.lfc), decreasing = TRUE), ]
+se3 <- se3[, rev(order(se3$group))]
+
+top_genes <- rownames(se3)[1:30]
+
+make_ht(se=se3, genes=top_genes, assay_nm="vst", col_annot = "group")
 
 ```
+
+</details>
+<br>
+
+
+## **Venn diagrams**
+
+One option is [ggVennDiagram](https://cran.r-project.org/web/packages/ggVennDiagram/readme/README.html).
+
+
+## **Upset plots**
+
+We recommend using the [ComplexHeatmap package](https://jokergoo.github.io/ComplexHeatmap-reference/book/upset-plot.html).
 
 
