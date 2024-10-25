@@ -2,26 +2,12 @@
 
 ## **Downstream of DE gene analysis**
 
+It is likely that you have a R object created for DE gene analysis, we will be loading DE gene results and conduct enrichment analyses. We will create a new R script called enrichment_script, under a new folder pathways:
 
-### **Create a R project**
+1. Click "Files", "New Folder" and enter "pathways" for the folder name. 
 
-If you have are not in RStudio yet:     
-1. Please go to the following URL:[https://ondemand3.vai.zone/](https://ondemand3.vai.zone/)      
-2. Click on RStudio Server, and create a new RStudio session on OnDemand. Please make sure you are loading the right R version, "bbc2/R/alt/R-4.4.0-setR_LIBS_USER", which you can select from the drop down menu. Partition can be "short", "long", "quick", or "big"; Set CPU as 2, memory as 32, and time as 8 hours      
-3. In the Rstudio window, click "file" at the upper left corner, click on "New Project" > "New Directory" > "New Project"; Then click on "Browser", you can click on triple dot horizontal button and manually type "/varidata/researchtemp/hpctmp/BBC_workshop_Oct2024_II" (make sure no typo), try to find your own folder then "rnaseq_workflow", click on "choose". Next you will go back to the project wizard, and type "enrichment". Now, you should have created a R project under rnaseq_workflow folder named "enrichment"    
-4. Lastly, you can create a R script file to put all your code for analysis there by click File > New File > R script. 
+2. Create an R script file to record the code that you will use for enrichment analysis: click "File" > "New File" > "R script". Click "File" > "Save"; save the file as "enrichment_script.R" under "pathway" (you might have to click pathway folder icon)
 
-<details>
-<summary>**Click to expand ** Why create R project? </summary>
-
-<blockquote>
-**Creating an R Project in RStudio is recommended for several reasons:**  
-1. A R Project creates a dedicated working directory for your project files, including R scripts, data files, figures, and output. This helps in organizing your files that are related to a specific project.      
-2. Automatic working directory setup. When you open an R Project, RStudio automatically sets the working directory to the project folder.           
-3. Reproducibility. With a project-based setup, the code and files related to a project stay together, making it easier to reproduce results.    
-4. Version control integration and package development support. 
-</blockquote>
-</details>
 
 ### **load packages**
 
@@ -29,9 +15,7 @@ If you have are not in RStudio yet:
 suppressPackageStartupMessages({
 library(DESeq2)
 library(ggrepel)
-library(msigdbr)
 library(clusterProfiler)
-library(ggvenn)
 library(tidyverse)
 library(enrichplot)
 library(org.Hs.eg.db)
@@ -55,7 +39,7 @@ outdir <- "./enrichment_res/"
 
 dir.create(outdir, recursive=TRUE)
 
-de_res <- read_tsv("../DE_genes/deseq2_out_files/de_res.tsv")
+de_res <- read_tsv("DE_genes/deseq2_out_files/de_res.tsv")
 ```
 
 ### **How many DE genes**
