@@ -278,13 +278,13 @@ While CRAN packages can be installed with `install.packages()`, [Bioconductor](h
 In order to let R know where to look for the functions we will use, we need to load them using the `library()` function. The `suppressPackageStartupMessages()` function calls here are simply to mute the automatic start-up messages of some of these packages to avoid cluttering what we are looking at.
 
 ```{r load_pkges}
-suppressMessages(library(dplyr))
+suppressPackageStartupMessages(library(dplyr))
 library(stringr)
 library(ggplot2)
 library(readr)
 library(ggrepel)
-suppressMessages(library(ComplexHeatmap))
-suppressMessages(library(DESeq2))
+suppressPackageStartupMessages(library(ComplexHeatmap))
+suppressPackageStartupMessages(library(DESeq2))
 ```
 
 ### **Set up your DESeq object**
@@ -575,6 +575,13 @@ gois <- rownames(se2)[match(gois, rowData(se2)[, "Symbol"])]
 make_ht(se=se2, genes=gois, assay_nm="vst", col_annot = "group")
 
 ```
+
+## **SummarizedExperiment exercises**
+
+```{r}
+
+```
+
 
 
 ## **Your turn**
