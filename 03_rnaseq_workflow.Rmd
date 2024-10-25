@@ -517,10 +517,11 @@ make_volcano(as.data.frame(lfc_shrink),
 
 ```{r stuff_se}
 # recall that we removed some genes new little or no expression.
-se2 <- se[rownames(dds), ]
+se2 <- se[rownames(dds), colnames(dds)]
 
 # replace the old variance-stabilized transformed counts
 stopifnot(identical(rownames(se2), rownames(vsd)))
+stopifnot(identical(colnames(se2), colnames(vsd)))
 assay(se2, "vst") <- assay(vsd)
 
 # Add DE results
