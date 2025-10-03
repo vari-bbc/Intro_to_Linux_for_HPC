@@ -202,7 +202,7 @@ Use the OnDemand file explorer to download and open `/varidata/researchtemp/hpct
 
 1. Please go to [VAI OnDemand](https://ondemand.vai.zone/).
 
-2. Click on RStudio Server, and create a new RStudio session. Please make sure you are loading the correct R module for this workshop, `bbc2/R/alt/R-4.4.0-setR_LIBS_USER`, which you can select from the drop down menu. Type "quick" in the "Partition" field. can be "quick" (if you encounter issues, you can also try "short" or "long"). Set CPU as 1, memory as 16GB, and time as 6 hours. Click "Launch".
+2. Click on RStudio Server, and create a new RStudio session. Please make sure you are loading the correct R module for this workshop, `bbc2/R/alt/R-4.4.0-setR_LIBS_USER`, which you can select from the drop down menu. Type "short" in the "Partition" field (if you encounter issues, you can also try "long"). Set CPU as 1, memory as 16GB, and time as 6 hours. Click "Launch".
 
 3. In the Rstudio window, click "File" in the upper left corner, click on "New Project" > "New Directory" > "New Project". Then, click on "Browse...", you can click on triple dot horizontal button and type `/varidata/researchtemp/hpctmp/BBC_workshop_Oct2024_III/<username>`. Click "choose". Next, you will go back to the project wizard, and type "workshop_2024" in the "Directory name" field. Click "Create Project". You will be the newly created "workshop_2024" folder, which will contain a new file named "workshop_2024.Rproj", which Rstudio uses to store details about your R project.
 
