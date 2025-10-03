@@ -165,7 +165,7 @@ cd /varidata/researchtemp/hpctmp/BBC_workshop_Oct2024_II/<username>
 
 ```
 
-Below is a SLURM job script to run Salmon. For now, do not worry about how the code works. Copy the code and paste it into a new file. Save it as `run_salmon.sh` in your username directory. If you have issues with this task, you can copy the job script directly using the command, `cp /varidata/researchtemp/hpctmp/BBC_workshop_June2023/kin.lau/run_salmon.sh .`.
+Below is a SLURM job script to run Salmon. For now, do not worry about how the code works. Copy the code and paste it into a new file. Save it as `run_salmon.sh` in your username directory. If you have issues with this task, you can download the job script directly using the command, `wget https://raw.githubusercontent.com/vari-bbc/Intro_to_Linux_for_HPC/refs/heads/main/resources/sec2/run_salmon.sh`.
 
 ```{bash, eval=FALSE, engine="sh"}
 #!/bin/bash
