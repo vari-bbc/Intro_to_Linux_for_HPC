@@ -277,17 +277,12 @@ Navigate to the project directory.
 cd /varidata/researchtemp/hpctmp/BBC_workshop_Oct2024_II/<username>
 ```
 
-Load the environment module for multiQC.
+Load the environment module for multiQC. Run multiQC, which will summarize the results from FastQC and Salmon and output the results into a new directory called `multiqc/`.
 
 ```{bash, eval=TRUE, engine="sh"}
 module load bbc2/multiqc/multiqc-1.14
-```
 
-Run multiQC, which will summarize the results from FastQC and Salmon and output the results into a new directory called `multiqc/`.
-
-```{bash, eval=FALSE, engine="sh"}
 multiqc --outdir multiqc .
-
 ```
 
 List the contents of the `multiqc` directory.
