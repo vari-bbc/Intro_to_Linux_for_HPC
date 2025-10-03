@@ -11,3 +11,4 @@ full_fastqs
 SummarizedExperiment.rds
 ._.Rhistory
 ._03_rnaseq_workflow.Rmd
+!resources/*/*
