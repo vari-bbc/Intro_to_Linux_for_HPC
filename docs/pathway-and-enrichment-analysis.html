@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Part 5 Pathway and enrichment analysis | Introductory Bioinformatics for VAI Users</title>
   <meta name="description" content="Bioinformatics tutorials with hands-on exercises and examples." />
-  <meta name="generator" content="bookdown 0.41 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.42 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Part 5 Pathway and enrichment analysis | Introductory Bioinformatics for VAI Users" />
   <meta property="og:type" content="book" />
@@ -285,32 +285,32 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ol>
 <div id="load-packages-1" class="section level3 hasAnchor" number="5.1.1">
 <h3><span class="header-section-number">5.1.1</span> <strong>load packages</strong><a href="pathway-and-enrichment-analysis.html#load-packages-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb144"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb144-1"><a href="pathway-and-enrichment-analysis.html#cb144-1" tabindex="-1"></a><span class="fu">suppressPackageStartupMessages</span>({</span>
-<span id="cb144-2"><a href="pathway-and-enrichment-analysis.html#cb144-2" tabindex="-1"></a><span class="fu">library</span>(DESeq2)</span>
-<span id="cb144-3"><a href="pathway-and-enrichment-analysis.html#cb144-3" tabindex="-1"></a><span class="fu">library</span>(ggrepel)</span>
-<span id="cb144-4"><a href="pathway-and-enrichment-analysis.html#cb144-4" tabindex="-1"></a><span class="fu">library</span>(clusterProfiler)</span>
-<span id="cb144-5"><a href="pathway-and-enrichment-analysis.html#cb144-5" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb144-6"><a href="pathway-and-enrichment-analysis.html#cb144-6" tabindex="-1"></a><span class="fu">library</span>(enrichplot)</span>
-<span id="cb144-7"><a href="pathway-and-enrichment-analysis.html#cb144-7" tabindex="-1"></a><span class="fu">library</span>(org.Hs.eg.db)</span>
-<span id="cb144-8"><a href="pathway-and-enrichment-analysis.html#cb144-8" tabindex="-1"></a><span class="fu">library</span>(pathview)</span>
-<span id="cb144-9"><a href="pathway-and-enrichment-analysis.html#cb144-9" tabindex="-1"></a>})</span></code></pre></div>
+<div class="sourceCode" id="cb143"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb143-1"><a href="pathway-and-enrichment-analysis.html#cb143-1" tabindex="-1"></a><span class="fu">suppressPackageStartupMessages</span>({</span>
+<span id="cb143-2"><a href="pathway-and-enrichment-analysis.html#cb143-2" tabindex="-1"></a><span class="fu">library</span>(DESeq2)</span>
+<span id="cb143-3"><a href="pathway-and-enrichment-analysis.html#cb143-3" tabindex="-1"></a><span class="fu">library</span>(ggrepel)</span>
+<span id="cb143-4"><a href="pathway-and-enrichment-analysis.html#cb143-4" tabindex="-1"></a><span class="fu">library</span>(clusterProfiler)</span>
+<span id="cb143-5"><a href="pathway-and-enrichment-analysis.html#cb143-5" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb143-6"><a href="pathway-and-enrichment-analysis.html#cb143-6" tabindex="-1"></a><span class="fu">library</span>(enrichplot)</span>
+<span id="cb143-7"><a href="pathway-and-enrichment-analysis.html#cb143-7" tabindex="-1"></a><span class="fu">library</span>(org.Hs.eg.db)</span>
+<span id="cb143-8"><a href="pathway-and-enrichment-analysis.html#cb143-8" tabindex="-1"></a><span class="fu">library</span>(pathview)</span>
+<span id="cb143-9"><a href="pathway-and-enrichment-analysis.html#cb143-9" tabindex="-1"></a>})</span></code></pre></div>
 </div>
 <div id="import-previous-de-results" class="section level3 hasAnchor" number="5.1.2">
 <h3><span class="header-section-number">5.1.2</span> <strong>Import previous DE results</strong><a href="pathway-and-enrichment-analysis.html#import-previous-de-results" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Create a output dir first, then read the DE gene results.</p>
-<div class="sourceCode" id="cb145"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb145-1"><a href="pathway-and-enrichment-analysis.html#cb145-1" tabindex="-1"></a>outdir <span class="ot">&lt;-</span> <span class="st">&quot;./enrichment_res/&quot;</span></span>
-<span id="cb145-2"><a href="pathway-and-enrichment-analysis.html#cb145-2" tabindex="-1"></a></span>
-<span id="cb145-3"><a href="pathway-and-enrichment-analysis.html#cb145-3" tabindex="-1"></a><span class="fu">dir.create</span>(outdir, <span class="at">recursive=</span><span class="cn">TRUE</span>)</span>
-<span id="cb145-4"><a href="pathway-and-enrichment-analysis.html#cb145-4" tabindex="-1"></a></span>
-<span id="cb145-5"><a href="pathway-and-enrichment-analysis.html#cb145-5" tabindex="-1"></a>de_res <span class="ot">&lt;-</span> <span class="fu">read_tsv</span>(<span class="st">&quot;DE_genes/deseq2_out_files/de_res.tsv&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb144"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb144-1"><a href="pathway-and-enrichment-analysis.html#cb144-1" tabindex="-1"></a>outdir <span class="ot">&lt;-</span> <span class="st">&quot;./enrichment_res/&quot;</span></span>
+<span id="cb144-2"><a href="pathway-and-enrichment-analysis.html#cb144-2" tabindex="-1"></a></span>
+<span id="cb144-3"><a href="pathway-and-enrichment-analysis.html#cb144-3" tabindex="-1"></a><span class="fu">dir.create</span>(outdir, <span class="at">recursive=</span><span class="cn">TRUE</span>)</span>
+<span id="cb144-4"><a href="pathway-and-enrichment-analysis.html#cb144-4" tabindex="-1"></a></span>
+<span id="cb144-5"><a href="pathway-and-enrichment-analysis.html#cb144-5" tabindex="-1"></a>de_res <span class="ot">&lt;-</span> <span class="fu">read_tsv</span>(<span class="st">&quot;DE_genes/deseq2_out_files/de_res.tsv&quot;</span>)</span></code></pre></div>
 </div>
 <div id="how-many-de-genes" class="section level3 hasAnchor" number="5.1.3">
 <h3><span class="header-section-number">5.1.3</span> <strong>How many DE genes</strong><a href="pathway-and-enrichment-analysis.html#how-many-de-genes" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb146"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb146-1"><a href="pathway-and-enrichment-analysis.html#cb146-1" tabindex="-1"></a><span class="do">## note the part after the &quot;.&quot; sign is the version number, here we can just remove it.</span></span>
-<span id="cb146-2"><a href="pathway-and-enrichment-analysis.html#cb146-2" tabindex="-1"></a>de_res<span class="sc">$</span>ens_gene <span class="ot">&lt;-</span> <span class="fu">str_split_fixed</span>(de_res<span class="sc">$</span>ens_gene, <span class="st">&quot;</span><span class="sc">\\</span><span class="st">.&quot;</span>, <span class="dv">2</span>)[, <span class="dv">1</span>]</span>
-<span id="cb146-3"><a href="pathway-and-enrichment-analysis.html#cb146-3" tabindex="-1"></a></span>
-<span id="cb146-4"><a href="pathway-and-enrichment-analysis.html#cb146-4" tabindex="-1"></a><span class="do">## check the first a few rows again</span></span>
-<span id="cb146-5"><a href="pathway-and-enrichment-analysis.html#cb146-5" tabindex="-1"></a><span class="fu">head</span>(de_res)</span></code></pre></div>
+<div class="sourceCode" id="cb145"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb145-1"><a href="pathway-and-enrichment-analysis.html#cb145-1" tabindex="-1"></a><span class="do">## note the part after the &quot;.&quot; sign is the version number, here we can just remove it.</span></span>
+<span id="cb145-2"><a href="pathway-and-enrichment-analysis.html#cb145-2" tabindex="-1"></a>de_res<span class="sc">$</span>ens_gene <span class="ot">&lt;-</span> <span class="fu">str_split_fixed</span>(de_res<span class="sc">$</span>ens_gene, <span class="st">&quot;</span><span class="sc">\\</span><span class="st">.&quot;</span>, <span class="dv">2</span>)[, <span class="dv">1</span>]</span>
+<span id="cb145-3"><a href="pathway-and-enrichment-analysis.html#cb145-3" tabindex="-1"></a></span>
+<span id="cb145-4"><a href="pathway-and-enrichment-analysis.html#cb145-4" tabindex="-1"></a><span class="do">## check the first a few rows again</span></span>
+<span id="cb145-5"><a href="pathway-and-enrichment-analysis.html#cb145-5" tabindex="-1"></a><span class="fu">head</span>(de_res)</span></code></pre></div>
 <pre><code>## # A tibble: 6 × 10
 ##   ens_gene      Symbol Uniq_syms entrez Gene_name baseMean log2FoldChange  lfcSE
 ##   &lt;chr&gt;         &lt;chr&gt;  &lt;chr&gt;      &lt;dbl&gt; &lt;chr&gt;        &lt;dbl&gt;          &lt;dbl&gt;  &lt;dbl&gt;
@@ -321,15 +321,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## 5 ENSG00000120… DUSP1  DUSP1       1843 dual spe…    3357.          -2.90 0.198 
 ## 6 ENSG00000125… MT2A   MT2A        4502 metallot…    3627.          -2.17 0.150 
 ## # ℹ 2 more variables: pvalue &lt;dbl&gt;, padj &lt;dbl&gt;</code></pre>
-<div class="sourceCode" id="cb148"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb148-1"><a href="pathway-and-enrichment-analysis.html#cb148-1" tabindex="-1"></a>fdr_cutoff <span class="ot">&lt;-</span> <span class="fl">0.1</span></span>
-<span id="cb148-2"><a href="pathway-and-enrichment-analysis.html#cb148-2" tabindex="-1"></a>up_reg_genes <span class="ot">&lt;-</span> de_res <span class="sc">|&gt;</span></span>
-<span id="cb148-3"><a href="pathway-and-enrichment-analysis.html#cb148-3" tabindex="-1"></a>  <span class="fu">filter</span>(padj <span class="sc">&lt;</span> fdr_cutoff <span class="sc">&amp;</span> log2FoldChange <span class="sc">&gt;</span> <span class="dv">0</span> )  </span>
-<span id="cb148-4"><a href="pathway-and-enrichment-analysis.html#cb148-4" tabindex="-1"></a>down_reg_genes <span class="ot">&lt;-</span> de_res <span class="sc">|&gt;</span></span>
-<span id="cb148-5"><a href="pathway-and-enrichment-analysis.html#cb148-5" tabindex="-1"></a>  <span class="fu">filter</span>(padj <span class="sc">&lt;</span> fdr_cutoff <span class="sc">&amp;</span> log2FoldChange <span class="sc">&lt;</span> <span class="dv">0</span> )  </span>
-<span id="cb148-6"><a href="pathway-and-enrichment-analysis.html#cb148-6" tabindex="-1"></a></span>
-<span id="cb148-7"><a href="pathway-and-enrichment-analysis.html#cb148-7" tabindex="-1"></a><span class="fu">message</span>(<span class="st">&quot;Number of up-regulated genes is: &quot;</span>, <span class="fu">nrow</span>(up_reg_genes))</span></code></pre></div>
+<div class="sourceCode" id="cb147"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb147-1"><a href="pathway-and-enrichment-analysis.html#cb147-1" tabindex="-1"></a>fdr_cutoff <span class="ot">&lt;-</span> <span class="fl">0.1</span></span>
+<span id="cb147-2"><a href="pathway-and-enrichment-analysis.html#cb147-2" tabindex="-1"></a>up_reg_genes <span class="ot">&lt;-</span> de_res <span class="sc">|&gt;</span></span>
+<span id="cb147-3"><a href="pathway-and-enrichment-analysis.html#cb147-3" tabindex="-1"></a>  <span class="fu">filter</span>(padj <span class="sc">&lt;</span> fdr_cutoff <span class="sc">&amp;</span> log2FoldChange <span class="sc">&gt;</span> <span class="dv">0</span> )  </span>
+<span id="cb147-4"><a href="pathway-and-enrichment-analysis.html#cb147-4" tabindex="-1"></a>down_reg_genes <span class="ot">&lt;-</span> de_res <span class="sc">|&gt;</span></span>
+<span id="cb147-5"><a href="pathway-and-enrichment-analysis.html#cb147-5" tabindex="-1"></a>  <span class="fu">filter</span>(padj <span class="sc">&lt;</span> fdr_cutoff <span class="sc">&amp;</span> log2FoldChange <span class="sc">&lt;</span> <span class="dv">0</span> )  </span>
+<span id="cb147-6"><a href="pathway-and-enrichment-analysis.html#cb147-6" tabindex="-1"></a></span>
+<span id="cb147-7"><a href="pathway-and-enrichment-analysis.html#cb147-7" tabindex="-1"></a><span class="fu">message</span>(<span class="st">&quot;Number of up-regulated genes is: &quot;</span>, <span class="fu">nrow</span>(up_reg_genes))</span></code></pre></div>
 <pre><code>## Number of up-regulated genes is: 1481</code></pre>
-<div class="sourceCode" id="cb150"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb150-1"><a href="pathway-and-enrichment-analysis.html#cb150-1" tabindex="-1"></a><span class="fu">message</span>(<span class="st">&quot;Number of down-regulated genes is: &quot;</span>, <span class="fu">nrow</span>(down_reg_genes))</span></code></pre></div>
+<div class="sourceCode" id="cb149"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb149-1"><a href="pathway-and-enrichment-analysis.html#cb149-1" tabindex="-1"></a><span class="fu">message</span>(<span class="st">&quot;Number of down-regulated genes is: &quot;</span>, <span class="fu">nrow</span>(down_reg_genes))</span></code></pre></div>
 <pre><code>## Number of down-regulated genes is: 1872</code></pre>
 </div>
 </div>
@@ -358,38 +358,38 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </details>
 <p>In this session, we will be mostly using <a href="https://guangchuangyu.github.io/software/clusterProfiler/">clusterProfiler</a> to conduct enrichment analyses.</p>
 <p>In the ORA here, we will be testing whether 2 fold up-regulated (logfold-change = 1, as log fold change is often log2 based) genes are enriched in which GO terms. We will be using enrichGO function from clusterProfiler, and use the whole dataset (~20,000 genes) as the background (universe in enrichGO function).</p>
-<div class="sourceCode" id="cb152"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb152-1"><a href="pathway-and-enrichment-analysis.html#cb152-1" tabindex="-1"></a><span class="do">## only getting DE genes at least have 2 fold change, so log2FC &gt; 1, only up-regulated genes.</span></span>
-<span id="cb152-2"><a href="pathway-and-enrichment-analysis.html#cb152-2" tabindex="-1"></a>genes_2f_up <span class="ot">&lt;-</span> de_res <span class="sc">|&gt;</span></span>
-<span id="cb152-3"><a href="pathway-and-enrichment-analysis.html#cb152-3" tabindex="-1"></a>  <span class="fu">filter</span>(padj <span class="sc">&lt;</span> fdr_cutoff <span class="sc">&amp;</span> log2FoldChange <span class="sc">&gt;</span> <span class="dv">1</span>)</span>
-<span id="cb152-4"><a href="pathway-and-enrichment-analysis.html#cb152-4" tabindex="-1"></a></span>
-<span id="cb152-5"><a href="pathway-and-enrichment-analysis.html#cb152-5" tabindex="-1"></a><span class="fu">message</span>(<span class="st">&quot;Number of DE genes have at least 2 fold change is: &quot;</span>, <span class="fu">nrow</span>(genes_2f_up))</span></code></pre></div>
+<div class="sourceCode" id="cb151"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb151-1"><a href="pathway-and-enrichment-analysis.html#cb151-1" tabindex="-1"></a><span class="do">## only getting DE genes at least have 2 fold change, so log2FC &gt; 1, only up-regulated genes.</span></span>
+<span id="cb151-2"><a href="pathway-and-enrichment-analysis.html#cb151-2" tabindex="-1"></a>genes_2f_up <span class="ot">&lt;-</span> de_res <span class="sc">|&gt;</span></span>
+<span id="cb151-3"><a href="pathway-and-enrichment-analysis.html#cb151-3" tabindex="-1"></a>  <span class="fu">filter</span>(padj <span class="sc">&lt;</span> fdr_cutoff <span class="sc">&amp;</span> log2FoldChange <span class="sc">&gt;</span> <span class="dv">1</span>)</span>
+<span id="cb151-4"><a href="pathway-and-enrichment-analysis.html#cb151-4" tabindex="-1"></a></span>
+<span id="cb151-5"><a href="pathway-and-enrichment-analysis.html#cb151-5" tabindex="-1"></a><span class="fu">message</span>(<span class="st">&quot;Number of DE genes have at least 2 fold change is: &quot;</span>, <span class="fu">nrow</span>(genes_2f_up))</span></code></pre></div>
 <pre><code>## Number of DE genes have at least 2 fold change is: 246</code></pre>
-<div class="sourceCode" id="cb154"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb154-1"><a href="pathway-and-enrichment-analysis.html#cb154-1" tabindex="-1"></a>ego_BP <span class="ot">&lt;-</span> <span class="fu">enrichGO</span>(<span class="at">gene          =</span> <span class="fu">as.character</span>(genes_2f_up<span class="sc">$</span>entrez),</span>
-<span id="cb154-2"><a href="pathway-and-enrichment-analysis.html#cb154-2" tabindex="-1"></a>                <span class="at">universe      =</span> <span class="fu">as.character</span>(de_res<span class="sc">$</span>entrez),</span>
-<span id="cb154-3"><a href="pathway-and-enrichment-analysis.html#cb154-3" tabindex="-1"></a>                <span class="at">OrgDb         =</span> org.Hs.eg.db,</span>
-<span id="cb154-4"><a href="pathway-and-enrichment-analysis.html#cb154-4" tabindex="-1"></a>                <span class="at">ont           =</span> <span class="st">&quot;BP&quot;</span>,</span>
-<span id="cb154-5"><a href="pathway-and-enrichment-analysis.html#cb154-5" tabindex="-1"></a>                <span class="at">pAdjustMethod =</span> <span class="st">&quot;BH&quot;</span>,</span>
-<span id="cb154-6"><a href="pathway-and-enrichment-analysis.html#cb154-6" tabindex="-1"></a>                <span class="at">qvalueCutoff  =</span> <span class="fl">0.05</span>,</span>
-<span id="cb154-7"><a href="pathway-and-enrichment-analysis.html#cb154-7" tabindex="-1"></a>                <span class="at">keyType =</span> <span class="st">&quot;ENTREZID&quot;</span>,</span>
-<span id="cb154-8"><a href="pathway-and-enrichment-analysis.html#cb154-8" tabindex="-1"></a>                <span class="at">readable =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb153"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb153-1"><a href="pathway-and-enrichment-analysis.html#cb153-1" tabindex="-1"></a>ego_BP <span class="ot">&lt;-</span> <span class="fu">enrichGO</span>(<span class="at">gene          =</span> <span class="fu">as.character</span>(genes_2f_up<span class="sc">$</span>entrez),</span>
+<span id="cb153-2"><a href="pathway-and-enrichment-analysis.html#cb153-2" tabindex="-1"></a>                <span class="at">universe      =</span> <span class="fu">as.character</span>(de_res<span class="sc">$</span>entrez),</span>
+<span id="cb153-3"><a href="pathway-and-enrichment-analysis.html#cb153-3" tabindex="-1"></a>                <span class="at">OrgDb         =</span> org.Hs.eg.db,</span>
+<span id="cb153-4"><a href="pathway-and-enrichment-analysis.html#cb153-4" tabindex="-1"></a>                <span class="at">ont           =</span> <span class="st">&quot;BP&quot;</span>,</span>
+<span id="cb153-5"><a href="pathway-and-enrichment-analysis.html#cb153-5" tabindex="-1"></a>                <span class="at">pAdjustMethod =</span> <span class="st">&quot;BH&quot;</span>,</span>
+<span id="cb153-6"><a href="pathway-and-enrichment-analysis.html#cb153-6" tabindex="-1"></a>                <span class="at">qvalueCutoff  =</span> <span class="fl">0.05</span>,</span>
+<span id="cb153-7"><a href="pathway-and-enrichment-analysis.html#cb153-7" tabindex="-1"></a>                <span class="at">keyType =</span> <span class="st">&quot;ENTREZID&quot;</span>,</span>
+<span id="cb153-8"><a href="pathway-and-enrichment-analysis.html#cb153-8" tabindex="-1"></a>                <span class="at">readable =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
 <div id="plot-ora-results" class="section level3 hasAnchor" number="5.3.1">
 <h3><span class="header-section-number">5.3.1</span> <strong>plot ORA results</strong><a href="pathway-and-enrichment-analysis.html#plot-ora-results" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Dotplots can be used to depict the enrichment scores (e.g. p values) and gene count or ratio as circle size and colors. Cneplots, gene-concept network, allows us to know which genes are involved in these significant GO terms or pathways, as well as the linkages among GO terms or pathways.</p>
-<div class="sourceCode" id="cb155"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb155-1"><a href="pathway-and-enrichment-analysis.html#cb155-1" tabindex="-1"></a><span class="fu">dotplot</span>(ego_BP, <span class="at">showCategory =</span> <span class="dv">20</span>, <span class="at">font.size =</span> <span class="dv">9</span> ) <span class="sc">+</span> <span class="fu">ggtitle</span>(<span class="st">&quot;dotplot for ORA - BP&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb154"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb154-1"><a href="pathway-and-enrichment-analysis.html#cb154-1" tabindex="-1"></a><span class="fu">dotplot</span>(ego_BP, <span class="at">showCategory =</span> <span class="dv">20</span>, <span class="at">font.size =</span> <span class="dv">9</span> ) <span class="sc">+</span> <span class="fu">ggtitle</span>(<span class="st">&quot;dotplot for ORA - BP&quot;</span>)</span></code></pre></div>
 <p><img src="04_pathway_enrichment_files/figure-html/plot_ORA-1.png" width="768" style="display: block; margin: auto;" /></p>
-<div class="sourceCode" id="cb156"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb156-1"><a href="pathway-and-enrichment-analysis.html#cb156-1" tabindex="-1"></a><span class="fu">cnetplot</span>(ego_BP, <span class="at">showCategory =</span> <span class="dv">10</span>, <span class="at">node_label_size =</span> <span class="fl">0.6</span>, <span class="at">cex_label_category =</span> <span class="fl">0.8</span>,</span>
-<span id="cb156-2"><a href="pathway-and-enrichment-analysis.html#cb156-2" tabindex="-1"></a>  <span class="at">cex_label_gene =</span> <span class="fl">0.5</span>, <span class="at">cex_category =</span> <span class="fl">0.8</span>, <span class="at">cex_genes =</span> <span class="fl">0.5</span>, </span>
-<span id="cb156-3"><a href="pathway-and-enrichment-analysis.html#cb156-3" tabindex="-1"></a>  <span class="at">max.overlaps =</span> <span class="cn">Inf</span>) <span class="sc">+</span> <span class="fu">ggtitle</span>(<span class="st">&quot;Gene-concept network for ORA - GO:BP&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb155"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb155-1"><a href="pathway-and-enrichment-analysis.html#cb155-1" tabindex="-1"></a><span class="fu">cnetplot</span>(ego_BP, <span class="at">showCategory =</span> <span class="dv">10</span>, <span class="at">node_label_size =</span> <span class="fl">0.6</span>, <span class="at">cex_label_category =</span> <span class="fl">0.8</span>,</span>
+<span id="cb155-2"><a href="pathway-and-enrichment-analysis.html#cb155-2" tabindex="-1"></a>  <span class="at">cex_label_gene =</span> <span class="fl">0.5</span>, <span class="at">cex_category =</span> <span class="fl">0.8</span>, <span class="at">cex_genes =</span> <span class="fl">0.5</span>, </span>
+<span id="cb155-3"><a href="pathway-and-enrichment-analysis.html#cb155-3" tabindex="-1"></a>  <span class="at">max.overlaps =</span> <span class="cn">Inf</span>) <span class="sc">+</span> <span class="fu">ggtitle</span>(<span class="st">&quot;Gene-concept network for ORA - GO:BP&quot;</span>)</span></code></pre></div>
 <p><img src="04_pathway_enrichment_files/figure-html/plot_ORA-2.png" width="768" style="display: block; margin: auto;" /></p>
 </div>
 <div id="save-ora-results-to-a-tsv-file" class="section level3 hasAnchor" number="5.3.2">
 <h3><span class="header-section-number">5.3.2</span> <strong>save ORA results to a tsv file</strong><a href="pathway-and-enrichment-analysis.html#save-ora-results-to-a-tsv-file" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>You can easily load this into Excel</p>
-<div class="sourceCode" id="cb157"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb157-1"><a href="pathway-and-enrichment-analysis.html#cb157-1" tabindex="-1"></a>ego_BP_df <span class="ot">&lt;-</span> ego_BP <span class="sc">|&gt;</span></span>
-<span id="cb157-2"><a href="pathway-and-enrichment-analysis.html#cb157-2" tabindex="-1"></a>  <span class="fu">as.data.frame</span>() </span>
-<span id="cb157-3"><a href="pathway-and-enrichment-analysis.html#cb157-3" tabindex="-1"></a></span>
-<span id="cb157-4"><a href="pathway-and-enrichment-analysis.html#cb157-4" tabindex="-1"></a><span class="do">## output the BP enrichment results into a tsv file</span></span>
-<span id="cb157-5"><a href="pathway-and-enrichment-analysis.html#cb157-5" tabindex="-1"></a><span class="fu">write_tsv</span>(ego_BP_df, <span class="fu">paste0</span>(outdir, <span class="st">&quot;/clusterProfiler_BP_res.tsv&quot;</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb156"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb156-1"><a href="pathway-and-enrichment-analysis.html#cb156-1" tabindex="-1"></a>ego_BP_df <span class="ot">&lt;-</span> ego_BP <span class="sc">|&gt;</span></span>
+<span id="cb156-2"><a href="pathway-and-enrichment-analysis.html#cb156-2" tabindex="-1"></a>  <span class="fu">as.data.frame</span>() </span>
+<span id="cb156-3"><a href="pathway-and-enrichment-analysis.html#cb156-3" tabindex="-1"></a></span>
+<span id="cb156-4"><a href="pathway-and-enrichment-analysis.html#cb156-4" tabindex="-1"></a><span class="do">## output the BP enrichment results into a tsv file</span></span>
+<span id="cb156-5"><a href="pathway-and-enrichment-analysis.html#cb156-5" tabindex="-1"></a><span class="fu">write_tsv</span>(ego_BP_df, <span class="fu">paste0</span>(outdir, <span class="st">&quot;/clusterProfiler_BP_res.tsv&quot;</span>))</span></code></pre></div>
 <details>
 <summary>
 <strong>Click to expand</strong> Exercise on your own:
@@ -408,83 +408,83 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2><span class="header-section-number">5.4</span> <strong>GSEA</strong><a href="pathway-and-enrichment-analysis.html#gsea" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>ORA is based on these differentially expressed genes. This approach will find genes where the difference is large and will fail where the difference is small, but evidenced in coordinated way in a set of related genes. <a href="https://www.pnas.org/doi/10.1073/pnas.0506580102">GSEA</a> directly addresses this limitation. Unlike ORA where an arbitrary threshold is set as “significant DE genes”, all genes can be used in GSEA. We usually sort genes based on their fold changes or p-values, and compare this sorted gene list to a predefined gene set, such as genes in certain pathways. It will help to detect situations where all genes in a predefined set change in a small but coordinated manner. P-values are generated through permutation tests. This type of analysis can be particularly helpful if the differential expression analysis only outputs a small number of significant DE genes.</p>
 <p>Here, what we create is a sorted list of all genes (~20,000 genes) in our dataset sorted by -log10(pvalue) and sign of fold change; this way, up-regulated and down-regulated genes will be at the top and bottom of the list. In GSEA, we will show how to run GSEA on <a href="https://www.genome.jp/kegg/pathway.html">KEGG pathways</a></p>
-<div class="sourceCode" id="cb158"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb158-1"><a href="pathway-and-enrichment-analysis.html#cb158-1" tabindex="-1"></a><span class="do">## we will use all the genes. Get the fold change and pvalues.</span></span>
-<span id="cb158-2"><a href="pathway-and-enrichment-analysis.html#cb158-2" tabindex="-1"></a>gene_list <span class="ot">&lt;-</span> <span class="fu">sign</span>(de_res<span class="sc">$</span>log2FoldChange) <span class="sc">*</span> <span class="sc">-</span><span class="fu">log10</span>(de_res<span class="sc">$</span>pvalue)</span>
-<span id="cb158-3"><a href="pathway-and-enrichment-analysis.html#cb158-3" tabindex="-1"></a><span class="do">## or we can just use fold change data. </span></span>
-<span id="cb158-4"><a href="pathway-and-enrichment-analysis.html#cb158-4" tabindex="-1"></a></span>
-<span id="cb158-5"><a href="pathway-and-enrichment-analysis.html#cb158-5" tabindex="-1"></a><span class="do">## get the name of the genes. </span></span>
-<span id="cb158-6"><a href="pathway-and-enrichment-analysis.html#cb158-6" tabindex="-1"></a><span class="fu">names</span>(gene_list) <span class="ot">&lt;-</span> de_res<span class="sc">$</span>entrez <span class="do">## the names of the gene list is the en ID. </span></span>
-<span id="cb158-7"><a href="pathway-and-enrichment-analysis.html#cb158-7" tabindex="-1"></a></span>
-<span id="cb158-8"><a href="pathway-and-enrichment-analysis.html#cb158-8" tabindex="-1"></a><span class="do">## remove NA is there is any in the fold change or gene names</span></span>
-<span id="cb158-9"><a href="pathway-and-enrichment-analysis.html#cb158-9" tabindex="-1"></a><span class="cf">if</span>(<span class="fu">any</span>(<span class="fu">is.na</span>(gene_list))){ </span>
-<span id="cb158-10"><a href="pathway-and-enrichment-analysis.html#cb158-10" tabindex="-1"></a>  gene_list <span class="ot">=</span> gene_list[<span class="sc">-</span><span class="fu">which</span>(<span class="fu">is.na</span>(gene_list))]</span>
-<span id="cb158-11"><a href="pathway-and-enrichment-analysis.html#cb158-11" tabindex="-1"></a>}</span>
-<span id="cb158-12"><a href="pathway-and-enrichment-analysis.html#cb158-12" tabindex="-1"></a><span class="cf">if</span>(<span class="fu">any</span>(<span class="fu">is.na</span>(<span class="fu">names</span>(gene_list)))) {</span>
-<span id="cb158-13"><a href="pathway-and-enrichment-analysis.html#cb158-13" tabindex="-1"></a>  gene_list <span class="ot">=</span> gene_list[<span class="sc">-</span><span class="fu">which</span>(<span class="fu">is.na</span>(<span class="fu">names</span>(gene_list)))]</span>
-<span id="cb158-14"><a href="pathway-and-enrichment-analysis.html#cb158-14" tabindex="-1"></a>}</span>
-<span id="cb158-15"><a href="pathway-and-enrichment-analysis.html#cb158-15" tabindex="-1"></a></span>
-<span id="cb158-16"><a href="pathway-and-enrichment-analysis.html#cb158-16" tabindex="-1"></a><span class="do">## also remove duplicated gene names</span></span>
-<span id="cb158-17"><a href="pathway-and-enrichment-analysis.html#cb158-17" tabindex="-1"></a>gene_list <span class="ot">&lt;-</span> gene_list[<span class="sc">!</span><span class="fu">duplicated</span>(<span class="fu">names</span>(gene_list))]</span>
-<span id="cb158-18"><a href="pathway-and-enrichment-analysis.html#cb158-18" tabindex="-1"></a></span>
-<span id="cb158-19"><a href="pathway-and-enrichment-analysis.html#cb158-19" tabindex="-1"></a><span class="do">## sort from largest to smallest.</span></span>
-<span id="cb158-20"><a href="pathway-and-enrichment-analysis.html#cb158-20" tabindex="-1"></a>gene_list <span class="ot">&lt;-</span> <span class="fu">sort</span>(gene_list, <span class="at">decreasing =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb158-21"><a href="pathway-and-enrichment-analysis.html#cb158-21" tabindex="-1"></a></span>
-<span id="cb158-22"><a href="pathway-and-enrichment-analysis.html#cb158-22" tabindex="-1"></a><span class="fu">head</span>(gene_list)</span></code></pre></div>
+<div class="sourceCode" id="cb157"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb157-1"><a href="pathway-and-enrichment-analysis.html#cb157-1" tabindex="-1"></a><span class="do">## we will use all the genes. Get the fold change and pvalues.</span></span>
+<span id="cb157-2"><a href="pathway-and-enrichment-analysis.html#cb157-2" tabindex="-1"></a>gene_list <span class="ot">&lt;-</span> <span class="fu">sign</span>(de_res<span class="sc">$</span>log2FoldChange) <span class="sc">*</span> <span class="sc">-</span><span class="fu">log10</span>(de_res<span class="sc">$</span>pvalue)</span>
+<span id="cb157-3"><a href="pathway-and-enrichment-analysis.html#cb157-3" tabindex="-1"></a><span class="do">## or we can just use fold change data. </span></span>
+<span id="cb157-4"><a href="pathway-and-enrichment-analysis.html#cb157-4" tabindex="-1"></a></span>
+<span id="cb157-5"><a href="pathway-and-enrichment-analysis.html#cb157-5" tabindex="-1"></a><span class="do">## get the name of the genes. </span></span>
+<span id="cb157-6"><a href="pathway-and-enrichment-analysis.html#cb157-6" tabindex="-1"></a><span class="fu">names</span>(gene_list) <span class="ot">&lt;-</span> de_res<span class="sc">$</span>entrez <span class="do">## the names of the gene list is the en ID. </span></span>
+<span id="cb157-7"><a href="pathway-and-enrichment-analysis.html#cb157-7" tabindex="-1"></a></span>
+<span id="cb157-8"><a href="pathway-and-enrichment-analysis.html#cb157-8" tabindex="-1"></a><span class="do">## remove NA is there is any in the fold change or gene names</span></span>
+<span id="cb157-9"><a href="pathway-and-enrichment-analysis.html#cb157-9" tabindex="-1"></a><span class="cf">if</span>(<span class="fu">any</span>(<span class="fu">is.na</span>(gene_list))){ </span>
+<span id="cb157-10"><a href="pathway-and-enrichment-analysis.html#cb157-10" tabindex="-1"></a>  gene_list <span class="ot">=</span> gene_list[<span class="sc">-</span><span class="fu">which</span>(<span class="fu">is.na</span>(gene_list))]</span>
+<span id="cb157-11"><a href="pathway-and-enrichment-analysis.html#cb157-11" tabindex="-1"></a>}</span>
+<span id="cb157-12"><a href="pathway-and-enrichment-analysis.html#cb157-12" tabindex="-1"></a><span class="cf">if</span>(<span class="fu">any</span>(<span class="fu">is.na</span>(<span class="fu">names</span>(gene_list)))) {</span>
+<span id="cb157-13"><a href="pathway-and-enrichment-analysis.html#cb157-13" tabindex="-1"></a>  gene_list <span class="ot">=</span> gene_list[<span class="sc">-</span><span class="fu">which</span>(<span class="fu">is.na</span>(<span class="fu">names</span>(gene_list)))]</span>
+<span id="cb157-14"><a href="pathway-and-enrichment-analysis.html#cb157-14" tabindex="-1"></a>}</span>
+<span id="cb157-15"><a href="pathway-and-enrichment-analysis.html#cb157-15" tabindex="-1"></a></span>
+<span id="cb157-16"><a href="pathway-and-enrichment-analysis.html#cb157-16" tabindex="-1"></a><span class="do">## also remove duplicated gene names</span></span>
+<span id="cb157-17"><a href="pathway-and-enrichment-analysis.html#cb157-17" tabindex="-1"></a>gene_list <span class="ot">&lt;-</span> gene_list[<span class="sc">!</span><span class="fu">duplicated</span>(<span class="fu">names</span>(gene_list))]</span>
+<span id="cb157-18"><a href="pathway-and-enrichment-analysis.html#cb157-18" tabindex="-1"></a></span>
+<span id="cb157-19"><a href="pathway-and-enrichment-analysis.html#cb157-19" tabindex="-1"></a><span class="do">## sort from largest to smallest.</span></span>
+<span id="cb157-20"><a href="pathway-and-enrichment-analysis.html#cb157-20" tabindex="-1"></a>gene_list <span class="ot">&lt;-</span> <span class="fu">sort</span>(gene_list, <span class="at">decreasing =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb157-21"><a href="pathway-and-enrichment-analysis.html#cb157-21" tabindex="-1"></a></span>
+<span id="cb157-22"><a href="pathway-and-enrichment-analysis.html#cb157-22" tabindex="-1"></a><span class="fu">head</span>(gene_list)</span></code></pre></div>
 <pre><code>##   115207     6536     9181   165215   338382     1277 
 ## 43.56579 42.34242 32.18764 31.64835 29.16647 28.73637</code></pre>
-<div class="sourceCode" id="cb160"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb160-1"><a href="pathway-and-enrichment-analysis.html#cb160-1" tabindex="-1"></a><span class="co"># set seeds</span></span>
-<span id="cb160-2"><a href="pathway-and-enrichment-analysis.html#cb160-2" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1234</span>)</span>
-<span id="cb160-3"><a href="pathway-and-enrichment-analysis.html#cb160-3" tabindex="-1"></a></span>
-<span id="cb160-4"><a href="pathway-and-enrichment-analysis.html#cb160-4" tabindex="-1"></a><span class="do">## run GSEA using clusterProfiler</span></span>
-<span id="cb160-5"><a href="pathway-and-enrichment-analysis.html#cb160-5" tabindex="-1"></a>gseaKEGG <span class="ot">&lt;-</span> <span class="fu">gseKEGG</span>(<span class="at">geneList =</span> gene_list, <span class="co"># ordered named vector of fold changes (Entrez IDs are the associated names)</span></span>
-<span id="cb160-6"><a href="pathway-and-enrichment-analysis.html#cb160-6" tabindex="-1"></a>              <span class="at">organism =</span> <span class="st">&quot;hsa&quot;</span>, </span>
-<span id="cb160-7"><a href="pathway-and-enrichment-analysis.html#cb160-7" tabindex="-1"></a>              <span class="at">nPerm =</span> <span class="dv">1000</span>, <span class="co"># default number permutations</span></span>
-<span id="cb160-8"><a href="pathway-and-enrichment-analysis.html#cb160-8" tabindex="-1"></a>              <span class="at">minGSSize =</span> <span class="dv">100</span>, <span class="co"># minimum gene set size (# genes in set) - change to test more sets or recover sets with fewer # genes</span></span>
-<span id="cb160-9"><a href="pathway-and-enrichment-analysis.html#cb160-9" tabindex="-1"></a>              <span class="at">pvalueCutoff =</span> <span class="fl">0.1</span>, <span class="co"># padj cutoff value</span></span>
-<span id="cb160-10"><a href="pathway-and-enrichment-analysis.html#cb160-10" tabindex="-1"></a>              <span class="at">verbose =</span> <span class="cn">FALSE</span>, </span>
-<span id="cb160-11"><a href="pathway-and-enrichment-analysis.html#cb160-11" tabindex="-1"></a>              <span class="at">eps =</span> <span class="dv">0</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb159"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb159-1"><a href="pathway-and-enrichment-analysis.html#cb159-1" tabindex="-1"></a><span class="co"># set seeds</span></span>
+<span id="cb159-2"><a href="pathway-and-enrichment-analysis.html#cb159-2" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1234</span>)</span>
+<span id="cb159-3"><a href="pathway-and-enrichment-analysis.html#cb159-3" tabindex="-1"></a></span>
+<span id="cb159-4"><a href="pathway-and-enrichment-analysis.html#cb159-4" tabindex="-1"></a><span class="do">## run GSEA using clusterProfiler</span></span>
+<span id="cb159-5"><a href="pathway-and-enrichment-analysis.html#cb159-5" tabindex="-1"></a>gseaKEGG <span class="ot">&lt;-</span> <span class="fu">gseKEGG</span>(<span class="at">geneList =</span> gene_list, <span class="co"># ordered named vector of fold changes (Entrez IDs are the associated names)</span></span>
+<span id="cb159-6"><a href="pathway-and-enrichment-analysis.html#cb159-6" tabindex="-1"></a>              <span class="at">organism =</span> <span class="st">&quot;hsa&quot;</span>, </span>
+<span id="cb159-7"><a href="pathway-and-enrichment-analysis.html#cb159-7" tabindex="-1"></a>              <span class="at">nPerm =</span> <span class="dv">1000</span>, <span class="co"># default number permutations</span></span>
+<span id="cb159-8"><a href="pathway-and-enrichment-analysis.html#cb159-8" tabindex="-1"></a>              <span class="at">minGSSize =</span> <span class="dv">100</span>, <span class="co"># minimum gene set size (# genes in set) - change to test more sets or recover sets with fewer # genes</span></span>
+<span id="cb159-9"><a href="pathway-and-enrichment-analysis.html#cb159-9" tabindex="-1"></a>              <span class="at">pvalueCutoff =</span> <span class="cn">Inf</span>, <span class="co"># padj cutoff value</span></span>
+<span id="cb159-10"><a href="pathway-and-enrichment-analysis.html#cb159-10" tabindex="-1"></a>              <span class="at">verbose =</span> <span class="cn">FALSE</span>, </span>
+<span id="cb159-11"><a href="pathway-and-enrichment-analysis.html#cb159-11" tabindex="-1"></a>              <span class="at">eps =</span> <span class="dv">0</span>)</span></code></pre></div>
 <pre><code>## Reading KEGG annotation online: &quot;https://rest.kegg.jp/link/hsa/pathway&quot;...</code></pre>
 <pre><code>## Reading KEGG annotation online: &quot;https://rest.kegg.jp/list/pathway/hsa&quot;...</code></pre>
-<div class="sourceCode" id="cb163"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb163-1"><a href="pathway-and-enrichment-analysis.html#cb163-1" tabindex="-1"></a>gseaKEGG_gene_symbol <span class="ot">&lt;-</span> <span class="fu">setReadable</span>(gseaKEGG, <span class="st">&#39;org.Hs.eg.db&#39;</span>, <span class="st">&#39;ENTREZID&#39;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb162"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb162-1"><a href="pathway-and-enrichment-analysis.html#cb162-1" tabindex="-1"></a>gseaKEGG_gene_symbol <span class="ot">&lt;-</span> <span class="fu">setReadable</span>(gseaKEGG, <span class="st">&#39;org.Hs.eg.db&#39;</span>, <span class="st">&#39;ENTREZID&#39;</span>)</span></code></pre></div>
 <div id="save-gsea-results" class="section level3 hasAnchor" number="5.4.1">
 <h3><span class="header-section-number">5.4.1</span> <strong>save gsea results</strong><a href="pathway-and-enrichment-analysis.html#save-gsea-results" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb164"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb164-1"><a href="pathway-and-enrichment-analysis.html#cb164-1" tabindex="-1"></a><span class="co"># gsea is a large list, and we convert it to a data frame, and save the results</span></span>
-<span id="cb164-2"><a href="pathway-and-enrichment-analysis.html#cb164-2" tabindex="-1"></a>gsea_df <span class="ot">&lt;-</span> gseaKEGG_gene_symbol <span class="sc">|&gt;</span> <span class="fu">as.data.frame</span>()</span>
-<span id="cb164-3"><a href="pathway-and-enrichment-analysis.html#cb164-3" tabindex="-1"></a></span>
-<span id="cb164-4"><a href="pathway-and-enrichment-analysis.html#cb164-4" tabindex="-1"></a><span class="fu">write_tsv</span>(gsea_df, <span class="fu">paste0</span>(outdir, <span class="st">&quot;/clusterProfiler_KEGG_GSEA_res.tsv&quot;</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb163"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb163-1"><a href="pathway-and-enrichment-analysis.html#cb163-1" tabindex="-1"></a><span class="co"># gsea is a large list, and we convert it to a data frame, and save the results</span></span>
+<span id="cb163-2"><a href="pathway-and-enrichment-analysis.html#cb163-2" tabindex="-1"></a>gsea_df <span class="ot">&lt;-</span> gseaKEGG_gene_symbol <span class="sc">|&gt;</span> <span class="fu">as.data.frame</span>()</span>
+<span id="cb163-3"><a href="pathway-and-enrichment-analysis.html#cb163-3" tabindex="-1"></a></span>
+<span id="cb163-4"><a href="pathway-and-enrichment-analysis.html#cb163-4" tabindex="-1"></a><span class="fu">write_tsv</span>(gsea_df, <span class="fu">paste0</span>(outdir, <span class="st">&quot;/clusterProfiler_KEGG_GSEA_res.tsv&quot;</span>))</span></code></pre></div>
 </div>
 <div id="plot-gsea-results" class="section level3 hasAnchor" number="5.4.2">
 <h3><span class="header-section-number">5.4.2</span> <strong>plot GSEA results</strong><a href="pathway-and-enrichment-analysis.html#plot-gsea-results" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Similarity, we can make dotplot and gene-concept network plots here.</p>
-<div class="sourceCode" id="cb165"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb165-1"><a href="pathway-and-enrichment-analysis.html#cb165-1" tabindex="-1"></a><span class="co"># first dotplot</span></span>
-<span id="cb165-2"><a href="pathway-and-enrichment-analysis.html#cb165-2" tabindex="-1"></a><span class="fu">dotplot</span>(gseaKEGG_gene_symbol, <span class="at">showCategory =</span> <span class="dv">15</span>) <span class="sc">+</span> <span class="fu">ggtitle</span>(<span class="st">&quot;dotplot for gsea - KEGG pathways&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb164"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb164-1"><a href="pathway-and-enrichment-analysis.html#cb164-1" tabindex="-1"></a><span class="co"># first dotplot</span></span>
+<span id="cb164-2"><a href="pathway-and-enrichment-analysis.html#cb164-2" tabindex="-1"></a><span class="fu">dotplot</span>(gseaKEGG_gene_symbol, <span class="at">showCategory =</span> <span class="dv">15</span>) <span class="sc">+</span> <span class="fu">ggtitle</span>(<span class="st">&quot;dotplot for gsea - KEGG pathways&quot;</span>)</span></code></pre></div>
 <p><img src="04_pathway_enrichment_files/figure-html/plot_GSEA1-1.png" width="768" style="display: block; margin: auto;" /></p>
-<div class="sourceCode" id="cb166"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb166-1"><a href="pathway-and-enrichment-analysis.html#cb166-1" tabindex="-1"></a><span class="fu">cnetplot</span>(gseaKEGG_gene_symbol, </span>
-<span id="cb166-2"><a href="pathway-and-enrichment-analysis.html#cb166-2" tabindex="-1"></a>         <span class="at">showCategory =</span> <span class="dv">5</span>, </span>
-<span id="cb166-3"><a href="pathway-and-enrichment-analysis.html#cb166-3" tabindex="-1"></a>         <span class="at">node_label_size =</span> <span class="fl">0.6</span>, </span>
-<span id="cb166-4"><a href="pathway-and-enrichment-analysis.html#cb166-4" tabindex="-1"></a>         <span class="at">cex_label_category =</span> <span class="fl">0.8</span>,</span>
-<span id="cb166-5"><a href="pathway-and-enrichment-analysis.html#cb166-5" tabindex="-1"></a>         <span class="at">cex_label_gene =</span> <span class="fl">0.5</span>, </span>
-<span id="cb166-6"><a href="pathway-and-enrichment-analysis.html#cb166-6" tabindex="-1"></a>         <span class="at">cex_category =</span> <span class="fl">0.8</span>, <span class="at">cex_genes =</span> <span class="fl">0.5</span>, </span>
-<span id="cb166-7"><a href="pathway-and-enrichment-analysis.html#cb166-7" tabindex="-1"></a>         <span class="at">max.overlaps =</span> <span class="cn">Inf</span>) <span class="sc">+</span> <span class="fu">ggtitle</span>(<span class="st">&quot;Gene-concept network for gsea-KEGG pathways&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb165"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb165-1"><a href="pathway-and-enrichment-analysis.html#cb165-1" tabindex="-1"></a><span class="fu">cnetplot</span>(gseaKEGG_gene_symbol, </span>
+<span id="cb165-2"><a href="pathway-and-enrichment-analysis.html#cb165-2" tabindex="-1"></a>         <span class="at">showCategory =</span> <span class="dv">5</span>, </span>
+<span id="cb165-3"><a href="pathway-and-enrichment-analysis.html#cb165-3" tabindex="-1"></a>         <span class="at">node_label_size =</span> <span class="fl">0.6</span>, </span>
+<span id="cb165-4"><a href="pathway-and-enrichment-analysis.html#cb165-4" tabindex="-1"></a>         <span class="at">cex_label_category =</span> <span class="fl">0.8</span>,</span>
+<span id="cb165-5"><a href="pathway-and-enrichment-analysis.html#cb165-5" tabindex="-1"></a>         <span class="at">cex_label_gene =</span> <span class="fl">0.5</span>, </span>
+<span id="cb165-6"><a href="pathway-and-enrichment-analysis.html#cb165-6" tabindex="-1"></a>         <span class="at">cex_category =</span> <span class="fl">0.8</span>, <span class="at">cex_genes =</span> <span class="fl">0.5</span>, </span>
+<span id="cb165-7"><a href="pathway-and-enrichment-analysis.html#cb165-7" tabindex="-1"></a>         <span class="at">max.overlaps =</span> <span class="cn">Inf</span>) <span class="sc">+</span> <span class="fu">ggtitle</span>(<span class="st">&quot;Gene-concept network for gsea-KEGG pathways&quot;</span>)</span></code></pre></div>
 <p><img src="04_pathway_enrichment_files/figure-html/plot_GSEA1-2.png" width="768" style="display: block; margin: auto;" /></p>
-<div class="sourceCode" id="cb167"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb167-1"><a href="pathway-and-enrichment-analysis.html#cb167-1" tabindex="-1"></a><span class="co"># Specific plots we can make for GSEA results</span></span>
-<span id="cb167-2"><a href="pathway-and-enrichment-analysis.html#cb167-2" tabindex="-1"></a><span class="fu">gseaplot</span>(gseaKEGG_gene_symbol, <span class="at">geneSetID =</span> <span class="st">&#39;hsa04910&#39;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb166"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb166-1"><a href="pathway-and-enrichment-analysis.html#cb166-1" tabindex="-1"></a><span class="co"># Specific plots we can make for GSEA results</span></span>
+<span id="cb166-2"><a href="pathway-and-enrichment-analysis.html#cb166-2" tabindex="-1"></a><span class="fu">gseaplot</span>(gseaKEGG_gene_symbol, <span class="at">geneSetID =</span> <span class="st">&#39;hsa04910&#39;</span>)</span></code></pre></div>
 <p><img src="04_pathway_enrichment_files/figure-html/plot_GSEA1-3.png" width="768" style="display: block; margin: auto;" /></p>
 </div>
 <div id="plot-kegg-map" class="section level3 hasAnchor" number="5.4.3">
 <h3><span class="header-section-number">5.4.3</span> <strong>plot KEGG map</strong><a href="pathway-and-enrichment-analysis.html#plot-kegg-map" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb168"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb168-1"><a href="pathway-and-enrichment-analysis.html#cb168-1" tabindex="-1"></a><span class="co"># Lastly, we can map gene expression to a KEGG map</span></span>
-<span id="cb168-2"><a href="pathway-and-enrichment-analysis.html#cb168-2" tabindex="-1"></a>foldchanges <span class="ot">&lt;-</span> de_res<span class="sc">$</span>log2FoldChange</span>
-<span id="cb168-3"><a href="pathway-and-enrichment-analysis.html#cb168-3" tabindex="-1"></a><span class="fu">names</span>(foldchanges) <span class="ot">&lt;-</span> de_res<span class="sc">$</span>entrez</span>
-<span id="cb168-4"><a href="pathway-and-enrichment-analysis.html#cb168-4" tabindex="-1"></a></span>
-<span id="cb168-5"><a href="pathway-and-enrichment-analysis.html#cb168-5" tabindex="-1"></a><span class="fu">pathview</span>(<span class="at">gene.data =</span> foldchanges,</span>
-<span id="cb168-6"><a href="pathway-and-enrichment-analysis.html#cb168-6" tabindex="-1"></a>              <span class="at">pathway.id =</span> <span class="st">&#39;hsa04910&#39;</span>,</span>
-<span id="cb168-7"><a href="pathway-and-enrichment-analysis.html#cb168-7" tabindex="-1"></a>              <span class="at">species =</span> <span class="st">&quot;hsa&quot;</span>,</span>
-<span id="cb168-8"><a href="pathway-and-enrichment-analysis.html#cb168-8" tabindex="-1"></a>              <span class="at">limit =</span> <span class="fu">list</span>(<span class="at">gene =</span> <span class="dv">2</span>, <span class="co"># value gives the max/min limit for foldchanges</span></span>
-<span id="cb168-9"><a href="pathway-and-enrichment-analysis.html#cb168-9" tabindex="-1"></a>              <span class="at">cpd =</span> <span class="dv">1</span>), </span>
-<span id="cb168-10"><a href="pathway-and-enrichment-analysis.html#cb168-10" tabindex="-1"></a>              <span class="at">low=</span><span class="fu">list</span>(<span class="at">gene=</span><span class="st">&quot;steelblue&quot;</span>),</span>
-<span id="cb168-11"><a href="pathway-and-enrichment-analysis.html#cb168-11" tabindex="-1"></a>              <span class="at">high=</span><span class="fu">list</span>(<span class="at">gene=</span><span class="st">&quot;gold&quot;</span>))</span>
-<span id="cb168-12"><a href="pathway-and-enrichment-analysis.html#cb168-12" tabindex="-1"></a><span class="do">## you can download the map from Rstudio, and you will be seeing something like this. </span></span></code></pre></div>
+<div class="sourceCode" id="cb167"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb167-1"><a href="pathway-and-enrichment-analysis.html#cb167-1" tabindex="-1"></a><span class="co"># Lastly, we can map gene expression to a KEGG map</span></span>
+<span id="cb167-2"><a href="pathway-and-enrichment-analysis.html#cb167-2" tabindex="-1"></a>foldchanges <span class="ot">&lt;-</span> de_res<span class="sc">$</span>log2FoldChange</span>
+<span id="cb167-3"><a href="pathway-and-enrichment-analysis.html#cb167-3" tabindex="-1"></a><span class="fu">names</span>(foldchanges) <span class="ot">&lt;-</span> de_res<span class="sc">$</span>entrez</span>
+<span id="cb167-4"><a href="pathway-and-enrichment-analysis.html#cb167-4" tabindex="-1"></a></span>
+<span id="cb167-5"><a href="pathway-and-enrichment-analysis.html#cb167-5" tabindex="-1"></a><span class="fu">pathview</span>(<span class="at">gene.data =</span> foldchanges,</span>
+<span id="cb167-6"><a href="pathway-and-enrichment-analysis.html#cb167-6" tabindex="-1"></a>              <span class="at">pathway.id =</span> <span class="st">&#39;hsa04910&#39;</span>,</span>
+<span id="cb167-7"><a href="pathway-and-enrichment-analysis.html#cb167-7" tabindex="-1"></a>              <span class="at">species =</span> <span class="st">&quot;hsa&quot;</span>,</span>
+<span id="cb167-8"><a href="pathway-and-enrichment-analysis.html#cb167-8" tabindex="-1"></a>              <span class="at">limit =</span> <span class="fu">list</span>(<span class="at">gene =</span> <span class="dv">2</span>, <span class="co"># value gives the max/min limit for foldchanges</span></span>
+<span id="cb167-9"><a href="pathway-and-enrichment-analysis.html#cb167-9" tabindex="-1"></a>              <span class="at">cpd =</span> <span class="dv">1</span>), </span>
+<span id="cb167-10"><a href="pathway-and-enrichment-analysis.html#cb167-10" tabindex="-1"></a>              <span class="at">low=</span><span class="fu">list</span>(<span class="at">gene=</span><span class="st">&quot;steelblue&quot;</span>),</span>
+<span id="cb167-11"><a href="pathway-and-enrichment-analysis.html#cb167-11" tabindex="-1"></a>              <span class="at">high=</span><span class="fu">list</span>(<span class="at">gene=</span><span class="st">&quot;gold&quot;</span>))</span>
+<span id="cb167-12"><a href="pathway-and-enrichment-analysis.html#cb167-12" tabindex="-1"></a><span class="do">## you can download the map from Rstudio, and you will be seeing something like this. </span></span></code></pre></div>
 <div class="float">
 <img src="img/hsa04910.pathview.png" alt="Example pathview output." />
 <div class="figcaption">Example pathview output.</div>
@@ -522,45 +522,45 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <script>
 gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({
-"sharing": {
-"github": true,
-"facebook": false,
-"twitter": false,
-"linkedin": false,
-"weibo": false,
-"instapaper": false,
-"vk": false,
-"whatsapp": false,
-"all": false
-},
-"fontsettings": {
-"theme": "white",
-"family": "sans",
-"size": 2
-},
-"edit": {
-"link": null,
-"text": null
-},
-"history": {
-"link": null,
-"text": null
-},
-"view": {
-"link": null,
-"text": null
-},
-"download": null,
-"search": {
-"engine": "fuse",
-"options": null
-},
-"toc": {
-"collapse": "subsection"
-},
-"toolbar": {
-"position": "static"
-}
+  "sharing": {
+    "github": true,
+    "facebook": false,
+    "twitter": false,
+    "linkedin": false,
+    "weibo": false,
+    "instapaper": false,
+    "vk": false,
+    "whatsapp": false,
+    "all": false
+  },
+  "fontsettings": {
+    "theme": "white",
+    "family": "sans",
+    "size": 2
+  },
+  "edit": {
+    "link": null,
+    "text": null
+  },
+  "history": {
+    "link": null,
+    "text": null
+  },
+  "view": {
+    "link": null,
+    "text": null
+  },
+  "download": null,
+  "search": {
+    "engine": "fuse",
+    "options": null
+  },
+  "toc": {
+    "collapse": "subsection"
+  },
+  "toolbar": {
+    "position": "static"
+  }
 });
 });
 </script>

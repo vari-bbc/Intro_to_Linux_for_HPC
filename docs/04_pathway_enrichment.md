@@ -230,7 +230,7 @@ gseaKEGG <- gseKEGG(geneList = gene_list, # ordered named vector of fold changes
               organism = "hsa", 
               nPerm = 1000, # default number permutations
               minGSSize = 100, # minimum gene set size (# genes in set) - change to test more sets or recover sets with fewer # genes
-              pvalueCutoff = 0.1, # padj cutoff value
+              pvalueCutoff = Inf, # padj cutoff value
               verbose = FALSE, 
               eps = 0)
 ```

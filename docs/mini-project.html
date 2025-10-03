@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Part 3 Mini Project | Introductory Bioinformatics for VAI Users</title>
   <meta name="description" content="Bioinformatics tutorials with hands-on exercises and examples." />
-  <meta name="generator" content="bookdown 0.41 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.42 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Part 3 Mini Project | Introductory Bioinformatics for VAI Users" />
   <meta property="og:type" content="book" />
@@ -286,7 +286,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2><span class="header-section-number">3.1</span> <strong>Start an Interactive Job</strong><a href="mini-project.html#start-an-interactive-job" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>While simple file manipulations can be done on the submit node, computationally intensive operations should be performed using preallocated computational resources. An <strong>interactive job</strong> allows us to preallocate resources while still being able to run commands line by line.</p>
 <p>We will start an interactive job, requesting one CPU core and 1 hour and 30 minutes of walltime.</p>
-<div class="sourceCode" id="cb23"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb23-1"><a href="mini-project.html#cb23-1" tabindex="-1"></a><span class="ex">srun</span> <span class="at">-p</span> quick <span class="at">--nodes</span><span class="op">=</span>1 <span class="at">--ntasks-per-node</span><span class="op">=</span>1 <span class="at">--time</span><span class="op">=</span>01:30:00 <span class="at">--pty</span> bash </span></code></pre></div>
+<div class="sourceCode" id="cb23"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb23-1"><a href="mini-project.html#cb23-1" tabindex="-1"></a><span class="ex">srun</span> <span class="at">-p</span> short <span class="at">--nodes</span><span class="op">=</span>1 <span class="at">--ntasks-per-node</span><span class="op">=</span>1 <span class="at">--time</span><span class="op">=</span>01:30:00 <span class="at">--pty</span> bash </span></code></pre></div>
 <p>After a job has been submitted, users can check on the status (e.g. how long it has been running) of it using the following.</p>
 <div class="sourceCode" id="cb24"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb24-1"><a href="mini-project.html#cb24-1" tabindex="-1"></a><span class="ex">squeue</span> <span class="at">--me</span></span></code></pre></div>
 </div>
@@ -490,7 +490,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb49-9"><a href="mini-project.html#cb49-9" tabindex="-1"></a></span>
 <span id="cb49-10"><a href="mini-project.html#cb49-10" tabindex="-1"></a><span class="co"># Go back to your project directory</span></span>
 <span id="cb49-11"><a href="mini-project.html#cb49-11" tabindex="-1"></a><span class="bu">cd</span> /varidata/researchtemp/hpctmp/BBC_workshop_Oct2024_II/<span class="op">&lt;</span>username<span class="op">&gt;</span></span></code></pre></div>
-<p>Below is a SLURM job script to run Salmon. For now, do not worry about how the code works. Copy the code and paste it into a new file. Save it as <code>run_salmon.sh</code> in your username directory. If you have issues with this task, you can copy the job script directly using the command, <code>cp /varidata/researchtemp/hpctmp/BBC_workshop_June2023/kin.lau/run_salmon.sh .</code>.</p>
+<p>Below is a SLURM job script to run Salmon. For now, do not worry about how the code works. Copy the code and paste it into a new file. Save it as <code>run_salmon.sh</code> in your username directory. If you have issues with this task, you can download the job script directly using the command, <code>wget https://raw.githubusercontent.com/vari-bbc/Intro_to_Linux_for_HPC/refs/heads/main/resources/sec2/run_salmon.sh</code>.</p>
 <div class="sourceCode" id="cb50"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb50-1"><a href="mini-project.html#cb50-1" tabindex="-1"></a><span class="co">#!/bin/bash</span></span>
 <span id="cb50-2"><a href="mini-project.html#cb50-2" tabindex="-1"></a></span>
 <span id="cb50-3"><a href="mini-project.html#cb50-3" tabindex="-1"></a><span class="co">#SBATCH --export=NONE</span></span>
@@ -530,7 +530,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Type <code>ls</code> to ensure <code>run_salmon.sh</code> file exist in the username directory.</p>
 <div class="sourceCode" id="cb51"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb51-1"><a href="mini-project.html#cb51-1" tabindex="-1"></a><span class="fu">ls</span></span></code></pre></div>
 <p>Use the <code>sbatch</code> command to submit the job.</p>
-<div class="sourceCode" id="cb52"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb52-1"><a href="mini-project.html#cb52-1" tabindex="-1"></a><span class="ex">sbatch</span> <span class="at">-p</span> quick run_salmon.sh</span></code></pre></div>
+<div class="sourceCode" id="cb52"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb52-1"><a href="mini-project.html#cb52-1" tabindex="-1"></a><span class="ex">sbatch</span> <span class="at">-p</span> short run_salmon.sh</span></code></pre></div>
 <p>Users can check if the job is running with the following command. The job should take about two minutes to complete.</p>
 <div class="sourceCode" id="cb53"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb53-1"><a href="mini-project.html#cb53-1" tabindex="-1"></a><span class="ex">squeue</span> <span class="at">--me</span></span></code></pre></div>
 </div>
@@ -538,18 +538,18 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2><span class="header-section-number">3.9</span> <strong>Examine the Standard Output (stdout) and Standard Error (stderr) log files</strong><a href="mini-project.html#examine-the-standard-output-stdout-and-standard-error-stderr-log-files" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>It is good practice to check the job logs after your job is done to ensure that the job completed successfully. If there is an error, the output files may not be reliable or could be incomplete.</p>
 <div class="sourceCode" id="cb54"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb54-1"><a href="mini-project.html#cb54-1" tabindex="-1"></a><span class="fu">tail</span> run_salmon.e</span></code></pre></div>
-<pre><code>## [2024-10-18 11:02:24.242] [jointLog] [info] Marked 0 weighted equivalence classes as degenerate
-## [2024-10-18 11:02:24.269] [jointLog] [info] iteration = 0 | max rel diff. = 202.856
-## [2024-10-18 11:02:26.830] [jointLog] [info] iteration = 100 | max rel diff. = 2.70344
-## [2024-10-18 11:02:29.410] [jointLog] [info] iteration = 200 | max rel diff. = 8.44748
-## [2024-10-18 11:02:32.123] [jointLog] [info] iteration = 300 | max rel diff. = 1.20046
-## [2024-10-18 11:02:34.825] [jointLog] [info] iteration = 400 | max rel diff. = 17.8856
-## [2024-10-18 11:02:36.638] [jointLog] [info] iteration = 468 | max rel diff. = 0.00941437
-## [2024-10-18 11:02:36.678] [jointLog] [info] Finished optimizer
-## [2024-10-18 11:02:36.678] [jointLog] [info] writing output</code></pre>
+<pre><code>## [2025-10-03 10:29:55.282] [jointLog] [info] Marked 0 weighted equivalence classes as degenerate
+## [2025-10-03 10:29:55.309] [jointLog] [info] iteration = 0 | max rel diff. = 203.028
+## [2025-10-03 10:29:57.974] [jointLog] [info] iteration = 100 | max rel diff. = 19.6442
+## [2025-10-03 10:30:00.719] [jointLog] [info] iteration = 200 | max rel diff. = 0.462189
+## [2025-10-03 10:30:03.319] [jointLog] [info] iteration = 300 | max rel diff. = 1.92755
+## [2025-10-03 10:30:05.909] [jointLog] [info] iteration = 400 | max rel diff. = 0.0347574
+## [2025-10-03 10:30:07.538] [jointLog] [info] iteration = 463 | max rel diff. = 0.00959217
+## [2025-10-03 10:30:07.581] [jointLog] [info] Finished optimizer
+## [2025-10-03 10:30:07.581] [jointLog] [info] writing output</code></pre>
 <div class="sourceCode" id="cb56"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb56-1"><a href="mini-project.html#cb56-1" tabindex="-1"></a><span class="fu">tail</span> run_salmon.o</span></code></pre></div>
-<pre><code>## Start time: 11:01:15
-## End time: 11:02:38</code></pre>
+<pre><code>## Start time: 10:28:40
+## End time: 10:30:09</code></pre>
 </div>
 <div id="use-grep-to-find-the-tpms-for-a-specific-gene" class="section level2 hasAnchor" number="3.10">
 <h2><span class="header-section-number">3.10</span> <strong>Use grep to find the TPMs for a specific gene</strong><a href="mini-project.html#use-grep-to-find-the-tpms-for-a-specific-gene" class="anchor-section" aria-label="Anchor link to header"></a></h2>
@@ -557,22 +557,22 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>First, let’s take a look at one of these files to figure out the format of these files.</p>
 <div class="sourceCode" id="cb58"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb58-1"><a href="mini-project.html#cb58-1" tabindex="-1"></a><span class="fu">head</span> salmon/SRR1039520/quant.sf</span></code></pre></div>
 <pre><code>## Name Length  EffectiveLength TPM NumReads
-## ENST00000456328.2    1657    1502.149    0.000000    0.000
-## ENST00000450305.2    632 477.287 0.000000    0.000
-## ENST00000488147.1    1351    1196.149    0.000000    0.000
-## ENST00000619216.1    68  1.878   0.000000    0.000
-## ENST00000473358.1    712 557.240 0.000000    0.000
-## ENST00000469289.1    535 380.407 0.000000    0.000
-## ENST00000607096.1    138 24.897  0.000000    0.000
-## ENST00000417324.1    1187    1032.149    0.000000    0.000
-## ENST00000461467.1    590 435.330 0.000000    0.000</code></pre>
+## ENST00000456328.2    1657    1501.734    0.000000    0.000
+## ENST00000450305.2    632 476.867 0.000000    0.000
+## ENST00000488147.1    1351    1195.734    0.000000    0.000
+## ENST00000619216.1    68  2.021   0.000000    0.000
+## ENST00000473358.1    712 556.827 0.000000    0.000
+## ENST00000469289.1    535 379.986 0.000000    0.000
+## ENST00000607096.1    138 24.859  0.000000    0.000
+## ENST00000417324.1    1187    1031.734    0.000000    0.000
+## ENST00000461467.1    590 434.911 0.000000    0.000</code></pre>
 <p>From the output above, we can see that the TPMs are in the 4th column of this file. The canonical transcript for <a href="http://useast.ensembl.org/Homo_sapiens/Gene/Summary?db=core;g=ENSG00000185499;r=1:155185824-155192916">MUC1</a> is ENST00000620103, so we will search for that using <code>grep</code>.</p>
 <div class="sourceCode" id="cb60"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb60-1"><a href="mini-project.html#cb60-1" tabindex="-1"></a><span class="fu">grep</span> <span class="st">&#39;ENST00000620103&#39;</span> salmon/SRR1039520/quant.sf</span></code></pre></div>
-<pre><code>## ENST00000620103.4    1811    1656.149    0.000000    0.000</code></pre>
+<pre><code>## ENST00000620103.4    1811    1655.734    0.000000    0.000</code></pre>
 <p>Look for MUC1 across all the samples at the same time. We can see that ‘SRR1039521’ has a TPM of 13.1 for MUC1 compared to 0 for ‘SRR1039520’. Recall that the fastq files for this exercise were subsetted to a very small number of reads so don’t interpret these results seriously.</p>
 <div class="sourceCode" id="cb62"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb62-1"><a href="mini-project.html#cb62-1" tabindex="-1"></a><span class="fu">grep</span> <span class="st">&#39;ENST00000620103&#39;</span> salmon/<span class="pp">*</span>/quant.sf</span></code></pre></div>
-<pre><code>## salmon/SRR1039520/quant.sf:ENST00000620103.4 1811    1656.149    0.000000    0.000
-## salmon/SRR1039521/quant.sf:ENST00000620103.4 1811    1655.487    13.171514   5.733</code></pre>
+<pre><code>## salmon/SRR1039520/quant.sf:ENST00000620103.4 1811    1655.734    0.000000    0.000
+## salmon/SRR1039521/quant.sf:ENST00000620103.4 1811    1655.512    13.182825   5.741</code></pre>
 </div>
 <div id="bonus-use-an-interactive-job-to-run-multiqc-on-the-salmon-and-fastqc-output" class="section level2 hasAnchor" number="3.11">
 <h2><span class="header-section-number">3.11</span> <strong>BONUS: Use an interactive job to run multiQC on the Salmon and FastQC output</strong><a href="mini-project.html#bonus-use-an-interactive-job-to-run-multiqc-on-the-salmon-and-fastqc-output" class="anchor-section" aria-label="Anchor link to header"></a></h2>
@@ -581,21 +581,25 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="sourceCode" id="cb64"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb64-1"><a href="mini-project.html#cb64-1" tabindex="-1"></a><span class="ex">srun</span> <span class="at">--nodes</span><span class="op">=</span>1 <span class="at">--ntasks-per-node</span><span class="op">=</span>1 <span class="at">--time</span><span class="op">=</span>00:30:00 <span class="at">--pty</span> bash</span></code></pre></div>
 <p>Navigate to the project directory.</p>
 <div class="sourceCode" id="cb65"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb65-1"><a href="mini-project.html#cb65-1" tabindex="-1"></a><span class="bu">cd</span> /varidata/researchtemp/hpctmp/BBC_workshop_Oct2024_II/<span class="op">&lt;</span>username<span class="op">&gt;</span></span></code></pre></div>
-<p>Load the environment module for multiQC.</p>
-<div class="sourceCode" id="cb66"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb66-1"><a href="mini-project.html#cb66-1" tabindex="-1"></a><span class="ex">module</span> load bbc2/multiqc/multiqc-1.14</span></code></pre></div>
+<p>Load the environment module for multiQC. Run multiQC, which will summarize the results from FastQC and Salmon and output the results into a new directory called <code>multiqc/</code>.</p>
+<div class="sourceCode" id="cb66"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb66-1"><a href="mini-project.html#cb66-1" tabindex="-1"></a><span class="ex">module</span> load bbc2/multiqc/multiqc-1.14</span>
+<span id="cb66-2"><a href="mini-project.html#cb66-2" tabindex="-1"></a></span>
+<span id="cb66-3"><a href="mini-project.html#cb66-3" tabindex="-1"></a><span class="ex">multiqc</span> <span class="at">--outdir</span> multiqc .</span></code></pre></div>
 <pre><code>## 
-## ### Loaded BBC module
-##  Loading this module prepends to $PYTHONPATH
-##  Don&#39;t use with conda.
-## ### End BBC module message.</code></pre>
-<p>Run multiQC, which will summarize the results from FastQC and Salmon and output the results into a new directory called <code>multiqc/</code>.</p>
-<div class="sourceCode" id="cb68"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb68-1"><a href="mini-project.html#cb68-1" tabindex="-1"></a><span class="ex">multiqc</span> <span class="at">--outdir</span> multiqc .</span></code></pre></div>
+##   /// MultiQC 🔍 | v1.14
+## 
+## |           multiqc | MultiQC Version v1.31 now available!
+## |           multiqc | Search path : /varidata/research/projects/bbc/research/Intro_to_Linux_for_HPC_devel
+## |         searching | ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 100% 143/143  
+## |            fastqc | Found 4 reports
+## |           multiqc | Compressing plot data
+## |           multiqc | Report      : multiqc/multiqc_report.html
+## |           multiqc | Data        : multiqc/multiqc_data
+## |           multiqc | MultiQC complete</code></pre>
 <p>List the contents of the <code>multiqc</code> directory.</p>
-<div class="sourceCode" id="cb69"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb69-1"><a href="mini-project.html#cb69-1" tabindex="-1"></a><span class="fu">ls</span> multiqc</span></code></pre></div>
+<div class="sourceCode" id="cb68"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb68-1"><a href="mini-project.html#cb68-1" tabindex="-1"></a><span class="fu">ls</span> multiqc</span></code></pre></div>
 <pre><code>## multiqc_data
-## multiqc_data_1
-## multiqc_report.html
-## multiqc_report_1.html</code></pre>
+## multiqc_report.html</code></pre>
 <p>Note the newly created <code>multiqc_report.html</code> file. Try to view this file in your preferred internet browser. If you have mounted the HPC file system to your computer, you can simply double-click on this file. Alternatively, you can copy this file to your computer’s local storage first and then open it.</p>
 
 </div>
@@ -620,45 +624,45 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <script>
 gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({
-"sharing": {
-"github": true,
-"facebook": false,
-"twitter": false,
-"linkedin": false,
-"weibo": false,
-"instapaper": false,
-"vk": false,
-"whatsapp": false,
-"all": false
-},
-"fontsettings": {
-"theme": "white",
-"family": "sans",
-"size": 2
-},
-"edit": {
-"link": null,
-"text": null
-},
-"history": {
-"link": null,
-"text": null
-},
-"view": {
-"link": null,
-"text": null
-},
-"download": null,
-"search": {
-"engine": "fuse",
-"options": null
-},
-"toc": {
-"collapse": "subsection"
-},
-"toolbar": {
-"position": "static"
-}
+  "sharing": {
+    "github": true,
+    "facebook": false,
+    "twitter": false,
+    "linkedin": false,
+    "weibo": false,
+    "instapaper": false,
+    "vk": false,
+    "whatsapp": false,
+    "all": false
+  },
+  "fontsettings": {
+    "theme": "white",
+    "family": "sans",
+    "size": 2
+  },
+  "edit": {
+    "link": null,
+    "text": null
+  },
+  "history": {
+    "link": null,
+    "text": null
+  },
+  "view": {
+    "link": null,
+    "text": null
+  },
+  "download": null,
+  "search": {
+    "engine": "fuse",
+    "options": null
+  },
+  "toc": {
+    "collapse": "subsection"
+  },
+  "toolbar": {
+    "position": "static"
+  }
 });
 });
 </script>

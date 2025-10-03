@@ -171,6 +171,10 @@ ls /varidata/research/projects/bbc/versioned_references/
 ## 2023-10-06_11.13.48_v14
 ## 2023-11-08_15.45.32_v15
 ## 2023-11-09_09.38.05_v16
+## 2024-10-31_10.56.03_v17
+## 2025-02-04_16.03.25_v18
+## 2025-04-30_23.47.46_v19
+## 2025-05-12_16.16.50_v20
 ## latest
 ## regarding_v2.txt
 ```
@@ -306,7 +310,7 @@ Use the OnDemand file explorer to download and open `/varidata/researchtemp/hpct
 
 1. Please go to [VAI OnDemand](https://ondemand.vai.zone/).
 
-2. Click on RStudio Server, and create a new RStudio session. Please make sure you are loading the correct R module for this workshop, `bbc2/R/alt/R-4.4.0-setR_LIBS_USER`, which you can select from the drop down menu. Type "quick" in the "Partition" field. can be "quick" (if you encounter issues, you can also try "short" or "long"). Set CPU as 1, memory as 16GB, and time as 6 hours. Click "Launch".
+2. Click on RStudio Server, and create a new RStudio session. Please make sure you are loading the correct R module for this workshop, `bbc2/R/alt/R-4.4.0-setR_LIBS_USER`, which you can select from the drop down menu. Type "short" in the "Partition" field (if you encounter issues, you can also try "long"). Set CPU as 1, memory as 16GB, and time as 6 hours. Click "Launch".
 
 3. In the Rstudio window, click "File" in the upper left corner, click on "New Project" > "New Directory" > "New Project". Then, click on "Browse...", you can click on triple dot horizontal button and type `/varidata/researchtemp/hpctmp/BBC_workshop_Oct2024_III/<username>`. Click "choose". Next, you will go back to the project wizard, and type "workshop_2024" in the "Directory name" field. Click "Create Project". You will be the newly created "workshop_2024" folder, which will contain a new file named "workshop_2024.Rproj", which Rstudio uses to store details about your R project.
 
@@ -803,10 +807,10 @@ rowData(se2)
 ## ENSG00000228463.10      0.07241761
 ## ...                            ...
 ## ENSG00000273748.1      -0.03748339
-## ENSG00000271254.6       0.66240875
+## ENSG00000271254.6       0.66240874
 ## ENSG00000278673.1      -0.00502522
-## ENSG00000278817.1      -0.28581340
-## ENSG00000277196.4      -2.92429454
+## ENSG00000278817.1      -0.28581346
+## ENSG00000277196.4      -2.92428962
 ```
 
 

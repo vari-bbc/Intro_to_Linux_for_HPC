@@ -18,7 +18,7 @@ We will start an interactive job, requesting one CPU core and 1 hour and 30 minu
 
 
 ``` bash
-srun -p quick --nodes=1 --ntasks-per-node=1 --time=01:30:00 --pty bash 
+srun -p short --nodes=1 --ntasks-per-node=1 --time=01:30:00 --pty bash 
 ```
 
 After a job has been submitted, users can check on the status (e.g. how long it has been running) of it using the following.
@@ -335,7 +335,7 @@ cd /varidata/researchtemp/hpctmp/BBC_workshop_Oct2024_II/<username>
 
 ```
 
-Below is a SLURM job script to run Salmon. For now, do not worry about how the code works. Copy the code and paste it into a new file. Save it as `run_salmon.sh` in your username directory. If you have issues with this task, you can copy the job script directly using the command, `cp /varidata/researchtemp/hpctmp/BBC_workshop_June2023/kin.lau/run_salmon.sh .`.
+Below is a SLURM job script to run Salmon. For now, do not worry about how the code works. Copy the code and paste it into a new file. Save it as `run_salmon.sh` in your username directory. If you have issues with this task, you can download the job script directly using the command, `wget https://raw.githubusercontent.com/vari-bbc/Intro_to_Linux_for_HPC/refs/heads/main/resources/sec2/run_salmon.sh`.
 
 
 ``` bash
@@ -387,7 +387,7 @@ Use the `sbatch` command to submit the job.
 
 
 ``` bash
-sbatch -p quick run_salmon.sh
+sbatch -p short run_salmon.sh
 
 ```
 
@@ -409,15 +409,15 @@ tail run_salmon.e
 ```
 
 ```
-## [2024-10-18 11:02:24.242] [jointLog] [info] Marked 0 weighted equivalence classes as degenerate
-## [2024-10-18 11:02:24.269] [jointLog] [info] iteration = 0 | max rel diff. = 202.856
-## [2024-10-18 11:02:26.830] [jointLog] [info] iteration = 100 | max rel diff. = 2.70344
-## [2024-10-18 11:02:29.410] [jointLog] [info] iteration = 200 | max rel diff. = 8.44748
-## [2024-10-18 11:02:32.123] [jointLog] [info] iteration = 300 | max rel diff. = 1.20046
-## [2024-10-18 11:02:34.825] [jointLog] [info] iteration = 400 | max rel diff. = 17.8856
-## [2024-10-18 11:02:36.638] [jointLog] [info] iteration = 468 | max rel diff. = 0.00941437
-## [2024-10-18 11:02:36.678] [jointLog] [info] Finished optimizer
-## [2024-10-18 11:02:36.678] [jointLog] [info] writing output
+## [2025-10-03 10:29:55.282] [jointLog] [info] Marked 0 weighted equivalence classes as degenerate
+## [2025-10-03 10:29:55.309] [jointLog] [info] iteration = 0 | max rel diff. = 203.028
+## [2025-10-03 10:29:57.974] [jointLog] [info] iteration = 100 | max rel diff. = 19.6442
+## [2025-10-03 10:30:00.719] [jointLog] [info] iteration = 200 | max rel diff. = 0.462189
+## [2025-10-03 10:30:03.319] [jointLog] [info] iteration = 300 | max rel diff. = 1.92755
+## [2025-10-03 10:30:05.909] [jointLog] [info] iteration = 400 | max rel diff. = 0.0347574
+## [2025-10-03 10:30:07.538] [jointLog] [info] iteration = 463 | max rel diff. = 0.00959217
+## [2025-10-03 10:30:07.581] [jointLog] [info] Finished optimizer
+## [2025-10-03 10:30:07.581] [jointLog] [info] writing output
 ```
 
 
@@ -426,8 +426,8 @@ tail run_salmon.o
 ```
 
 ```
-## Start time: 11:01:15
-## End time: 11:02:38
+## Start time: 10:28:40
+## End time: 10:30:09
 ```
 
 ## **Use grep to find the TPMs for a specific gene**
@@ -444,15 +444,15 @@ head salmon/SRR1039520/quant.sf
 
 ```
 ## Name	Length	EffectiveLength	TPM	NumReads
-## ENST00000456328.2	1657	1502.149	0.000000	0.000
-## ENST00000450305.2	632	477.287	0.000000	0.000
-## ENST00000488147.1	1351	1196.149	0.000000	0.000
-## ENST00000619216.1	68	1.878	0.000000	0.000
-## ENST00000473358.1	712	557.240	0.000000	0.000
-## ENST00000469289.1	535	380.407	0.000000	0.000
-## ENST00000607096.1	138	24.897	0.000000	0.000
-## ENST00000417324.1	1187	1032.149	0.000000	0.000
-## ENST00000461467.1	590	435.330	0.000000	0.000
+## ENST00000456328.2	1657	1501.734	0.000000	0.000
+## ENST00000450305.2	632	476.867	0.000000	0.000
+## ENST00000488147.1	1351	1195.734	0.000000	0.000
+## ENST00000619216.1	68	2.021	0.000000	0.000
+## ENST00000473358.1	712	556.827	0.000000	0.000
+## ENST00000469289.1	535	379.986	0.000000	0.000
+## ENST00000607096.1	138	24.859	0.000000	0.000
+## ENST00000417324.1	1187	1031.734	0.000000	0.000
+## ENST00000461467.1	590	434.911	0.000000	0.000
 ```
 
 From the output above, we can see that the TPMs are in the 4th column of this file. The canonical transcript for [MUC1](http://useast.ensembl.org/Homo_sapiens/Gene/Summary?db=core;g=ENSG00000185499;r=1:155185824-155192916) is ENST00000620103, so we will search for that using `grep`.
@@ -464,7 +464,7 @@ grep 'ENST00000620103' salmon/SRR1039520/quant.sf
 ```
 
 ```
-## ENST00000620103.4	1811	1656.149	0.000000	0.000
+## ENST00000620103.4	1811	1655.734	0.000000	0.000
 ```
 
 Look for MUC1 across all the samples at the same time. We can see that 'SRR1039521' has a TPM of 13.1 for MUC1 compared to 0 for 'SRR1039520'. Recall that the fastq files for this exercise were subsetted to a very small number of reads so don't interpret these results seriously.
@@ -475,8 +475,8 @@ grep 'ENST00000620103' salmon/*/quant.sf
 ```
 
 ```
-## salmon/SRR1039520/quant.sf:ENST00000620103.4	1811	1656.149	0.000000	0.000
-## salmon/SRR1039521/quant.sf:ENST00000620103.4	1811	1655.487	13.171514	5.733
+## salmon/SRR1039520/quant.sf:ENST00000620103.4	1811	1655.734	0.000000	0.000
+## salmon/SRR1039521/quant.sf:ENST00000620103.4	1811	1655.512	13.182825	5.741
 ```
 
 ## **BONUS: Use an interactive job to run multiQC on the Salmon and FastQC output**
@@ -497,27 +497,27 @@ Navigate to the project directory.
 cd /varidata/researchtemp/hpctmp/BBC_workshop_Oct2024_II/<username>
 ```
 
-Load the environment module for multiQC.
+Load the environment module for multiQC. Run multiQC, which will summarize the results from FastQC and Salmon and output the results into a new directory called `multiqc/`.
 
 
 ``` bash
 module load bbc2/multiqc/multiqc-1.14
+
+multiqc --outdir multiqc .
 ```
 
 ```
 ## 
-## ### Loaded BBC module
-## 	Loading this module prepends to $PYTHONPATH
-## 	Don't use with conda.
-## ### End BBC module message.
-```
-
-Run multiQC, which will summarize the results from FastQC and Salmon and output the results into a new directory called `multiqc/`.
-
-
-``` bash
-multiqc --outdir multiqc .
-
+##   /// MultiQC 🔍 | v1.14
+## 
+## |           multiqc | MultiQC Version v1.31 now available!
+## |           multiqc | Search path : /varidata/research/projects/bbc/research/Intro_to_Linux_for_HPC_devel
+## |         searching | ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 100% 143/143  
+## |            fastqc | Found 4 reports
+## |           multiqc | Compressing plot data
+## |           multiqc | Report      : multiqc/multiqc_report.html
+## |           multiqc | Data        : multiqc/multiqc_data
+## |           multiqc | MultiQC complete
 ```
 
 List the contents of the `multiqc` directory.
@@ -529,9 +529,7 @@ ls multiqc
 
 ```
 ## multiqc_data
-## multiqc_data_1
 ## multiqc_report.html
-## multiqc_report_1.html
 ```
 
 Note the newly created `multiqc_report.html` file. Try to view this file in your preferred internet browser. If you have mounted the HPC file system to your computer, you can simply double-click on this file. Alternatively, you can copy this file to your computer's local storage first and then open it.
