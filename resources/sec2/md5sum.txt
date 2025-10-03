@@ -1,0 +1,4 @@
+5f99dd63498fb8b127782d6d492ce3c4  SRR1039520_1.fastq.gz
+659a6d87defaf07ea4ca178ab3e47e6d  SRR1039520_2.fastq.gz
+7eb46b408ea10e4c0b813f083addac26  SRR1039521_1.fastq.gz
+f40adaba8ff51d479680d13b2962eaa4  SRR1039521_2.fastq.gz
